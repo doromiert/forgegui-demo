@@ -334,7 +334,7 @@
             </div>
         </div>
 
-        <div id="userPopup" style="display: none;">
+        <div id="userPopup" class="userPopup hidden" >
             <img class="userBanner" src="doromiert.png">
             <img class="userPFP" src="doromiert.png" style="width: 85px;">
             <div class="userInfo">
@@ -370,15 +370,23 @@
         const popup = document.getElementById('userPopup');
         if (!popup) return;
 
-        // position right at the cursor
-        popup.style.position = 'fixed';
+        const top = e.clientY;
+        const left = e.clientX;
         popup.style.left = `${e.clientX}px`;
-        popup.style.top = `${e.clientY}px`;
-        popup.style.display = 'block';
+        popup.style.top = `${top - 10}px`;
+        popup.classList.remove('hidden'); // make visible first, still at start pos
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            popup.style.top = `${top}px`;
+          });
+        });
 
         // close helpers
         const closePopup = () => {
-          popup.style.display = 'none';
+          popup.classList.add("hidden")
+          popup.style.left = `${left}px`;
+          popup.style.top = `${top - 20}px`;
           cleanup();
         };
 
