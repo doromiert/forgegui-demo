@@ -46,10 +46,10 @@
             </div>
             <div style="flex: 1;"></div>
             <div class="topbarCTA">
-                <button class="topbarCTAButton shadedButton">
+                <a href="newChat.html" class="topbarCTAButton shadedButton">
                     Sign In
-                </button>
-                <button class="shadedButton topbarCTAButton active">
+                </a>
+                <button  class="shadedButton topbarCTAButton active" onclick="showSignup()">
                     Start Free Now
                 </button>
             </div>
@@ -63,7 +63,9 @@
             </div>
             <span class="heroSubtext">ForgeGUI provides you with quick and easy tools which allow you to generate and customize assets for your games.</span>
             <div class="heroCTA">
-                <button class="shadedButton heroButton active">Start Free Now</button>
+                <button  class="shadedButton heroButton active" onclick="showSignup()">
+                    Start Free Now
+                </button>
                 <span class="heroSubtext italic">Try it for free</span>
             </div>
             <div class="engineLogos">
@@ -264,7 +266,7 @@
         </section>
         <section id="finalCTA">
             <div class="finalCTA">
-                <button class="glassButton">Start Free Now</button>
+                <button class="glassButton" onclick="showSignup()">Start Free Now</button>
             </div>
         </section>
         <section id="faq">
@@ -373,6 +375,42 @@
                 <img src="footerAssets/collective.svg">
             </div>
         </div>
+        <div class="signupFormContainer" style="display: none;">
+            <div class="signupForm">
+                <div class="signupFormContent">
+                    <img src="bigIcons/fg.svg">
+                    <h1>Sign up with email</h1>
+                    <span>Create your account for ForgeGUI</span>
+                    <input type="text" placeholder="Name">
+                    <input type="text" placeholder="Email Address">
+                    <input type="password" placeholder="Password">
+                    <!-- pressing this opens newChat.html -->
+                    <button onclick="window.location.href='newChat.html'" class="shadedButton active square">Create Account</button>
+                    <div class="AHA"><hr>Already have an account?<hr></div>
+                    <button class="shadedButton square" onclick="hideSignup()"><img src="smallIcons/Chevron.svg" style="rotate: 90deg" > Back</button>
+                    <span class="sfooter">By continuing, you confirm you have read our privacy policy and terms of use.</span>
+                </div>
+                <div class="signupImage">
+                    <button class="closeButton" onclick="hideSignup()"><img src="smallIcons/X.svg"></button>
+                    <div class="signupImageContent">
+                        <div class="pillsBar">
+                            <div class="pill">Random Pill</div>
+                            <div class="pill">Random Pill</div>
+                            <div class="pill">Random Pill</div>
+                            <div class="pill">Random Pill</div>
+                        </div>
+                        <h1>Model Name</h1>
+                        <span>Tagline for the model.</span>
+                        <div class="sectionBar">
+                            <div class="active"><div></div></div>
+                            <div><div></div></div>
+                            <div><div></div></div>
+                            <div><div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
     <script>
     function openFaq(index) {
@@ -391,6 +429,13 @@
                 chevron.style.rotate = '0deg';
             }
         }
+    }
+    
+    function hideSignup() {
+        document.querySelector('.signupFormContainer').style.display = 'none';
+    }
+    function showSignup() {
+        document.querySelector('.signupFormContainer').style.display = 'flex';
     }
     </script>
 </html>
