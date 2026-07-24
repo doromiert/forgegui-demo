@@ -1,4 +1,5 @@
 
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -6,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ForgeGUI</title>
         <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
-        <link rel="stylesheet" href="base.css" />
+        <link rel="stylesheet" href="landingPage.css" />
         <meta name="theme-color" content="#0D0D0D" />
         <meta name="description" content="ForgeGUI - Create anything with AI">
         <meta property="og:title" content="ForgeGUI">
@@ -15,462 +16,326 @@
         <meta name="color-scheme" content="dark">
 
         <style>
-
-            .mainView{
-                padding: 288px 24px 0 24px;
-                overflow-y: scroll;
-                overflow-x: hidden;
-            }
-
-            .header{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 0;
-                h1{
-                    text-align: center;
-                    margin: 0;
-                }
-            }
-
-
-
-            .gallery{
-                display: flex;
-                flex-direction: column;
-                max-width: 1024px;
-                width: 100%;
-
-                gap: 20px
-            }
-
-            .galleryLine{
-                gap: 10px;
-                display: flex;
-                flex-direction: column;
-            }
-
-            .GLHeader{
-                display: flex;
-                gap: 12px;
-            }
-
-            .GLContent{
-                display: flex;
-                gap: 24px;
-                img{
-                    max-width: 327px;
-                    width: 100%;
-                    height: 184px;
-                    object-fit: cover;
-                    border-radius: 16px;
-                }
-            }
-
         </style>
     </head>
     <body>
-        <a href="#temp" class="skip-link">Skip to content</a>
+        <div class="landingTopbar">
+            <img id="topbarLogo" src="footerLogo.svg">
 
-        <div class="sidebar" >
-            <div class="sbTop">
-                <img id="FGlogo" style="height: 28px;" src="footerLogo.svg" alt="">
-                <button class="iconButton" onclick="toggleSidebar()">
-                    <img class="icon" src="bigIcons/Sidebars.svg" alt="">
-                </button>
-            </div>
-
-            <div class="topSection">
-                <div class="nonChats">
-                    <a href="index.html" class="sidebarEntry forceActive" >
-                        <img class="icon" src="bigIcons/Add.svg" alt="">
-                        New Chat
-                    </a>
-                    <a href="explore.html" class="sidebarEntry" >
-                        <img class="icon" src="bigIcons/Compass.svg" alt="">
-                        Explore
-                    </a>
-                    <a href="assets.html" class="sidebarEntry" >
-                        <img class="icon" src="bigIcons/Assets.svg" alt="">
-                        Assets
-                    </a>
-                    <a href="search.html" class="sidebarEntry" >
-                        <img class="icon" src="bigIcons/Search.svg" alt="">
-                        Search
-                    </a>
-                    <hr style="margin: 5px 12px; color: rgba(255, 255, 255, 25%)">
+            <div class="landingDropdowns">
+                <div class="dropdownOption">
+                    <span>AI Tools</span>
+                    <img src="smallIcons/Chevron.svg">
                 </div>
-
-                <div class="historySection">
-                    <div class="chatsSep">MY CHATS</div>
-
-                    <div class="chatEntries">
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                    </div>
+                <div class="dropdownOption">
+                    <span>Plans</span>
+                    <img src="smallIcons/Chevron.svg">
+                </div>
+                <div class="dropdownOption">
+                    <span>Community</span>
+                    <img src="smallIcons/Chevron.svg">
+                </div>
+                <div class="dropdownOption">
+                    <span>Support</span>
+                    <img src="smallIcons/Chevron.svg">
+                </div>
+                <div class="dropdownOption">
+                    <span>Company</span>
+                    <img src="smallIcons/Chevron.svg">
                 </div>
             </div>
-
-            <div class="sidebarBottom">
-                <button class="sidebarUserInfo" onclick="showUserPopup(event)">
-                    <div class="modelPickerPopup hidden" id="userPicker">
-                        <div class="modelOption style">
-                            <img src="modePickerIcons/Settings.svg" style="height: 28px;">
-                            <div class="stylePickerText">
-                                <b>Settings</b>
-                                <span>Change your account settings.</span>
-                            </div>
-                        </div>
-                        <div class="modelOption style">
-                            <img src="modePickerIcons/X.svg" style="height: 28px;">
-                            <div class="stylePickerText">
-                                <b>Log Out</b>
-                                <span>Exit your session.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="userInfo">
-                        <div class="userProfile">
-                            <img style="height: 40px; border-radius: 50%;" src="doromiert.png" alt="doromiert">
-                            <div class="doxx"><span style="font-size: 20px; font-weight: 600;">doromiert</span><span style="font-size: 16px; color: rgba(255,255,255,0.8);">doromiert@gmail.com</span></div>
-                        </div>
-                        <div class="shapeChip">PRO</div>
-                    </div>
-                    <div class="creditCounter">
-                        <span>Credits</span>
-                        <div class="creditBar"></div>
-                        <span>67/120</span>
-                    </div>
-
+            <div style="flex: 1;"></div>
+            <div class="topbarCTA">
+                <button class="topbarCTAButton shadedButton">
+                    Sign In
                 </button>
-                <button class="upgradeButton"><span>UPGRADE</span></button>
+                <button class="shadedButton topbarCTAButton active">
+                    Start Free Now
+                </button>
             </div>
-
         </div>
-        <div class="mainView">
-            <div class="header">
-                <span style="font-size: 24px;"><b>544,200</b> users have created assets so far</span>
-                <h1 style="font-size: 50px; font-weight: 600;">What are we creating today, doromiert?</h1>
-            </div>
-            <div class="chatbox">
-                <div class="attachments">
-                    <div class="attachment">
-                        <button class="removeAttachmentButton">
-                            <img src="smallIcons/X.svg">
-                        </button>
-                    </div>
-                    <div class="attachment">
-                        <button class="removeAttachmentButton">
-                            <img src="smallIcons/X.svg">
-                        </button>
-                    </div>
-                </div>
-                <textarea class="chatboxProper" placeholder="Describe what you wish to create."></textarea>
-                <div class="textboxUnder">
-                    <button class="addMediaButton">
-                        <img src="smallIcons/Add.svg">
-                    </button>
-                    <button class="outputTypePicker" onclick="toggleTypePopup(event)">
-                        <div class="modelPickerPopup hidden" id="outputTypePicker">
-                            <div class="modelOption style">
-                                <img src="modePickerIcons/thumb.svg" style="height: 28px;">
-                                <div class="stylePickerText">
-                                    <b>Thumbnail</b>
-                                    <span>Generate thumbnails for your projects.</span>
-                                </div>
-                            </div>
-                            <div class="modelOption style">
-                                <img src="modePickerIcons/Icons.svg" style="height: 28px;">
-                                <div class="stylePickerText">
-                                    <b>Icon</b>
-                                    <span>Generate icons for your projects.</span>
-                                </div>
-                            </div>
-                            <div class="modelOption style">
-                                <img src="modePickerIcons/GUI.svg" style="height: 28px;">
-                                <div class="stylePickerText">
-                                    <b>GUI</b>
-                                    <span>Generate high-quality GUI assets</span>
-                                </div>
-                            </div>
-                            <div class="modelOption style">
-                                <img src="modePickerIcons/3d.svg" style="height: 28px;">
-                                <div class="stylePickerText">
-                                    <b>3D</b>
-                                    <span>Generate 3D objects</span>
-                                </div>
-                            </div>
-                            <div class="modelOption style">
-                                <img src="modePickerIcons/Music.svg" style="height: 28px;">
-                                <div class="stylePickerText">
-                                    <b>Music</b>
-                                    <span>Generate music for your projects.</span>
-                                </div>
-                            </div>
-                            <div class="modelOption style">
-                                <img src="modePickerIcons/AudioWave.svg" style="height: 28px;">
-                                <div class="stylePickerText">
-                                    <b>SFX</b>
-                                    <span>Generate high-quality SFX</span>
-                                </div>
-                            </div>
-                        </div>
-                        <img src="smallIcons/Image.svg">
-                        <span>Image</span>
-                        <img src="smallIcons/Chevron.svg">
-                    </button>
-                    <button class="modelPicker" onclick="showModelPicker(event)">
-                        <img src="smallIcons/AI.svg">
-                        <span>Yunes <span class="modelVersion">MAX</span></span>
-                        <img src="smallIcons/Chevron.svg">
-                        <div class="modelPickerPopup hidden" id="modelPickerPopup">
-                            <div class="modelOption">
-                                <img src="aiModels/nanobanana.svg">
-                                <div class="modelDetails">
-                                    <span class="modelName">Nano Banana Pro <div style="width: min-content;" class="shapeChip">NEW</div></span>
-                                    <span class="modelDesc">
-                                        Premium quality; deep visual reasoning, native 4K output, and strict multi-image character consistency.
-                                    </span>
-                                    <div class="modelTags">
-                                        <div class="modelTag">Creative</div>
-                                        <div class="modelTag" style="background-color: #00A1B3;">Customizable</div>
-                                    </div>
-                                    <div class="modelCreditCost">
-                                        <img src="smallIcons/AI.svg">
-                                        <span>3 Credits</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modelOption">
-                                <img src="aiModels/gpti2.svg">
-                                <div class="modelDetails">
-                                    <span class="modelName">GPT Image 2</span>
-                                    <span class="modelDesc">
-                                        High-accuracy multimodal; exceptional text rendering, precise regional editing, and complex prompt adherence.
-                                    </span>
-                                    <div class="modelTags">
-                                        <div class="modelTag">Creative</div>
-                                        <div class="modelTag" style="background-color: #00A1B3;">Customizable</div>
-                                    </div>
-                                    <div class="modelCreditCost">
-                                        <img src="smallIcons/AI.svg">
-                                        <span>3 Credits</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modelOption">
-                                <img src="aiModels/meshy.svg">
-                                <div class="modelDetails">
-                                    <span class="modelName">Meshy</span>
-                                    <span class="modelDesc">
-                                        AI 3D generation; rapid text/image-to-3D asset creation, automated PBR texturing, and game-ready mesh generation.
-                                    </span>
-                                    <div class="modelTags">
-                                        <div class="modelTag">Creative</div>
-                                        <div class="modelTag" style="background-color: #00A1B3;">Customizable</div>
-                                    </div>
-                                    <div class="modelCreditCost">
-                                        <img src="smallIcons/AI.svg">
-                                        <span>3 Credits</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </button>
-                    <hr>
-                    <button class="gamePicker" onclick="toggleStylePicker(event)">
-                        <div class="modelPickerPopup hidden" id="stylePicker">
-                            <div class="modelOption style">
-                                <img src="modePickerIcons/RobloxLogo.svg" style="height: 28px;">
-                                <div class="stylePickerText">
-                                    <b>Roblox</b>
-                                    <span>Stylized like Roblox</span>
-                                </div>
-                            </div>
-                            <div class="modelOption style">
-                                <img src="modePickerIcons/UnrealEngine.svg" style="height: 28px;">
-                                <div class="stylePickerText">
-                                    <b>Fortnite</b>
-                                    <span>Stylized like Fortnite</span>
-                                </div>
-                            </div>
-                            <div class="modelOption style">
-                                <img src="modePickerIcons/thumb.svg" style="height: 28px;">
-                                <div class="stylePickerText">
-                                    <b>Realistic</b>
-                                    <span>Generic style, easily customizable.</span>
-                                </div>
-                            </div>
-                            <div class="modelOption style">
-                                <img src="modePickerIcons/Pencil.svg" style="height: 28px;">
-                                <div class="stylePickerText">
-                                    <b>General</b>
-                                    <span>Generic style, easily customizable.</span>
-                                </div>
-                            </div>
-                        </div>
-                        <img src="smallIcons/Pencil.svg">
-                        <span>Roblox</span>
-                        <img src="smallIcons/Chevron.svg">
-                    </button>
-                    <hr>
-                    <div style="flex: 1;"></div>
-                    <button class="sendButton">
-                        <img src="smallIcons/Send.svg">
-                    </button>
-                </div>
-            </div>
 
-            <div class="gallery">
-                <div class="galleryLine">
-                    <div class="GLHeader">
-                        <img src="smallIcons/Image.svg">
-                        <span>Explore assets by the community</span>
-                        <div style="flex: 1;"></div>
-                        <a href="https://doromiert.neg-zero.com">Explore more</a>
-                    </div>
-                    <div class="GLContent">
-                        <img src="doromiert.png">
-                        <img src="doromiert.png">
-                        <img src="doromiert.png">
-                    </div>
-                </div>
-                <div class="galleryLine">
-                    <div class="GLHeader">
-                        <img src="smallIcons/Image.svg">
-                        <span>Explore assets by the community</span>
-                        <div style="flex: 1;"></div>
-                        <a href="https://doromiert.neg-zero.com">Explore more</a>
-                    </div>
-                    <div class="GLContent">
-                        <img src="doromiert.png">
-                        <img src="doromiert.png">
-                        <img src="doromiert.png">
-                    </div>
-                </div>
-                <div class="galleryLine">
-                    <div class="GLHeader">
-                        <img src="smallIcons/Image.svg">
-                        <span>Explore assets by the community</span>
-                        <div style="flex: 1;"></div>
-                        <a href="https://doromiert.neg-zero.com">Explore more</a>
-                    </div>
-                    <div class="GLContent">
-                        <img src="doromiert.png">
-                        <img src="doromiert.png">
-                        <img src="doromiert.png">
+        <section id="hero">
+            <div class="heroChevron"></div>
+            <div class="heroText">
+                <span>The AI Design Platform for</span>
+                <span>Game <span class="heroHighlight" data-text="Developers">Developers</span></span>
+            </div>
+            <span class="heroSubtext">ForgeGUI provides you with quick and easy tools which allow you to generate and customize assets for your games.</span>
+            <div class="heroCTA">
+                <button class="shadedButton heroButton active">Start Free Now</button>
+                <span class="heroSubtext italic">Try it for free</span>
+            </div>
+            <div class="engineLogos">
+                <img src="engineLogos/roblox.svg">
+                <img src="engineLogos/ue.svg">
+                <img src="engineLogos/uefn.svg">
+                <img src="engineLogos/unity.svg">
+            </div>
+            <div class="heroChevron">
+                <img src="bigIcons/heroChevron.svg">
+            </div>
+        </section>
+        <section id="essentials">
+            <div class="essentialsText">
+                <h1>The essentials at your fingertips.</h1>
+                <span>We have <b>tools</b> for every single task you need.</span>
+                <button class="shadedButton heroButton active">Go to toolbox</button>
+            </div>
+            <div class="essentialsBar">
+                <div class="essentialsBox">
+                    <img src="coloredIcons/3d.svg">
+                    <span class="essentialsBoxTitle">3D Creator</span>
+                    <span class="essentialsDesc">Make creating beautiful 3D assets easier than ever.</span>
+                    <div class="essentialsButtons">
+                        <button class="shadedButton">Learn more</button>
+                        <button class="shadedButton active">Try it now</button>
                     </div>
                 </div>
-                <div class="galleryLine">
-                    <div class="GLHeader">
-                        <img src="smallIcons/Image.svg">
-                        <span>Explore assets by the community</span>
-                        <div style="flex: 1;"></div>
-                        <a href="https://doromiert.neg-zero.com">Explore more</a>
-                    </div>
-                    <div class="GLContent">
-                        <img src="doromiert.png">
-                        <img src="doromiert.png">
-                        <img src="doromiert.png">
+                <div class="essentialsBox">
+                    <img src="coloredIcons/thumbnail.svg">
+                    <span class="essentialsBoxTitle">Thumbnail Creator</span>
+                    <span class="essentialsDesc">Create rich and high quality thumbnails in your games across various platforms.</span>
+                    <div class="essentialsButtons">
+                        <button class="shadedButton">Learn more</button>
+                        <button class="shadedButton active">Try it now</button>
                     </div>
                 </div>
+                <div class="essentialsBox">
+                    <img src="coloredIcons/toggle.svg">
+                    <span class="essentialsBoxTitle">GUI Creator</span>
+                    <span class="essentialsDesc">Create engaging and stunning interfaces for your experiences in select games.</span>
+                    <div class="essentialsButtons">
+                        <button class="shadedButton">Learn more</button>
+                        <button class="shadedButton active">Try it now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="essentials2">
+            <div class="e2Top">Our full suite includes...</div>
+            <div class="essentialBoxGrid">
+                <div class="essentialBox">
+                    <img src="essentialsIcons/Icons.svg">
+                    <span class="essentialsBoxTitle alt">Icon Studio</span>
+                    <span class="essentialsBoxDesc alt">Create rich and high quality icons for your games across various platforms.</span>
+                    <button class="shadedButton">Learn more</button>
+                </div>
+                <div class="essentialBox">
+                    <img src="essentialsIcons/Texture.svg">
+                    <span class="essentialsBoxTitle alt">Texture Studio</span>
+                    <span class="essentialsBoxDesc alt">Make your assets stand out with beautiful textures.</span>
+                    <button class="shadedButton">Learn more</button>
+                </div>
+                <div class="essentialBox">
+                    <img src="essentialsIcons/Persons.svg">
+                    <span class="essentialsBoxTitle alt">Character Studio</span>
+                    <span class="essentialsBoxDesc alt">Build creative and beautiful characters to empower your story.</span>
+                    <button class="shadedButton">Learn more</button>
+                </div>
+                <div class="essentialBox">
+                    <img src="essentialsIcons/Animation.svg">
+                    <span class="essentialsBoxTitle alt">Animation studio</span>
+                    <span class="essentialsBoxDesc alt">Make your assets come to life with expressive and fluid animations.</span>
+                    <button class="shadedButton">Learn more</button>
+                </div>
+                <div class="essentialBox">
+                    <img src="essentialsIcons/AI.svg">
+                    <span class="essentialsBoxTitle alt">Effect studio</span>
+                    <span class="essentialsBoxDesc alt">Create beautiful visual effects in your engine of choice.</span>
+                    <button class="shadedButton">Learn more</button>
+                </div>
+                <div class="essentialBox">
+                    <img src="essentialsIcons/Music.svg">
+                    <span class="essentialsBoxTitle alt">Music studio</span>
+                    <span class="essentialsBoxDesc alt">Make your game into an immersive audio experience.</span>
+                    <button class="shadedButton">Learn more</button>
+                </div>
+                <div class="essentialBox">
+                    <img src="essentialsIcons/Translate.svg">
+                    <span class="essentialsBoxTitle alt">Rosetta Stone</span>
+                    <span class="essentialsBoxDesc alt">Translate thousands of dialogue lines to hundreds of different languages.</span>
+                    <button class="shadedButton">Learn more</button>
+                </div>
+                <div class="essentialBox">
+                    <img src="essentialsIcons/Programming Icon.svg">
+                    <span class="essentialsBoxTitle alt">Forge Code</span>
+                    <span class="essentialsBoxDesc alt">Create high quality code for your game or project.</span>
+                    <button class="shadedButton">Learn more</button>
+                </div>
+            </div>
+        </section>
+        <section id="stock">
+            <h1 class="stockTitle">Premium stock catalog</h1>
+            <div class="stockBoxes">
+                <div class="stockBox">
+                    <h1>SFX</h1>
+                    <div class="stockBoxLearnMore">
+                        <a href="placeholder.html">Learn more</a>
+                    </div>
+                </div>
+                <div class="stockBox">
+                    <h1>3D Assets</h1>
+                    <div class="stockBoxLearnMore">
+                        <a href="placeholder.html">Learn more</a>
+                    </div>
+                </div>
+                <div class="stockBox">
+                    <h1>Templates</h1>
+                    <div class="stockBoxLearnMore">
+                        <a href="placeholder.html">Learn more</a>
+                    </div>
+                </div>
+                <div class="stockBox">
+                    <h1>Music</h1>
+                    <div class="stockBoxLearnMore">
+                        <a href="placeholder.html">Learn more</a>
+                    </div>
+                </div>
+            </div>
+            <span class="catalogFooter">This catalog includes music, SFX, 3D assets, game and system templates all royalty free</span>
+        </section>
+        <section id="userCount">
+            <div class="bigCount">
+                <span><span class="creatorCount">70K+</span>creators choose ForgeGUI</span>
+            </div>
+            <div class="userCountCheckboxes">
+                <div class="UCLine">
+                    <img src="bigIcons/Checkmark.svg">
+                    <span>Built for developers</span>
+                </div>
+                <div class="UCLine">
+                    <img src="bigIcons/Checkmark.svg">
+                    <span>Affordable unlike other models</span>
+                </div>
+                <div class="UCLine">
+                    <img src="bigIcons/Checkmark.svg">
+                    <span>Large community built to empower you.</span>
+                </div>
+            </div>
+        </section>
+        <section id="planSection">
+            <div class="plansText">
+                <h1>Find your perfect plan</h1>
+                <div class="planType">
+                    <span class="planTitle">Solo Devs</span>
+                    <span class="planDesc">Use our full suite of tools with flexible credits and access to our premium stock catalog</span>
+                    <button class="holoButton">See Plans</button>
+                </div>
+                <div class="planType">
+                    <span class="planTitle">Teams & Businesses</span>
+                    <span class="planDesc">Give your team or business full, unlimited access to our tools with flexible pricing.</span>
+                    <button class="holoButton">See Plans</button>
+                </div>
+            </div>
+            <img src="images/roblox0.png">
+        </section>
+        <section id="finalCTA">
+            <div class="finalCTA">
+                <button class="glassButton">Start Free Now</button>
+            </div>
+        </section>
+        <section id="faq">
+            <h1>Frequently asked questions</h1>
+            <div class="faqs">
+                <button class="faqLine" onclick="openFaq(0)">
+                    <div class="faqTop">
+                        <span>What is ForgeGUI and who is it for?</span>
+                        <div style="flex: 1"></div>
+                        <img src="smallIcons/Chevron.svg" class="faqChevron" id="chevron0">
+                    </div>
+                    <div class="collapsibleAnswer collapsed" id="faq0">
+                        <span>placeholder for the faq answer lorem ipsum</span>
+                        <a href="placeholder.html">Learn More</a>
+                    </div>
+                </button>
+                <button class="faqLine" onclick="openFaq(1)">
+                    <div class="faqTop">
+                        <span>Is ForgeGUI free?</span>
+                        <div style="flex: 1"></div>
+                        <img src="smallIcons/Chevron.svg" class="faqChevron" id="chevron0">
+                    </div>
+                    <div class="collapsibleAnswer collapsed" id="faq1">
+                        <span>placeholder for the faq answer lorem ipsum</span>
+                        <a href="placeholder.html">Learn More</a>
+                    </div>
+                </button>
+                <button class="faqLine" onclick="openFaq(2)">
+                    <div class="faqTop">
+                        <span>What are credits and how do I use them?</span>
+                        <div style="flex: 1"></div>
+                        <img src="smallIcons/Chevron.svg" class="faqChevron" id="chevron0">
+                    </div>
+                    <div class="collapsibleAnswer collapsed" id="faq2">
+                        <span>placeholder for the faq answer lorem ipsum</span>
+                        <a href="placeholder.html">Learn More</a>
+                    </div>
+                </button>
+                <button class="faqLine" onclick="openFaq(3)">
+                    <div class="faqTop">
+                        <span>Where else can I use ForgeGUI?</span>
+                        <div style="flex: 1"></div>
+                        <img src="smallIcons/Chevron.svg" class="faqChevron" id="chevron0">
+                    </div>
+                    <div class="collapsibleAnswer collapsed" id="faq3">
+                        <span>placeholder for the faq answer lorem ipsum</span>
+                        <a href="placeholder.html">Learn More</a>
+                    </div>
+                </button>
+                <button class="faqLine" onclick="openFaq(4)">
+                    <div class="faqTop">
+                        <span>What is the license for assets generated by ForgeGUI?</span>
+                        <div style="flex: 1"></div>
+                        <img src="smallIcons/Chevron.svg" class="faqChevron" id="chevron0">
+                    </div>
+                    <div class="collapsibleAnswer collapsed" id="faq4">
+                        <span>placeholder for the faq answer lorem ipsum</span>
+                        <a href="placeholder.html">Learn More</a>
+                    </div>
+                </button>
+                <button class="faqLine" onclick="openFaq(5)">
+                    <div class="faqTop">
+                        <span>Can I use my own assets as reference?</span>
+                        <div style="flex: 1"></div>
+                        <img src="smallIcons/Chevron.svg" class="faqChevron" id="chevron0">
+                    </div>
+                    <div class="collapsibleAnswer collapsed" id="faq5">
+                        <span>placeholder for the faq answer lorem ipsum</span>
+                        <a href="placeholder.html">Learn More</a>
+                    </div>
+                </button>
+
+
+                <a class="faqLine">
+                    <div class="faqTop">
+                        <span>View more answers in support</span>
+                        <div style="flex: 1"></div>
+                        <img src="smallIcons/Arrow-Right.svg" class="faqChevron">
+                    </div>
+                </a>
+            </div>
+        </section>
+        <div class="footer">
+            <div class="line0">
+                <img src="footerLogo.svg">
+                <a src="placeholder.html">Careers</a>
+                <a src="placeholder.html">Company</a>
+                <a src="placeholder.html">Privacy Policy</a>
+                <a src="placeholder.html">Terms of service</a>
+                <a src="placeholder.html">Blog</a>
+                <div style="flex: 1"></div>
+                <span>© 2026 ForgeGUI. All rights reserved.</span>
+                <img src="footerAssets/Discord.svg">
+                <img src="footerAssets/Reddit.svg">
+                <img src="footerAssets/X.svg">
+            </div>
+            <div class="line1">
+                <span>We are backed by:</span>
+                <img src="footerAssets/zfellows.svg">
+                <img src="footerAssets/collective.svg">
             </div>
         </div>
     </body>
     <script>
-      function toggleSidebar() {
-        document.querySelector('.sidebar').classList.toggle('collapsed');
-      }
-      function showModelPicker() {
-        document.querySelector('#modelPickerPopup').classList.toggle('hidden');
-      }
-      function toggleStylePicker() {
-        document.querySelector('#stylePicker').classList.toggle('hidden');
-      }
-      function toggleTypePopup() {
-        document.querySelector('#outputTypePicker').classList.toggle('hidden');
-      }
-      function showUserPopup() {
-        document.querySelector('#userPicker').classList.toggle('hidden');
-      }
-
     </script>
 </html>
