@@ -1070,3 +1070,19 @@ backdrop-filter: blur(2px);
         }
     }
 }
+
+button, .shadedButton, .glassButton, .holoButton{
+    transition: 0.2s;
+}
+
+ .shadedButton:hover, .glassButton:hover, .holoButton:hover, button:not(.faqLine):hover{
+    cursor: pointer;
+
+    filter: brightness(1.1);
+    transform: scale(1.1);
+}
+
+button:active, .shadedButton:active, .glassButton:active, .holoButton:active{
+    filter: brightness(0.9);
+    transform: scale(0.9);
+}

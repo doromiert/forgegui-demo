@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ForgeGUI</title>
+    <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="theme-color" content="#0D0D0D" />
+    <meta name="description" content="ForgeGUI - Create anything with AI" />
+    <meta property="og:title" content="ForgeGUI" />
+    <meta property="og:description" content="Powerful AI tool for creators" />
+    <meta property="og:type" content="website" />
+    <meta name="color-scheme" content="dark" />
+
+    <style>
+        .mainView {
+            display: flex;
+            padding: 55px 250px 0 250px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 25px;
+            flex: 1 0 0;
+            align-self: stretch;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#temp" class="skip-link">Skip to content</a>
+
+    <div class="sidebar settings">
+        <div class="sbTop" style="justify-content: start; gap: 20px">
+            <a href="../newChat.html" class="iconButton">
+                <img class="icon" src="../smallIcons/Chevron.svg" style="rotate: 90deg" alt="" />
+            </a>
+
+            <img id="FGlogo" style="height: 28px" src="../footerLogo.svg" alt="" />
+        </div>
+
+        <div class="topSection">
+            <div class="nonChats">
+                <a href="accountOverview.html" class="sidebarEntry">
+                    <img class="icon" src="../bigIcons/people.svg" alt="" />
+                    Account Overview
+                </a>
+                <a href="billing.html" class="sidebarEntry">
+                    <img class="icon" src="../bigIcons/coins.svg" alt="" />
+                    Billing & Plan
+                </a>
+                <a href="notifications.html" class="sidebarEntry forceActive">
+                    <img class="icon" src="../bigIcons/bell.svg" alt="" />
+                    Notifications
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="mainView">
+        <div class="userInfo">
+            <div class="userInfoLine">
+                <span class="a">Generation Done</span>
+                <span class="b"><button class="toggle" aria-pressed="true" aria-label="Toggle"
+                        onclick="this.classList.toggle('off'); this.setAttribute('aria-pressed', !this.classList.contains('off'))">
+                        <div class="toggle-spacer"></div>
+                        <div class="toggle-knob"></div>
+                    </button>
+            </div>
+            <hr />
+            <div class="userInfoLine">
+                <span class="a">Product News</span>
+                <span class="b"><button class="toggle" aria-pressed="true" aria-label="Toggle"
+                        onclick="this.classList.toggle('off'); this.setAttribute('aria-pressed', !this.classList.contains('off'))">
+                        <div class="toggle-spacer"></div>
+                        <div class="toggle-knob"></div>
+                    </button>
+            </div>
+            <hr />
+            <div class="userInfoLine">
+                <span class="a">Credit Alerts</span>
+                <span class="b"><button class="toggle" aria-pressed="true" aria-label="Toggle"
+                        onclick="this.classList.toggle('off'); this.setAttribute('aria-pressed', !this.classList.contains('off'))">
+                        <div class="toggle-spacer"></div>
+                        <div class="toggle-knob"></div>
+                    </button>
+            </div>
+            <hr />
+            <div class="userInfoLine">
+                <span class="a">Tips & Tricks</span>
+                <span class="b"><button class="toggle" aria-pressed="true" aria-label="Toggle"
+                        onclick="this.classList.toggle('off'); this.setAttribute('aria-pressed', !this.classList.contains('off'))">
+                        <div class="toggle-spacer"></div>
+                        <div class="toggle-knob"></div>
+                    </button>
+            </div>
+            <hr />
+            <div class="userInfoLine">
+                <span class="a">Payment Receipts</span>
+                <span class="b"><button class="toggle" aria-pressed="true" aria-label="Toggle"
+                        onclick="this.classList.toggle('off'); this.setAttribute('aria-pressed', !this.classList.contains('off'))">
+                        <div class="toggle-spacer"></div>
+                        <div class="toggle-knob"></div>
+                    </button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function toggleSidebar() {
+        document.querySelector(".sidebar").classList.toggle("collapsed");
+    }
+    function showModelPicker() {
+        document.querySelector("#modelPickerPopup").classList.toggle("hidden");
+    }
+    function toggleStylePicker() {
+        document.querySelector("#stylePicker").classList.toggle("hidden");
+    }
+    function toggleTypePopup() {
+        document.querySelector("#outputTypePicker").classList.toggle("hidden");
+    }
+    function showUserPopup() {
+        document.querySelector("#userPicker").classList.toggle("hidden");
+    }
+</script>
+
+</html>
