@@ -1,22 +1,21 @@
-
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ForgeGUI</title>
-        <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
-        <link rel="stylesheet" href="base.css" />
-        <meta name="theme-color" content="#0D0D0D" />
-        <meta name="description" content="ForgeGUI - Create anything with AI">
-        <meta property="og:title" content="ForgeGUI">
-        <meta property="og:description" content="Powerful AI tool for creators">
-        <meta property="og:type" content="website">
-        <meta name="color-scheme" content="dark">
 
-        <style>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ForgeGUI</title>
+    <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+    <link rel="stylesheet" href="base.css" />
+    <meta name="theme-color" content="#0D0D0D" />
+    <meta name="description" content="ForgeGUI - Create anything with AI">
+    <meta property="og:title" content="ForgeGUI">
+    <meta property="og:description" content="Powerful AI tool for creators">
+    <meta property="og:type" content="website">
+    <meta name="color-scheme" content="dark">
 
-        .assetView{
+    <style>
+        .assetView {
             width: 100%;
             height: 100%;
             align-items: center;
@@ -25,12 +24,12 @@
             background-color: #0F0F0F;
         }
 
-        .assetSidebar{
+        .assetSidebar {
             max-width: 458px;
             height: 100%;
             outline: solid;
             outline-width: 1px;
-            outline-color: rgba(255,255,255,0.15);
+            outline-color: rgba(255, 255, 255, 0.15);
 
             display: flex;
             flex-direction: column;
@@ -39,13 +38,13 @@
             box-sizing: border-box;
         }
 
-        .mainView{
+        .mainView {
             flex-direction: row;
             overflow: hidden;
             gap: 0px;
         }
 
-        .sbt{
+        .sbt {
             display: flex;
             gap: 17px;
             align-items: center;
@@ -53,10 +52,11 @@
             font-weight: 600;
         }
 
-        .assetTags{
+        .assetTags {
             display: flex;
             gap: 8px;
-            .assetTag{
+
+            .assetTag {
                 height: 32px;
                 border-radius: 10px;
                 background-color: #313131;
@@ -65,36 +65,44 @@
                 box-sizing: border-box;
                 align-items: center;
                 display: flex;
-                &.active{
+
+                &.active {
                     background-color: #2258A9;
                 }
             }
+
             flex-wrap: wrap;
             width: 100%;
         }
 
-        .assetInfo{
-            h1{
+        .assetInfo {
+            h1 {
                 margin: 0 !important;
             }
+
             gap: 24px;
-            span{
+
+            span {
                 display: flex;
-                img{
+
+                img {
                     width: 26px;
                     border-radius: 21px;
                 }
+
                 gap: 8px;
                 align-items: center;
                 font-size: 24px;
                 font-weight: 600;
             }
         }
-        .assetActions{
+
+        .assetActions {
             display: flex;
             gap: 15px;
         }
-        .assetAction{
+
+        .assetAction {
             display: flex;
             border: none;
             background-color: #313131;
@@ -103,236 +111,242 @@
             gap: 15px;
             font-size: 24px;
             font-weight: 600;
-            span{
+
+            span {
                 margin-right: 5px;
             }
+
             outline: solid;
             outline-width: 1px;
             outline-offset: -1px;
-            outline-color: rgba(255,255,255,0.1);
-            &.active{
+            outline-color: rgba(255, 255, 255, 0.1);
+
+            &.active {
                 background-color: #2258A9;
             }
         }
-        </style>
+    </style>
 
-    </head>
-    <body>
-        <a href="#temp" class="skip-link">Skip to content</a>
+</head>
 
-        <div class="sidebar collapsed" >
-            <div class="sbTop">
-                <img id="FGlogo" style="height: 28px;" src="footerLogo.svg" alt="">
-                <button class="iconButton" onclick="toggleSidebar()">
-                    <img class="icon" src="bigIcons/Sidebars.svg" alt="">
-                </button>
+<body>
+    <a href="#temp" class="skip-link">Skip to content</a>
+
+    <div class="sidebar collapsed">
+        <div class="sbTop">
+            <img id="FGlogo" style="height: 28px;" src="footerLogo.svg" alt="">
+            <button class="iconButton" onclick="toggleSidebar()">
+                <img class="icon" src="bigIcons/Sidebars.svg" alt="">
+            </button>
+        </div>
+
+        <div class="topSection">
+            <div class="nonChats">
+                <a href="newChat.html" class="sidebarEntry">
+                    <img class="icon" src="bigIcons/Add.svg" alt="">
+                    New Chat
+                </a>
+                <a href="explore.html" class="sidebarEntry">
+                    <img class="icon" src="bigIcons/Compass.svg" alt="">
+                    Explore
+                </a>
+                <a href="assets.html" class="sidebarEntry forceActive">
+                    <img class="icon" src="bigIcons/Assets.svg" alt="">
+                    Assets
+                </a>
+                <a href="search.html" class="sidebarEntry">
+                    <img class="icon" src="bigIcons/Search.svg" alt="">
+                    Search
+                </a>
+                <hr style="margin: 5px 12px; color: rgba(255, 255, 255, 25%)">
             </div>
 
-            <div class="topSection">
-                <div class="nonChats">
-                    <a href="newChat.html" class="sidebarEntry" >
-                        <img class="icon" src="bigIcons/Add.svg" alt="">
+            <div class="historySection">
+                <div class="chatsSep">MY CHATS</div>
+
+                <div class="chatEntries">
+                    <a href="oldChat.html" class="sidebarEntry">
+                        <img class="icon" src="bigIcons/Message.svg" alt="">
                         New Chat
+                        <span style="width: 100%;"></span>
+                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
                     </a>
-                    <a href="explore.html" class="sidebarEntry" >
-                        <img class="icon" src="bigIcons/Compass.svg" alt="">
-                        Explore
+
+                    <a href="oldChat.html" class="sidebarEntry">
+                        <img class="icon" src="bigIcons/Message.svg" alt="">
+                        New Chat
+                        <span style="width: 100%;"></span>
+                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
                     </a>
-                    <a href="assets.html" class="sidebarEntry forceActive" >
-                        <img class="icon" src="bigIcons/Assets.svg" alt="">
-                        Assets
+                    <a href="oldChat.html" class="sidebarEntry">
+                        <img class="icon" src="bigIcons/Message.svg" alt="">
+                        New Chat
+                        <span style="width: 100%;"></span>
+                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
                     </a>
-                    <a href="search.html" class="sidebarEntry" >
-                        <img class="icon" src="bigIcons/Search.svg" alt="">
-                        Search
+                    <a href="oldChat.html" class="sidebarEntry">
+                        <img class="icon" src="bigIcons/Message.svg" alt="">
+                        New Chat
+                        <span style="width: 100%;"></span>
+                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
                     </a>
-                    <hr style="margin: 5px 12px; color: rgba(255, 255, 255, 25%)">
+                    <a href="oldChat.html" class="sidebarEntry">
+                        <img class="icon" src="bigIcons/Message.svg" alt="">
+                        New Chat
+                        <span style="width: 100%;"></span>
+                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
+                    </a>
+                    <a href="oldChat.html" class="sidebarEntry">
+                        <img class="icon" src="bigIcons/Message.svg" alt="">
+                        New Chat
+                        <span style="width: 100%;"></span>
+                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
+                    </a>
+                    <a href="oldChat.html" class="sidebarEntry">
+                        <img class="icon" src="bigIcons/Message.svg" alt="">
+                        New Chat
+                        <span style="width: 100%;"></span>
+                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
+                    </a>
+                    <a href="oldChat.html" class="sidebarEntry">
+                        <img class="icon" src="bigIcons/Message.svg" alt="">
+                        New Chat
+                        <span style="width: 100%;"></span>
+                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
+                    </a>
+                    <a href="oldChat.html" class="sidebarEntry">
+                        <img class="icon" src="bigIcons/Message.svg" alt="">
+                        New Chat
+                        <span style="width: 100%;"></span>
+                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
+                    </a>
+                    <a href="oldChat.html" class="sidebarEntry">
+                        <img class="icon" src="bigIcons/Message.svg" alt="">
+                        New Chat
+                        <span style="width: 100%;"></span>
+                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
+                    </a>
+                    <a href="oldChat.html" class="sidebarEntry">
+                        <img class="icon" src="bigIcons/Message.svg" alt="">
+                        New Chat
+                        <span style="width: 100%;"></span>
+                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
+                    </a>
+                    <a href="oldChat.html" class="sidebarEntry">
+                        <img class="icon" src="bigIcons/Message.svg" alt="">
+                        New Chat
+                        <span style="width: 100%;"></span>
+                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
+                    </a>
+                    <a href="oldChat.html" class="sidebarEntry">
+                        <img class="icon" src="bigIcons/Message.svg" alt="">
+                        New Chat
+                        <span style="width: 100%;"></span>
+                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
+                    </a>
                 </div>
+            </div>
+        </div>
 
-                <div class="historySection">
-                    <div class="chatsSep">MY CHATS</div>
-
-                    <div class="chatEntries">
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
-                        <a href="oldChat.html" class="sidebarEntry" >
-                            <img class="icon" src="bigIcons/Message.svg" alt="">
-                            New Chat
-                            <span style="width: 100%;"></span>
-                            <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                        </a>
+        <div class="sidebarBottom">
+            <button class="sidebarUserInfo" onclick="showUserPopup(event)">
+                <div class="modelPickerPopup hidden" id="userPicker">
+                    <a href="settings/accountOverview.html" class="modelOption style">
+                        <img src="modePickerIcons/Settings.svg" style="height: 28px;">
+                        <div class="stylePickerText">
+                            <b>Settings</b>
+                            <span>Change your account settings.</span>
+                        </div>
+                    </a>
+                    <div class="modelOption style">
+                        <img src="modePickerIcons/X.svg" style="height: 28px;">
+                        <div class="stylePickerText">
+                            <b>Log Out</b>
+                            <span>Exit your session.</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="sidebarBottom">
-                            <button class="sidebarUserInfo" onclick="showUserPopup(event)">
-                                <div class="modelPickerPopup hidden" id="userPicker">
-                                    <a href="settings/accountOverview.html" class="modelOption style">
-                                        <img src="modePickerIcons/Settings.svg" style="height: 28px;">
-                                        <div class="stylePickerText">
-                                            <b>Settings</b>
-                                            <span>Change your account settings.</span>
-                                        </div>
-                                    </a>
-                                    <div class="modelOption style">
-                                        <img src="modePickerIcons/X.svg" style="height: 28px;">
-                                        <div class="stylePickerText">
-                                            <b>Log Out</b>
-                                            <span>Exit your session.</span>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="userInfo">
+                    <div class="userProfile">
+                        <img style="height: 40px; border-radius: 50%;" src="doromiert.png" alt="doromiert">
+                        <div class="doxx"><span style="font-size: 20px; font-weight: 600;">doromiert</span><span
+                                style="font-size: 16px; color: rgba(255,255,255,0.8);">doromiert@gmail.com</span></div>
+                    </div>
+                    <div class="shapeChip">PRO</div>
+                </div>
+                <div class="creditCounter">
+                    <span>Credits</span>
+                    <div class="creditBar"></div>
+                    <span>67/120</span>
+                </div>
 
-                                <div class="userInfo">
-                                    <div class="userProfile">
-                                        <img style="height: 40px; border-radius: 50%;" src="doromiert.png" alt="doromiert">
-                                        <div class="doxx"><span style="font-size: 20px; font-weight: 600;">doromiert</span><span style="font-size: 16px; color: rgba(255,255,255,0.8);">doromiert@gmail.com</span></div>
-                                    </div>
-                                    <div class="shapeChip">PRO</div>
-                                </div>
-                                <div class="creditCounter">
-                                    <span>Credits</span>
-                                    <div class="creditBar"></div>
-                                    <span>67/120</span>
-                                </div>
-
-                            </button>
-                            <button class="upgradeButton"><span>UPGRADE</span></button>
-                        </div>
-
-        </div>
-        <div class="mainView">
-            <div class="assetView">
-                <img src="doromiert.png" style="height: 80%;">
-            </div>
-            <div class="assetSidebar">
-                <a href="assets.html" class="sbt" style="text-decoration: none; color: white;">
-                    <img src="smallIcons/Chevron.svg" style="height: 32px; transform: rotate(90deg);">
-                    <span> Asset View</span>
-                </a>
-                <div class="assetTags">
-                    <div class="assetTag active">Thumbnail</div>
-                    <div class="assetTag">AI generated</div>
-                </div>
-                <div class="assetInfo">
-                    <h1>Some Asset</h1>
-                    <span><span style="opacity: 50%;">By</span> <img src="doromiert.png"> doromiert</span>
-                </div>
-                <div class="assetActions">
-                    <button class="assetAction active">
-                        <img src="bigIcons/Download.svg">
-                        <span>Download</span>
-                    </button>
-                    <button class="assetAction">
-                        <img src="bigIcons/Heart.svg">
-                    </button>
-                    <button class="assetAction">
-                        <img src="bigIcons/Share.svg">
-                    </button>
-                </div>
-                <div class="assetTags">
-                    <div class="assetTag">tag</div>
-                    <div class="assetTag">tag</div>
-                    <div class="assetTag">tag</div>
-                    <div class="assetTag">tag</div>
-                    <div class="assetTag">tag</div>
-                    <div class="assetTag">tag</div>
-                    <div class="assetTag">tag</div>
-                    <div class="assetTag">tag</div>
-                    <div class="assetTag">tag</div>
-                    <div class="assetTag">tag</div>
-                </div>
-            </div>
+            </button>
+            <a href="settings/plans.html" class="upgradeButton"><span>UPGRADE</span></a>
         </div>
 
-    </body>
-    <script>
-      function toggleSidebar() {
+    </div>
+    <div class="mainView">
+        <div class="assetView">
+            <img src="doromiert.png" style="height: 80%;">
+        </div>
+        <div class="assetSidebar">
+            <a href="assets.html" class="sbt" style="text-decoration: none; color: white;">
+                <img src="smallIcons/Chevron.svg" style="height: 32px; transform: rotate(90deg);">
+                <span> Asset View</span>
+            </a>
+            <div class="assetTags">
+                <div class="assetTag active">Thumbnail</div>
+                <div class="assetTag">AI generated</div>
+            </div>
+            <div class="assetInfo">
+                <h1>Some Asset</h1>
+                <span><span style="opacity: 50%;">By</span> <img src="doromiert.png"> doromiert</span>
+            </div>
+            <div class="assetActions">
+                <button class="assetAction active">
+                    <img src="bigIcons/Download.svg">
+                    <span>Download</span>
+                </button>
+                <button class="assetAction">
+                    <img src="bigIcons/Heart.svg">
+                </button>
+                <button class="assetAction">
+                    <img src="bigIcons/Share.svg">
+                </button>
+            </div>
+            <div class="assetTags">
+                <div class="assetTag">tag</div>
+                <div class="assetTag">tag</div>
+                <div class="assetTag">tag</div>
+                <div class="assetTag">tag</div>
+                <div class="assetTag">tag</div>
+                <div class="assetTag">tag</div>
+                <div class="assetTag">tag</div>
+                <div class="assetTag">tag</div>
+                <div class="assetTag">tag</div>
+                <div class="assetTag">tag</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    function toggleSidebar() {
         document.querySelector('.sidebar').classList.toggle('collapsed');
-      }
-      function showModelPicker() {
+    }
+    function showModelPicker() {
         document.querySelector('#modelPickerPopup').classList.toggle('hidden');
-      }
-      function toggleStylePicker() {
+    }
+    function toggleStylePicker() {
         document.querySelector('#stylePicker').classList.toggle('hidden');
-      }
-      function toggleTypePopup() {
+    }
+    function toggleTypePopup() {
         document.querySelector('#outputTypePicker').classList.toggle('hidden');
-      }
-      function showUserPopup() {
+    }
+    function showUserPopup() {
         document.querySelector('#userPicker').classList.toggle('hidden');
-      }
-    </script>
+    }
+</script>
+
 </html>

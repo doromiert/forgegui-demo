@@ -14,22 +14,21 @@
     <meta name="color-scheme" content="dark" />
 
     <style>
+      .mainView {
+        display: flex;
+        padding: 55px 250px 0 250px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+        flex: 1 0 0;
+        align-self: stretch;
+      }
 
-        .mainView{
-            display: flex;
-padding: 55px 250px 0 250px;
-flex-direction: column;
-align-items: flex-start;
-gap: 25px;
-flex: 1 0 0;
-align-self: stretch;
-        }
-
-        .b{
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
+      .b {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
     </style>
   </head>
   <body>
@@ -67,7 +66,7 @@ align-self: stretch;
       </div>
     </div>
     <div class="mainView">
-        <div class="settingsFinancesBrief">
+      <div class="settingsFinancesBrief">
         <div class="financesBriefBox">
           <div class="topLine">
             <img src="../smallIcons/coins.svg" alt="" />
@@ -95,12 +94,23 @@ align-self: stretch;
       <div class="userInfo settings">
         <div class="userInfoLine">
           <span class="a">Billing to</span>
-          <span class="b">Visa 2137 <div class="visaBadge"><img src="../visa.svg"></div> <button class="linkbutton" onclick="editPaymentPopup()">Change...</button></span>
+          <span class="b"
+            >Visa 2137
+            <div class="visaBadge"><img src="../visa.svg" /></div>
+            <button class="linkbutton" onclick="editPaymentPopup()">
+              Change...
+            </button></span
+          >
         </div>
         <hr />
         <div class="userInfoLine">
           <span class="a">Billing Address</span>
-          <span class="b">123 Main Street, City, State 12345 <button class="linkbutton" onclick="editAddressPopup()">Change...</button></span>
+          <span class="b"
+            >123 Main Street, City, State 12345
+            <button class="linkbutton" onclick="editAddressPopup()">
+              Change...
+            </button></span
+          >
         </div>
         <hr />
         <div class="userInfoLine">
@@ -108,11 +118,13 @@ align-self: stretch;
           <span class="b">May 12, 2026</span>
         </div>
         <hr />
-        
       </div>
       <div class="billingFooter">
-        <img src="../smallIcons/lock.svg"> 
-        <span>All payments you make through our platform are securely handled by Stripe.</span>
+        <img src="../smallIcons/lock.svg" />
+        <span
+          >All payments you make through our platform are securely handled by
+          Stripe.</span
+        >
         <a href="../placeholder.html">Learn more</a>
       </div>
     </div>
