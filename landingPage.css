@@ -6,9 +6,9 @@ body {
   z-index: 212893012398;
   position: fixed;
   display: flex;
-  height: 56px;
   width: 100vw;
   gap: 24px;
+  
   padding: 22px 36px;
   box-sizing: border-box;
   left: 0;
@@ -16,6 +16,7 @@ body {
   #topbarLogo {
     width: 135px;
     height: 47px;
+    align-self: center;
   }
   .landingDropdowns {
     display: flex;
@@ -771,7 +772,7 @@ hr {
   font-weight: 400;
   line-height: normal;
   box-sizing: border-box;
-  transition: 0.25s;
+  transition: height 0.3s ease, padding 0.3s ease;
   a {
     color: #07f;
     font-family: "Inter Tight";

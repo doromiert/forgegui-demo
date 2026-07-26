@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ForgeGUI</title>
+    <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="theme-color" content="#0D0D0D" />
+    <meta name="description" content="ForgeGUI - Create anything with AI" />
+    <meta property="og:title" content="ForgeGUI" />
+    <meta property="og:description" content="Powerful AI tool for creators" />
+    <meta property="og:type" content="website" />
+    <meta name="color-scheme" content="dark" />
+
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .mainView {
+        display: flex;
+        padding: 20px;
+        box-sizing: border-box;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        height: calc(100vh - 66px - 30px);
+        overflow: scroll;
+        
+        h1 {
+          color: #fff;
+          text-align: center;
+          leading-trim: both;
+          text-edge: cap;
+          font-family: "Atkinson Hyperlegible Next";
+          font-size: 50px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          margin: 0;
+        }
+        span {
+          color: rgba(255, 255, 255, 0.65);
+          text-align: center;
+          leading-trim: both;
+          text-edge: cap;
+          font-family: "Atkinson Hyperlegible";
+          font-size: 22px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+
+      .b {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .dateChanger {
+        display: flex;
+        padding: 4px;
+        align-items: flex-start;
+        border-radius: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: #000;
+      }
+
+      .dateButton {
+        display: flex;
+        padding: 15px 22px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 30px;
+        border: none;
+        text-align: center;
+        leading-trim: both;
+        text-edge: cap;
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        background: none;
+        box-sizing: border-box;
+        height: 43px;
+        color: rgba(255, 255, 255, 0.5);
+        &.active {
+          background: #00ff90 !important;
+          color: #040404;
+          &:hover {
+            filter: brightness(1.1);
+          }
+        }
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.25);
+        }
+      }
+
+      .planCarousel {
+        display: flex;
+        padding: 0 90px;
+        align-items: flex-start;
+        gap: 20px;
+        align-self: stretch;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#temp" class="skip-link">Skip to content</a>
+
+    <div class="topBar settings">
+      <img id="FGlogo" style="height: 28px" src="../footerLogo.svg" alt="" />
+      <a href="accountOverview.html" class="iconButton">
+        <img src="../smallIcons/Chevron.svg" style="rotate: 90deg" alt="" />
+        <span>Back to Home</span>
+      </a>
+
+      <div style="flex: 1"></div>
+      <img
+        src="../doromiert.png"
+        style="width: 50px; height: 50px; border-radius: 2137px"
+      />
+    </div>
+    <div class="mainView">
+      <h1>Upgrade your Plan</h1>
+      <span>Upgrade your ForgeGUI experience with even better plans.</span>
+      <div class="dateChanger">
+        <button class="dateButton active">Monthly</button>
+        <button class="dateButton">Yearly</button>
+      </div>
+      <div class="planCarousel">
+        <div class="planCard starter">
+          <div class="planCardHeader">
+            <span>STARTER</span>
+            <div class="shapeChip blue">FOR NEW USERS</div>
+          </div>
+          <div class="pricingBox">
+            <span class="price"><b>$19.99</b>/month</span>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Includes 120 Credits/mo</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Flexible Credits</span>
+            </div>
+          </div>
+          <button class="planButton starter">Get Starter</button>
+          <div class="benefits">
+            <b>Included AI Models</b>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to Google Nano Banana</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to Meshy</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to GPT Image V2</span>
+            </div>
+            <hr />
+
+            <b>Included Features</b>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to Community</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Game Studio (Baseline)</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Premium Customer Support</span>
+            </div>
+          </div>
+        </div>
+        <div class="planCard plus">
+          <div class="planCardHeader">
+            <span>PLUS</span>
+            <div class="shapeChip pink">00% OFF</div>
+          </div>
+          <div class="pricingBox">
+            <span class="price"
+              ><b>$19.99</b>
+              <div class="preSalePrice">$29.99</div>
+              /month</span
+            >
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Includes 500 Credits/mo</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Flexible Credits</span>
+            </div>
+          </div>
+          <button class="planButton plus">Get Plus</button>
+          <div class="benefits">
+            <b>Included AI Models</b>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to Google Nano Banana</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to Meshy</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to GPT Image V2</span>
+            </div>
+            <hr />
+            <b>Included Features</b>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to Community</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Game Studio (Baseline)</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Premium Customer Support</span>
+            </div>
+          </div>
+        </div>
+        <div class="planCard max">
+          <div class="planCardHeader">
+            <span>MAX</span>
+            <div class="shapeChip">BEST VALUE</div>
+          </div>
+          <div class="pricingBox">
+            <span class="price"><b>$199.99</b>/month</span>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Includes 2,000 Credits/mo</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Flexible Credits</span>
+            </div>
+          </div>
+          <button class="planButton max">Get Max</button>
+          <div class="benefits">
+            <b>Included AI Models</b>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to Google Nano Banana</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to Meshy</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to GPT Image V2</span>
+            </div>
+            <hr />
+            <b>Included Features</b>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to Community</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Game Studio (Baseline)</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Premium Customer Support</span>
+            </div>
+          </div>
+        </div>
+        <div class="planCard custom">
+          <div class="planCardHeader">
+            <span>CUSTOM</span>
+          </div>
+          <div class="pricingBox">
+            <span class="price"><b>$--.--</b>/month</span>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Customizable</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Tailored to Your Needs</span>
+            </div>
+          </div>
+          <button class="planButton custom">Build your Plan</button>
+          <div class="benefits">
+            <b>Included AI Models</b>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to Google Nano Banana</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to Meshy</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to GPT Image V2</span>
+            </div>
+            <hr />
+            <b>Included Features</b>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Access to Community</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Game Studio (Baseline)</span>
+            </div>
+            <div class="valueLine">
+              <img src="../bigIcons/Checkmark.svg" />
+              <span>Premium Customer Support</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="plansFooter">
+        Tax not included in price. Your payment is securely processed by our
+        payment partner, Stripe.
+      </div>
+    </div>
+  </body>
+  <script>
+    function toggleSidebar() {
+      document.querySelector(".sidebar").classList.toggle("collapsed");
+    }
+    function showModelPicker() {
+      document.querySelector("#modelPickerPopup").classList.toggle("hidden");
+    }
+    function toggleStylePicker() {
+      document.querySelector("#stylePicker").classList.toggle("hidden");
+    }
+    function toggleTypePopup() {
+      document.querySelector("#outputTypePicker").classList.toggle("hidden");
+    }
+    function showUserPopup() {
+      document.querySelector("#userPicker").classList.toggle("hidden");
+    }
+  </script>
+</html>
