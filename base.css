@@ -1236,7 +1236,7 @@ button {
     rgba(41, 41, 41, 0.3);
 }
 
-.userInfo {
+.userInfo.settings {
   display: flex;
   flex-direction: column;
   align-items: center;
