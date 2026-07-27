@@ -31,6 +31,7 @@
       }
     </style>
   </head>
+
   <body>
     <a href="#temp" class="skip-link">Skip to content</a>
 
@@ -97,17 +98,17 @@
           <span class="b"
             >Visa 2137
             <div class="visaBadge"><img src="../visa.svg" /></div>
-            <button class="linkbutton" onclick="editPaymentPopup()">
+            <button class="linkbutton" onclick="toggleCardPopup()">
               Change...
-            </button></span
-          >
+            </button>
+          </span>
         </div>
         <hr />
         <div class="userInfoLine">
           <span class="a">Billing Address</span>
           <span class="b"
             >123 Main Street, City, State 12345
-            <button class="linkbutton" onclick="editAddressPopup()">
+            <button class="linkbutton" onclick="toggleCardPopup()">
               Change...
             </button></span
           >
@@ -128,7 +129,118 @@
         <a href="../placeholder.html">Learn more</a>
       </div>
     </div>
+    <div
+      class="popupContainer hidden"
+      style="z-index: 21312312837123891273189371289371283712893712"
+    >
+      <!-- sane index -->
+      <div class="planCheckoutPopup card ">
+        <div class="leftSide">
+          <h1>Add Payment Method</h1>
+          <span class="topSubtext"
+            >Make checkout even faster by having us remember your payment
+            information.</span
+          >
+          <form class="checkoutForm">
+            <div class="horizontal">
+              <div class="input-wrap icon-email">
+                <input class="emailinput" type="email" placeholder="Email" />
+              </div>
+              <input
+                class="nameinput"
+                type="name"
+                placeholder="Cardholder Name"
+              />
+            </div>
+
+            <div class="input-wrap icon-card">
+              <input
+                type="text"
+                inputmode="numeric"
+                placeholder="Card Number"
+                class="ccinput"
+              />
+            </div>
+            <div class="horizontal">
+              <input
+                type="text"
+                inputmode="numeric"
+                class="dateinput"
+                placeholder="MM / YY"
+                maxlength="7"
+              />
+              <input type="text" inputmode="numeric" placeholder="CVC" />
+            </div>
+
+            <div class="horizontal">
+              <select class="country-select"></select>
+              <input type="text" class="zipinput" placeholder="ZIP" />
+            </div>
+            <input type="text" placeholder="Address" style="width: 100%" />
+          </form>
+
+          <!-- replace your confirm button + save row with this -->
+
+          <div class="stripe-notice">
+            <img src="../smallIcons/lock.svg" alt="" />
+            <p>
+              All payments you make through our platform are securely handled by
+              Stripe. <a href="#">Learn More</a>
+            </p>
+          </div>
+          <button
+            class="planButton starter confirm-button"
+            style="margin: 0"
+            onclick="toggleCardPopup()"
+          >
+            Add Payment Method
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
+  <script type="module">
+    import postalCodes from "https://cdn.jsdelivr.net/npm/postal-codes-js/+esm";
+    const select = document.querySelector(".country-select");
+    const zip = document.querySelector(".zipinput");
+
+    zip.addEventListener("blur", () => {
+      const result = postalCodes.validate(select.value, zip.value);
+      zip.classList.toggle("invalid", result !== true);
+    });
+    fetch("https://cdn.jsdelivr.net/npm/country-list@2.3.0/data.json")
+      .then((r) => r.json())
+      .then((countries) => {
+        const select = document.querySelector(".country-select");
+        countries.forEach(({ code, name }) => {
+          const opt = document.createElement("option");
+          opt.value = code;
+          opt.textContent = name;
+          if (code === "US") opt.selected = true;
+          select.appendChild(opt);
+        });
+      });
+    document.querySelector(".dateinput").addEventListener("input", (e) => {
+      let v = e.target.value.replace(/\D/g, "").slice(0, 4);
+      if (v.length >= 2) {
+        let mm = Math.min(parseInt(v.slice(0, 2)), 12)
+          .toString()
+          .padStart(2, "0");
+        v = mm + v.slice(2);
+      }
+      if (v.length >= 3) v = v.slice(0, 2) + " / " + v.slice(2);
+      e.target.value = v;
+    });
+    document
+      .querySelector('[placeholder="CVC"]')
+      .addEventListener("input", (e) => {
+        e.target.value = e.target.value.replace(/\D/g, "").slice(0, 4);
+      });
+    document.querySelector(".ccinput").addEventListener("input", (e) => {
+      let v = e.target.value.replace(/\D/g, "").slice(0, 16);
+      e.target.value = v.replace(/(.{4})/g, "$1 ").trim();
+    });
+  </script>
   <script>
     function toggleSidebar() {
       document.querySelector(".sidebar").classList.toggle("collapsed");
@@ -144,6 +256,9 @@
     }
     function showUserPopup() {
       document.querySelector("#userPicker").classList.toggle("hidden");
+    }
+    function toggleCardPopup(){
+        document.querySelector(".popupContainer").classList.toggle("hidden")
     }
   </script>
 </html>

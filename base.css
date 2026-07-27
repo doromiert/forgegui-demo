@@ -336,11 +336,11 @@ body {
 
   &.blue {
     background-color: #88dbff;
-    
+
     &::before {
       background-image: url("shapeChip/start-blue.svg");
     }
-    
+
     &::after {
       background-image: url("shapeChip/end-blue.svg");
     }
@@ -348,11 +348,11 @@ body {
 
   &.pink {
     background-color: #fa11a5;
-    
+
     &::before {
       background-image: url("shapeChip/start-pink.svg");
     }
-    
+
     &::after {
       background-image: url("shapeChip/end-pink.svg");
     }
@@ -1465,6 +1465,21 @@ button {
 }
 
 .planCard {
+  &.rightSide {
+    .planCardHeader {
+      padding-right: 15px;
+    }
+    border: none;
+    border-radius: 0;
+    justify-content: flex-start !important;
+    button {
+      margin-top: auto;
+    }
+    .pricingBox {
+      height: min-content !important;
+      flex: 0;
+    }
+  }
   display: flex;
   width: 450px;
   flex-direction: column;
@@ -1503,8 +1518,8 @@ button {
     background: rgba(255, 255, 255, 0.06);
     width: calc(100% - 30px);
     box-sizing: border-box;
-    .valueLine span{
-        opacity: 80%;
+    .valueLine span {
+      opacity: 80%;
     }
     .price {
       display: flex;
@@ -1539,25 +1554,24 @@ button {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    span{
-        color: #fff;
-        
+    span {
+      color: #fff;
     }
     img {
       height: 24px;
     }
   }
 
-  .benefits{
-    b{
-        color: #FFF;
-leading-trim: both;
-text-edge: cap;
-font-family: "Atkinson Hyperlegible Next";
-font-size: 24px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+  .benefits {
+    b {
+      color: #fff;
+      leading-trim: both;
+      text-edge: cap;
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
     }
     margin: 0 10px 10px 10px;
     align-self: stretch;
@@ -1565,20 +1579,20 @@ line-height: normal;
     gap: 10px;
     display: flex;
     flex-direction: column;
-    .valueLine span{
-        color: #FFF;
-text-align: center;
-leading-trim: both;
-text-edge: cap;
-font-family: "Atkinson Hyperlegible Next";
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+    .valueLine span {
+      color: #fff;
+      text-align: center;
+      leading-trim: both;
+      text-edge: cap;
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
     }
   }
 
-  hr{
+  hr {
     margin: 10px 0 0 0;
     opacity: 25%;
   }
@@ -1638,70 +1652,425 @@ line-height: normal;
       ),
       rgba(41, 41, 41, 0.3);
   }
+}
+.planButton {
+  display: flex;
+  height: 50px;
+  padding: 16px 16px 19px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  margin: 0 15px;
+  border-radius: 16px;
+  box-shadow: 0 -3px 2px 0 rgba(0, 0, 0, 0.3) inset;
+  border: none;
+  text-align: center;
+  font-family: "Atkinson Hyperlegible Next";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  &.starter {
+    background: #fff;
+    color: #000;
+  }
+  &.plus {
+    background: #00ff90;
+    color: #000;
+  }
+  &.max {
+    background: #ff3f92;
+    color: #000;
+  }
+  &.custom {
+    background: #fff;
+    color: #000;
+  }
 
-  .planButton {
+  &:hover {
+    filter: brightness(1.05);
+    scale: 1.1;
+  }
+  &:active {
+    filter: brightness(0.95);
+    scale: 0.9;
+  }
+}
+
+.plansFooter {
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  leading-trim: both;
+  text-edge: cap;
+  font-family: "Inter Tight";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  display: flex;
+  width: 717px;
+  height: 58px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+a {
+  transition: 0.25s;
+}
+
+.checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.checkbox:checked {
+  background: #00ff90;
+  border-color: #00ff90;
+  background-image: url("../bigIcons/Checkmark-dark.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 28px;
+}
+.popupContainer {
+  &.hidden {
+    display: none;
+  }
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+
+  align-items: center;
+  justify-content: center;
+}
+
+.planCheckoutPopup {
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #171717;
+
+  .leftSide {
+    
+    height: 100%;
+    width: 539px;
     display: flex;
-    height: 50px;
-    padding: 16px 16px 19px 16px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
-    margin: 0 15px;
-    border-radius: 16px;
-    box-shadow: 0 -3px 2px 0 rgba(0, 0, 0, 0.3) inset;
-    border: none;
-    text-align: center;
-    font-family: "Atkinson Hyperlegible Next";
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    &.starter {
-      background: #fff;
-      color: #000;
-    }
-    &.plus {
-      background: #00ff90;
-      color: #000;
-    }
-    &.max {
-      background: #ff3f92;
-      color: #000;
-    }
-    &.custom {
-      background: #fff;
-      color: #000;
-    }
+    padding: 45px;
+    flex-direction: column;
+    justify-small: center;
+    align-items: flex-start;
+    gap: 25px;
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+      align-self: stretch;
+      input,
+      select,
+      .input-wrap {
+        width: 100%;
+        box-sizing: border-box;
+        width: 262px;
+      }
+      .horizontal {
+        width: 100%;
+        flex-wrap: nowrap;
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        align-self: stretch;
+      }
+      input,
+      select {
+        background: rgba(255, 255, 255, 0.05);
+        border: none;
+        border-radius: 10px;
+        padding: 7px 15px;
+        height: 44px;
+        box-sizing: border-box;
+        color: #fff;
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 20px;
+        font-weight: 500;
+        outline: none;
+        appearance: none;
+        -webkit-appearance: none;
+      }
 
-    &:hover {
-      filter: brightness(1.05);
-      scale: 1.1;
+      input::placeholder {
+        color: #a4a4a4;
+      }
+
+      input.invalid {
+        outline: 1px solid rgba(255, 80, 80, 0.7);
+      }
+
+      /* icon wrapper — position: relative on the parent */
+
+      .input-wrap {
+        position: relative;
+        width: 100%;
+      }
+
+      .input-wrap input {
+        width: 100%;
+        padding-right: 44px;
+      }
+
+      .input-wrap::after {
+        content: "";
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 24px;
+        height: 24px;
+        pointer-events: none;
+        background-color: #a4a4a4;
+        -webkit-mask: var(--icon) no-repeat center;
+        mask: var(--icon) no-repeat center;
+        mask-size: contain;
+      }
+
+      .input-wrap.icon-email {
+        --icon: url("./smallIcons/mail.svg");
+      }
+      .input-wrap.icon-card {
+        --icon: url("./bigIcons/coins.svg");
+      }
+
+      /* country select arrow */
+      .country-select {
+        cursor: pointer;
+        padding-right: 44px;
+        background-image: url("./smallIcons/Chevron.svg");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 24px;
+        color: #fff;
+      }
     }
-    &:active {
-      filter: brightness(0.95);
-      scale: 0.9;
+    h1 {
+      margin: 0;
+      color: #fff;
+      leading-trim: both;
+      text-edge: cap;
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 44px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+    .topSubtext {
+      color: rgba(255, 255, 255, 0.65);
+      leading-trim: both;
+      text-edge: cap;
+      font-family: "Atkinson Hyperlegible";
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      width: 100%;
+    }
+  }
+  .rightSide {
+    background:
+      radial-gradient(
+        86.96% 70.71% at 0% 100%,
+        rgba(0, 255, 204, 0.2) 0%,
+        rgba(58, 58, 58, 0.2) 100%
+      ),
+      radial-gradient(
+        86.96% 70.71% at 100% 0%,
+        rgba(0, 255, 204, 0.2) 0%,
+        rgba(0, 0, 0, 0.2) 100%
+      ),
+      rgba(41, 41, 41, 0.3);
+    display: flex;
+    width: 450px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    .rs-header {
+      display: flex;
+      height: 79px;
+      padding: 24px 20px 24px 25px;
+      justify-content: space-between;
+      align-items: center;
+      align-self: stretch;
+      box-sizing: border-box;
+    }
+    .rs-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      .rs-plan-name {
+        color: #fff;
+        leading-trim: both;
+        text-edge: cap;
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 32px;
+        font-style: italic;
+        font-weight: 800;
+        line-height: normal;
+      }
+    }
+    .rs-close {
+      display: flex;
+      width: 40px;
+      height: 40px;
+      padding: 10px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      aspect-ratio: 1/1;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
     }
   }
 }
 
-.plansFooter{
-    color: rgba(255, 255, 255, 0.50);
-text-align: center;
-leading-trim: both;
-text-edge: cap;
-font-family: "Inter Tight";
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-display: flex;
-width: 717px;
-height: 58px;
-flex-direction: column;
-justify-content: center;
+.save-payment-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: #fff;
+  leading-trim: both;
+  text-edge: cap;
+  font-family: "Atkinson Hyperlegible Next";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
-a{
-    transition: 0.25s;
+.stripe-notice {
+  color: rgba(255, 255, 255, 0.8);
+  leading-trim: both;
+  text-edge: cap;
+  font-family: "Atkinson Hyperlegible Next";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  align-self: stretch;
+  a {
+    color: #fff;
+    leading-trim: both;
+    text-edge: cap;
+    font-family: "Atkinson Hyperlegible Next";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+  }
+}
+
+.state-form,
+.state-error,
+.state-saved { display: none; }
+
+.planCheckoutPopup[data-state="form"] .state-form { display: flex; flex-direction: column; gap: 25px; }
+.planCheckoutPopup[data-state="error"] .state-error { display: flex; flex-direction: column; gap: 25px; }
+.planCheckoutPopup[data-state="saved"] .state-saved { display: flex; flex-direction: column; gap: 25px; }
+
+/* hide form inputs when in saved state */
+.planCheckoutPopup[data-state="saved"] form { display: none; }
+.planCheckoutPopup[data-state="saved"] .dateChanger.checkout { display: flex; }
+
+.loadingPopup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10px);
+  z-index: 99998;
+}
+
+.loadingPopupInner {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 45px;
+  background: #171717;
+  border-radius: 26px;
+  background:
+    radial-gradient(ellipse at top left, rgba(0,255,204,0.2) 0%, transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(0,255,204,0.2) 0%, transparent 60%),
+    #171717;
+}
+
+.loadingPopupInner h1 {
+  margin: 0;
+  color: #fff;
+  font-size: 44px;
+  font-weight: 700;
+}
+
+.loadingPopupInner span {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 22px;
+}
+
+/* also hide the form inputs during loading/success */
+.planCheckoutPopup[data-state="loading"] form,
+.planCheckoutPopup[data-state="success"] form { display: none; }
+
+.error-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  color: #ffb3b3;
+  font-size: 20px;
+}
+
+.saved-card-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 24px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.saved-card-row img.card-icon { width: 34px; height: 34px; border-radius: 4px; }
+
+.add-payment-link {
+  color: #fff;
+  font-size: 22px;
+  text-decoration: underline;
 }
