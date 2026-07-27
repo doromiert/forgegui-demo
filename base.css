@@ -1544,23 +1544,7 @@ button {
       text-decoration-line: line-through;
     }
   }
-  .valueLine {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-align: center;
-    font-family: "Atkinson Hyperlegible Next";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    span {
-      color: #fff;
-    }
-    img {
-      height: 24px;
-    }
-  }
+ 
 
   .benefits {
     b {
@@ -2074,3 +2058,20 @@ a {
   font-size: 22px;
   text-decoration: underline;
 }
+ .valueLine {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    font-family: "Atkinson Hyperlegible Next";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    span {
+      color: #fff;
+    }
+    img {
+      height: 24px;
+    }
+  }
