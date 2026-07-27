@@ -714,6 +714,8 @@ section {
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
+  border-radius: 25px;
+  overflow: hidden;
 }
 
 .faqLine {
