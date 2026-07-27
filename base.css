@@ -1734,7 +1734,7 @@ a {
 .checkbox:checked {
   background: #00ff90;
   border-color: #00ff90;
-  background-image: url("../bigIcons/Checkmark-dark.svg");
+  background-image: url("bigIcons/Checkmark-dark.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 28px;
