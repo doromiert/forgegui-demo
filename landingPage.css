@@ -98,11 +98,11 @@ body {
   background-image: url("images/hero.png");
   display: flex;
   flex-direction: column;
-  padding: 66px 425px 50px 425px;
+  padding: 66px;
   justify-content: space-between;
   .heroText {
     font-family: "instrument serif";
-    font-size: 115px;
+    font-size: 96px;
     font-weight: 400;
     text-align: center;
   }
@@ -110,7 +110,7 @@ body {
     text-align: center;
     filter: drop-shadow(0 2px 2.2px rgba(0, 0, 0, 0.54));
     font-family: "Cal Sans";
-    font-size: 110px;
+    font-size: 96px;
     font-style: normal;
     font-weight: 400;
     position: relative;
@@ -171,6 +171,8 @@ body {
   );
   box-shadow: 0 0 22px 0 rgba(255, 255, 255, 0.57) inset;
   backdrop-filter: blur(10px);
+  width: 1000px;
+  align-self: center;
 }
 
 #essentials {
