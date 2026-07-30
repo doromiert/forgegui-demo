@@ -1,382 +1,133 @@
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ForgeGUI</title>
     <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
     <link rel="stylesheet" href="base.css" />
     <meta name="theme-color" content="#0D0D0D" />
-    <meta name="description" content="ForgeGUI - Create anything with AI">
-    <meta property="og:title" content="ForgeGUI">
-    <meta property="og:description" content="Powerful AI tool for creators">
-    <meta property="og:type" content="website">
-    <meta name="color-scheme" content="dark">
+    <meta name="description" content="ForgeGUI - Create anything with AI" />
+    <meta property="og:title" content="ForgeGUI" />
+    <meta property="og:description" content="Powerful AI tool for creators" />
+    <meta property="og:type" content="website" />
+    <meta name="color-scheme" content="dark" />
 
-    <style>
-        .mainView {
-            overflow: hidden;
-        }
-    </style>
+    <style></style>
+  </head>
+  <body class="chat">
+    <sidebar>
+      <top>
+        <img src="footerLogo.svg" class="fgLogo" />
+        <button onclick="toggleSidebar()">
+          <img src="bigIcons/Sidebars.svg" />
+        </button>
+      </top>
+      <specialTabs>
+        <a href="index.html" class="sidebarElem ">
+          <img src="bigIcons/3Dots.svg" />
+          <span>Home</span>
+        </a>
+        <a href="assets.html" class="sidebarElem ">
+          <img src="bigIcons/3Dots.svg" />
+          <span>Assets</span>
+        </a>
+        <a href="index.html" class="sidebarElem">
+          <img src="bigIcons/3Dots.svg" />
+          <span>Community</span>
+        </a>
+      </specialTabs>
+      <projects>
+        <topLabel>Game Projects</topLabel>
+        <a href="oldChat.html" class="sidebarElem selected">
+          <img src="bigIcons/3Dots.svg" />
+          <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem ">
+          <img src="bigIcons/3Dots.svg" />
+          <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem ">
+          <img src="bigIcons/3Dots.svg" />
+          <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem ">
+          <img src="bigIcons/3Dots.svg" />
+          <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem ">
+          <img src="bigIcons/3Dots.svg" />
+          <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem ">
+          <img src="bigIcons/3Dots.svg" />
+          <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem ">
+          <img src="bigIcons/3Dots.svg" />
+          <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem ">
+          <img src="bigIcons/3Dots.svg" />
+          <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem ">
+          <img src="bigIcons/3Dots.svg" />
+          <span>Message 1</span>
+        </a>
+       
+      </projects>
+      <bottom>
+        <creditCounter>
+          <top>
+            <img src="smallIcons/coins.svg" />
+            <span>Starter Plan</span>
+            <div style="flex: 1"></div>
+            <a href="placeholder.html">Get More</a>
+          </top>
+          <bottom>
+            <slider></slider>
+            <span>1</span>
+          </bottom>
+        </creditCounter>
+        <a href="placeholder.html" class="sidebarElem">
+          <img src="bigIcons/3Dots.svg" />
+          <span>Upgrade to Pro</span>
+        </a>
+        <actions>
+          <a href="placeholder.html" class="sidebarElem">
+            <img src="smallIcons/Add.svg" />
+            <span>Courses</span>
+          </a>
+          <a href="placeholder.html" class="sidebarElem">
+            <img src="smallIcons/Add.svg" />
+            <span>Courses</span>
+          </a>
+          <a href="placeholder.html" class="sidebarElem">
+            <img src="smallIcons/Add.svg" />
+            <span>Courses</span>
+          </a>
+        </actions>
+        <button onclick="showUserPopup()">
+          <img src="doromiert.png" />
+          <vertical>
+            <span>doromiert</span>
+            <span>doromiert@gmail.com</span>
+          </vertical>
+          <img src="bigIcons/3Dots.svg" />
+        </button>
+      </bottom>
+    </sidebar>
+    <mainView>
+        <top>
 
-</head>
-
-<body>
-    <a href="#temp" class="skip-link">Skip to content</a>
-
-    <div class="sidebar">
-        <div class="sbTop">
-            <img id="FGlogo" style="height: 28px;" src="footerLogo.svg" alt="">
-            <button class="iconButton" onclick="toggleSidebar()">
-                <img class="icon" src="bigIcons/Sidebars.svg" alt="">
-            </button>
-        </div>
-
-        <div class="topSection">
-            <div class="nonChats">
-                <a href="newChat.html" class="sidebarEntry">
-                    <img class="icon" src="bigIcons/Add.svg" alt="">
-                    New Chat
-                </a>
-                <a href="explore.html" class="sidebarEntry">
-                    <img class="icon" src="bigIcons/Compass.svg" alt="">
-                    Explore
-                </a>
-                <a href="assets.html" class="sidebarEntry">
-                    <img class="icon" src="bigIcons/Assets.svg" alt="">
-                    Assets
-                </a>
-                <a href="search.html" class="sidebarEntry">
-                    <img class="icon" src="bigIcons/Search.svg" alt="">
-                    Search
-                </a>
-                <hr style="margin: 5px 12px; color: rgba(255, 255, 255, 25%)">
-            </div>
-
-            <div class="historySection">
-                <div class="chatsSep">MY CHATS</div>
-
-                <div class="chatEntries">
-                    <a href="oldChat.html" class="sidebarEntry forceActive">
-                        <img class="icon" src="bigIcons/Message.svg" alt="">
-                        New Chat
-                        <span style="width: 100%;"></span>
-                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                    </a>
-
-                    <a href="oldChat.html" class="sidebarEntry">
-                        <img class="icon" src="bigIcons/Message.svg" alt="">
-                        New Chat
-                        <span style="width: 100%;"></span>
-                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                    </a>
-                    <a href="oldChat.html" class="sidebarEntry">
-                        <img class="icon" src="bigIcons/Message.svg" alt="">
-                        New Chat
-                        <span style="width: 100%;"></span>
-                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                    </a>
-                    <a href="oldChat.html" class="sidebarEntry">
-                        <img class="icon" src="bigIcons/Message.svg" alt="">
-                        New Chat
-                        <span style="width: 100%;"></span>
-                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                    </a>
-                    <a href="oldChat.html" class="sidebarEntry">
-                        <img class="icon" src="bigIcons/Message.svg" alt="">
-                        New Chat
-                        <span style="width: 100%;"></span>
-                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                    </a>
-                    <a href="oldChat.html" class="sidebarEntry">
-                        <img class="icon" src="bigIcons/Message.svg" alt="">
-                        New Chat
-                        <span style="width: 100%;"></span>
-                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                    </a>
-                    <a href="oldChat.html" class="sidebarEntry">
-                        <img class="icon" src="bigIcons/Message.svg" alt="">
-                        New Chat
-                        <span style="width: 100%;"></span>
-                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                    </a>
-                    <a href="oldChat.html" class="sidebarEntry">
-                        <img class="icon" src="bigIcons/Message.svg" alt="">
-                        New Chat
-                        <span style="width: 100%;"></span>
-                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                    </a>
-                    <a href="oldChat.html" class="sidebarEntry">
-                        <img class="icon" src="bigIcons/Message.svg" alt="">
-                        New Chat
-                        <span style="width: 100%;"></span>
-                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                    </a>
-                    <a href="oldChat.html" class="sidebarEntry">
-                        <img class="icon" src="bigIcons/Message.svg" alt="">
-                        New Chat
-                        <span style="width: 100%;"></span>
-                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                    </a>
-                    <a href="oldChat.html" class="sidebarEntry">
-                        <img class="icon" src="bigIcons/Message.svg" alt="">
-                        New Chat
-                        <span style="width: 100%;"></span>
-                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                    </a>
-                    <a href="oldChat.html" class="sidebarEntry">
-                        <img class="icon" src="bigIcons/Message.svg" alt="">
-                        New Chat
-                        <span style="width: 100%;"></span>
-                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                    </a>
-                    <a href="oldChat.html" class="sidebarEntry">
-                        <img class="icon" src="bigIcons/Message.svg" alt="">
-                        New Chat
-                        <span style="width: 100%;"></span>
-                        <img class="moreButton" src="bigIcons/3Dots.svg" alt="">
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="sidebarBottom">
-            <button class="sidebarUserInfo" onclick="showUserPopup(event)">
-                <div class="modelPickerPopup hidden" id="userPicker">
-                    <a href="settings/accountOverview.html" class="modelOption style">
-                        <img src="modePickerIcons/Settings.svg" style="height: 28px;">
-                        <div class="stylePickerText">
-                            <b>Settings</b>
-                            <span>Change your account settings.</span>
-                        </div>
-                    </a>
-                    <div class="modelOption style">
-                        <img src="modePickerIcons/X.svg" style="height: 28px;">
-                        <div class="stylePickerText">
-                            <b>Log Out</b>
-                            <span>Exit your session.</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="userInfo">
-                    <div class="userProfile">
-                        <img style="height: 40px; border-radius: 50%;" src="doromiert.png" alt="doromiert">
-                        <div class="doxx"><span style="font-size: 20px; font-weight: 600;">doromiert</span><span
-                                style="font-size: 16px; color: rgba(255,255,255,0.8);">doromiert@gmail.com</span></div>
-                    </div>
-                    <div class="shapeChip">PRO</div>
-                </div>
-                <div class="creditCounter">
-                    <span>Credits</span>
-                    <div class="creditBar"></div>
-                    <span>67/120</span>
-                </div>
-
-            </button>
-            <a href="settings/plans.html" class="upgradeButton"><span>UPGRADE</span></a>
-        </div>
-
-    </div>
-    <div class="mainView">
-        <div class="topBar">
-            <img src="bigIcons/Message.svg">
-            <span>New Chat</span>
-            <div style="flex: 1;"></div>
-            <img src="bigIcons/3Dots.svg">
-        </div>
-        <div class="chatScrollView">
-            <div class="message you">This is a user created message</div>
-            <div class="message">Generating your asset...</div>
-            <div class="WIPImage">
-                <div class="WILayer2">
-                    <img src="smallIcons/AI.svg" style="height: 76px;">
-                    <span>Sit back and wait while we do the magic...</span>
-                </div>
-            </div>
-
-        </div>
-        <div class="chatbox floating">
-
-            <textarea class="chatboxProper" placeholder="Describe what you wish to create."></textarea>
-            <div class="textboxUnder">
-                <button class="addMediaButton">
-                    <img src="smallIcons/Add.svg">
-                </button>
-                <button class="outputTypePicker" onclick="toggleTypePopup(event)">
-                    <div class="modelPickerPopup hidden" id="outputTypePicker">
-                        <div class="modelOption style">
-                            <img src="modePickerIcons/thumb.svg" style="height: 28px;">
-                            <div class="stylePickerText">
-                                <b>Thumbnail</b>
-                                <span>Generate thumbnails for your projects.</span>
-                            </div>
-                        </div>
-                        <div class="modelOption style">
-                            <img src="modePickerIcons/Icons.svg" style="height: 28px;">
-                            <div class="stylePickerText">
-                                <b>Icon</b>
-                                <span>Generate icons for your projects.</span>
-                            </div>
-                        </div>
-                        <div class="modelOption style">
-                            <img src="modePickerIcons/GUI.svg" style="height: 28px;">
-                            <div class="stylePickerText">
-                                <b>GUI</b>
-                                <span>Generate high-quality GUI assets</span>
-                            </div>
-                        </div>
-                        <div class="modelOption style">
-                            <img src="modePickerIcons/3d.svg" style="height: 28px;">
-                            <div class="stylePickerText">
-                                <b>3D</b>
-                                <span>Generate 3D objects</span>
-                            </div>
-                        </div>
-                        <div class="modelOption style">
-                            <img src="modePickerIcons/Music.svg" style="height: 28px;">
-                            <div class="stylePickerText">
-                                <b>Music</b>
-                                <span>Generate music for your projects.</span>
-                            </div>
-                        </div>
-                        <div class="modelOption style">
-                            <img src="modePickerIcons/AudioWave.svg" style="height: 28px;">
-                            <div class="stylePickerText">
-                                <b>SFX</b>
-                                <span>Generate high-quality SFX</span>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="smallIcons/Image.svg">
-                    <span>Image</span>
-                    <img src="smallIcons/Chevron.svg">
-                </button>
-                <button class="modelPicker" onclick="showModelPicker(event)">
-                    <img src="smallIcons/AI.svg">
-                    <span>Yunes <span class="modelVersion">MAX</span></span>
-                    <img src="smallIcons/Chevron.svg">
-                    <div class="modelPickerPopup hidden" id="modelPickerPopup">
-                        <div class="modelOption">
-                            <img src="aiModels/nanobanana.svg">
-                            <div class="modelDetails">
-                                <span class="modelName">Nano Banana Pro <div style="width: min-content;"
-                                        class="shapeChip">NEW</div></span>
-                                <span class="modelDesc">
-                                    Premium quality; deep visual reasoning, native 4K output, and strict multi-image
-                                    character consistency.
-                                </span>
-                                <div class="modelTags">
-                                    <div class="modelTag">Creative</div>
-                                    <div class="modelTag" style="background-color: #00A1B3;">Customizable</div>
-                                </div>
-                                <div class="modelCreditCost">
-                                    <img src="smallIcons/AI.svg">
-                                    <span>3 Credits</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modelOption">
-                            <img src="aiModels/gpti2.svg">
-                            <div class="modelDetails">
-                                <span class="modelName">GPT Image 2</span>
-                                <span class="modelDesc">
-                                    High-accuracy multimodal; exceptional text rendering, precise regional editing, and
-                                    complex prompt adherence.
-                                </span>
-                                <div class="modelTags">
-                                    <div class="modelTag">Creative</div>
-                                    <div class="modelTag" style="background-color: #00A1B3;">Customizable</div>
-                                </div>
-                                <div class="modelCreditCost">
-                                    <img src="smallIcons/AI.svg">
-                                    <span>3 Credits</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modelOption">
-                            <img src="aiModels/meshy.svg">
-                            <div class="modelDetails">
-                                <span class="modelName">Meshy</span>
-                                <span class="modelDesc">
-                                    AI 3D generation; rapid text/image-to-3D asset creation, automated PBR texturing,
-                                    and game-ready mesh generation.
-                                </span>
-                                <div class="modelTags">
-                                    <div class="modelTag">Creative</div>
-                                    <div class="modelTag" style="background-color: #00A1B3;">Customizable</div>
-                                </div>
-                                <div class="modelCreditCost">
-                                    <img src="smallIcons/AI.svg">
-                                    <span>3 Credits</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </button>
-                <hr>
-                <button class="gamePicker" onclick="toggleStylePicker(event)">
-                    <div class="modelPickerPopup hidden" id="stylePicker">
-                        <div class="modelOption style">
-                            <img src="modePickerIcons/RobloxLogo.svg" style="height: 28px;">
-                            <div class="stylePickerText">
-                                <b>Roblox</b>
-                                <span>Stylized like Roblox</span>
-                            </div>
-                        </div>
-                        <div class="modelOption style">
-                            <img src="modePickerIcons/UnrealEngine.svg" style="height: 28px;">
-                            <div class="stylePickerText">
-                                <b>Fortnite</b>
-                                <span>Stylized like Fortnite</span>
-                            </div>
-                        </div>
-                        <div class="modelOption style">
-                            <img src="modePickerIcons/thumb.svg" style="height: 28px;">
-                            <div class="stylePickerText">
-                                <b>Realistic</b>
-                                <span>Generic style, easily customizable.</span>
-                            </div>
-                        </div>
-                        <div class="modelOption style">
-                            <img src="modePickerIcons/Pencil.svg" style="height: 28px;">
-                            <div class="stylePickerText">
-                                <b>General</b>
-                                <span>Generic style, easily customizable.</span>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="smallIcons/Pencil.svg">
-                    <span>Roblox</span>
-                    <img src="smallIcons/Chevron.svg">
-                </button>
-                <hr>
-                <div style="flex: 1;"></div>
-                <button class="sendButton">
-                    <img src="smallIcons/Send.svg">
-                </button>
-            </div>
-        </div>
-    </div>
-
-</body>
-<script>
+        </top>
+                </mainView>
+  </body>
+  <script>
     function toggleSidebar() {
-        document.querySelector('.sidebar').classList.toggle('collapsed');
+      document.querySelector("sidebar").classList.toggle("collapsed");
     }
-    function showModelPicker() {
-        document.querySelector('#modelPickerPopup').classList.toggle('hidden');
-    }
-    function toggleStylePicker() {
-        document.querySelector('#stylePicker').classList.toggle('hidden');
-    }
-    function toggleTypePopup() {
-        document.querySelector('#outputTypePicker').classList.toggle('hidden');
-    }
-    function showUserPopup() {
-        document.querySelector('#userPicker').classList.toggle('hidden');
-    }
-</script>
 
+  </script>
 </html>
