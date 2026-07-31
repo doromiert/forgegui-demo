@@ -185,6 +185,7 @@ sidebar {
         text-align: center;
         font-size: 18px;
         font-weight: 400;
+        gap: 8px;
 
         a {
           color: #fff;
