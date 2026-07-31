@@ -441,6 +441,8 @@ contextMenu {
   box-shadow: 0 4px 50px 0 #000;
   backdrop-filter: blur(25px);
   bottom: 20px;
+  z-index: 9999999128317;
+
   &.hidden {
     opacity: 0;
     pointer-events: none;
@@ -453,6 +455,13 @@ contextMenu {
     gap: 10px;
     align-self: stretch;
     background-color: #00000000 !important;
+    display: flex;
+    padding: 12px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 15px;
+    border: none;
+    box-sizing: border-box;
     &:hover {
       background-color: rgba(255, 255, 255, 0.05) !important;
     }
@@ -804,4 +813,14 @@ galleryFeatured {
     align-items: center;
     padding: 0 8px;
   }
+}
+
+button.destructive{
+    border-radius: 15px;
+border: 1px solid rgba(255, 168, 168, 0.18) ; 
+background: rgba(255, 0, 0, 0.10) !important;
+
+&:hover {
+    background: rgba(255, 0, 0, 0.20) !important;  
+}
 }

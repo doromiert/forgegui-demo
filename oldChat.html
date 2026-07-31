@@ -69,6 +69,17 @@
           <span>Message 1</span>
         </a>
       </projects>
+      <contextMenu id="userMenu" class="hidden" style="width: 282px;" onclick="showContext('userMenu')">
+        <button><img src="icons/Exclamation.svg" /> Help</button>
+        <button><img src="icons/Settings.svg" /> Settings</button>
+        <button>
+          <img src="icons/Moon.svg" /> Theme
+          <div style="flex: 1"></div>
+          <span>System</span
+          ><img src="icons/arrow.svg" style="rotate: -90deg" />
+        </button>
+        <button class="destructive"><img src="icons/SignOut.svg" /> Logout</button>
+      </contextMenu>
       <bottom class="sb">
         <creditCounter>
           <top>
@@ -100,7 +111,7 @@
             <span>Notifications</span>
           </a>
         </actions>
-        <sidebarUserButton onclick="showUserPopup()">
+        <sidebarUserButton onclick="showContext('userMenu')">
           <img src="doromiert.png" />
           <vertical>
             <b>doromiert</b>

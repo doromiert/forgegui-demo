@@ -70,6 +70,18 @@
           <span>Message 1</span>
         </a>
       </projects>
+      <contextMenu id="userMenu" class="hidden" style="width: 282px;" onclick="showContext('userMenu')">
+        <button><img src="icons/Exclamation.svg" /> Help</button>
+        <button><img src="icons/Settings.svg" /> Settings</button>
+        <button>
+          <img src="icons/Moon.svg" /> Theme
+          <div style="flex: 1"></div>
+          <span>System</span
+          ><img src="icons/arrow.svg" style="rotate: -90deg" />
+        </button>
+        <button class="destructive"><img src="icons/SignOut.svg" /> Logout</button>
+      </contextMenu>
+
       <bottom class="sb">
         <creditCounter>
           <top>
@@ -101,7 +113,7 @@
             <span>Notifications</span>
           </a>
         </actions>
-        <sidebarUserButton onclick="showUserPopup()">
+        <sidebarUserButton onclick="showContext('userMenu')">
           <img src="doromiert.png" />
           <vertical>
             <b>doromiert</b>
@@ -129,7 +141,11 @@
               <span>Roblox</span>
               <img src="icons/arrow.svg" />
             </button>
-            <contextMenu id="chatboxGamePicker" class="hidden" onclick="showContext('chatboxGamePicker')">
+            <contextMenu
+              id="chatboxGamePicker"
+              class="hidden"
+              onclick="showContext('chatboxGamePicker')"
+            >
               <button><img src="icons/roblox.svg" />Roblox</button>
               <button><img src="icons/ue.svg" />Unreal Engine</button>
               <button><img src="icons/unity.svg" />Unity</button>
@@ -139,7 +155,12 @@
               <span>Auto-Detect</span>
               <img src="icons/arrow.svg" />
             </button>
-            <contextMenu id="chatboxStyle" class="hidden" style="left: 120px" onclick="showContext('chatboxStyle')">
+            <contextMenu
+              id="chatboxStyle"
+              class="hidden"
+              style="left: 120px"
+              onclick="showContext('chatboxStyle')"
+            >
               <button>Auto-Detect</button>
               <button>Realistic</button>
               <button>Cartoon</button>
@@ -151,7 +172,12 @@
               <span>Yunes Pro</span>
               <img src="icons/arrow.svg" />
             </button>
-            <contextMenu id="chatboxModel" class="hidden" style="left: 328px" onclick="showContext('chatboxModel')">
+            <contextMenu
+              id="chatboxModel"
+              class="hidden"
+              style="left: 328px"
+              onclick="showContext('chatboxModel')"
+            >
               <button>Yunes Pro</button>
               <button>GoyAI</button>
               <button>SahurML</button>
@@ -202,8 +228,12 @@
               <span>Quick Tools</span>
             </div>
             <horizButtons>
-              <button onclick="scrollGallery(this, -1)"><img src="icons/arrow.svg" style="rotate: 90deg" /></button>
-              <button onclick="scrollGallery(this, 1)"><img src="icons/arrow.svg" style="rotate: 270deg" /></button>
+              <button onclick="scrollGallery(this, -1)">
+                <img src="icons/arrow.svg" style="rotate: 90deg" />
+              </button>
+              <button onclick="scrollGallery(this, 1)">
+                <img src="icons/arrow.svg" style="rotate: 270deg" />
+              </button>
             </horizButtons>
           </galleryTop>
           <galleryCarousel>
@@ -266,8 +296,11 @@
               <b>Placeholder Title</b>
               <span>Placeholder subtext cuz why not</span>
             </cardInfo>
-            <button class="upgradeButton" style="width: auto; padding: 12px 20px;">
-              <span style="font-size: 18px;">Try Now</span>
+            <button
+              class="upgradeButton"
+              style="width: auto; padding: 12px 20px"
+            >
+              <span style="font-size: 18px">Try Now</span>
             </button>
           </featuredInfo>
         </galleryFeatured>
@@ -279,8 +312,12 @@
               <span>Other Tools</span>
             </div>
             <horizButtons>
-              <button onclick="scrollGallery(this, -1)"><img src="icons/arrow.svg" style="rotate: 90deg" /></button>
-              <button onclick="scrollGallery(this, 1)"><img src="icons/arrow.svg" style="rotate: 270deg" /></button>
+              <button onclick="scrollGallery(this, -1)">
+                <img src="icons/arrow.svg" style="rotate: 90deg" />
+              </button>
+              <button onclick="scrollGallery(this, 1)">
+                <img src="icons/arrow.svg" style="rotate: 270deg" />
+              </button>
             </horizButtons>
           </galleryTop>
           <galleryCarousel>
@@ -346,7 +383,9 @@
       document.querySelector("#" + id).classList.toggle("hidden");
     }
     function scrollGallery(btn, dir) {
-      const carousel = btn.closest("galleryLine").querySelector("galleryCarousel");
+      const carousel = btn
+        .closest("galleryLine")
+        .querySelector("galleryCarousel");
       carousel.scrollBy({ left: dir * 440, behavior: "smooth" });
     }
   </script>
