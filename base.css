@@ -443,6 +443,10 @@ contextMenu {
   bottom: 20px;
   z-index: 9999999128317;
 
+  &.user{
+    bottom: 100px;
+  }
+
   &.hidden {
     opacity: 0;
     pointer-events: none;
