@@ -15,96 +15,100 @@
 
     <style></style>
   </head>
+
   <body class="chat">
     <sidebar>
-      <top>
+      <top class="sb">
         <img src="footerLogo.svg" class="fgLogo" />
         <button onclick="toggleSidebar()">
-          <img src="bigIcons/Sidebars.svg" />
+          <img src="icons/sidebar.svg" />
         </button>
       </top>
       <specialTabs>
         <a href="index.html" class="sidebarElem selected">
-          <img src="bigIcons/3Dots.svg" />
+          <img src="icons/home.svg" />
           <span>Home</span>
         </a>
         <a href="assets.html" class="sidebarElem">
-          <img src="bigIcons/3Dots.svg" />
+          <img src="icons/file.svg" />
           <span>Assets</span>
         </a>
         <a href="index.html" class="sidebarElem">
-          <img src="bigIcons/3Dots.svg" />
+          <img src="icons/people.svg" />
           <span>Community</span>
         </a>
       </specialTabs>
       <projects>
         <topLabel>Game Projects</topLabel>
-        <a href="index.html" class="sidebarElem">
-          <img src="bigIcons/3Dots.svg" />
+        <a href="oldChat.html" class="sidebarElem">
+          <img src="icons/s-3d.svg" />
           <span>Message 1</span>
         </a>
-        <a href="index.html" class="sidebarElem">
-          <img src="bigIcons/3Dots.svg" />
-          <span>Message 1</span>
-        </a>
-
-        <a href="index.html" class="sidebarElem">
-          <img src="bigIcons/3Dots.svg" />
+        <a href="oldChat.html" class="sidebarElem">
+          <img src="icons/s-3d.svg" />
           <span>Message 1</span>
         </a>
 
-        <a href="index.html" class="sidebarElem">
-          <img src="bigIcons/3Dots.svg" />
+        <a href="oldChat.html" class="sidebarElem">
+          <img src="icons/s-3d.svg" />
           <span>Message 1</span>
         </a>
-        <a href="index.html" class="sidebarElem">
-          <img src="bigIcons/3Dots.svg" />
+        <a href="oldChat.html" class="sidebarElem">
+          <img src="icons/s-3d.svg" />
           <span>Message 1</span>
         </a>
-        <a href="index.html" class="sidebarElem">
-          <img src="bigIcons/3Dots.svg" />
+        <a href="oldChat.html" class="sidebarElem">
+          <img src="icons/s-3d.svg" />
+          <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+          <img src="icons/s-3d.svg" />
+          <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+          <img src="icons/s-3d.svg" />
           <span>Message 1</span>
         </a>
       </projects>
-      <bottom>
+      <bottom class="sb">
         <creditCounter>
           <top>
-            <img src="smallIcons/coins.svg" />
+            <img src="icons/coins.svg" />
             <span>Starter Plan</span>
             <div style="flex: 1"></div>
             <a href="placeholder.html">Get More</a>
           </top>
           <bottom>
-            <slider></slider>
+            <creditSlider></creditSlider>
             <span>1</span>
           </bottom>
         </creditCounter>
-        <a href="placeholder.html" class="sidebarElem">
-          <img src="bigIcons/3Dots.svg" />
+        <a href="placeholder.html" class="sidebarElem upgradeButton">
+          <img src="icons/crown.svg" style="image-rendering: optimizeQuality" />
           <span>Upgrade to Pro</span>
         </a>
         <actions>
           <a href="placeholder.html" class="sidebarElem">
-            <img src="smallIcons/Add.svg" />
+            <img src="icons/book.svg" />
             <span>Courses</span>
           </a>
           <a href="placeholder.html" class="sidebarElem">
-            <img src="smallIcons/Add.svg" />
-            <span>Courses</span>
+            <img src="icons/plugin.svg" />
+            <span>Plugins</span>
           </a>
           <a href="placeholder.html" class="sidebarElem">
-            <img src="smallIcons/Add.svg" />
-            <span>Courses</span>
+            <img src="icons/bell.svg" />
+            <span>Notifications</span>
           </a>
         </actions>
-        <button onclick="showUserPopup()">
+        <sidebarUserButton onclick="showUserPopup()">
           <img src="doromiert.png" />
           <vertical>
-            <span>doromiert</span>
+            <b>doromiert</b>
             <span>doromiert@gmail.com</span>
           </vertical>
-          <img src="bigIcons/3Dots.svg" />
-        </button>
+          <img src="icons/selection.svg" />
+        </sidebarUserButton>
       </bottom>
     </sidebar>
     <mainView>
@@ -113,131 +117,222 @@
         <h1>Let's create a game, doromiert</h1>
         <chatBox>
           <assetBar>
-            <button><img src="smallIcons/Add.svg" /></button>
+            <button><img src="icons/add.svg" /></button>
           </assetBar>
           <textarea placeholder="Describe what you want..."></textarea>
           <bottom>
-            <button class="chatboxButton">
-              <img src="smallIcons/Add.svg" />
+            <button
+              class="chatboxButton"
+              onclick="showContext('chatboxGamePicker')"
+            >
+              <img src="icons/roblox.svg" />
               <span>Roblox</span>
-              <img src="smallIcons/Chevron.svg" />
-
-              <contextMenu>
-                <button><img src="smallIcons/Add.svg">Roblox</button>
-                <button><img src="smallIcons/Add.svg">Unreal Engine</button>
-                <button><img src="smallIcons/Add.svg">Unity</button>
-              </contextMenu>
+              <img src="icons/arrow.svg" />
             </button>
-            <button class="chatboxButton">
-              <img src="smallIcons/Add.svg" />
+            <contextMenu id="chatboxGamePicker" class="hidden" onclick="showContext('chatboxGamePicker')">
+              <button><img src="icons/roblox.svg" />Roblox</button>
+              <button><img src="icons/ue.svg" />Unreal Engine</button>
+              <button><img src="icons/unity.svg" />Unity</button>
+            </contextMenu>
+            <button class="chatboxButton" onclick="showContext('chatboxStyle')">
+              <img src="icons/pencil.svg" />
               <span>Auto-Detect</span>
-              <img src="smallIcons/Chevron.svg" />
-
-              <contextMenu>
-                <button><img src="smallIcons/Add.svg">Auto-Detect</button>
-                <button><img src="smallIcons/Add.svg">Realistic</button>
-                <button><img src="smallIcons/Add.svg">Cartoon</button>
-                <button><img src="smallIcons/Add.svg">Pixel Art</button>
-              </contextMenu>
+              <img src="icons/arrow.svg" />
             </button>
-            <button class="chatboxButton">
-              <img src="smallIcons/Add.svg" />
+            <contextMenu id="chatboxStyle" class="hidden" style="left: 120px" onclick="showContext('chatboxStyle')">
+              <button>Auto-Detect</button>
+              <button>Realistic</button>
+              <button>Cartoon</button>
+              <button>Pixel Art</button>
+            </contextMenu>
+
+            <button class="chatboxButton" onclick="showContext('chatboxModel')">
+              <img src="icons/ai.svg" />
               <span>Yunes Pro</span>
-              <img src="smallIcons/Chevron.svg" />
-
-              <contextMenu>
-                <button><img src="smallIcons/Add.svg">Yunes Pro</button>
-                <button><img src="smallIcons/Add.svg">GoyAI</button>
-                <button><img src="smallIcons/Add.svg">SahurML</button>
-              </contextMenu>
+              <img src="icons/arrow.svg" />
             </button>
+            <contextMenu id="chatboxModel" class="hidden" style="left: 328px" onclick="showContext('chatboxModel')">
+              <button>Yunes Pro</button>
+              <button>GoyAI</button>
+              <button>SahurML</button>
+            </contextMenu>
+
+            <div style="flex: 1"></div>
 
             <button class="chatboxButton send">
               <span>Create</span>
-              <img src="smallIcons/Chevron.svg" />
+              <img src="icons/send.svg" />
             </button>
           </bottom>
         </chatBox>
         <suggestionBar>
           <suggestion>
-            <img src="smallIcons/Add.svg" />
+            <img src="icons/placeholder.svg" />
             Suggestion
           </suggestion>
           <suggestion>
-            <img src="smallIcons/Add.svg" />
+            <img src="icons/placeholder.svg" />
             Suggestion
           </suggestion>
           <suggestion>
-            <img src="smallIcons/Add.svg" />
+            <img src="icons/placeholder.svg" />
             Suggestion
           </suggestion>
           <suggestion>
-            <img src="smallIcons/Add.svg" />
+            <img src="icons/placeholder.svg" />
             Suggestion
           </suggestion>
           <suggestion>
-            <img src="smallIcons/Add.svg" />
+            <img src="icons/placeholder.svg" />
             Suggestion
           </suggestion>
           <suggestion>
-            <img src="smallIcons/Add.svg" />
+            <img src="icons/placeholder.svg" />
             Suggestion
           </suggestion>
         </suggestionBar>
       </chatWindow>
       <gallery>
-        <galleryTop> <span>THE</span><b>FORGE</b> </galleryTop>
+        <galleryTop><span>THE</span><b>FORGE</b></galleryTop>
 
         <galleryLine>
           <galleryTop>
             <div>
-              <img src="smallIcons/Add.svg" />
+              <img src="icons/s-3d.svg" />
               <span>Quick Tools</span>
             </div>
             <horizButtons>
-              <img
-                src="smallIcons/Chevron.svg"
-                onclick="scrollGallery(0, true)"
-              />
-              <img
-                src="smallIcons/Chevron.svg"
-                onclick="scrollGallery(0, true)"
-              />
+              <button onclick="scrollGallery(this, -1)"><img src="icons/arrow.svg" style="rotate: 90deg" /></button>
+              <button onclick="scrollGallery(this, 1)"><img src="icons/arrow.svg" style="rotate: 270deg" /></button>
             </horizButtons>
           </galleryTop>
           <galleryCarousel>
-            <img src="doromiert.png" />
-            <img src="doromiert.png" />
-            <img src="doromiert.png" />
-            <img src="doromiert.png" />
-            <img src="doromiert.png" />
-            <img src="doromiert.png" />
+            <galleryCard>
+              <img src="doromiert.png" />
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+            </galleryCard>
+            <galleryCard>
+              <img src="doromiert.png" />
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+            </galleryCard>
+            <galleryCard>
+              <img src="doromiert.png" />
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+            </galleryCard>
+            <galleryCard>
+              <img src="doromiert.png" />
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+            </galleryCard>
+            <galleryCard>
+              <img src="doromiert.png" />
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+            </galleryCard>
+            <galleryCard>
+              <img src="doromiert.png" />
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+            </galleryCard>
+            <galleryCard>
+              <img src="doromiert.png" />
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+            </galleryCard>
           </galleryCarousel>
         </galleryLine>
+
+        <galleryFeatured>
+          <img src="doromiert.png" />
+          <featuredInfo>
+            <cardInfo>
+              <b>Placeholder Title</b>
+              <span>Placeholder subtext cuz why not</span>
+            </cardInfo>
+            <button class="upgradeButton" style="width: auto; padding: 12px 20px;">
+              <span style="font-size: 18px;">Try Now</span>
+            </button>
+          </featuredInfo>
+        </galleryFeatured>
+
         <galleryLine>
           <galleryTop>
             <div>
-              <img src="smallIcons/Add.svg" />
-              <span>Quick Tools</span>
+              <img src="icons/picture.svg" />
+              <span>Other Tools</span>
             </div>
             <horizButtons>
-              <img
-                src="smallIcons/Chevron.svg"
-                onclick="scrollGallery(1, true)"
-              />
-              <img
-                src="smallIcons/Chevron.svg"
-                onclick="scrollGallery(1, true)"
-              />
+              <button onclick="scrollGallery(this, -1)"><img src="icons/arrow.svg" style="rotate: 90deg" /></button>
+              <button onclick="scrollGallery(this, 1)"><img src="icons/arrow.svg" style="rotate: 270deg" /></button>
             </horizButtons>
           </galleryTop>
           <galleryCarousel>
-            <img src="doromiert.png" />
-            <img src="doromiert.png" />
-            <img src="doromiert.png" />
-            <img src="doromiert.png" />
-            <img src="doromiert.png" />
-            <img src="doromiert.png" />
+            <galleryCard>
+              <img src="doromiert.png" />
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+            </galleryCard>
+            <galleryCard>
+              <img src="doromiert.png" />
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+            </galleryCard>
+            <galleryCard>
+              <img src="doromiert.png" />
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+            </galleryCard>
+            <galleryCard>
+              <img src="doromiert.png" />
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+            </galleryCard>
+            <galleryCard>
+              <img src="doromiert.png" />
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+            </galleryCard>
+            <galleryCard>
+              <img src="doromiert.png" />
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+            </galleryCard>
+            <galleryCard>
+              <img src="doromiert.png" />
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+            </galleryCard>
           </galleryCarousel>
         </galleryLine>
       </gallery>
@@ -247,17 +342,12 @@
     function toggleSidebar() {
       document.querySelector("sidebar").classList.toggle("collapsed");
     }
-    function showModelPicker() {
-      document.querySelector("#modelPickerPopup").classList.toggle("hidden");
+    function showContext(id) {
+      document.querySelector("#" + id).classList.toggle("hidden");
     }
-    function toggleStylePicker() {
-      document.querySelector("#stylePicker").classList.toggle("hidden");
-    }
-    function toggleTypePopup() {
-      document.querySelector("#outputTypePicker").classList.toggle("hidden");
-    }
-    function showUserPopup() {
-      document.querySelector("#userPicker").classList.toggle("hidden");
+    function scrollGallery(btn, dir) {
+      const carousel = btn.closest("galleryLine").querySelector("galleryCarousel");
+      carousel.scrollBy({ left: dir * 440, behavior: "smooth" });
     }
   </script>
 </html>

@@ -3,41 +3,804 @@
 * {
   font-family: "Atkinson Hyperlegible Next", sans-serif;
   font-optical-sizing: auto;
-  font-style: normal;
+  transition: 0.25s;
 }
 
-body{
-    background: #0A0A0A;
+body {
+  background: #0a0a0a;
 
-    &.chat{
-        display: flex;
-width: 1728px;
-height: 1117px;
-padding: 10px 0 0 10px;
-align-items: flex-start;
-gap: 10px;
-    }
-}
-
-sidebar{
+  &.chat {
     display: flex;
-width: 325px;
-padding: 10px 10px 20px 10px;
-flex-direction: column;
-align-items: flex-start;
-gap: 15px;
-flex-shrink: 0;
-align-self: stretch;
-width: 305px;
+    height: 100vh;
+    width: 100vw;
+    padding: 10px 0 0 10px;
+    margin: 0;
+    box-sizing: border-box;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
 
-top{
+sidebar {
+  user-select: none;
+  -webkit-user-drag: none;
+  overflow-y: scroll;
+  display: flex;
+  width: 305px;
+  padding: calc(10px + 62px + 15px) 10px 440px 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  flex-shrink: 0;
+  align-self: stretch;
+  position: relative;
+
+  &.collapsed {
+    width: 60px;
+    padding-bottom: 20px;
+    top.sb {
+      width: 60px;
+      .fgLogo {
+        display: none;
+      }
+    }
+    .sidebarElem {
+      color: #ffffff00;
+      width: 60px;
+      height: 60px;
+    }
+    topLabel {
+      display: none;
+    }
+    bottom {
+      display: none !important;
+    }
+  }
+
+  top.sb {
+    display: flex;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    right: 10px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    box-sizing: border-box;
+    width: 305px;
+
+    .fgLogo {
+      height: 24px;
+    }
+    button {
+      border: none;
+      background: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 1293px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        outline: solid 10px rgba(255, 255, 255, 0.05);
+      }
+      &:active {
+        transform: scale(0.9);
+      }
+    }
+  }
+
+  specialTabs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+  }
+
+  projects {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+
+    topLabel {
+      display: flex;
+      margin: 14px 15px;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+      color: #fff;
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+
+  .sidebarElem {
+    text-decoration: none;
+    display: flex;
+    padding: 8px 10px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    border-radius: 15px;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    width: 100%;
+    box-sizing: border-box;
+
+    &.selected {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(60, 60, 60, 0.2);
+    }
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    img {
+      width: 28px;
+      height: 28px;
+      margin: 5px;
+    }
+  }
+
+  bottom.sb {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 12931823;
+    backdrop-filter: blur(20px);
+    border-radius: 15px;
+    width: 305px;
+    actions {
+      width: 100%;
+    }
+    creditCounter {
+      box-sizing: border-box;
+      display: flex;
+      padding: 10px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      align-self: stretch;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      width: 100%;
+
+      top {
+        display: flex;
+        padding: 5px 8px;
+        justify-content: space-between;
+        align-items: center;
+        align-self: stretch;
+        color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        font-size: 18px;
+        font-weight: 400;
+
+        a {
+          color: #fff;
+          text-decoration: none;
+          font-size: 18px;
+          font-weight: 600;
+        }
+      }
+      bottom {
+        display: flex;
+        flex-direction: row;
+        padding: 8px;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        align-self: stretch;
+      }
+      creditSlider {
+        height: 9px;
+        flex: 1 0 0;
+        background-color: rgba(255, 255, 255, 0.1);
+        width: 100%;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        &::before {
+          content: "";
+          width: 100px;
+          display: flex;
+          height: 9px;
+          background: linear-gradient(0deg, #0084ff 0%, #0084ff 100%);
+        }
+      }
+    }
+
+    sidebarUserButton {
+      display: flex;
+      padding: 15px;
+      align-items: center;
+      gap: 10px;
+      align-self: stretch;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      user-select: none;
+
+      vertical {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        height: 34px;
+        width: 100%;
+
+        b {
+          color: #fff;
+          font-size: 20px;
+          font-weight: 600;
+          line-height: 20px;
+        }
+
+        span {
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 16px;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+
+      img {
+        width: 38px;
+        height: 38px;
+        border-radius: 38px;
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
+}
+
+.upgradeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: #0077ff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    background-color: #32a3ff !important;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+    pointer-events: none;
+  }
+
+  span {
+    font-weight: bold;
+    font-size: 20px;
+    white-space: nowrap;
+    background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.5));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0px 1px 1.4px rgba(0, 0, 0, 0.25));
+  }
+}
+
+mainView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 0 0;
+  height: 100%;
+  overflow-y: scroll;
+  border-radius: 20px 0 0 0;
+  border-top: 1px solid #333;
+  border-left: 1px solid #333;
+  background: #161616;
+  h1 {
+    margin: 0;
+  }
+  chatWindow {
+    border-radius: 15px 0 0 0;
+    display: flex;
+    height: 944px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    align-self: stretch;
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%),
+      url(d2.png) lightgray 50% / cover no-repeat;
+    height: calc(100vh - 100px);
+    flex-shrink: 0;
+  }
+}
+
+chatbox {
+  display: flex;
+  width: 985px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  border-radius: 25px;
+  border: 1px solid #383838;
+  background: #101010;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+
+  textarea {
+    resize: none;
+    display: flex;
+    padding: 15px 20px 55px 20px;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    font-family: "Atkinson Hyperlegible Next";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background: none;
+    border: none;
+    text-align: left;
+    outline: none;
+  }
+
+  bottom {
+    position: relative;
+    display: flex;
+    padding: 12px;
+    gap: 12px;
+    align-items: center;
+    align-self: stretch;
+
+    border-top: 1px solid #1f1f1f;
+    background: #000;
+
+    button {
+      display: flex;
+      padding: 12px 16px;
+      align-items: center;
+      gap: 10px;
+      border-radius: 15px;
+      background: #212121;
+      border: none;
+      box-sizing: border-box;
+      color: #fff;
+      text-align: center;
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+
+      &:hover {
+        filter: brightness(1.1);
+      }
+      &.send {
+        border-radius: 15px;
+        background: #07f;
+        box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.59) inset;
+      }
+    }
+  }
+
+  assetBar {
+    display: flex;
+    padding: 12px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-bottom: 1px solid #1f1f1f;
+    background:
+      linear-gradient(0deg, #101010 0%, #101010 100%),
+      linear-gradient(0deg, #333 0%, #333 100%), #0f0f0f;
+
+    button {
+      display: flex;
+      padding: 12px;
+      align-items: center;
+      gap: 10px;
+      border-radius: 15px;
+      background: #212121;
+      border: none;
+      box-sizing: border-box;
+    }
+  }
+}
+
+contextMenu {
+  position: absolute;
+  display: flex;
+  width: 305px;
+  padding: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 23px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(18, 18, 18, 0.8);
+  box-shadow: 0 4px 50px 0 #000;
+  backdrop-filter: blur(25px);
+  bottom: 20px;
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
+    bottom: 0;
+  }
+  button {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    background-color: #00000000 !important;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05) !important;
+    }
+  }
+}
+
+suggestionBar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 985px;
+  suggestion {
+    display: flex;
+    padding: 10px 12px;
+    align-items: center;
+    gap: 10px;
+    width: calc(985px / 3 - 33px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: radial-gradient(
+      100% 50.05% at 50.05% 1.09%,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+    backdrop-filter: blur(25px);
+  }
+}
+
+mainView.currentConvo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 0 0;
+  align-self: stretch;
+  header {
+    display: flex;
+    padding: 20px 25px 0 25px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+  }
+
+  mainViewTop {
+    display: flex;
+    padding: 15px;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 15px;
+    flex: 1 0 0;
+    align-self: stretch;
+    color: #fff;
+    text-align: center;
+    font-family: "Atkinson Hyperlegible Next";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    height: 734px;
+
+    chatContainer {
+      display: flex;
+      flex: 1 0 0;
+      padding: 0 10px 10px 10px;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+      border-radius: 25px;
+      border: 1px solid #464646;
+      background: #0c0c0c;
+      padding-bottom: 0;
+      overflow: hidden;
+
+      top {
+        display: flex;
+        padding: 15px 0;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        height: 24px !important;
+        width: 100%;
+
+        color: #fff;
+        text-align: center;
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+      .assetGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+        gap: 10px;
+        padding: 2px;
+        align-content: flex-start;
+        flex: 1 0 0;
+        align-self: stretch;
+        height: 100%;
+        overflow-y: scroll;
+
+        img {
+          width: 100%;
+          aspect-ratio: 1/1;
+          border-radius: 14px;
+          opacity: 0;
+          transition: none !important;
+        }
+      }
+
+      &.convo {
+        display: flex;
+        flex: none;
+        width: 441px !important;
+        padding: 0 10px 10px 10px;
+        flex-direction: column;
+        align-items: flex-start;
+        align-self: stretch;
+      }
+    }
+  }
+}
+
+@keyframes assetFadeIn {
+  from {
+    opacity: 0;
+    transform: perspective(400px) rotateX(-14deg) rotateY(14deg) scale(0.82);
+  }
+  65% {
+    opacity: 1;
+    transform: perspective(400px) rotateX(-2deg) rotateY(2deg) scale(1.08);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(400px) rotateX(0deg) rotateY(0deg) scale(1);
+  }
+}
+
+bottom.convo {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  flex: 1 0 0;
+  align-self: stretch;
+  border-radius: 16px;
+  background: #161616;
+
+  message {
+    display: flex;
+    width: 400px;
+    padding: 12px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 15px;
+    border-radius: 9px;
+    &.you {
+      display: flex;
+      width: 400px;
+      padding: 12px;
+      justify-content: flex-end;
+      text-align: left;
+      gap: 10px;
+      border-radius: 9px;
+      background: #2a2a2a;
+    }
+    msgTop {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+      span {
+        color: rgba(255, 255, 255, 0.55);
+        leading-trim: both;
+        text-edge: cap;
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+    }
+  }
+}
+
+gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  background: #0f0f0f;
+  border-top: 1px solid #303030;
+  padding-bottom: 10px;
+
+  galleryTop {
+    display: flex;
+    padding: 30px 30px 10px 30px;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 8px;
+    align-self: stretch;
+    color: white;
+    font-style: italic !important;
+    text-transform: uppercase;
+
+    span {
+      font-size: 24px;
+      font-weight: 500;
+    }
+    b {
+      font-size: 33px;
+      font-weight: 800;
+      text-shadow: 0 4px 20.4px rgba(255, 255, 255, 0.25);
+    }
+  }
+}
+
+galleryLine {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 30px;
+  width: 100%;
+  box-sizing: border-box;
+
+  galleryTop {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    .fgLogo{
+    align-self: stretch;
+    padding: 0;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      img {
+        width: 24px;
         height: 24px;
-        
+      }
+
+      span {
+        color: #fff;
+        font-size: 20px;
+        font-weight: 500;
+        font-style: normal;
+        text-transform: none;
+        text-shadow: none;
+      }
     }
+  }
+
+  galleryCarousel {
+    display: flex;
+    gap: 15px;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
+
+horizButtons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    opacity: 0.7;
+    &:hover {
+      opacity: 1;
+    }
+    &:active {
+      transform: scale(0.85);
+    }
+  }
+}
+
+galleryCard {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex-shrink: 0;
+  width: 403px;
+  scroll-snap-align: start;
+
+  img {
+    width: 100%;
+    height: 225px;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+  }
+}
+
+cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 8px;
+
+  b {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  span {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+galleryFeatured {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0 30px 20px 30px;
+  width: 100%;
+  box-sizing: border-box;
+
+  img {
+    width: 100%;
+    height: 378px;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+  }
+
+  featuredInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+  }
 }
