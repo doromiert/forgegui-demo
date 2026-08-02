@@ -8,6 +8,7 @@
 
 body {
   background: #0a0a0a;
+  --Glass-Text: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%);
 
   &.chat {
     display: flex;
@@ -308,6 +309,7 @@ mainView {
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
   flex: 1 0 0;
   height: 100%;
   overflow-y: scroll;
@@ -443,7 +445,7 @@ contextMenu {
   bottom: 20px;
   z-index: 9999999128317;
 
-  &.user{
+  &.user {
     bottom: 100px;
   }
 
@@ -819,12 +821,533 @@ galleryFeatured {
   }
 }
 
-button.destructive{
-    border-radius: 15px;
-border: 1px solid rgba(255, 168, 168, 0.18) ; 
-background: rgba(255, 0, 0, 0.10) !important;
+button.destructive {
+  border-radius: 15px;
+  border: 1px solid rgba(255, 168, 168, 0.18);
+  background: rgba(255, 0, 0, 0.1) !important;
 
-&:hover {
-    background: rgba(255, 0, 0, 0.20) !important;  
+  &:hover {
+    background: rgba(255, 0, 0, 0.2) !important;
+  }
 }
+
+mainView#plugins {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  selectWrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    width: fit-content;
+    background: #212121;
+    border-radius: 15px;
+    padding: 12px 40px 12px 16px;
+    cursor: pointer;
+    height: 26px;
+
+    span {
+      color: rgba(255, 255, 255, 0.8);
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 20px;
+      font-weight: 500;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .selectArrow {
+      position: absolute;
+      right: 12px;
+      width: 18px;
+      height: 18px;
+      pointer-events: none;
+    }
+  }
+  banner {
+    width: 100%;
+    height: 430px;
+    background-image: url(plugin-banner.png);
+    background-size: cover;
+    background-position: right;
+    padding: 40px 95px 45px 100px;
+    box-sizing: border-box;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    h1 {
+      margin: 0;
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 90px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      background: var(
+        --Glass-Text,
+        linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%)
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    span {
+      color: rgba(255, 255, 255, 0.8);
+
+      /* Display Text */
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      max-width: 572px;
+    }
+  }
+  pluginHeader {
+    display: flex;
+    width: 100%;
+    padding: 0px 40px;
+    box-sizing: border-box;
+    vertical {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 50px;
+      justify-content: center;
+      b {
+        color: #fff;
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+      span {
+        color: rgba(255, 255, 255, 0.8);
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+    }
+  }
+  pluginGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 0 40px 40px 40px;
+    width: 100%;
+    box-sizing: border-box;
+    pluginBox {
+      display: flex;
+      height: 195px;
+      padding: 20px;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(
+        100% 100% at 50.14% 0%,
+        #202020 0%,
+        #0b0b0b 100%
+      );
+
+      &.premium {
+        background: url(roblox-connect-bg.jpg) center / cover no-repeat;
+
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.5); /* tweak opacity */
+        }
+      }
+
+      top {
+        z-index: 1;
+        display: flex;
+        div {
+          width: 100%;
+          display: flex;
+          align-items: top;
+          justify-content: end;
+          gap: 8px;
+
+          pluginChip {
+            display: flex;
+            height: 30px;
+            padding: 8px 10px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            text-align: center;
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            border-radius: 19px;
+            box-sizing: border-box;
+            border-radius: 19px;
+            border: 1px solid #434343;
+            background: linear-gradient(
+              180deg,
+              #000 0%,
+              rgba(20, 20, 20, 0.58) 100%
+            );
+            &.active {
+              background: #0f5384;
+            }
+          }
+
+          premiumBadge {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            align-items: center;
+            height: 28px;
+
+            background: var(
+              --Glass-Text,
+              linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%)
+            );
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            img {
+              height: 28px;
+            }
+          }
+        }
+        img {
+          height: 48px;
+        }
+      }
+
+      bottom {
+        z-index: 1;
+        display: flex;
+        align-items: flex-end;
+        gap: 3px;
+        align-self: stretch;
+        vertical {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          b {
+            color: #fff;
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+          }
+          span {
+            color: rgba(255, 255, 255, 0.7);
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+          }
+        }
+        button {
+          display: flex;
+          padding: 10px 13px;
+          align-items: center;
+          gap: 10px;
+          border-radius: 50px;
+          background: #07f;
+          box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.59) inset;
+          border: none;
+          color: #fff;
+          text-align: center;
+          font-family: "Atkinson Hyperlegible Next";
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
+      }
+    }
+  }
+}
+
+mainView#community {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 25px;
+
+  communityTags {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    height: 48px;
+    justify-content: center;
+    searchWrapper {
+      display: flex;
+      align-items: center;
+      flex: 1 0 0;
+      height: 48px;
+      position: relative;
+      max-width: 400px;
+      img {
+        position: absolute;
+        left: 16px;
+        height: 20px;
+        pointer-events: none;
+        opacity: 0.5;
+      }
+      input {
+        display: flex;
+        height: 48px;
+        padding: 10px 18px 10px 46px;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 47px;
+        border: 1px solid #373636;
+        color: var(--Textbox-Hint, rgba(255, 255, 255, 0.5));
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        background: #121212;
+      }
+    }
+    communityTag {
+      display: flex;
+      padding: 12px 16px;
+      align-items: center;
+      gap: 10px;
+      border-radius: 15px;
+      background: #212121;
+      &.active {
+        background: #545454;
+      }
+    }
+  }
+
+  & > top {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    color: #fff;
+    font-family: "Atkinson Hyperlegible Next";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    img {
+      height: 32px;
+    }
+  }
+}
+
+.postButton {
+  display: flex;
+  width: 195px;
+  padding: 12px 0;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: #07f;
+  box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.59) inset;
+  border: none;
+  span {
+    font-family: "Atkinson Hyperlegible Next";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background: var(
+      --Glass-Text,
+      linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+timeline {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 20px;
+  border: 1px solid #454545;
+  box-sizing: border-box;
+  max-width: 770px;
+  height: max-content;
+  post:last-child {
+    border: none;
+  }
+  post {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    border-bottom: 1px solid #454545;
+    top {
+      display: flex;
+      width: 770px;
+      padding: 15px 20px;
+      gap: 10px;
+      align-items: center;
+      box-sizing: border-box;
+      username {
+        color: #fff;
+        text-align: center;
+
+        /* Small Text 20px Bold */
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+      timestamp {
+        color: #fff;
+        text-align: center;
+
+        /* Small Text 20px */
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        opacity: 0.8;
+      }
+      postTag {
+        display: flex;
+        padding: 6px 10px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 30px;
+        &.ai {
+          border-radius: 49px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(115, 0, 255, 0.27);
+          color: #f1b8ff;
+          text-align: center;
+          font-family: "Inter Tight";
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
+      }
+      img {
+        height: 34px;
+      }
+    }
+    content {
+      width: 100%;
+      padding: 0 10px;
+      box-sizing: border-box;
+      overflow: hidden;
+
+      &.img {
+        width: 100%;
+        max-height: 500px;
+        img {
+          width: 100%;
+          height: 100%;
+          background-color: rgb(10, 10, 10);
+          border-radius: 10px;
+        }
+      }
+      &.text {
+        display: flex;
+        padding: 10px 15px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 5px;
+        align-self: stretch;
+        h1 {
+          margin: 0;
+          color: #fff;
+          text-align: center;
+
+          /* Normal Text (bold) */
+          font-family: "Atkinson Hyperlegible Next";
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+        }
+        p {
+          color: rgba(255, 255, 255, 0.9);
+          text-align: left;
+
+          /* Small Text 20px */
+          font-family: "Atkinson Hyperlegible Next";
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+          margin: 0;
+        }
+      }
+    }
+    bottom {
+      display: flex;
+      width: 770px;
+      padding: 16px 22px;
+      gap: 30px;
+      align-items: center;
+      box-sizing: border-box;
+      engagement {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: rgba(255, 255, 255, 0.81);
+        text-align: center;
+
+        /* Small Text 18px */
+        font-family: "Atkinson Hyperlegible Next";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+      img {
+        border-radius: 100px;
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 100px;
+          outline: solid;
+          outline-width: 8px;
+          outline-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+  }
 }
