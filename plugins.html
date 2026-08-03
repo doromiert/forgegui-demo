@@ -6,6 +6,7 @@
     <title>ForgeGUI</title>
     <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
     <link rel="stylesheet" href="base.css" />
+    <script src="site.js" defer></script>
     <meta name="theme-color" content="#0D0D0D" />
     <meta name="description" content="ForgeGUI - Create anything with AI" />
     <meta property="og:title" content="ForgeGUI" />
@@ -17,299 +18,139 @@
   </head>
 
   <body class="chat">
-    <sidebar>
-      <top class="sb">
-        <img src="footerLogo.svg" class="fgLogo" />
-        <button onclick="toggleSidebar()">
-          <img src="icons/sidebar.svg" />
-        </button>
-      </top>
-      <specialTabs>
-        <a href="index.html" class="sidebarElem ">
-          <img src="icons/home.svg" />
-          <span>Home</span>
-        </a>
-        <a href="assets.html" class="sidebarElem">
-          <img src="icons/file.svg" />
-          <span>Assets</span>
-        </a>
-        <a href="community.html" class="sidebarElem">
-          <img src="icons/people.svg" />
-          <span>Community</span>
-        </a>
-      </specialTabs>
-      <projects>
-        <topLabel>Game Projects</topLabel>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-      </projects>
-      <contextMenu
-        id="userMenu"
-        class="hidden user"
-        style="width: 282px"
-        onclick="showContext('userMenu')"
-      >
-        <button><img src="icons/Exclamation.svg" /> Help</button>
-        <button><img src="icons/Settings.svg" /> Settings</button>
-        <button>
-          <img src="icons/Moon.svg" /> Theme
-          <div style="flex: 1"></div>
-          <span>System</span
-          ><img src="icons/arrow.svg" style="rotate: -90deg" />
-        </button>
-        <button class="destructive">
-          <img src="icons/SignOut.svg" /> Logout
-        </button>
-      </contextMenu>
-
-      <bottom class="sb">
-        <creditCounter>
-          <top>
-            <img src="icons/coins.svg" />
-            <span>Starter Plan</span>
-            <div style="flex: 1"></div>
-            <a href="placeholder.html">Get More</a>
-          </top>
-          <bottom>
-            <creditSlider></creditSlider>
-            <span>1</span>
-          </bottom>
-        </creditCounter>
-        <a href="placeholder.html" class="sidebarElem upgradeButton">
-          <img src="icons/crown.svg" style="image-rendering: optimizeQuality" />
-          <span>Upgrade to Pro</span>
-        </a>
-        <actions>
-          <a href="placeholder.html" class="sidebarElem">
-            <img src="icons/book.svg" />
-            <span>Courses</span>
-          </a>
-          <a href="plugins.html" class="sidebarElem selected">
-            <img src="icons/plugin.svg" />
-            <span>Plugins</span>
-          </a>
-          <a href="placeholder.html" class="sidebarElem">
-            <img src="icons/bell.svg" />
-            <span>Notifications</span>
-          </a>
-        </actions>
-        <sidebarUserButton onclick="showContext('userMenu')">
-          <img src="generic.png" />
-          <vertical>
-            <b>generic</b>
-            <span>generic@gmail.com</span>
-          </vertical>
-          <img src="icons/selection.svg" />
-        </sidebarUserButton>
-      </bottom>
-    </sidebar>
-    <mainView id="plugins">
-      <banner>
-        <h1>Plugins</h1>
-        <span
-          >Enhance your ForgeGUI experience with plugins that slot right in with
-          your engine of choice.</span
-        >
-      </banner>
-      <pluginHeader>
-        <vertical>
-          <b>Game Engines</b>
+    <slot template="templates/app-shell.html">
+      <mainView id="plugins" slot="content">
+        <banner>
+          <h1>Plugins</h1>
           <span
             >Enhance your ForgeGUI experience with plugins that slot right in
             with your engine of choice.</span
           >
-        </vertical>
-        <selectWrapper>
-          <span>Show Only: <b id="filterLabel">All</b></span>
-          <img src="icons/arrow.svg" class="selectArrow" />
-          <select
-            onchange="
+        </banner>
+        <pluginHeader>
+          <vertical>
+            <b>Game Engines</b>
+            <span
+              >Enhance your ForgeGUI experience with plugins that slot right in
+              with your engine of choice.</span
+            >
+          </vertical>
+          <selectWrapper>
+            <span>Show Only: <b id="filterLabel">All</b></span>
+            <img src="icons/arrow.svg" class="selectArrow" />
+            <select
+              onchange="
               document.getElementById('filterLabel').textContent =
                 this.options[this.selectedIndex].text
             "
-          >
-            <option value="all">All</option>
-          </select>
-        </selectWrapper>
-      </pluginHeader>
-      <pluginGrid>
-        <pluginBox class="premium">
+            >
+              <option value="all">All</option>
+            </select>
+          </selectWrapper>
+        </pluginHeader>
+        <pluginGrid>
+          <pluginBox class="premium">
             <top>
-                <img src="icons/roblox.svg">
-                <div>
-                    <premiumBadge>
-                        <img src="icons/crown.svg">
-                        <span>Premium</span>
-                    </premiumBadge>
-                    <pluginChip class="active">
-                        Beta
-                    </pluginChip>
-                    <pluginChip>
-                        1.4
-                    </pluginChip>
-                </div>
+              <img src="icons/roblox.svg" />
+              <div>
+                <premiumBadge>
+                  <img src="icons/crown.svg" />
+                  <span>Premium</span>
+                </premiumBadge>
+                <pluginChip class="active"> Beta </pluginChip>
+                <pluginChip> 1.4 </pluginChip>
+              </div>
             </top>
             <bottom>
-                <vertical>
-                    <b>ForgeGUI Connect</b>
-                    <span>for Roblox Studio</span>
-                </vertical>
-                <button>
-                    Install <img src="icons/download.svg">
-                </button>
+              <vertical>
+                <b>ForgeGUI Connect</b>
+                <span>for Roblox Studio</span>
+              </vertical>
+              <button>Install <img src="icons/download.svg" /></button>
             </bottom>
-        </pluginBox>
-        <pluginBox>
+          </pluginBox>
+          <pluginBox>
             <top>
-                <img src="icons/unity.svg">
-                <div>
-                    
-                    <pluginChip class="active">
-                        Beta
-                    </pluginChip>
-                    <pluginChip>
-                        1.4
-                    </pluginChip>
-                </div>
+              <img src="icons/unity.svg" />
+              <div>
+                <pluginChip class="active"> Beta </pluginChip>
+                <pluginChip> 1.4 </pluginChip>
+              </div>
             </top>
             <bottom>
-                <vertical>
-                    <b>ForgeGUI Connect</b>
-                    <span>for Unity</span>
-                </vertical>
-                <button>
-                    Install <img src="icons/download.svg">
-                </button>
+              <vertical>
+                <b>ForgeGUI Connect</b>
+                <span>for Unity</span>
+              </vertical>
+              <button>Install <img src="icons/download.svg" /></button>
             </bottom>
-        </pluginBox>
-        <pluginBox>
+          </pluginBox>
+          <pluginBox>
             <top>
-                <img src="icons/ue.svg">
-                <div>
-                    
-                    <pluginChip class="active">
-                        Beta
-                    </pluginChip>
-                    <pluginChip>
-                        1.4
-                    </pluginChip>
-                </div>
+              <img src="icons/ue.svg" />
+              <div>
+                <pluginChip class="active"> Beta </pluginChip>
+                <pluginChip> 1.4 </pluginChip>
+              </div>
             </top>
             <bottom>
-                <vertical>
-                    <b>ForgeGUI Connect</b>
-                    <span>for Unreal Engine</span>
-                </vertical>
-                <button>
-                    Install <img src="icons/download.svg">
-                </button>
+              <vertical>
+                <b>ForgeGUI Connect</b>
+                <span>for Unreal Engine</span>
+              </vertical>
+              <button>Install <img src="icons/download.svg" /></button>
             </bottom>
-        </pluginBox>
-        <pluginBox>
+          </pluginBox>
+          <pluginBox>
             <top>
-                <img src="icons/godot.svg">
-                <div>
-                    
-                    <pluginChip class="active">
-                        Beta
-                    </pluginChip>
-                    <pluginChip>
-                        1.4
-                    </pluginChip>
-                </div>
+              <img src="icons/godot.svg" />
+              <div>
+                <pluginChip class="active"> Beta </pluginChip>
+                <pluginChip> 1.4 </pluginChip>
+              </div>
             </top>
             <bottom>
-                <vertical>
-                    <b>ForgeGUI Connect</b>
-                    <span>for Godot</span>
-                </vertical>
-                <button>
-                    Install <img src="icons/download.svg">
-                </button>
+              <vertical>
+                <b>ForgeGUI Connect</b>
+                <span>for Godot</span>
+              </vertical>
+              <button>Install <img src="icons/download.svg" /></button>
             </bottom>
-        </pluginBox>
-        <pluginBox>
+          </pluginBox>
+          <pluginBox>
             <top>
-                <img src="icons/blender.svg">
-                <div>
-                    
-                    <pluginChip class="active">
-                        Beta
-                    </pluginChip>
-                    <pluginChip>
-                        1.4
-                    </pluginChip>
-                </div>
+              <img src="icons/blender.svg" />
+              <div>
+                <pluginChip class="active"> Beta </pluginChip>
+                <pluginChip> 1.4 </pluginChip>
+              </div>
             </top>
             <bottom>
-                <vertical>
-                    <b>ForgeGUI Connect</b>
-                    <span>for Blender</span>
-                </vertical>
-                <button>
-                    Install <img src="icons/download.svg">
-                </button>
+              <vertical>
+                <b>ForgeGUI Connect</b>
+                <span>for Blender</span>
+              </vertical>
+              <button>Install <img src="icons/download.svg" /></button>
             </bottom>
-        </pluginBox>
-        <pluginBox>
+          </pluginBox>
+          <pluginBox>
             <top>
-                <img src="icons/ai.svg">
-                <div>
-                    
-                    <pluginChip class="active">
-                        Beta
-                    </pluginChip>
-                    <pluginChip>
-                        1.4
-                    </pluginChip>
-                </div>
+              <img src="icons/ai.svg" />
+              <div>
+                <pluginChip class="active"> Beta </pluginChip>
+                <pluginChip> 1.4 </pluginChip>
+              </div>
             </top>
             <bottom>
-                <vertical>
-                    <b>ForgeGUI Connect</b>
-                    <span>for MCP</span>
-                </vertical>
-                <button>
-                    Install <img src="icons/download.svg">
-                </button>
+              <vertical>
+                <b>ForgeGUI Connect</b>
+                <span>for MCP</span>
+              </vertical>
+              <button>Install <img src="icons/download.svg" /></button>
             </bottom>
-        </pluginBox>
-      </pluginGrid>
-    </mainView>
+          </pluginBox>
+        </pluginGrid>
+      </mainView>
+    </slot>
   </body>
-  <script>
-    function toggleSidebar() {
-      document.querySelector("sidebar").classList.toggle("collapsed");
-    }
-    function showContext(id) {
-      document.querySelector("#" + id).classList.toggle("hidden");
-    }
-  </script>
 </html>

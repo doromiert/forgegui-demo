@@ -1,0 +1,130 @@
+<sidebar>
+    <top class="sb">
+        <img src="footerLogo.svg" class="fgLogo" alt="ForgeGUI" />
+        <button type="button" data-toggle-sidebar aria-label="Toggle sidebar">
+            <img src="icons/sidebar.svg" alt="" />
+        </button>
+    </top>
+
+    <specialTabs>
+        <a href="index.html" class="sidebarElem" data-route="index.html">
+            <img src="icons/home.svg" alt="" />
+            <span>Home</span>
+        </a>
+        <a href="assets.html" class="sidebarElem" data-route="assets.html">
+            <img src="icons/file.svg" alt="" />
+            <span>Assets</span>
+        </a>
+        <a
+            href="community.html"
+            class="sidebarElem"
+            data-route="community.html"
+        >
+            <img src="icons/people.svg" alt="" />
+            <span>Community</span>
+        </a>
+    </specialTabs>
+
+    <projects>
+        <topLabel>Game Projects</topLabel>
+        <a href="oldChat.html" class="sidebarElem" data-route="oldChat.html">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+    </projects>
+
+    <contextMenu
+        id="userMenu"
+        class="hidden user"
+        style="width: 282px"
+        data-context-target="userMenu"
+    >
+        <button><img src="icons/Exclamation.svg" alt="" /> Help</button>
+        <button><img src="icons/Settings.svg" alt="" /> Settings</button>
+        <button>
+            <img src="icons/Moon.svg" alt="" /> Theme
+            <span style="flex: 1"></span>
+            <span>System</span>
+            <img src="icons/arrow.svg" alt="" style="rotate: -90deg" />
+        </button>
+        <button class="destructive">
+            <img src="icons/SignOut.svg" alt="" /> Logout
+        </button>
+    </contextMenu>
+
+    <bottom class="sb">
+        <creditCounter>
+            <top>
+                <img src="icons/coins.svg" alt="" />
+                <span>Starter Plan</span>
+                <span style="flex: 1"></span>
+                <a href="getMoreCredits.html">Get More</a>
+            </top>
+            <bottom>
+                <creditSlider></creditSlider>
+                <span>1</span>
+            </bottom>
+        </creditCounter>
+
+        <a href="plans.html" class="sidebarElem upgradeButton">
+            <img
+                src="icons/crown.svg"
+                alt=""
+                style="image-rendering: optimizeQuality"
+            />
+            <span>Upgrade to Pro</span>
+        </a>
+
+        <actions>
+            <a href="courses.html" class="sidebarElem">
+                <img src="icons/book.svg" alt="" />
+                <span>Courses</span>
+            </a>
+            <a
+                href="plugins.html"
+                class="sidebarElem"
+                data-route="plugins.html"
+            >
+                <img src="icons/plugin.svg" alt="" />
+                <span>Plugins</span>
+            </a>
+            <a href="notifications.html" class="sidebarElem">
+                <img src="icons/bell.svg" alt="" />
+                <span>Notifications</span>
+            </a>
+        </actions>
+
+        <sidebarUserButton data-context-target="userMenu">
+            <img src="generic.png" alt="" />
+            <vertical>
+                <b>generic</b>
+                <span>generic@gmail.com</span>
+            </vertical>
+            <img src="icons/selection.svg" alt="" />
+        </sidebarUserButton>
+    </bottom>
+</sidebar>

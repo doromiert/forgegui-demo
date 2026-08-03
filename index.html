@@ -6,6 +6,7 @@
     <title>ForgeGUI</title>
     <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
     <link rel="stylesheet" href="base.css" />
+    <script src="site.js" defer></script>
     <meta name="theme-color" content="#0D0D0D" />
     <meta name="description" content="ForgeGUI - Create anything with AI" />
     <meta property="og:title" content="ForgeGUI" />
@@ -17,371 +18,198 @@
   </head>
 
   <body class="chat">
-    <sidebar>
-      <top class="sb">
-        <img src="footerLogo.svg" class="fgLogo" />
-        <button onclick="toggleSidebar()">
-          <img src="icons/sidebar.svg" />
-        </button>
-      </top>
-      <specialTabs>
-        <a href="index.html" class="sidebarElem selected">
-          <img src="icons/home.svg" />
-          <span>Home</span>
-        </a>
-        <a href="assets.html" class="sidebarElem">
-          <img src="icons/file.svg" />
-          <span>Assets</span>
-        </a>
-        <a href="community.html" class="sidebarElem">
-          <img src="icons/people.svg" />
-          <span>Community</span>
-        </a>
-      </specialTabs>
-      <projects>
-        <topLabel>Game Projects</topLabel>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
+    <slot template="templates/app-shell.html">
+      <mainView slot="content">
+        <chatWindow>
+          <span><b>544,200</b> users have created assets today.</span>
+          <h1>Let's create a game, generic</h1>
+          <slot template="templates/chatbox.html"></slot>
+          <suggestionBar>
+            <suggestion>
+              <img src="icons/placeholder.svg" />
+              Suggestion
+            </suggestion>
+            <suggestion>
+              <img src="icons/placeholder.svg" />
+              Suggestion
+            </suggestion>
+            <suggestion>
+              <img src="icons/placeholder.svg" />
+              Suggestion
+            </suggestion>
+            <suggestion>
+              <img src="icons/placeholder.svg" />
+              Suggestion
+            </suggestion>
+            <suggestion>
+              <img src="icons/placeholder.svg" />
+              Suggestion
+            </suggestion>
+            <suggestion>
+              <img src="icons/placeholder.svg" />
+              Suggestion
+            </suggestion>
+          </suggestionBar>
+        </chatWindow>
+        <gallery>
+          <galleryTop><span>THE</span><b>FORGE</b></galleryTop>
 
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-      </projects>
-      <contextMenu id="userMenu" class="hidden user" style="width: 282px;" onclick="showContext('userMenu')">
-        <button><img src="icons/Exclamation.svg" /> Help</button>
-        <button><img src="icons/Settings.svg" /> Settings</button>
-        <button>
-          <img src="icons/Moon.svg" /> Theme
-          <div style="flex: 1"></div>
-          <span>System</span
-          ><img src="icons/arrow.svg" style="rotate: -90deg" />
-        </button>
-        <button class="destructive"><img src="icons/SignOut.svg" /> Logout</button>
-      </contextMenu>
+          <galleryLine>
+            <galleryTop>
+              <div>
+                <img src="icons/s-3d.svg" />
+                <span>Quick Tools</span>
+              </div>
+              <horizButtons>
+                <button onclick="scrollGallery(this, -1)">
+                  <img src="icons/arrow.svg" style="rotate: 90deg" />
+                </button>
+                <button onclick="scrollGallery(this, 1)">
+                  <img src="icons/arrow.svg" style="rotate: 270deg" />
+                </button>
+              </horizButtons>
+            </galleryTop>
+            <galleryCarousel>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+            </galleryCarousel>
+          </galleryLine>
 
-      <bottom class="sb">
-        <creditCounter>
-          <top>
-            <img src="icons/coins.svg" />
-            <span>Starter Plan</span>
-            <div style="flex: 1"></div>
-            <a href="placeholder.html">Get More</a>
-          </top>
-          <bottom>
-            <creditSlider></creditSlider>
-            <span>1</span>
-          </bottom>
-        </creditCounter>
-        <a href="placeholder.html" class="sidebarElem upgradeButton">
-          <img src="icons/crown.svg" style="image-rendering: optimizeQuality" />
-          <span>Upgrade to Pro</span>
-        </a>
-        <actions>
-          <a href="placeholder.html" class="sidebarElem">
-            <img src="icons/book.svg" />
-            <span>Courses</span>
-          </a>
-          <a href="plugins.html" class="sidebarElem">
-            <img src="icons/plugin.svg" />
-            <span>Plugins</span>
-          </a>
-          <a href="placeholder.html" class="sidebarElem">
-            <img src="icons/bell.svg" />
-            <span>Notifications</span>
-          </a>
-        </actions>
-        <sidebarUserButton onclick="showContext('userMenu')">
-          <img src="generic.png" />
-          <vertical>
-            <b>generic</b>
-            <span>generic@gmail.com</span>
-          </vertical>
-          <img src="icons/selection.svg" />
-        </sidebarUserButton>
-      </bottom>
-    </sidebar>
-    <mainView>
-      <chatWindow>
-        <span><b>544,200</b> users have created assets today.</span>
-        <h1>Let's create a game, generic</h1>
-        <chatBox>
-          <assetBar>
-            <button><img src="icons/add.svg" /></button>
-          </assetBar>
-          <textarea placeholder="Describe what you want..."></textarea>
-          <bottom>
-            <button
-              class="chatboxButton"
-              onclick="showContext('chatboxGamePicker')"
-            >
-              <img src="icons/roblox.svg" />
-              <span>Roblox</span>
-              <img src="icons/arrow.svg" />
-            </button>
-            <contextMenu
-              id="chatboxGamePicker"
-              class="hidden"
-              onclick="showContext('chatboxGamePicker')"
-            >
-              <button><img src="icons/roblox.svg" />Roblox</button>
-              <button><img src="icons/ue.svg" />Unreal Engine</button>
-              <button><img src="icons/unity.svg" />Unity</button>
-            </contextMenu>
-            <button class="chatboxButton" onclick="showContext('chatboxStyle')">
-              <img src="icons/pencil.svg" />
-              <span>Auto-Detect</span>
-              <img src="icons/arrow.svg" />
-            </button>
-            <contextMenu
-              id="chatboxStyle"
-              class="hidden"
-              style="left: 120px"
-              onclick="showContext('chatboxStyle')"
-            >
-              <button>Auto-Detect</button>
-              <button>Realistic</button>
-              <button>Cartoon</button>
-              <button>Pixel Art</button>
-            </contextMenu>
-
-            <button class="chatboxButton" onclick="showContext('chatboxModel')">
-              <img src="icons/ai.svg" />
-              <span>Yunes Pro</span>
-              <img src="icons/arrow.svg" />
-            </button>
-            <contextMenu
-              id="chatboxModel"
-              class="hidden"
-              style="left: 328px"
-              onclick="showContext('chatboxModel')"
-            >
-              <button>Yunes Pro</button>
-              <button>GoyAI</button>
-              <button>SahurML</button>
-            </contextMenu>
-
-            <div style="flex: 1"></div>
-
-            <button class="chatboxButton send">
-              <span>Create</span>
-              <img src="icons/send.svg" />
-            </button>
-          </bottom>
-        </chatBox>
-        <suggestionBar>
-          <suggestion>
-            <img src="icons/placeholder.svg" />
-            Suggestion
-          </suggestion>
-          <suggestion>
-            <img src="icons/placeholder.svg" />
-            Suggestion
-          </suggestion>
-          <suggestion>
-            <img src="icons/placeholder.svg" />
-            Suggestion
-          </suggestion>
-          <suggestion>
-            <img src="icons/placeholder.svg" />
-            Suggestion
-          </suggestion>
-          <suggestion>
-            <img src="icons/placeholder.svg" />
-            Suggestion
-          </suggestion>
-          <suggestion>
-            <img src="icons/placeholder.svg" />
-            Suggestion
-          </suggestion>
-        </suggestionBar>
-      </chatWindow>
-      <gallery>
-        <galleryTop><span>THE</span><b>FORGE</b></galleryTop>
-
-        <galleryLine>
-          <galleryTop>
-            <div>
-              <img src="icons/s-3d.svg" />
-              <span>Quick Tools</span>
-            </div>
-            <horizButtons>
-              <button onclick="scrollGallery(this, -1)">
-                <img src="icons/arrow.svg" style="rotate: 90deg" />
+          <galleryFeatured>
+            <img src="generic.png" />
+            <featuredInfo>
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+              <button
+                class="upgradeButton"
+                style="width: auto; padding: 12px 20px"
+              >
+                <span style="font-size: 18px">Try Now</span>
               </button>
-              <button onclick="scrollGallery(this, 1)">
-                <img src="icons/arrow.svg" style="rotate: 270deg" />
-              </button>
-            </horizButtons>
-          </galleryTop>
-          <galleryCarousel>
-            <galleryCard>
-              <img src="generic.png" />
-              <cardInfo>
-                <b>Placeholder Title</b>
-                <span>Placeholder subtext cuz why not</span>
-              </cardInfo>
-            </galleryCard>
-            <galleryCard>
-              <img src="generic.png" />
-              <cardInfo>
-                <b>Placeholder Title</b>
-                <span>Placeholder subtext cuz why not</span>
-              </cardInfo>
-            </galleryCard>
-            <galleryCard>
-              <img src="generic.png" />
-              <cardInfo>
-                <b>Placeholder Title</b>
-                <span>Placeholder subtext cuz why not</span>
-              </cardInfo>
-            </galleryCard>
-            <galleryCard>
-              <img src="generic.png" />
-              <cardInfo>
-                <b>Placeholder Title</b>
-                <span>Placeholder subtext cuz why not</span>
-              </cardInfo>
-            </galleryCard>
-            <galleryCard>
-              <img src="generic.png" />
-              <cardInfo>
-                <b>Placeholder Title</b>
-                <span>Placeholder subtext cuz why not</span>
-              </cardInfo>
-            </galleryCard>
-            <galleryCard>
-              <img src="generic.png" />
-              <cardInfo>
-                <b>Placeholder Title</b>
-                <span>Placeholder subtext cuz why not</span>
-              </cardInfo>
-            </galleryCard>
-            <galleryCard>
-              <img src="generic.png" />
-              <cardInfo>
-                <b>Placeholder Title</b>
-                <span>Placeholder subtext cuz why not</span>
-              </cardInfo>
-            </galleryCard>
-          </galleryCarousel>
-        </galleryLine>
+            </featuredInfo>
+          </galleryFeatured>
 
-        <galleryFeatured>
-          <img src="generic.png" />
-          <featuredInfo>
-            <cardInfo>
-              <b>Placeholder Title</b>
-              <span>Placeholder subtext cuz why not</span>
-            </cardInfo>
-            <button
-              class="upgradeButton"
-              style="width: auto; padding: 12px 20px"
-            >
-              <span style="font-size: 18px">Try Now</span>
-            </button>
-          </featuredInfo>
-        </galleryFeatured>
-
-        <galleryLine>
-          <galleryTop>
-            <div>
-              <img src="icons/picture.svg" />
-              <span>Other Tools</span>
-            </div>
-            <horizButtons>
-              <button onclick="scrollGallery(this, -1)">
-                <img src="icons/arrow.svg" style="rotate: 90deg" />
-              </button>
-              <button onclick="scrollGallery(this, 1)">
-                <img src="icons/arrow.svg" style="rotate: 270deg" />
-              </button>
-            </horizButtons>
-          </galleryTop>
-          <galleryCarousel>
-            <galleryCard>
-              <img src="generic.png" />
-              <cardInfo>
-                <b>Placeholder Title</b>
-                <span>Placeholder subtext cuz why not</span>
-              </cardInfo>
-            </galleryCard>
-            <galleryCard>
-              <img src="generic.png" />
-              <cardInfo>
-                <b>Placeholder Title</b>
-                <span>Placeholder subtext cuz why not</span>
-              </cardInfo>
-            </galleryCard>
-            <galleryCard>
-              <img src="generic.png" />
-              <cardInfo>
-                <b>Placeholder Title</b>
-                <span>Placeholder subtext cuz why not</span>
-              </cardInfo>
-            </galleryCard>
-            <galleryCard>
-              <img src="generic.png" />
-              <cardInfo>
-                <b>Placeholder Title</b>
-                <span>Placeholder subtext cuz why not</span>
-              </cardInfo>
-            </galleryCard>
-            <galleryCard>
-              <img src="generic.png" />
-              <cardInfo>
-                <b>Placeholder Title</b>
-                <span>Placeholder subtext cuz why not</span>
-              </cardInfo>
-            </galleryCard>
-            <galleryCard>
-              <img src="generic.png" />
-              <cardInfo>
-                <b>Placeholder Title</b>
-                <span>Placeholder subtext cuz why not</span>
-              </cardInfo>
-            </galleryCard>
-            <galleryCard>
-              <img src="generic.png" />
-              <cardInfo>
-                <b>Placeholder Title</b>
-                <span>Placeholder subtext cuz why not</span>
-              </cardInfo>
-            </galleryCard>
-          </galleryCarousel>
-        </galleryLine>
-      </gallery>
-    </mainView>
+          <galleryLine>
+            <galleryTop>
+              <div>
+                <img src="icons/picture.svg" />
+                <span>Other Tools</span>
+              </div>
+              <horizButtons>
+                <button onclick="scrollGallery(this, -1)">
+                  <img src="icons/arrow.svg" style="rotate: 90deg" />
+                </button>
+                <button onclick="scrollGallery(this, 1)">
+                  <img src="icons/arrow.svg" style="rotate: 270deg" />
+                </button>
+              </horizButtons>
+            </galleryTop>
+            <galleryCarousel>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+            </galleryCarousel>
+          </galleryLine>
+        </gallery>
+      </mainView>
+    </slot>
   </body>
   <script>
-    function toggleSidebar() {
-      document.querySelector("sidebar").classList.toggle("collapsed");
-    }
-    function showContext(id) {
-      document.querySelector("#" + id).classList.toggle("hidden");
-    }
     function scrollGallery(btn, dir) {
       const carousel = btn
         .closest("galleryLine")
