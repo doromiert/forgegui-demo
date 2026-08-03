@@ -293,15 +293,6 @@
         ];
 
         let i = 0;
-        (function next() {
-            if (i >= stages.length) {
-                box.finish();
-                return;
-            } // box.finish('/render.png')
-            box.progress(stages[i][0], stages[i][1]);
-            i++;
-            setTimeout(next, 900);
-        })();
 
         function toggleSidebar() {
             document.querySelector("sidebar").classList.toggle("collapsed");
