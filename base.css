@@ -612,13 +612,14 @@ mainView.currentConvo {
 bottom.convo {
    display: flex;
    padding: 10px;
-   flex-direction: column;
+   flex-direction: column-reverse;
    align-items: flex-end;
    gap: 10px;
    flex: 1 0 0;
    align-self: stretch;
    border-radius: 16px;
    background: #161616;
+   overflow-y: scroll;
 
    message {
       display: flex;
@@ -1371,4 +1372,8 @@ sticky {
       }
    }
    gap: 16px;
+}
+
+.genbox {
+   height: 400px;
 }

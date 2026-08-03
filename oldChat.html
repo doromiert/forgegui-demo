@@ -1,257 +1,338 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ForgeGUI</title>
-    <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
-    <link rel="stylesheet" href="base.css" />
-    <meta name="theme-color" content="#0D0D0D" />
-    <meta name="description" content="ForgeGUI - Create anything with AI" />
-    <meta property="og:title" content="ForgeGUI" />
-    <meta property="og:description" content="Powerful AI tool for creators" />
-    <meta property="og:type" content="website" />
-    <meta name="color-scheme" content="dark" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+        <link rel="stylesheet" href="base.css" />
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
 
-    <style></style>
-  </head>
-  <body class="chat">
-     <sidebar>
-      <top class="sb">
-        <img src="footerLogo.svg" class="fgLogo" />
-        <button onclick="toggleSidebar()">
-          <img src="icons/sidebar.svg" />
-        </button>
-      </top>
-      <specialTabs>
-        <a href="index.html" class="sidebarElem ">
-          <img src="icons/home.svg" />
-          <span>Home</span>
-        </a>
-        <a href="assets.html" class="sidebarElem">
-          <img src="icons/file.svg" />
-          <span>Assets</span>
-        </a>
-        <a href="index.html" class="sidebarElem">
-          <img src="icons/people.svg" />
-          <span>Community</span>
-        </a>
-      </specialTabs>
-      <projects>
-        <topLabel>Game Projects</topLabel>
-        <a href="oldChat.html" class="sidebarElem selected">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
+        <link rel="stylesheet" href="genbox.css" />
+        <style></style>
+    </head>
+    <body class="chat">
+        <sidebar>
+            <top class="sb">
+                <img src="footerLogo.svg" class="fgLogo" />
+                <button onclick="toggleSidebar()">
+                    <img src="icons/sidebar.svg" />
+                </button>
+            </top>
+            <specialTabs>
+                <a href="index.html" class="sidebarElem">
+                    <img src="icons/home.svg" />
+                    <span>Home</span>
+                </a>
+                <a href="assets.html" class="sidebarElem">
+                    <img src="icons/file.svg" />
+                    <span>Assets</span>
+                </a>
+                <a href="index.html" class="sidebarElem">
+                    <img src="icons/people.svg" />
+                    <span>Community</span>
+                </a>
+            </specialTabs>
+            <projects>
+                <topLabel>Game Projects</topLabel>
+                <a href="oldChat.html" class="sidebarElem selected">
+                    <img src="icons/s-3d.svg" />
+                    <span>Message 1</span>
+                </a>
+                <a href="oldChat.html" class="sidebarElem">
+                    <img src="icons/s-3d.svg" />
+                    <span>Message 1</span>
+                </a>
 
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-      </projects>
-      <contextMenu id="userMenu" class="hidden user" style="width: 282px;" onclick="showContext('userMenu')">
-        <button><img src="icons/Exclamation.svg" /> Help</button>
-        <button><img src="icons/Settings.svg" /> Settings</button>
-        <button>
-          <img src="icons/Moon.svg" /> Theme
-          <div style="flex: 1"></div>
-          <span>System</span
-          ><img src="icons/arrow.svg" style="rotate: -90deg" />
-        </button>
-        <button class="destructive"><img src="icons/SignOut.svg" /> Logout</button>
-      </contextMenu>
-      <bottom class="sb">
-        <creditCounter>
-          <top>
-            <img src="icons/coins.svg" />
-            <span>Starter Plan</span>
-            <div style="flex: 1"></div>
-            <a href="placeholder.html">Get More</a>
-          </top>
-          <bottom>
-            <creditSlider></creditSlider>
-            <span>1</span>
-          </bottom>
-        </creditCounter>
-        <a href="placeholder.html" class="sidebarElem upgradeButton">
-          <img src="icons/crown.svg" style="image-rendering: optimizeQuality" />
-          <span>Upgrade to Pro</span>
-        </a>
-        <actions>
-          <a href="placeholder.html" class="sidebarElem">
-            <img src="icons/book.svg" />
-            <span>Courses</span>
-          </a>
-          <a href="plugins.html" class="sidebarElem">
-            <img src="icons/plugin.svg" />
-            <span>Plugins</span>
-          </a>
-          <a href="placeholder.html" class="sidebarElem">
-            <img src="icons/bell.svg" />
-            <span>Notifications</span>
-          </a>
-        </actions>
-        <sidebarUserButton onclick="showContext('userMenu')">
-          <img src="generic.png" />
-          <vertical>
-            <b>generic</b>
-            <span>generic@gmail.com</span>
-          </vertical>
-          <img src="icons/selection.svg" />
-        </sidebarUserButton>
-      </bottom>
-    </sidebar>
-    <mainView class="currentConvo">
-      <header>
-        <img src="icons/message.svg">
-        <span>Chat</span>
-      </header>
-      <mainViewTop>
-        <chatContainer>
-          <top>
-            <img src="icons/assets.svg" />
-            <span>Asset Grid</span>
-          </top>
-          <bottom class="assetGrid">
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-            <img src="generic.png" />
-          </bottom>
-        </chatContainer>
-        <chatContainer class="convo">
-          <top>
-            <img src="icons/message.svg" />
-            <span>Conversation</span>
-          </top>
-          <bottom class="convo">
-            <message class="you"> my message </message>
-            <message><msgTop><img src="icons/ai.svg"/><span>Yunes</span></msgTop> clanker message </message>
-            <message class="you"> my message </message>
-            <message><msgTop><img src="icons/ai.svg"/><span>Yunes</span></msgTop> clanker message <br><img src="icons/3dots.svg"/></message>
-          </bottom>
-        </chatContainer>
-      </mainViewTop>
-      <bottom>
-        <chatBox>
-          <assetBar>
-            <button><img src="icons/add.svg" /></button>
-          </assetBar>
-          <textarea placeholder="Describe what you want..."></textarea>
-          <bottom>
-            <button
-              class="chatboxButton"
-              onclick="showContext('chatboxGamePicker')"
+                <a href="oldChat.html" class="sidebarElem">
+                    <img src="icons/s-3d.svg" />
+                    <span>Message 1</span>
+                </a>
+                <a href="oldChat.html" class="sidebarElem">
+                    <img src="icons/s-3d.svg" />
+                    <span>Message 1</span>
+                </a>
+                <a href="oldChat.html" class="sidebarElem">
+                    <img src="icons/s-3d.svg" />
+                    <span>Message 1</span>
+                </a>
+                <a href="oldChat.html" class="sidebarElem">
+                    <img src="icons/s-3d.svg" />
+                    <span>Message 1</span>
+                </a>
+                <a href="oldChat.html" class="sidebarElem">
+                    <img src="icons/s-3d.svg" />
+                    <span>Message 1</span>
+                </a>
+            </projects>
+            <contextMenu
+                id="userMenu"
+                class="hidden user"
+                style="width: 282px"
+                onclick="showContext('userMenu')"
             >
-              <img src="icons/roblox.svg" />
-              <span>Roblox</span>
-              <img src="icons/arrow.svg" />
-            </button>
-            <contextMenu id="chatboxGamePicker" class="hidden" onclick="showContext('chatboxGamePicker')">
-              <button><img src="icons/roblox.svg" />Roblox</button>
-              <button><img src="icons/ue.svg" />Unreal Engine</button>
-              <button><img src="icons/unity.svg" />Unity</button>
+                <button><img src="icons/Exclamation.svg" /> Help</button>
+                <button><img src="icons/Settings.svg" /> Settings</button>
+                <button>
+                    <img src="icons/Moon.svg" /> Theme
+                    <div style="flex: 1"></div>
+                    <span>System</span
+                    ><img src="icons/arrow.svg" style="rotate: -90deg" />
+                </button>
+                <button class="destructive">
+                    <img src="icons/SignOut.svg" /> Logout
+                </button>
             </contextMenu>
-            <button class="chatboxButton" onclick="showContext('chatboxStyle')">
-              <img src="icons/pencil.svg" />
-              <span>Auto-Detect</span>
-              <img src="icons/arrow.svg" />
-            </button>
-            <contextMenu id="chatboxStyle" class="hidden" style="left: 120px" onclick="showContext('chatboxStyle')">
-              <button>Auto-Detect</button>
-              <button>Realistic</button>
-              <button>Cartoon</button>
-              <button>Pixel Art</button>
-            </contextMenu>
+            <bottom class="sb">
+                <creditCounter>
+                    <top>
+                        <img src="icons/coins.svg" />
+                        <span>Starter Plan</span>
+                        <div style="flex: 1"></div>
+                        <a href="placeholder.html">Get More</a>
+                    </top>
+                    <bottom>
+                        <creditSlider></creditSlider>
+                        <span>1</span>
+                    </bottom>
+                </creditCounter>
+                <a href="placeholder.html" class="sidebarElem upgradeButton">
+                    <img
+                        src="icons/crown.svg"
+                        style="image-rendering: optimizeQuality"
+                    />
+                    <span>Upgrade to Pro</span>
+                </a>
+                <actions>
+                    <a href="placeholder.html" class="sidebarElem">
+                        <img src="icons/book.svg" />
+                        <span>Courses</span>
+                    </a>
+                    <a href="plugins.html" class="sidebarElem">
+                        <img src="icons/plugin.svg" />
+                        <span>Plugins</span>
+                    </a>
+                    <a href="placeholder.html" class="sidebarElem">
+                        <img src="icons/bell.svg" />
+                        <span>Notifications</span>
+                    </a>
+                </actions>
+                <sidebarUserButton onclick="showContext('userMenu')">
+                    <img src="generic.png" />
+                    <vertical>
+                        <b>generic</b>
+                        <span>generic@gmail.com</span>
+                    </vertical>
+                    <img src="icons/selection.svg" />
+                </sidebarUserButton>
+            </bottom>
+        </sidebar>
+        <mainView class="currentConvo">
+            <header>
+                <img src="icons/message.svg" />
+                <span>Chat</span>
+            </header>
+            <mainViewTop>
+                <chatContainer>
+                    <top>
+                        <img src="icons/assets.svg" />
+                        <span>Asset Grid</span>
+                    </top>
+                    <bottom class="assetGrid">
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                        <img src="generic.png" />
+                    </bottom>
+                </chatContainer>
+                <chatContainer class="convo">
+                    <top>
+                        <img src="icons/message.svg" />
+                        <span>Conversation</span>
+                    </top>
+                    <bottom class="convo">
+                        <message class="you"> my message </message>
+                        <message
+                            ><msgTop
+                                ><img src="icons/ai.svg" /><span
+                                    >Yunes</span
+                                ></msgTop
+                            >
+                            clanker message
+                        </message>
+                        <message class="you"> my message </message>
+                        <message
+                            ><msgTop
+                                ><img src="icons/ai.svg" /><span
+                                    >Yunes</span
+                                ></msgTop
+                            >
+                            clanker message <br /><img src="icons/3dots.svg" />
+                            <div id="slot" class="genbox" data-genbox></div
+                        ></message>
+                    </bottom>
+                </chatContainer>
+            </mainViewTop>
+            <bottom>
+                <chatBox>
+                    <assetBar>
+                        <button><img src="icons/add.svg" /></button>
+                    </assetBar>
+                    <textarea
+                        placeholder="Describe what you want..."
+                    ></textarea>
+                    <bottom>
+                        <button
+                            class="chatboxButton"
+                            onclick="showContext('chatboxGamePicker')"
+                        >
+                            <img src="icons/roblox.svg" />
+                            <span>Roblox</span>
+                            <img src="icons/arrow.svg" />
+                        </button>
+                        <contextMenu
+                            id="chatboxGamePicker"
+                            class="hidden"
+                            onclick="showContext('chatboxGamePicker')"
+                        >
+                            <button>
+                                <img src="icons/roblox.svg" />Roblox
+                            </button>
+                            <button>
+                                <img src="icons/ue.svg" />Unreal Engine
+                            </button>
+                            <button><img src="icons/unity.svg" />Unity</button>
+                        </contextMenu>
+                        <button
+                            class="chatboxButton"
+                            onclick="showContext('chatboxStyle')"
+                        >
+                            <img src="icons/pencil.svg" />
+                            <span>Auto-Detect</span>
+                            <img src="icons/arrow.svg" />
+                        </button>
+                        <contextMenu
+                            id="chatboxStyle"
+                            class="hidden"
+                            style="left: 120px"
+                            onclick="showContext('chatboxStyle')"
+                        >
+                            <button>Auto-Detect</button>
+                            <button>Realistic</button>
+                            <button>Cartoon</button>
+                            <button>Pixel Art</button>
+                        </contextMenu>
 
-            <button class="chatboxButton" onclick="showContext('chatboxModel')">
-              <img src="icons/ai.svg" />
-              <span>Yunes Pro</span>
-              <img src="icons/arrow.svg" />
-            </button>
-            <contextMenu id="chatboxModel" class="hidden" style="left: 328px" onclick="showContext('chatboxModel')">
-              <button>Yunes Pro</button>
-              <button>GoyAI</button>
-              <button>SahurML</button>
-            </contextMenu>
+                        <button
+                            class="chatboxButton"
+                            onclick="showContext('chatboxModel')"
+                        >
+                            <img src="icons/ai.svg" />
+                            <span>Yunes Pro</span>
+                            <img src="icons/arrow.svg" />
+                        </button>
+                        <contextMenu
+                            id="chatboxModel"
+                            class="hidden"
+                            style="left: 328px"
+                            onclick="showContext('chatboxModel')"
+                        >
+                            <button>Yunes Pro</button>
+                            <button>GoyAI</button>
+                            <button>SahurML</button>
+                        </contextMenu>
 
-            <div style="flex: 1"></div>
+                        <div style="flex: 1"></div>
 
-            <button class="chatboxButton send">
-              <span>Create</span>
-              <img src="icons/send.svg" />
-            </button>
-          </bottom>
-        </chatBox>
-      </bottom>
-    </mainVie>
-  </body>
-  <script>
-    function toggleSidebar() {
-      document.querySelector("sidebar").classList.toggle("collapsed");
-    }
-    function showContext(id) {
-      document.querySelector("#" + id).classList.toggle("hidden");
-    }
+                        <button class="chatboxButton send">
+                            <span>Create</span>
+                            <img src="icons/send.svg" />
+                        </button>
+                    </bottom>
+                </chatBox>
+            </bottom>
+        </mainView>
+    </body>
+    <script src="genbox.js"></script>
+    <script>
+        const box = document.querySelector("#slot").genbox;
 
-    function runAssetAnimation() {
-      const grid = document.querySelector('.assetGrid');
-      if (!grid) return;
-      const items = Array.from(grid.children);
-      const colStr = getComputedStyle(grid).gridTemplateColumns;
-      const cols = colStr === 'none' ? 1 : colStr.trim().split(/\s+/).length;
-      const stagger = 55;
-      items.forEach((item, i) => {
-        const delay = (Math.floor(i / cols) + (i % cols)) * stagger;
-        item.style.animationName = 'assetFadeIn';
-        item.style.animationDuration = '550ms';
-        item.style.animationTimingFunction = 'ease-out';
-        item.style.animationFillMode = 'both';
-        item.style.animationDelay = delay + 'ms';
-      });
-    }
+        const stages = [
+            [0.06, "reading prompt"],
+            [0.18, "seeding latents"],
+            [0.44, "denoising · step 12/30"],
+            [0.74, "denoising · step 26/30"],
+            [0.92, "decoding vae"],
+            [1.0, "upscaling"],
+        ];
 
-    document.addEventListener('DOMContentLoaded', () => {
-      // double rAF ensures layout is fully computed before reading grid columns
-      requestAnimationFrame(() => requestAnimationFrame(runAssetAnimation));
-    });
-  </script>
+        let i = 0;
+        (function next() {
+            if (i >= stages.length) {
+                box.finish();
+                return;
+            } // box.finish('/render.png')
+            box.progress(stages[i][0], stages[i][1]);
+            i++;
+            setTimeout(next, 900);
+        })();
+
+        function toggleSidebar() {
+            document.querySelector("sidebar").classList.toggle("collapsed");
+        }
+        function showContext(id) {
+            document.querySelector("#" + id).classList.toggle("hidden");
+        }
+
+        function runAssetAnimation() {
+            const grid = document.querySelector(".assetGrid");
+            if (!grid) return;
+            const items = Array.from(grid.children);
+            const colStr = getComputedStyle(grid).gridTemplateColumns;
+            const cols =
+                colStr === "none" ? 1 : colStr.trim().split(/\s+/).length;
+            const stagger = 55;
+            items.forEach((item, i) => {
+                const delay = (Math.floor(i / cols) + (i % cols)) * stagger;
+                item.style.animationName = "assetFadeIn";
+                item.style.animationDuration = "550ms";
+                item.style.animationTimingFunction = "ease-out";
+                item.style.animationFillMode = "both";
+                item.style.animationDelay = delay + "ms";
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // double rAF ensures layout is fully computed before reading grid columns
+            requestAnimationFrame(() =>
+                requestAnimationFrame(runAssetAnimation),
+            );
+        });
+    </script>
 </html>
