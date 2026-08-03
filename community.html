@@ -1,244 +1,298 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ForgeGUI</title>
-    <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
-    <link rel="stylesheet" href="base.css" />
-    <meta name="theme-color" content="#0D0D0D" />
-    <meta name="description" content="ForgeGUI - Create anything with AI" />
-    <meta property="og:title" content="ForgeGUI" />
-    <meta property="og:description" content="Powerful AI tool for creators" />
-    <meta property="og:type" content="website" />
-    <meta name="color-scheme" content="dark" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+        <link rel="stylesheet" href="base.css" />
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
 
-    <style></style>
-  </head>
+        <style></style>
+    </head>
 
-  <body class="chat">
-    <sidebar>
-      <top class="sb">
-        <img src="footerLogo.svg" class="fgLogo" />
-        <button onclick="toggleSidebar()">
-          <img src="icons/sidebar.svg" />
-        </button>
-      </top>
-      <specialTabs>
-        <a href="index.html" class="sidebarElem">
-          <img src="icons/home.svg" />
-          <span>Home</span>
-        </a>
-        <a href="assets.html" class="sidebarElem">
-          <img src="icons/file.svg" />
-          <span>Assets</span>
-        </a>
-        <a href="community.html" class="sidebarElem selected">
-          <img src="icons/people.svg" />
-          <span>Community</span>
-        </a>
-      </specialTabs>
-      <projects>
-        <topLabel>Game Projects</topLabel>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
+    <body class="chat">
+        <sidebar>
+            <top class="sb">
+                <img src="footerLogo.svg" class="fgLogo" />
+                <button onclick="toggleSidebar()">
+                    <img src="icons/sidebar.svg" />
+                </button>
+            </top>
+            <specialTabs>
+                <a href="index.html" class="sidebarElem">
+                    <img src="icons/home.svg" />
+                    <span>Home</span>
+                </a>
+                <a href="assets.html" class="sidebarElem">
+                    <img src="icons/file.svg" />
+                    <span>Assets</span>
+                </a>
+                <a href="community.html" class="sidebarElem selected">
+                    <img src="icons/people.svg" />
+                    <span>Community</span>
+                </a>
+            </specialTabs>
+            <projects>
+                <topLabel>Game Projects</topLabel>
+                <a href="oldChat.html" class="sidebarElem">
+                    <img src="icons/s-3d.svg" />
+                    <span>Message 1</span>
+                </a>
+                <a href="oldChat.html" class="sidebarElem">
+                    <img src="icons/s-3d.svg" />
+                    <span>Message 1</span>
+                </a>
 
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-          <img src="icons/s-3d.svg" />
-          <span>Message 1</span>
-        </a>
-      </projects>
-      <contextMenu
-        id="userMenu"
-        class="hidden user"
-        style="width: 282px"
-        onclick="showContext('userMenu')"
-      >
-        <button><img src="icons/Exclamation.svg" /> Help</button>
-        <button><img src="icons/Settings.svg" /> Settings</button>
-        <button>
-          <img src="icons/Moon.svg" /> Theme
-          <div style="flex: 1"></div>
-          <span>System</span
-          ><img src="icons/arrow.svg" style="rotate: -90deg" />
-        </button>
-        <button class="destructive">
-          <img src="icons/SignOut.svg" /> Logout
-        </button>
-      </contextMenu>
+                <a href="oldChat.html" class="sidebarElem">
+                    <img src="icons/s-3d.svg" />
+                    <span>Message 1</span>
+                </a>
+                <a href="oldChat.html" class="sidebarElem">
+                    <img src="icons/s-3d.svg" />
+                    <span>Message 1</span>
+                </a>
+                <a href="oldChat.html" class="sidebarElem">
+                    <img src="icons/s-3d.svg" />
+                    <span>Message 1</span>
+                </a>
+                <a href="oldChat.html" class="sidebarElem">
+                    <img src="icons/s-3d.svg" />
+                    <span>Message 1</span>
+                </a>
+                <a href="oldChat.html" class="sidebarElem">
+                    <img src="icons/s-3d.svg" />
+                    <span>Message 1</span>
+                </a>
+            </projects>
+            <contextMenu
+                id="userMenu"
+                class="hidden user"
+                style="width: 282px"
+                onclick="showContext('userMenu')"
+            >
+                <button><img src="icons/Exclamation.svg" /> Help</button>
+                <button><img src="icons/Settings.svg" /> Settings</button>
+                <button>
+                    <img src="icons/Moon.svg" /> Theme
+                    <div style="flex: 1"></div>
+                    <span>System</span
+                    ><img src="icons/arrow.svg" style="rotate: -90deg" />
+                </button>
+                <button class="destructive">
+                    <img src="icons/SignOut.svg" /> Logout
+                </button>
+            </contextMenu>
 
-      <bottom class="sb">
-        <creditCounter>
-          <top>
-            <img src="icons/coins.svg" />
-            <span>Starter Plan</span>
-            <div style="flex: 1"></div>
-            <a href="placeholder.html">Get More</a>
-          </top>
-          <bottom>
-            <creditSlider></creditSlider>
-            <span>1</span>
-          </bottom>
-        </creditCounter>
-        <a href="placeholder.html" class="sidebarElem upgradeButton">
-          <img src="icons/crown.svg" style="image-rendering: optimizeQuality" />
-          <span>Upgrade to Pro</span>
-        </a>
-        <actions>
-          <a href="placeholder.html" class="sidebarElem">
-            <img src="icons/book.svg" />
-            <span>Courses</span>
-          </a>
-          <a href="plugins.html" class="sidebarElem">
-            <img src="icons/plugin.svg" />
-            <span>Plugins</span>
-          </a>
-          <a href="placeholder.html" class="sidebarElem">
-            <img src="icons/bell.svg" />
-            <span>Notifications</span>
-          </a>
-        </actions>
-        <sidebarUserButton onclick="showContext('userMenu')">
-          <img src="generic.png" />
-          <vertical>
-            <b>generic</b>
-            <span>generic@gmail.com</span>
-          </vertical>
-          <img src="icons/selection.svg" />
-        </sidebarUserButton>
-      </bottom>
-    </sidebar>
-    <mainView id="community">
-      <top>
-        <img src="icons/people.svg" />
-        <span>Community</span>
-      </top>
-      <communityTags>
-        <communityTag class="active"> 🔥 Trending </communityTag>
-        <communityTag> 🎸 Music </communityTag>
-        <communityTag> 📣 Announcements </communityTag>
-        <communityTag> 👾 Development </communityTag>
-        <communityTag> 🕹️ Gaming </communityTag>
-        <communityTag> ✏️ Drawing </communityTag>
-        <communityTag> 📝 Writing </communityTag>
-        <searchWrapper>
-          <img src="icons/search.svg" />
-          <input type="text" placeholder="Search" />
-        </searchWrapper>
-      </communityTags>
-      <button class="postButton"><img src="icons/s-add.svg" /><span>Post</span></button>
-        <timeline>
-            <post>
+            <bottom class="sb">
+                <creditCounter>
+                    <top>
+                        <img src="icons/coins.svg" />
+                        <span>Starter Plan</span>
+                        <div style="flex: 1"></div>
+                        <a href="placeholder.html">Get More</a>
+                    </top>
+                    <bottom>
+                        <creditSlider></creditSlider>
+                        <span>1</span>
+                    </bottom>
+                </creditCounter>
+                <a href="placeholder.html" class="sidebarElem upgradeButton">
+                    <img
+                        src="icons/crown.svg"
+                        style="image-rendering: optimizeQuality"
+                    />
+                    <span>Upgrade to Pro</span>
+                </a>
+                <actions>
+                    <a href="placeholder.html" class="sidebarElem">
+                        <img src="icons/book.svg" />
+                        <span>Courses</span>
+                    </a>
+                    <a href="plugins.html" class="sidebarElem">
+                        <img src="icons/plugin.svg" />
+                        <span>Plugins</span>
+                    </a>
+                    <a href="placeholder.html" class="sidebarElem">
+                        <img src="icons/bell.svg" />
+                        <span>Notifications</span>
+                    </a>
+                </actions>
+                <sidebarUserButton onclick="showContext('userMenu')">
+                    <img src="generic.png" />
+                    <vertical>
+                        <b>generic</b>
+                        <span>generic@gmail.com</span>
+                    </vertical>
+                    <img src="icons/selection.svg" />
+                </sidebarUserButton>
+            </bottom>
+        </sidebar>
+        <mainView id="community">
+            <sticky>
                 <top>
-                    <img src="generic.png">
-                    <username>generic</username>
-                    <div style="width:6px;height:6px;border-radius:50%;background-color: white;flex-shrink:0"></div>
-                    <timestamp>1h ago</timestamp>
-                    <div style="flex: 1"></div>
-                    <postTag class="ai">AI Generated</postTag>
-                    <img src="icons/3dots.svg">
+                    <img src="icons/people.svg" />
+                    <span>Community</span>
                 </top>
-                <content class="img">
-                    <img src="generic.png">
-                </content>
-                <bottom>
-                    <img src="icons/share.svg">
-                    <div style="flex: 1"></div>
-                    <engagement>
-                        <img src="icons/heart.svg">
-                        <span>2137</span>
-                    </engagement>
-                    <engagement>
-                        <img src="icons/message.svg">
-                        <span>2137</span>
-                    </engagement>
-                </bottom>
-            </post>
-            <post>
-                <top>
-                    <img src="generic.png">
-                    <span>generic</span>
-                      <div style="width:6px;height:6px;border-radius:50%;background-color: white;flex-shrink:0"></div>
-                    <span>1h ago</span>
-                    <div style="flex: 1"></div>
-                    <postTag class="ai">AI Generated</postTag>
-                    <img src="icons/3dots.svg">
-                </top>
-                <content class="text">
-                    <h1>Post with text</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </content>
-                <bottom>
-                    <img src="icons/share.svg">
-                    <div style="flex: 1"></div>
-                    <engagement>
-                        <img src="icons/heart.svg">
-                        <span>2137</span>
-                    </engagement>
-                    <engagement>
-                        <img src="icons/message.svg">
-                        <span>2137</span>
-                    </engagement>
-                </bottom>
-            </post>
-            <post>
-                <top>
-                    <img src="generic.png">
-                    <span>generic</span>
-                      <div style="width:6px;height:6px;border-radius:50%;background-color: white;flex-shrink:0"></div>
-                    <span>1h ago</span>
-                    <div style="flex: 1"></div>
-                    <postTag class="ai">AI Generated</postTag>
-                    <img src="icons/3dots.svg">
-                </top>
-                <content class="text">
-                    <h1>Post with text</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </content>
-                <bottom>
-                    <img src="icons/share.svg">
-                    <div style="flex: 1"></div>
-                    <engagement>
-                        <img src="icons/heart.svg">
-                        <span>2137</span>
-                    </engagement>
-                    <engagement>
-                        <img src="icons/message.svg">
-                        <span>2137</span>
-                    </engagement>
-                </bottom>
-            </post>
-        </timeline>
-    </mainView>
-  </body>
-  <script>
-    function toggleSidebar() {
-      document.querySelector("sidebar").classList.toggle("collapsed");
-    }
-    function showContext(id) {
-      document.querySelector("#" + id).classList.toggle("hidden");
-    }
-  </script>
+                <communityTags>
+                    <communityTag class="active"> 🔥 Trending </communityTag>
+                    <communityTag> 🎸 Music </communityTag>
+                    <communityTag> 📣 Announcements </communityTag>
+                    <communityTag> 👾 Development </communityTag>
+                    <communityTag> 🕹️ Gaming </communityTag>
+                    <communityTag> ✏️ Drawing </communityTag>
+                    <communityTag> 📝 Writing </communityTag>
+                    <searchWrapper>
+                        <img src="icons/search.svg" />
+                        <input type="text" placeholder="Search" />
+                    </searchWrapper>
+                </communityTags>
+                <button class="postButton">
+                    <img src="icons/s-add.svg" /><span>Post</span>
+                </button>
+            </sticky>
+            <timeline>
+                <post>
+                    <top>
+                        <img src="generic.png" />
+                        <username>generic</username>
+                        <div
+                            style="
+                                width: 6px;
+                                height: 6px;
+                                border-radius: 50%;
+                                background-color: white;
+                                flex-shrink: 0;
+                            "
+                        ></div>
+                        <timestamp>1h ago</timestamp>
+                        <div style="flex: 1"></div>
+                        <postTag class="ai">AI Generated</postTag>
+                        <img src="icons/3dots.svg" />
+                    </top>
+                    <content class="img">
+                        <img src="generic.png" />
+                    </content>
+                    <bottom>
+                        <img src="icons/share.svg" />
+                        <div style="flex: 1"></div>
+                        <engagement>
+                            <img src="icons/heart.svg" />
+                            <span>2137</span>
+                        </engagement>
+                        <engagement>
+                            <img src="icons/message.svg" />
+                            <span>2137</span>
+                        </engagement>
+                    </bottom>
+                </post>
+                <post>
+                    <top>
+                        <img src="generic.png" />
+                        <span>generic</span>
+                        <div
+                            style="
+                                width: 6px;
+                                height: 6px;
+                                border-radius: 50%;
+                                background-color: white;
+                                flex-shrink: 0;
+                            "
+                        ></div>
+                        <span>1h ago</span>
+                        <div style="flex: 1"></div>
+                        <postTag class="ai">AI Generated</postTag>
+                        <img src="icons/3dots.svg" />
+                    </top>
+                    <content class="text">
+                        <h1>Post with text</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip
+                            ex ea commodo consequat. Duis aute irure dolor in
+                            reprehenderit in voluptate velit esse cillum dolore
+                            eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia
+                            deserunt mollit anim id est laborum.
+                        </p>
+                    </content>
+                    <bottom>
+                        <img src="icons/share.svg" />
+                        <div style="flex: 1"></div>
+                        <engagement>
+                            <img src="icons/heart.svg" />
+                            <span>2137</span>
+                        </engagement>
+                        <engagement>
+                            <img src="icons/message.svg" />
+                            <span>2137</span>
+                        </engagement>
+                    </bottom>
+                </post>
+                <post>
+                    <top>
+                        <img src="generic.png" />
+                        <span>generic</span>
+                        <div
+                            style="
+                                width: 6px;
+                                height: 6px;
+                                border-radius: 50%;
+                                background-color: white;
+                                flex-shrink: 0;
+                            "
+                        ></div>
+                        <span>1h ago</span>
+                        <div style="flex: 1"></div>
+                        <postTag class="ai">AI Generated</postTag>
+                        <img src="icons/3dots.svg" />
+                    </top>
+                    <content class="text">
+                        <h1>Post with text</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip
+                            ex ea commodo consequat. Duis aute irure dolor in
+                            reprehenderit in voluptate velit esse cillum dolore
+                            eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia
+                            deserunt mollit anim id est laborum.
+                        </p>
+                    </content>
+                    <bottom>
+                        <img src="icons/share.svg" />
+                        <div style="flex: 1"></div>
+                        <engagement>
+                            <img src="icons/heart.svg" />
+                            <span>2137</span>
+                        </engagement>
+                        <engagement>
+                            <img src="icons/message.svg" />
+                            <span>2137</span>
+                        </engagement>
+                    </bottom>
+                </post>
+            </timeline>
+        </mainView>
+    </body>
+    <script>
+        function toggleSidebar() {
+            document.querySelector("sidebar").classList.toggle("collapsed");
+        }
+        function showContext(id) {
+            document.querySelector("#" + id).classList.toggle("hidden");
+        }
+    </script>
 </html>
