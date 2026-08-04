@@ -48,59 +48,23 @@
                     </button>
                 </sticky>
                 <timeline>
-                    <post>
-                        <top>
-                            <img src="generic.png" />
-                            <username>generic</username>
-                            <div
-                                style="
-                                    width: 6px;
-                                    height: 6px;
-                                    border-radius: 50%;
-                                    background-color: white;
-                                    flex-shrink: 0;
-                                "
-                            ></div>
-                            <timestamp>1h ago</timestamp>
-                            <div style="flex: 1"></div>
-                            <postTag class="ai">AI Generated</postTag>
-                            <img src="icons/3dots.svg" />
-                        </top>
-                        <content class="img">
+                    <slot template="templates/post.html">
+                        <img slot="avatar" src="generic.png" />
+                        <username slot="username">generic</username>
+                        <timestamp slot="timestamp">1h ago</timestamp>
+                        <postTag slot="tag" class="ai">AI Generated</postTag>
+                        <content slot="content" class="img">
                             <img src="generic.png" />
                         </content>
-                        <bottom>
-                            <img src="icons/share.svg" />
-                            <div style="flex: 1"></div>
-                            <engagement>
-                                <img src="icons/heart.svg" />
-                                <span>2137</span>
-                            </engagement>
-                            <engagement>
-                                <img src="icons/message.svg" />
-                                <span>2137</span>
-                            </engagement>
-                        </bottom>
-                    </post>
-                    <post>
-                        <top>
-                            <img src="generic.png" />
-                            <span>generic</span>
-                            <div
-                                style="
-                                    width: 6px;
-                                    height: 6px;
-                                    border-radius: 50%;
-                                    background-color: white;
-                                    flex-shrink: 0;
-                                "
-                            ></div>
-                            <span>1h ago</span>
-                            <div style="flex: 1"></div>
-                            <postTag class="ai">AI Generated</postTag>
-                            <img src="icons/3dots.svg" />
-                        </top>
-                        <content class="text">
+                        <span slot="likes">2137</span>
+                        <span slot="comments">2137</span>
+                    </slot>
+                    <slot template="templates/post.html">
+                        <img slot="avatar" src="generic.png" />
+                        <username slot="username">generic</username>
+                        <timestamp slot="timestamp">1h ago</timestamp>
+                        <postTag slot="tag" class="ai">AI Generated</postTag>
+                        <content slot="content" class="text">
                             <h1>Post with text</h1>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur
@@ -115,38 +79,15 @@
                                 qui officia deserunt mollit anim id est laborum.
                             </p>
                         </content>
-                        <bottom>
-                            <img src="icons/share.svg" />
-                            <div style="flex: 1"></div>
-                            <engagement>
-                                <img src="icons/heart.svg" />
-                                <span>2137</span>
-                            </engagement>
-                            <engagement>
-                                <img src="icons/message.svg" />
-                                <span>2137</span>
-                            </engagement>
-                        </bottom>
-                    </post>
-                    <post>
-                        <top>
-                            <img src="generic.png" />
-                            <span>generic</span>
-                            <div
-                                style="
-                                    width: 6px;
-                                    height: 6px;
-                                    border-radius: 50%;
-                                    background-color: white;
-                                    flex-shrink: 0;
-                                "
-                            ></div>
-                            <span>1h ago</span>
-                            <div style="flex: 1"></div>
-                            <postTag class="ai">AI Generated</postTag>
-                            <img src="icons/3dots.svg" />
-                        </top>
-                        <content class="text">
+                        <span slot="likes">2137</span>
+                        <span slot="comments">2137</span>
+                    </slot>
+                    <slot template="templates/post.html">
+                        <img slot="avatar" src="generic.png" />
+                        <username slot="username">generic</username>
+                        <timestamp slot="timestamp">1h ago</timestamp>
+                        <postTag slot="tag" class="ai">AI Generated</postTag>
+                        <content slot="content" class="text">
                             <h1>Post with text</h1>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur
@@ -161,19 +102,9 @@
                                 qui officia deserunt mollit anim id est laborum.
                             </p>
                         </content>
-                        <bottom>
-                            <img src="icons/share.svg" />
-                            <div style="flex: 1"></div>
-                            <engagement>
-                                <img src="icons/heart.svg" />
-                                <span>2137</span>
-                            </engagement>
-                            <engagement>
-                                <img src="icons/message.svg" />
-                                <span>2137</span>
-                            </engagement>
-                        </bottom>
-                    </post>
+                        <span slot="likes">2137</span>
+                        <span slot="comments">2137</span>
+                    </slot>
                 </timeline>
                 <userCtx>
                     <banner>
@@ -187,21 +118,275 @@
                         <button class="profileButton active">
                             <b>Follow</b><span>2K</span>
                         </button>
-                        <button class="profileButton">
+                        <button class="profileButton" onclick="openUserPopup()">
                             <b>View Profile</b>
                         </button>
                     </buttons>
                 </userCtx>
+
+                <popupContainer class="hidden">
+                    <userPopup class="hidden">
+                        <leftSide>
+                            <banner>
+                                <button
+                                    class="closeButton"
+                                    onclick="closeUserPopup()"
+                                >
+                                    <img src="icons/x.svg" />
+                                </button>
+                                <img src="generic.png" />
+                            </banner>
+                            <header>
+                                <doxx>
+                                    <b>generic</b>
+                                    <span>generic@gmail.com</span>
+                                </doxx>
+                                <bigNumber>
+                                    <b>140K</b>
+                                    <span>Followers</span>
+                                </bigNumber>
+                                <bigNumber>
+                                    <b>3K</b>
+                                    <span>Likes</span>
+                                </bigNumber>
+                                <button class="postButton follow">
+                                    <b>Follow</b>
+                                </button>
+                            </header>
+                            <bio>
+                                <header>About Me</header>
+                                <content> here's some bio or whatever </content>
+                            </bio>
+                            <games>
+                                <header>Games</header>
+                                <gamesGrid>
+                                    <game>
+                                        <b>Game Title</b>
+                                        <span>By ForgeGUI</span>
+                                    </game>
+                                    <game>
+                                        <b>Game Title</b>
+                                        <span>By ForgeGUI</span>
+                                    </game>
+                                    <game>
+                                        <b>Game Title</b>
+                                        <span>By ForgeGUI</span>
+                                    </game>
+                                    <game>
+                                        <b>Game Title</b>
+                                        <span>By ForgeGUI</span>
+                                    </game>
+                                    <game>
+                                        <b>Game Title</b>
+                                        <span>By ForgeGUI</span>
+                                    </game>
+                                    <game>
+                                        <b>Game Title</b>
+                                        <span>By ForgeGUI</span>
+                                    </game>
+                                    <game>
+                                        <b>Game Title</b>
+                                        <span>By ForgeGUI</span>
+                                    </game>
+                                    <game>
+                                        <b>Game Title</b>
+                                        <span>By ForgeGUI</span>
+                                    </game>
+                                    <game>
+                                        <b>Game Title</b>
+                                        <span>By ForgeGUI</span>
+                                    </game>
+                                </gamesGrid>
+                            </games>
+                        </leftSide>
+                        <rightSide>
+                            <slot template="templates/post.html">
+                                <img slot="avatar" src="generic.png" />
+                                <username slot="username">generic</username>
+                                <timestamp slot="timestamp">1h ago</timestamp>
+                                <postTag slot="tag" class="ai"
+                                    >AI Generated</postTag
+                                >
+                                <content slot="content" class="img">
+                                    <img src="generic.png" />
+                                </content>
+                                <span slot="likes">2137</span>
+                                <span slot="comments">2137</span>
+                            </slot>
+                            <slot template="templates/post.html">
+                                <img slot="avatar" src="generic.png" />
+                                <username slot="username">generic</username>
+                                <timestamp slot="timestamp">1h ago</timestamp>
+                                <postTag slot="tag" class="ai"
+                                    >AI Generated</postTag
+                                >
+                                <content slot="content" class="text">
+                                    <h1>Post with text</h1>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna
+                                        aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris
+                                        nisi ut aliquip ex ea commodo consequat.
+                                        Duis aute irure dolor in reprehenderit
+                                        in voluptate velit esse cillum dolore eu
+                                        fugiat nulla pariatur. Excepteur sint
+                                        occaecat cupidatat non proident, sunt in
+                                        culpa qui officia deserunt mollit anim
+                                        id est laborum.
+                                    </p>
+                                </content>
+                                <span slot="likes">2137</span>
+                                <span slot="comments">2137</span>
+                            </slot>
+                            <slot template="templates/post.html">
+                                <img slot="avatar" src="generic.png" />
+                                <username slot="username">generic</username>
+                                <timestamp slot="timestamp">1h ago</timestamp>
+                                <postTag slot="tag" class="ai"
+                                    >AI Generated</postTag
+                                >
+                                <content slot="content" class="text">
+                                    <h1>Post with text</h1>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna
+                                        aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris
+                                        nisi ut aliquip ex ea commodo consequat.
+                                        Duis aute irure dolor in reprehenderit
+                                        in voluptate velit esse cillum dolore eu
+                                        fugiat nulla pariatur. Excepteur sint
+                                        occaecat cupidatat non proident, sunt in
+                                        culpa qui officia deserunt mollit anim
+                                        id est laborum.
+                                    </p>
+                                </content>
+                                <span slot="likes">2137</span>
+                                <span slot="comments">2137</span>
+                            </slot>
+                        </rightSide>
+                    </userPopup>
+                    <newPostPopup class="hidden">
+                        <top>
+                            <img src="generic.png" />
+                            <vertical>
+                                <b>generic</b>
+                                <span>@generic</span>
+                            </vertical>
+                            <button
+                                class="closeButton"
+                                onclick="closeNewPostPopup()"
+                            >
+                                <img src="icons/x.svg" />
+                            </button>
+                        </top>
+                        <form>
+                            <div class="postField">
+                                <input
+                                    type="text"
+                                    placeholder="Title"
+                                    maxlength="50"
+                                />
+                                <span class="charCounter">0/50</span>
+                            </div>
+                            <div class="postField">
+                                <textarea
+                                    placeholder="Text"
+                                    maxlength="1000"
+                                ></textarea>
+                                <span class="charCounter">0/1000</span>
+                            </div>
+                        </form>
+                        <mediaSlots>
+                            <header>
+                                <img src="icons/picture.svg" />
+                                <span>Media</span>
+                                <span>Up to 4 images</span>
+                            </header>
+                            <mediaCarousel>
+                                <button class="addMediaButton">
+                                    <img src="icons/add.svg" />
+                                </button>
+                                <mediaPlaceholder></mediaPlaceholder>
+                                <mediaPlaceholder></mediaPlaceholder>
+                            </mediaCarousel>
+                        </mediaSlots>
+                        <button class="postButton">
+                            Upload Post
+                            <img src="icons/send.svg" />
+                        </button>
+                    </newPostPopup>
+                </popupContainer>
             </mainView>
         </slot>
         <script>
+            var popupContainer = document.querySelector("popupContainer");
+            var newPostPopup = document.querySelector("newPostPopup");
+            var userPopup = document.querySelector("userPopup");
+
+            function openNewPostPopup() {
+                popupContainer.classList.remove("hidden");
+                newPostPopup.classList.remove("hidden");
+            }
+
+            function closeNewPostPopup() {
+                newPostPopup.classList.add("hidden");
+                popupContainer.classList.add("hidden");
+            }
+
+            function openUserPopup() {
+                popupContainer.classList.remove("hidden");
+                userPopup.classList.remove("hidden");
+            }
+
+            function closeUserPopup() {
+                userPopup.classList.add("hidden");
+                popupContainer.classList.add("hidden");
+            }
+
+            document
+                .querySelector("sticky .postButton")
+                .addEventListener("click", openNewPostPopup);
+
+            document
+                .querySelector("newPostPopup .closeButton")
+                .addEventListener("click", closeNewPostPopup);
+
+            popupContainer.addEventListener("click", function (e) {
+                if (e.target === popupContainer) {
+                    closeNewPostPopup();
+                    closeUserPopup();
+                }
+            });
+
+            // Char counters for new post form
+            document
+                .querySelector("newPostPopup form")
+                .addEventListener("input", function (e) {
+                    var el = e.target;
+                    if (!el.maxLength || el.maxLength === -1) return;
+                    var counter = el
+                        .closest(".postField")
+                        .querySelector(".charCounter");
+                    if (counter)
+                        counter.textContent =
+                            el.value.length + "/" + el.maxLength;
+                });
+
             document.addEventListener("click", function (e) {
                 var ctx = document.querySelector("userCtx");
                 if (!ctx) return;
 
                 // PFP click: the first img inside post > top
                 var postTop = e.target.closest("post > top");
-                if (postTop && e.target.tagName === "IMG" && e.target === postTop.querySelector("img")) {
+                if (
+                    postTop &&
+                    e.target.tagName === "IMG" &&
+                    e.target === postTop.querySelector("img")
+                ) {
                     e.stopPropagation();
                     var rect = e.target.getBoundingClientRect();
                     // Align top of menu with the PFP, 10px gap to its left

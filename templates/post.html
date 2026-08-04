@@ -1,0 +1,24 @@
+<post>
+    <top>
+        <slot name="avatar"><img src="generic.png" /></slot>
+        <slot name="username"><username>User</username></slot>
+        <div style="width:6px;height:6px;border-radius:50%;background:white;flex-shrink:0"></div>
+        <slot name="timestamp"><timestamp>now</timestamp></slot>
+        <div style="flex:1"></div>
+        <slot name="tag"></slot>
+        <img src="icons/3dots.svg" />
+    </top>
+    <slot name="content"></slot>
+    <bottom>
+        <img src="icons/share.svg" />
+        <div style="flex:1"></div>
+        <engagement>
+            <img src="icons/heart.svg" />
+            <slot name="likes"><span>0</span></slot>
+        </engagement>
+        <engagement>
+            <img src="icons/message.svg" />
+            <slot name="comments"><span>0</span></slot>
+        </engagement>
+    </bottom>
+</post>
