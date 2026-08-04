@@ -48,7 +48,7 @@
         page.style.transform =
           "perspective(" + persp + "px)" +
           " translateX(" + (offset * w * 1.05) + "px)" +
-          " rotateY(" + (offset * -120) + "deg)";
+          " rotateY(" + (offset * -60) + "deg)";
       });
       syncSteps(index, pages.length);
     }
