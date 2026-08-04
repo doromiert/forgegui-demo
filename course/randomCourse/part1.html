@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+        <link rel="stylesheet" href="base.css" />
+        <link rel="stylesheet" href="plans.css" />
+        <script src="site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
+
+        <style></style>
+    </head>
+
+    <body class="chat">
+        <slot template="templates/course-sidebar.html"> </slot>
+        <mainView slot="content" class="courses">
+            <top>
+                <path>
+                    <span>Course Title</span>
+                    <img src="icons/arrow.svg" style="rotate: -90deg" />
+                    <b>Chapter 1</b>
+                </path>
+                <button class="topButton">
+                    <img src="icons/ai.svg" />
+                    AI Summary
+                </button>
+            </top>
+            <coursePlayer>
+                <button class="playButton">
+                    <img src="icons/Play.svg" />
+                </button>
+                <h1>Part 1</h1>
+                <h2>Course name, Chapter 1</h2>
+                <span>Click to begin course video.</span>
+            </coursePlayer>
+            <bottom>
+                <button class="courseSwitchButton">
+                    <img src="icons/arrow.svg" style="rotate: 90deg" />
+                </button>
+                <completionBar>
+                    <meat> <b>25%</b><span>Complete</span> </meat>
+                </completionBar>
+                <button class="courseSwitchButton active">
+                    <img src="icons/arrow.svg" style="rotate: -90deg" />
+                </button>
+            </bottom>
+        </mainView>
+    </body>
+</html>

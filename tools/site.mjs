@@ -195,6 +195,30 @@ function projectContent(template, projected) {
   return output;
 }
 
+function addClassesToRoot(html, extraClasses) {
+  const extra = extraClasses.trim();
+  if (!extra) return html;
+  // Match first opening tag, handling quoted attribute values that may contain spaces
+  return html.replace(
+    /(<[A-Za-z][\w:-]*)(\s(?:[^"'>]|"[^"]*"|'[^']*')*)?>/,
+    function (match, tagOpen, attrs) {
+      attrs = attrs || "";
+      if (/\bclass\s*=\s*(?:"[^"]*"|'[^']*')/i.test(attrs)) {
+        return (
+          tagOpen +
+          attrs.replace(
+            /(\bclass\s*=\s*)(["'])(.*?)\2/i,
+            (_, pre, q, existing) =>
+              `${pre}${q}${[existing, extra].filter(Boolean).join(" ")}${q}`,
+          ) +
+          ">"
+        );
+      }
+      return `${tagOpen}${attrs} class="${extra}">`;
+    },
+  );
+}
+
 function resolveTemplatePath(templatePath) {
   const file = resolve(ROOT, templatePath);
   const relativePath = relative(TEMPLATE_DIRECTORY, file);
@@ -233,10 +257,14 @@ async function expandTemplates(html, chain = []) {
       source,
       chain.concat(templateFile),
     );
-    const replacement = await expandTemplates(
+    let replacement = await expandTemplates(
       projectContent(expandedTemplate, projected),
       chain.concat(templateFile),
     );
+
+    if (slot.attributes.class) {
+      replacement = addClassesToRoot(replacement, slot.attributes.class);
+    }
 
     output = output.slice(0, slot.start) + replacement + output.slice(slot.end);
   }
@@ -244,15 +272,30 @@ async function expandTemplates(html, chain = []) {
   return output;
 }
 
-function markActiveRoute(html, pageName) {
+function injectForgePath(html, forgePath) {
+  const meta = `<meta name="forge-path" content="${forgePath}">`;
+  if (html.includes("</head>")) {
+    return html.replace("</head>", `  ${meta}\n</head>`);
+  }
+  return html;
+}
+
+function markActiveRoute(html, pagePath) {
   let marked = false;
+  const pageName = pagePath.split("/").pop();
 
   return html.replace(
     /<a\b[^>]*\bdata-route\s*=\s*(?:"[^"]*"|'[^']*')[^>]*>/gi,
     function (tag) {
       const attributes = parseAttributes(tag);
-      const routes = (attributes["data-route"] || "").split(",");
-      const active = !marked && routes.includes(pageName);
+      const routes = (attributes["data-route"] || "").split(",").map((r) => r.trim());
+      const active =
+        !marked &&
+        routes.some((route) =>
+          route.endsWith("/")
+            ? pagePath.startsWith(route)
+            : route === pagePath || (pagePath === pageName && route === pageName),
+        );
       let output = tag.replace(/\s+data-route\s*=\s*(?:"[^"]*"|'[^']*')/i, "");
 
       if (active) {
@@ -276,10 +319,30 @@ function markActiveRoute(html, pageName) {
   );
 }
 
+function rewritePaths(html, depth) {
+  if (depth === 0) return html;
+  const prefix = "../".repeat(depth);
+
+  return html.replace(
+    /\b(src|href|action)\s*=\s*(["'])([^"']*)\2/gi,
+    function (match, attr, quote, value) {
+      // Leave: protocol URLs (http:, data:, etc.), root-relative (/), fragments (#), empty
+      if (!value || /^(?:[a-z][a-z0-9+\-.]*:|\/|#)/i.test(value)) {
+        return match;
+      }
+      return `${attr}=${quote}${prefix}${value}${quote}`;
+    },
+  );
+}
+
 async function renderPage(file) {
   const source = await readFile(file, "utf8");
   const rendered = await expandTemplates(source);
-  return markActiveRoute(rendered, file.split(sep).pop());
+  const forgePath = relative(ROOT, file).replaceAll(sep, "/");
+  const withMeta = injectForgePath(rendered, forgePath);
+  const marked = markActiveRoute(withMeta, forgePath);
+  const depth = forgePath.split("/").length - 1;
+  return rewritePaths(marked, depth);
 }
 
 function injectDevReload(html) {

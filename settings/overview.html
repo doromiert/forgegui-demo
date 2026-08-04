@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI — Settings</title>
+        <link rel="stylesheet" href="base.css" />
+        <script src="site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="color-scheme" content="dark" />
+        <style></style>
+    </head>
+
+    <body class="chat">
+        <slot template="templates/sidebar.html" class="collapsed"></slot>
+        <mainView class="settings">
+            <slot template="templates/settings-sidebar.html"></slot>
+            <settingsView>
+                <banner>
+                    <span class="bannerEditHint"
+                        ><img src="icons/pencil.svg" alt=""
+                    /></span>
+                    <userPFP>
+                        <img src="generic.png" alt="" />
+                        <span class="pfpEditHint"
+                            ><img src="icons/pencil.svg" alt=""
+                        /></span>
+                    </userPFP>
+                </banner>
+
+                <verifiedCTA>
+                    <img src="icons/user-mark.svg" alt="" />
+                    Get Verified
+                </verifiedCTA>
+                <doxx>
+                    <b>Generic</b>
+                    <span>generic@gmail.com</span>
+                </doxx>
+                <button class="editProfileButton">Edit Public Profile</button>
+
+                <slot template="templates/listbox.html">
+                    <span slot="header">My Account</span>
+                    <slot template="templates/listbox-row.html">
+                        <span slot="label">Name</span>
+                        <b slot="value">Generic</b>
+                    </slot>
+                    <slot template="templates/listbox-row.html">
+                        <span slot="label">Username</span>
+                        <b slot="value">@generic</b>
+                    </slot>
+                    <slot template="templates/listbox-row.html">
+                        <span slot="label">Email Address</span>
+                        <b slot="value">generic@gmail.com</b>
+                    </slot>
+                    <slot template="templates/listbox-row.html">
+                        <span slot="label">Security</span>
+                        <b slot="value">Password &amp; Email Verification</b>
+                    </slot>
+                </slot>
+
+                <slot template="templates/listbox.html">
+                    <span slot="header">Connections</span>
+                    <slot template="templates/listbox-row.html">
+                        <span slot="label">Roblox Account</span>
+                        <b slot="value">Not Linked</b>
+                        <button slot="action" class="listboxAction">
+                            Link Roblox Account
+                        </button>
+                    </slot>
+                </slot>
+
+                <slot template="templates/listbox.html">
+                    <span slot="header">Account Management</span>
+                    <slot template="templates/listbox-row.html" class="reversed">
+                        <span slot="label">Log out of all devices</span>
+                        <b slot="value">Log Out</b>
+                        <button slot="action" class="listboxAction">
+                            Log Out Now
+                        </button>
+                    </slot>
+                    <slot template="templates/listbox-row.html" class="reversed">
+                        <span slot="label">This action is permanent.</span>
+                        <b slot="value">Delete my Account</b>
+                        <button slot="action" class="listboxAction destructive">
+                            Delete my Account
+                        </button>
+                    </slot>
+                </slot>
+            </settingsView>
+        </mainView>
+    </body>
+</html>

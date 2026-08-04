@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+        <link rel="stylesheet" href="base.css" />
+        <link rel="stylesheet" href="plans.css" />
+        <script src="site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
+
+        <style></style>
+    </head>
+
+    <body class="chat">
+        <slot template="templates/app-shell.html">
+            <mainView slot="content" class="courses">
+                <banner>
+                    <h1>Courses</h1>
+                    <span
+                        >Learn how to build popular games using ForgeGUI.<br />
+                        Exclusively taught by the <em class="goat">GOAT</em>, Guilio Greco.</span
+                    >
+
+                    <img src="course-graph.svg" />
+                </banner>
+                <courseHeader> Available Courses </courseHeader>
+                <courseGrid>
+                    <slot template="templates/course.html"> </slot>
+                    <slot template="templates/course.html"> </slot>
+                    <slot template="templates/course.html"> </slot>
+                    <slot template="templates/course.html"> </slot>
+                    <slot template="templates/course.html"> </slot>
+                    <slot template="templates/course.html"> </slot>
+                    <slot template="templates/course.html"> </slot>
+                    <slot template="templates/course.html"> </slot>
+                    <slot template="templates/course.html"> </slot>
+                </courseGrid>
+                <completionBarBG>
+                    <completionBar>
+                        <meat> <b>25%</b><span>Complete</span> </meat>
+                    </completionBar>
+                </completionBarBG>
+            </mainView>
+        </slot>
+    </body>
+</html>

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ForgeGUI</title>
+    <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+    <link rel="stylesheet" href="base.css" />
+    <script src="site.js" defer></script>
+    <meta name="theme-color" content="#0D0D0D" />
+    <meta name="description" content="ForgeGUI - Create anything with AI" />
+    <meta property="og:title" content="ForgeGUI" />
+    <meta property="og:description" content="Powerful AI tool for creators" />
+    <meta property="og:type" content="website" />
+    <meta name="color-scheme" content="dark" />
+
+    <style></style>
+  </head>
+
+  <body class="chat">
+    <slot template="templates/app-shell.html">
+      <mainView slot="content">
+        <chatWindow>
+          <span><b>544,200</b> users have created assets today.</span>
+          <h1>Let's create a game, generic</h1>
+          <slot template="templates/chatbox.html"></slot>
+          <suggestionBar>
+            <suggestion>
+              <img src="icons/placeholder.svg" />
+              Suggestion
+            </suggestion>
+            <suggestion>
+              <img src="icons/placeholder.svg" />
+              Suggestion
+            </suggestion>
+            <suggestion>
+              <img src="icons/placeholder.svg" />
+              Suggestion
+            </suggestion>
+            <suggestion>
+              <img src="icons/placeholder.svg" />
+              Suggestion
+            </suggestion>
+            <suggestion>
+              <img src="icons/placeholder.svg" />
+              Suggestion
+            </suggestion>
+            <suggestion>
+              <img src="icons/placeholder.svg" />
+              Suggestion
+            </suggestion>
+          </suggestionBar>
+        </chatWindow>
+        <gallery>
+          <galleryTop><span>THE</span><b>FORGE</b></galleryTop>
+
+          <galleryLine>
+            <galleryTop>
+              <div>
+                <img src="icons/s-3d.svg" />
+                <span>Quick Tools</span>
+              </div>
+              <horizButtons>
+                <button onclick="scrollGallery(this, -1)">
+                  <img src="icons/arrow.svg" style="rotate: 90deg" />
+                </button>
+                <button onclick="scrollGallery(this, 1)">
+                  <img src="icons/arrow.svg" style="rotate: 270deg" />
+                </button>
+              </horizButtons>
+            </galleryTop>
+            <galleryCarousel>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+            </galleryCarousel>
+          </galleryLine>
+
+          <galleryFeatured>
+            <img src="generic.png" />
+            <featuredInfo>
+              <cardInfo>
+                <b>Placeholder Title</b>
+                <span>Placeholder subtext cuz why not</span>
+              </cardInfo>
+              <button
+                class="upgradeButton"
+                style="width: auto; padding: 12px 20px"
+              >
+                <span style="font-size: 18px">Try Now</span>
+              </button>
+            </featuredInfo>
+          </galleryFeatured>
+
+          <galleryLine>
+            <galleryTop>
+              <div>
+                <img src="icons/picture.svg" />
+                <span>Other Tools</span>
+              </div>
+              <horizButtons>
+                <button onclick="scrollGallery(this, -1)">
+                  <img src="icons/arrow.svg" style="rotate: 90deg" />
+                </button>
+                <button onclick="scrollGallery(this, 1)">
+                  <img src="icons/arrow.svg" style="rotate: 270deg" />
+                </button>
+              </horizButtons>
+            </galleryTop>
+            <galleryCarousel>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+              <galleryCard>
+                <img src="generic.png" />
+                <cardInfo>
+                  <b>Placeholder Title</b>
+                  <span>Placeholder subtext cuz why not</span>
+                </cardInfo>
+              </galleryCard>
+            </galleryCarousel>
+          </galleryLine>
+        </gallery>
+      </mainView>
+    </slot>
+  </body>
+  <script>
+    function scrollGallery(btn, dir) {
+      const carousel = btn
+        .closest("galleryLine")
+        .querySelector("galleryCarousel");
+      carousel.scrollBy({ left: dir * 440, behavior: "smooth" });
+    }
+  </script>
+</html>
