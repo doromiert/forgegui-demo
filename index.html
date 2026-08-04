@@ -168,10 +168,47 @@
             <carouselPage id="page4">
                 <onboardingHeader>
                     <h1>Let's get you connected!</h1>
-                    <span>Follow 3 accounts.</span>
+                    <span>Before you can continue, follow <strong>3</strong> accounts.</span>
                 </onboardingHeader>
-                placeholder because this is retarded
-                <button onclick="carousel.next()">skip</button>
+                <followList>
+                    <followItem>
+                        <div class="followAvatar">
+                            <img src="generic.png" />
+                        </div>
+                        <div class="followInfo">
+                            <strong>Account Name</strong>
+                            <span>@username</span>
+                        </div>
+                        <button class="followBtn" onclick="toggleFollow(this)">Not Followed</button>
+                    </followItem>
+                    <followItem>
+                        <div class="followAvatar">
+                            <img src="generic.png" />
+                        </div>
+                        <div class="followInfo">
+                            <strong>Account Name</strong>
+                            <span>@username</span>
+                        </div>
+                        <button class="followBtn" onclick="toggleFollow(this)">Not Followed</button>
+                    </followItem>
+                    <followItem>
+                        <div class="followAvatar">
+                            <img src="generic.png" />
+                        </div>
+                        <div class="followInfo">
+                            <strong>Account Name</strong>
+                            <span>@username</span>
+                        </div>
+                        <button class="followBtn" onclick="toggleFollow(this)">Not Followed</button>
+                    </followItem>
+
+                </followList>
+                <button class="postButton" onclick="followAll()">
+                    <img src="icons/People.svg">
+                    <span>
+                        Follow All 3
+                    </span>
+                </button>
             </carouselPage>
             <carouselPage id="page5">
                 <onboardingHeader>
@@ -347,6 +384,23 @@
                     btn.style.transform = "";
                 });
             });
+
+            function toggleFollow(btn) {
+                btn.classList.toggle("is-followed");
+                btn.textContent = btn.classList.contains("is-followed") ? "Following" : "Not Followed";
+                var allFollowed = Array.from(
+                    document.getElementById("page4").querySelectorAll(".followBtn")
+                ).every((b) => b.classList.contains("is-followed"));
+                if (allFollowed) carousel.next();
+            }
+
+            function followAll() {
+                document.getElementById("page4").querySelectorAll(".followBtn").forEach((btn) => {
+                    btn.classList.add("is-followed");
+                    btn.textContent = "Following";
+                });
+                carousel.next();
+            }
         </script>
     </body>
 </html>

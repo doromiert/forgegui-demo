@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+        <link rel="stylesheet" href="base.css" />
+        <script src="site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
+
+        <style></style>
+    </head>
+
+    <body class="chat">
+        <slot template="templates/app-shell.html">
+            <mainView slot="content" class="leaderboard">
+                <fomo> <b>57</b><span>Days Left</span> </fomo>
+                <h1>Leaderboard</h1>
+                <leaderboard>
+                    <leaderboardheader>Top 4</leaderboardheader>
+                    <leaderboardPosition id="n1">
+                        <badge class="n1">1st</badge>
+                        <img src="generic.png" />
+                        <username>Generic</username>
+                        <img src="trophy.svg" />
+                        <likesCount>49K Likes</likesCount>
+                        <playsCount><b>100B+</b> Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n2">
+                        <badge>2nd</badge>
+                        <img src="generic.png" />
+                        <username>Generic</username>
+                        <img src="trophy.svg" />
+                        <likesCount>49K Likes</likesCount>
+                        <playsCount><b>100B+</b> Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n3">
+                        <badge>3rd</badge>
+                        <img src="generic.png" />
+                        <username>Generic</username>
+                        <img src="trophy.svg" />
+                        <likesCount>49K Likes</likesCount>
+                        <playsCount><b>100B+</b> Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n4">
+                        <badge>4th</badge>
+                        <img src="generic.png" />
+                        <username>Generic</username>
+                        <img src="trophy.svg" />
+                        <likesCount>49K Likes</likesCount>
+                        <playsCount><b>100B+</b> Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardheader class="more-header">More...</leaderboardheader>
+                    <leaderboardPosition id="n5" class="extra-row">
+                        <badge>5th</badge>
+                        <img src="generic.png" />
+                        <username>Username</username>
+                        <img src="trophy.svg" />
+                        <likesCount>50K Likes</likesCount>
+                        <playsCount><b>105B+</b> Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n6" class="extra-row">
+                        <badge>6th</badge>
+                        <img src="generic.png" />
+                        <username>Username</username>
+                        <img src="trophy.svg" />
+                        <likesCount>52K Likes</likesCount>
+                        <playsCount>110B+ Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n7" class="extra-row">
+                        <badge>7th</badge>
+                        <img src="generic.png" />
+                        <username>Username</username>
+                        <img src="trophy.svg" />
+                        <likesCount>48K Likes</likesCount>
+                        <playsCount>95B+ Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n8" class="extra-row">
+                        <badge>8th</badge>
+                        <img src="generic.png" />
+                        <username>Username</username>
+                        <img src="trophy.svg" />
+                        <likesCount>51K Likes</likesCount>
+                        <playsCount>102B+ Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n9" class="extra-row">
+                        <badge>9th</badge>
+                        <img src="generic.png" />
+                        <username>Username</username>
+                        <likesCount>53K Likes</likesCount>
+                        <playsCount>108B+ Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n10" class="extra-row">
+                        <badge>10th</badge>
+                        <img src="generic.png" />
+                        <username>Username</username>
+                        <likesCount>54K Likes</likesCount>
+                        <playsCount>115B+ Plays</playsCount>
+                    </leaderboardPosition>
+                </leaderboard>
+                <button class="showMoreButton" onclick="toggleLeaderboard(this)">Show More...</button>
+                <div class="leaderboardBottom">
+                    <leaderboardPosition id="you">
+                        <badge>67th</badge>
+                        <img src="generic.png" />
+                        <username>YOU</username>
+                        <likesCount>49K Likes</likesCount>
+                        <playsCount><b>100B+</b> Plays</playsCount>
+                    </leaderboardPosition>
+                    <span>50M Plays to 1st place!</span>
+                </div>
+                <physicalBox>
+                    <img src="trophy.svg" />
+                    <h1>Physical Trophy Winners</h1>
+                    <p>
+                        Every month, 10 users are selected for a ForgeGUI
+                        trophy. You can earn one by continuing to contribute to
+                        the community and getting plays.
+                    </p>
+                    <winners>
+                        <winner>
+                            <img src="generic.png" />
+                            <span>Username</span>
+                            <trophyType>GOLD</trophyType>
+                        </winner>
+                        <winner>
+                            <img src="generic.png" />
+                            <span>Username</span>
+                            <trophyType>SILVER</trophyType>
+                        </winner>
+                        <winner>
+                            <img src="generic.png" />
+                            <span>Username</span>
+                            <trophyType>BRONZE</trophyType>
+                        </winner>
+                    </winners>
+                </physicalBox>
+            </mainView>
+        </slot>
+        <script>
+            function toggleLeaderboard(btn) {
+                var mv = document.querySelector("mainView.leaderboard");
+                mv.classList.toggle("is-expanded");
+                var expanded = mv.classList.contains("is-expanded");
+                btn.textContent = expanded ? "Show Less" : "Show More...";
+                if (expanded) mv.querySelector("leaderboard").scrollTop = 0;
+            }
+        </script>
+    </body>
+</html>
