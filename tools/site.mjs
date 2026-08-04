@@ -405,30 +405,22 @@ async function copyDirectory(source, destination) {
   }
 }
 
-async function build(destinationArgument = "dist") {
-  const destination = resolve(process.cwd(), destinationArgument);
-
-  if (destination === ROOT) {
-    throw new Error("Build destination cannot be the project root");
-  }
-
-  await rm(destination, { force: true, recursive: true });
-  await mkdir(destination, { recursive: true });
-
-  const entries = await readdir(ROOT, { withFileTypes: true });
+async function buildDirectory(sourceDir, destinationDir, ignoredNames = new Set()) {
+  await mkdir(destinationDir, { recursive: true });
+  const entries = await readdir(sourceDir, { withFileTypes: true });
 
   for (const entry of entries) {
-    const source = join(ROOT, entry.name);
-    const target = join(destination, entry.name);
+    if (ignoredNames.has(entry.name)) continue;
+
+    const source = join(sourceDir, entry.name);
+    const target = join(destinationDir, entry.name);
 
     if (entry.isDirectory()) {
-      if (entry.name === "icons") await copyDirectory(source, target);
+      await buildDirectory(source, target);
       continue;
     }
 
-    if (entry.name === "opencode.json") {
-      continue;
-    }
+    if (entry.name === "opencode.json") continue;
 
     if (entry.name.endsWith(".html")) {
       await writeFile(target, await renderPage(source));
@@ -439,6 +431,22 @@ async function build(destinationArgument = "dist") {
       await copyFile(source, target);
     }
   }
+}
+
+async function build(destinationArgument = "dist") {
+  const destination = resolve(process.cwd(), destinationArgument);
+
+  if (destination === ROOT) {
+    throw new Error("Build destination cannot be the project root");
+  }
+
+  await rm(destination, { force: true, recursive: true });
+
+  const ignoredAtRoot = new Set([
+    ".git", ".github", ".direnv", ".claude",
+    "dist", "tools", "templates", "node_modules",
+  ]);
+  await buildDirectory(ROOT, destination, ignoredAtRoot);
 
   await writeFile(join(destination, ".nojekyll"), "");
   console.log(`Built ${relative(process.cwd(), destination) || "."}`);
