@@ -319,6 +319,78 @@
                             <img src="icons/send.svg" />
                         </button>
                     </newPostPopup>
+                    <postPopup class="hidden">
+                        <top>
+                            <button class="backButton">
+                                <img
+                                    src="icons/arrow.svg"
+                                    style="rotate: 90deg"
+                                />
+                            </button>
+                            <span> Community Post </span>
+                            <div style="flex: 1"></div>
+                            <img src="icons/3dots.svg" />
+                        </top>
+                        <header>
+                            <img src="generic.png" />
+                            <doxx>
+                                <b>generic</b>
+                                <span>@generic</span>
+                            </doxx>
+                            <button class="followButton">
+                                Follow
+                                <img src="icons/follow.svg" />
+                            </button>
+                        </header>
+                        <postTitle>
+                            <b>Mountain retreat</b>
+                            <span>lorem ipsum</span>
+                            <tags>
+                                <tag>Nature</tag>
+                                <tag>Travel</tag>
+                            </tags>
+                        </postTitle>
+                        <content class="img">
+                            <img src="generic.png" />
+                        </content>
+                        <bottom>
+                            <img src="icons/share.svg" />
+                            <div style="flex: 1"></div>
+                            <engagement>
+                                <img src="icons/heart.svg" />
+                                <span>54</span>
+                            </engagement>
+                            <engagement>
+                                <img src="icons/message.svg" />
+                                <span>54</span>
+                            </engagement>
+                        </bottom>
+                        <commentsBox>
+                            <header>
+                                <b>Comments</b>
+                                <span>42 Comments</span>
+                            </header>
+                            <commentField>
+                                <input
+                                    type="text"
+                                    placeholder="Type Comment..."
+                                />
+                                <img src="icons/send.svg" />
+                            </commentField>
+                            <slot template="templates/post.html">
+                                <img slot="avatar" src="generic.png" />
+                                <username slot="username">generic</username>
+                                <timestamp slot="timestamp">1h ago</timestamp>
+
+                                <content slot="content" class="text">
+                                    <h1>Comment with text</h1>
+                                    <p>Comment with text</p>
+                                </content>
+                                <span slot="likes">2137</span>
+                                <span slot="comments">2137</span>
+                            </slot>
+                        </commentsBox>
+                    </postPopup>
                 </popupContainer>
             </mainView>
         </slot>
@@ -326,6 +398,7 @@
             var popupContainer = document.querySelector("popupContainer");
             var newPostPopup = document.querySelector("newPostPopup");
             var userPopup = document.querySelector("userPopup");
+            var postPopup = document.querySelector("postPopup");
 
             function openNewPostPopup() {
                 popupContainer.classList.remove("hidden");
@@ -347,6 +420,16 @@
                 popupContainer.classList.add("hidden");
             }
 
+            function openPostPopup() {
+                popupContainer.classList.remove("hidden");
+                postPopup.classList.remove("hidden");
+            }
+
+            function closePostPopup() {
+                postPopup.classList.add("hidden");
+                popupContainer.classList.add("hidden");
+            }
+
             document
                 .querySelector("sticky .postButton")
                 .addEventListener("click", openNewPostPopup);
@@ -355,11 +438,26 @@
                 .querySelector("newPostPopup .closeButton")
                 .addEventListener("click", closeNewPostPopup);
 
+            document
+                .querySelector("postPopup .backButton")
+                .addEventListener("click", closePostPopup);
+
             popupContainer.addEventListener("click", function (e) {
                 if (e.target === popupContainer) {
                     closeNewPostPopup();
                     closeUserPopup();
+                    closePostPopup();
                 }
+            });
+
+            // Open the post popup when a feed post is clicked. Scoped to
+            // <timeline> so comment posts inside postPopup don't re-trigger it.
+            document.addEventListener("click", function (e) {
+                if (!e.target.closest("timeline post")) return;
+                // The avatar opens userCtx; the 3dots and the action row own
+                // their own behavior — don't hijack those clicks.
+                if (e.target.closest("post > top img, post > bottom")) return;
+                openPostPopup();
             });
 
             // Char counters for new post form

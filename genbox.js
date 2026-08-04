@@ -134,9 +134,8 @@
       '<div class="genbox-vign"></div>' +
       '<div class="genbox-ring"></div>' +
       '<img class="genbox-shot" alt="">' +
-      '<div class="genbox-track"><i></i></div>' +
       '<div class="genbox-label">' +
-        '<span class="genbox-txt"></span><span class="genbox-pct"></span>' +
+        '<span class="genbox-txt">Generating your image...</span><span class="genbox-pct"></span>' +
       '</div>';
 
     buildBlur(el.querySelector('.genbox-pblur'), opts.blurLayers, opts.blurMax);
@@ -184,7 +183,6 @@
     };
 
     el.genbox = this;
-    this.progress(0, opts.label || 'queued');
   }
 
   global.GenBox = GenBox;

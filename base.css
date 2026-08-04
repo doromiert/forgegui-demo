@@ -1572,6 +1572,9 @@ timeline {
    box-sizing: border-box;
    max-width: 770px;
    height: max-content;
+   post {
+      cursor: pointer;
+   }
    post:last-child {
       border: none;
    }
@@ -4322,6 +4325,341 @@ userPopup {
       post {
          border-bottom: 1px solid #454545;
          border-radius: 0;
+      }
+   }
+}
+
+/* ── Post Popup ─────────────────────────────────────────────────── */
+postPopup {
+   display: flex;
+   flex-direction: column;
+   align-items: stretch;
+   gap: 15px;
+   width: 925px;
+   max-height: 90vh;
+   padding: 15px 20px 20px;
+   box-sizing: border-box;
+   background: #0c0c0c;
+   border: 1px solid #272727;
+   border-radius: 30px;
+   box-shadow: 0px 4px 250px 170px #000;
+   overflow-y: auto;
+   scrollbar-width: thin;
+   scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+
+   &.hidden {
+      display: none;
+   }
+
+   > top {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      height: 38px;
+      padding: 0 10px;
+      flex-shrink: 0;
+      box-sizing: border-box;
+
+      button {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         padding: 0;
+         background: none;
+         border: none;
+         cursor: pointer;
+      }
+
+      img {
+         width: 24px;
+         height: 24px;
+      }
+
+      > span {
+         color: #fff;
+
+         /* Normal Text */
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 24px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: normal;
+      }
+   }
+
+   > header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px;
+      flex-shrink: 0;
+
+      > img {
+         width: 48px;
+         height: 48px;
+         border-radius: 50%;
+         object-fit: cover;
+         flex-shrink: 0;
+      }
+
+      doxx {
+         flex: 1;
+         min-width: 0;
+         display: flex;
+         flex-direction: column;
+         gap: 0px;
+         /* the global doxx rule centers and lifts — this row is left-aligned */
+         align-items: flex-start;
+         margin-top: 0;
+
+         b {
+            color: #fff;
+
+            /* Normal Text (bold) */
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+         }
+
+         span {
+            color: rgba(255, 255, 255, 0.8);
+
+            /* Small Text 20px */
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+         }
+      }
+
+      .followButton {
+         display: flex;
+         align-items: center;
+         gap: 10px;
+         padding: 10px 15px 10px 20px;
+         border: none;
+         border-radius: 50px;
+         background: #0077ff;
+         box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+         cursor: pointer;
+         flex-shrink: 0;
+
+         color: #fff;
+         text-align: center;
+
+         /* Small Text 18px */
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 18px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: normal;
+
+         img {
+            width: 24px;
+            height: 24px;
+         }
+      }
+   }
+
+   > postTitle {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 0 15px 15px;
+      flex-shrink: 0;
+      filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.8));
+
+      > b {
+         color: #fff;
+
+         /* Normal Text (bold) */
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 24px;
+         font-style: normal;
+         font-weight: 700;
+         line-height: normal;
+      }
+
+      > span {
+         max-width: 100%;
+         color: rgba(255, 255, 255, 0.8);
+         overflow: hidden;
+         text-overflow: ellipsis;
+         white-space: nowrap;
+
+         /* Small Text 18px */
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 18px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: normal;
+      }
+
+      tags {
+         display: flex;
+         align-items: flex-start;
+         gap: 8px;
+
+         tag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            border-radius: 5px;
+            height: 24px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: #171717;
+
+            color: #fff;
+            text-align: center;
+            font-family: "Inter Tight";
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+         }
+      }
+   }
+
+   > content.img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 1px solid #1a1919;
+      border-radius: 10px;
+      overflow: hidden;
+      box-sizing: border-box;
+      flex-shrink: 0;
+
+      img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         background-color: rgb(10, 10, 10);
+         display: block;
+      }
+   }
+
+   > bottom {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      padding: 10px 15px;
+      flex-shrink: 0;
+
+      > img {
+         width: 32px;
+         height: 32px;
+      }
+
+      engagement {
+         display: flex;
+         align-items: center;
+         gap: 5px;
+         color: rgba(255, 255, 255, 0.81);
+         text-align: center;
+
+         /* Normal Text */
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 24px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: normal;
+
+         img {
+            width: 32px;
+            height: 32px;
+         }
+      }
+   }
+
+   > commentsBox {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      border-radius: 20px;
+      border: 1px solid #454545;
+      background: #040404;
+      overflow: hidden;
+      flex-shrink: 0;
+
+      > header {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         height: 68px;
+         padding: 15px 25px;
+         box-sizing: border-box;
+         flex-shrink: 0;
+
+         b {
+            color: #fff;
+
+            /* Normal Text (bold) */
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+         }
+
+         span {
+            color: rgba(255, 255, 255, 0.7);
+
+            /* Normal Text */
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+         }
+      }
+
+      commentField {
+         display: flex;
+         align-items: center;
+         gap: 15px;
+         height: 68px;
+         padding: 15px 25px;
+         box-sizing: border-box;
+         background: #1d1d1d;
+         flex-shrink: 0;
+
+         input {
+            flex: 1;
+            min-width: 0;
+            background: none;
+            border: none;
+            outline: none;
+            color: #fff;
+            caret-color: #fff;
+
+            /* Normal Text */
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+
+            &::placeholder {
+               color: rgba(255, 255, 255, 0.7);
+            }
+         }
+
+         img {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            flex-shrink: 0;
+         }
+      }
+
+      post:last-child {
+         border-bottom: none;
       }
    }
 }
