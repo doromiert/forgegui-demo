@@ -37,28 +37,57 @@
                     <span>Select between one of the options below.</span>
                 </onboardingHeader>
                 <onboardingOptionsGrid>
-                    <button class="onboardingButton" onclick="carousel.next()">
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
                         <img src="icons/placeholder.svg" />
                         Youtube
                     </button>
-                    <button class="onboardingButton" onclick="carousel.next()">
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
                         <img src="icons/placeholder.svg" />
                         X/Twitter
                     </button>
-                    <button class="onboardingButton" onclick="carousel.next()">
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
                         <img src="icons/placeholder.svg" />
                         TikTok
                     </button>
-                    <button class="onboardingButton" onclick="carousel.next()">
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
                         <img src="icons/placeholder.svg" />
                         Search Engine
                     </button>
-                    <button class="onboardingButton" onclick="carousel.next()">
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
                         <img src="icons/placeholder.svg" />
                         Friend/Other
                     </button>
                 </onboardingOptionsGrid>
-                <carouselSteps></carouselSteps>
             </carouselPage>
             <carouselPage id="page2">
                 <onboardingHeader>
@@ -66,20 +95,37 @@
                     <span>Select between one of the options below.</span>
                 </onboardingHeader>
                 <onboardingOptionsGrid>
-                    <button class="onboardingButton" onclick="carousel.next()">
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
                         <img src="icons/placeholder.svg" />
                         Roblox
                     </button>
-                    <button class="onboardingButton" onclick="carousel.next()">
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
                         <img src="icons/placeholder.svg" />
                         UEFN
                     </button>
-                    <button class="onboardingButton" onclick="carousel.next()">
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
                         <img src="icons/placeholder.svg" />
                         Unity
                     </button>
                 </onboardingOptionsGrid>
-                <carouselSteps></carouselSteps>
             </carouselPage>
             <carouselPage id="page3">
                 <onboardingHeader>
@@ -87,20 +133,37 @@
                     <span>Select between one of the options below.</span>
                 </onboardingHeader>
                 <onboardingOptionsGrid>
-                    <button class="onboardingButton" onclick="carousel.next()">
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
                         <img src="icons/placeholder.svg" />
                         Game Developer
                     </button>
-                    <button class="onboardingButton" onclick="carousel.next()">
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
                         <img src="icons/placeholder.svg" />
                         Designer
                     </button>
-                    <button class="onboardingButton" onclick="carousel.next()">
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
                         <img src="icons/placeholder.svg" />
                         Gamer/Playtester
                     </button>
                 </onboardingOptionsGrid>
-                <carouselSteps></carouselSteps>
             </carouselPage>
             <carouselPage id="page4">
                 <onboardingHeader>
@@ -109,7 +172,6 @@
                 </onboardingHeader>
                 placeholder because this is retarded
                 <button onclick="carousel.next()">skip</button>
-                <carouselSteps></carouselSteps>
             </carouselPage>
             <carouselPage id="page5">
                 <onboardingHeader>
@@ -122,15 +184,23 @@
                         <span class="charCounter">0/50</span>
                     </div>
                     <span> Or, Use suggested </span>
-                    <button type="button" onclick="carousel.next()">
+                    <button
+                        type="button"
+                        class="suggestionButton"
+                        onclick="carousel.next()"
+                    >
                         <img src="icons/ai.svg" />
                         Epic Gun Game
                     </button>
-                    <button type="button" onclick="carousel.next()">
-                        Create Project <img src="icons/add.svg" />
+                    <button
+                        type="button"
+                        class="postButton"
+                        style="width: 300px; align-self: center"
+                        onclick="carousel.next()"
+                    >
+                        <span>Create Project</span><img src="icons/add.svg" />
                     </button>
                 </form>
-                <carouselSteps></carouselSteps>
             </carouselPage>
             <carouselPage id="page6">
                 <onboardingHeader>
@@ -138,47 +208,46 @@
                     <span>Generate the first asset for your game.</span>
                 </onboardingHeader>
                 <stockPrompts>
-                    <button>
+                    <button class="suggestionButton">
                         <img src="icons/ai.svg" onclick="carousel.next()" />
                         Generate an AK47 3D model
                     </button>
-                    <button>
+                    <button class="suggestionButton">
                         <img src="icons/ai.svg" onclick="carousel.next()" />
                         Generate an fps thumbnail for my game
                     </button>
-                    <button>
+                    <button class="suggestionButton">
                         <img src="icons/ai.svg" onclick="carousel.next()" />
                         Generate a gun shot sound effect
                     </button>
-                    <hr />
                 </stockPrompts>
-                <span>Or type your own prompt...</span>
-                <div class="promptInput">
-                    <input type="text" placeholder="Enter Text" />
-                    <button class="createBtn" onclick="carousel.next()">
-                        Create
-                        <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 16 16"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M14.5 1.5L1.5 6.5L6.5 8.5M14.5 1.5L9.5 14.5L6.5 8.5M14.5 1.5L6.5 8.5"
-                                stroke="white"
-                                stroke-width="1.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            />
-                        </svg>
-                    </button>
-                </div>
-
-                <carouselSteps></carouselSteps>
+                <hr class="onboardingHR" />
+                <ownPrompt>
+                    <span>Or type your own prompt...</span>
+                    <div class="promptInput">
+                        <input type="text" placeholder="Enter Text" />
+                        <button class="createBtn" onclick="carousel.next()">
+                            Create
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M14.5 1.5L1.5 6.5L6.5 8.5M14.5 1.5L9.5 14.5L6.5 8.5M14.5 1.5L6.5 8.5"
+                                    stroke="white"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </ownPrompt>
             </carouselPage>
             <carouselPage id="page7">
-                <div class="offerView">
                     <onboardingHeader>
                         <h1>You're in luck!</h1>
                         <span
@@ -205,7 +274,7 @@
                         <slot template="templates/plan-card.html">
                             <span slot="title">Pro</span>
                             <span slot="badge">55% OFF</span>
-                            <span slot="price">14.99</span>
+                            <span slot="price">$14.99</span>
                             <span slot="original-price">$59.99</span>
                             <span slot="button">Claim Discount!</span>
                             <div slot="price-benefits">
@@ -233,14 +302,14 @@
                         type="button"
                         class="skipOfferBtn"
                         onclick="
-                            document
-                                .getElementById('page7')
-                                .classList.add('skipped')
+                            var p = document.getElementById('page7');
+                            p.classList.add('skipped');
+                            p.style.overflowY = 'hidden';
+                            p.scrollTop = 0;
                         "
                     >
                         Skip Offer
                     </button>
-                    <carouselSteps></carouselSteps>
                 </div>
                 <div class="freePlanView">
                     <onboardingHeader>
@@ -258,9 +327,26 @@
                             Upgrade
                         </a>
                     </div>
-                    <carouselSteps></carouselSteps>
                 </div>
             </carouselPage>
+            <carouselSteps></carouselSteps>
         </mainView>
+        <script>
+            document.querySelectorAll(".onboardingButton").forEach((btn) => {
+                btn.addEventListener("mousemove", (e) => {
+                    if (btn.matches(":active")) return;
+                    const r = btn.getBoundingClientRect();
+                    const x = (e.clientX - r.left) / r.width - 0.5;
+                    const y = (e.clientY - r.top) / r.height - 0.5;
+                    btn.style.transform = `perspective(600px) rotateX(${-y * 14}deg) rotateY(${x * 14}deg)`;
+                });
+                btn.addEventListener("mousedown", () => {
+                    btn.style.transform = "";
+                });
+                btn.addEventListener("mouseleave", () => {
+                    btn.style.transform = "";
+                });
+            });
+        </script>
     </body>
 </html>

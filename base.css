@@ -64,6 +64,7 @@ mainView.carousel {
    border-radius: 0;
    border: none;
    background: none;
+   padding: 0;
 }
 
 carouselSteps {
@@ -189,6 +190,7 @@ carouselStep {
    gap: 50px;
    padding: 40px 20px 30px;
    box-sizing: border-box;
+   background-color: #161616;
 }
 
 #page7.skipped .offerView {
@@ -302,13 +304,15 @@ carouselStep {
    align-items: center;
    width: 100%;
 
-   button {
+   a {
       border-radius: 15px;
       font-size: 20px;
       font-weight: 500;
       cursor: pointer;
       width: 100%;
       max-width: 462px;
+      text-align: center;
+      text-decoration: none;
       padding: 17px 24px;
    }
 
@@ -335,10 +339,11 @@ carouselPage {
    left: 0;
    width: 100%;
    height: 100%;
+   box-sizing: border-box;
    display: flex;
    flex-direction: column;
    color: #fff;
-   overflow-y: auto;
+   overflow-y: scroll;
    transform: translateX(100vw);
    will-change: transform;
    backface-visibility: hidden;
@@ -2906,4 +2911,163 @@ settingsview {
    border-radius: 25px;
    left: 2px;
    top: 2px;
+}
+
+carouselPage {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 50px;
+
+   onboardingHeader {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+
+      h1 {
+         color: #fff;
+         margin: 0;
+
+         /* Heading 1 */
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 40px;
+         font-style: normal;
+         font-weight: 600;
+         line-height: normal;
+      }
+
+      span {
+         color: rgba(255, 255, 255, 0.8);
+
+         /* Display Text */
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 24px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: normal;
+      }
+   }
+   onboardingOptionsGrid {
+      display: flex;
+      width: 1060px;
+      justify-content: center;
+      align-items: flex-start;
+      align-content: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+
+      button {
+         display: flex;
+         width: 340px;
+         height: 210px;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         gap: 15px;
+         flex-shrink: 0;
+         border-radius: 15px;
+         border: 1px solid #313131;
+         background: #131313;
+         box-shadow:
+            0 -3px 15px 0 rgba(0, 0, 0, 0.5) inset,
+            0 8px 15px 0 rgba(0, 0, 0, 0.4);
+         user-select: none;
+         color: #fff;
+         transition:
+            scale 0.2s ease-out,
+            background-color 0.25s,
+            border 0.25s,
+            box-shadow 0.25s;
+
+         /* Display Text */
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 24px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: normal;
+         img {
+            height: 64px;
+         }
+
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            scale: 1.1;
+         }
+
+         &:active,
+         &.is-active {
+            border-radius: 15px;
+            border: 8px solid #0086b7;
+            background: linear-gradient(180deg, #011d3b 0%, #005274 100%);
+            box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.4);
+            scale: 0.9;
+         }
+      }
+   }
+
+   form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      .onboardingInput {
+         height: 55px;
+         box-sizing: border-box;
+         width: 101%;
+      }
+      input {
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 23px;
+         font-style: normal;
+         font-weight: 400;
+         line-height: normal;
+      }
+   }
+}
+
+carouselSteps {
+   position: absolute;
+   bottom: 50px;
+}
+
+.suggestionButton {
+   display: flex;
+   width: 514px;
+   padding: 12px;
+   align-items: center;
+   gap: 10px;
+   box-sizing: border-box;
+   border-radius: 15px;
+   border: 1px solid #262626;
+   background: #1d1d1d;
+   color: #fff;
+   text-align: center;
+   font-family: "Atkinson Hyperlegible Next";
+   font-size: 22px;
+   font-style: normal;
+   font-weight: 500;
+   line-height: normal;
+   box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.21) inset;
+}
+
+stockPrompts {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 10px;
+}
+
+.onboardingHR {
+   width: 480px;
+   color: #383838;
+}
+
+ownPrompt {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 20px;
+   width: 700px;
 }

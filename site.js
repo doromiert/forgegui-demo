@@ -24,6 +24,7 @@
 
     function syncSteps(n, total) {
       document.querySelectorAll("carouselSteps").forEach(function (el) {
+        el.style.visibility = n === total - 1 ? "hidden" : "";
         if (el.children.length !== total) {
           el.innerHTML = "";
           for (var i = 0; i < total; i++) {
@@ -41,18 +42,19 @@
       if (!pages.length) return;
       index = Math.max(0, Math.min(n, pages.length - 1));
       var w = (pages[0].parentElement || document.body).clientWidth;
-      var persp = w * 2;
+      var persp = w * 0.8;
       pages.forEach(function (page, i) {
         var offset = i - index;
         page.style.transform =
           "perspective(" + persp + "px)" +
-          " translateX(" + (offset * w * 1.1) + "px)" +
-          " rotateY(" + (offset * -20) + "deg)";
+          " translateX(" + (offset * w * 1.05) + "px)" +
+          " rotateY(" + (offset * -120) + "deg)";
       });
       syncSteps(index, pages.length);
     }
 
-    layout(0);
+    var DEV_START_PAGE = 0;
+    layout(DEV_START_PAGE);
     window.addEventListener("resize", function () { layout(index); });
 
     return {
