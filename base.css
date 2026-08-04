@@ -4013,6 +4013,9 @@ post {
       }
       img {
          height: 34px;
+         &:hover {
+            transform: scale(1.1);
+         }
       }
    }
    content {
@@ -4325,4 +4328,8 @@ userPopup {
 
 .follow {
    height: 36px;
+}
+
+button:hover {
+   transform: scale(1.1);
 }
