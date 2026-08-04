@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI — Settings</title>
+        <link rel="stylesheet" href="base.css" />
+        <script src="site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="color-scheme" content="dark" />
+        <style></style>
+    </head>
+
+    <body class="chat">
+        <slot template="templates/sidebar.html" class="collapsed"></slot>
+        <mainView class="settings">
+            <slot template="templates/settings-sidebar.html"></slot>
+            <settingsView>
+                <div style="height: 90px"></div>
+                <slot template="templates/listbox.html">
+                    <span slot="header">Plan Overview</span>
+                    <slot template="templates/listbox-row.html">
+                        <span slot="label">Selected Plan</span>
+                        <b slot="value">ForgeGUI Pro</b>
+                        <button slot="action" class="listboxAction">
+                            Change Plan
+                        </button>
+                    </slot>
+                    <slot template="templates/listbox-row.html">
+                        <span slot="label">Daily Rate Limit</span>
+                        <b slot="value">30% Used</b>
+                        <button slot="action" class="listboxAction">
+                            Upgrade to Max
+                        </button>
+                    </slot>
+                    <slot template="templates/listbox-row.html">
+                        <span slot="label">Billed to</span>
+                        <b slot="value">VISA-0094</b>
+                        <button slot="action" class="listboxAction">
+                            Edit Billing Info
+                        </button>
+                    </slot>
+                </slot>
+            </settingsView>
+        </mainView>
+    </body>
+</html>

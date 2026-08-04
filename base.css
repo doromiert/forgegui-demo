@@ -2637,3 +2637,273 @@ settingsview {
    box-sizing: border-box;
    overflow-y: scroll;
 }
+
+/* ── Rewards Page ──────────────────────────────────────────────────── */
+.rewardsSection {
+   width: 100%;
+   max-width: 720px;
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+
+.rewardsSectionLabel {
+   margin: 0;
+   padding: 0 10px;
+   font-size: 18px;
+   font-weight: 500;
+   color: white;
+}
+
+.rewardsMilestones {
+   background: #0d0d0d;
+   border: 1px solid #282828;
+   border-radius: 15px;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+   box-sizing: border-box;
+}
+
+.rewardsMilestonesScroll {
+   padding: 45px 20px;
+   overflow-x: auto;
+   scrollbar-width: thin;
+   scrollbar-color: #3a3a3a transparent;
+   display: flex;
+   flex-direction: column;
+}
+
+.rewardsRow {
+   display: flex;
+   gap: 139px;
+   flex-shrink: 0;
+}
+
+.rewardsRow--top {
+   align-items: flex-end;
+}
+
+.rewardsRow--bottom {
+   align-items: flex-start;
+   padding-left: 180px;
+}
+
+.rewardItem {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   flex-shrink: 0;
+}
+
+.rewardCard {
+   position: relative;
+   width: 216px;
+   height: 184px;
+   flex-shrink: 0;
+   background: #212121;
+   border-radius: 18px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-between;
+   padding: 60px 15px 15px 15px;
+   box-sizing: border-box;
+   border: 1px solid transparent;
+
+   &.rewardCard--upgrade {
+      border-color: #db8300;
+   }
+}
+
+.rewardItem--top .rewardCard {
+   margin-bottom: -10px;
+   z-index: 1;
+}
+
+.rewardItem--bottom .rewardCard {
+   margin-top: -12.5px;
+   z-index: 1;
+}
+
+.rewardConnector {
+   width: 2px;
+   background: rgba(255, 255, 255, 0.15);
+   flex-shrink: 0;
+   align-self: center;
+}
+
+.rewardItem--top .rewardConnector {
+   height: 61.5px;
+}
+
+.rewardItem--bottom .rewardConnector {
+   height: 42px;
+}
+
+.rewardCardBadge {
+   position: absolute;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 65px;
+   height: 65px;
+   border-radius: 50%;
+   background: #2e2e2e;
+   border: 1px solid rgba(145, 145, 145, 0.25);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+   }
+
+   &.rewardCardBadge--upgrade {
+      border-color: #db8300;
+   }
+}
+
+.rewardItem--top .rewardCardBadge {
+   top: -28px;
+}
+
+.rewardItem--bottom .rewardCardBadge {
+   top: -12.5px;
+}
+
+.rewardCardCheck {
+   position: absolute;
+   bottom: -3px;
+   right: -3px;
+   width: 22px;
+   height: 22px;
+   border-radius: 50%;
+   background: #0680ff;
+   border: 2px solid #2e2e2e;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   &::after {
+      content: "";
+      width: 9px;
+      height: 5px;
+      border-left: 2px solid white;
+      border-bottom: 2px solid white;
+      transform: rotate(-45deg);
+      margin-top: -2px;
+   }
+}
+
+.rewardCardText {
+   display: flex;
+   flex-direction: column;
+   gap: 3px;
+   text-align: center;
+   width: 100%;
+
+   b {
+      font-size: 20px;
+      font-weight: 500;
+      color: white;
+      line-height: normal;
+   }
+
+   span {
+      font-size: 18px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: normal;
+   }
+}
+
+.rewardCardBtn {
+   width: 100%;
+   padding: 15px;
+   border: none;
+   border-radius: 8px;
+   font-size: 18px;
+   font-weight: 500;
+   cursor: pointer;
+   font-family: "Atkinson Hyperlegible Next";
+   text-align: center;
+
+   &.rewardCardBtn--claimed {
+      background: #094380;
+      color: rgba(255, 255, 255, 0.8);
+   }
+
+   &.rewardCardBtn--upgrade {
+      background: #db8300;
+      color: white;
+   }
+
+   &.rewardCardBtn--claim {
+      background: #0680ff;
+      color: rgba(255, 255, 255, 0.8);
+   }
+
+   &.rewardCardBtn--locked {
+      background: #353535;
+      color: rgba(255, 255, 255, 0.8);
+   }
+}
+
+.rewardsProgressBar {
+   height: 47px;
+   width: 1844px;
+   border-radius: 36px;
+   background: rgba(255, 255, 255, 0.1);
+   position: relative;
+   flex-shrink: 0;
+}
+
+.rewardsProgressFill {
+   position: absolute;
+   left: 0;
+   top: 0;
+   height: 100%;
+   width: 532.5px;
+   border-radius: 36px 0 0 36px;
+   background: linear-gradient(90deg, #3e88ff 0%, #0080ff 100%);
+}
+
+.rewardsMilestoneLabel {
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+   background: white;
+   color: #1d83ff;
+   font-size: 18px;
+   font-weight: 600;
+   padding: 4px 11px;
+   border-radius: 30px;
+   white-space: nowrap;
+}
+
+.rewardsIndicatorWrapper {
+   padding-top: 5px;
+   flex-shrink: 0;
+   width: 1844px;
+}
+
+.rewardsIndicator {
+   background: #2f2f2f;
+   height: 15px;
+   border-radius: 23px;
+   overflow: hidden;
+   position: relative;
+   width: 100%;
+}
+
+.rewardsIndicatorThumb {
+   position: absolute;
+   background: #d9d9d9;
+   height: 11px;
+   width: 106px;
+   border-radius: 25px;
+   left: 2px;
+   top: 2px;
+}

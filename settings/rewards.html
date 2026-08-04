@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI — Settings</title>
+        <link rel="stylesheet" href="base.css" />
+        <script src="site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="color-scheme" content="dark" />
+        <style></style>
+    </head>
+
+    <body class="chat">
+        <slot template="templates/sidebar.html" class="collapsed"></slot>
+        <mainView class="settings">
+            <slot template="templates/settings-sidebar.html"></slot>
+            <settingsView>
+                <div style="height: 90px"></div>
+
+                <slot template="templates/listbox.html">
+                    <span slot="header">Referrals</span>
+                    <slot template="templates/listbox-row.html">
+                        <span slot="label">Your Referral Link</span>
+                        <b
+                            slot="value"
+                            style="
+                                font-family:
+                                    &quot;Atkinson Hyperlegible Mono&quot;,
+                                    monospace;
+                                font-size: 18px;
+                            "
+                            >https://forgegui.com/referral/name</b
+                        >
+                        <button slot="action" class="listboxAction">
+                            Copy
+                        </button>
+                    </slot>
+                    <slot template="templates/listbox-row.html">
+                        <span slot="label">People Referred</span>
+                        <b slot="value">3 People</b>
+                        <button slot="action" class="listboxAction">
+                            Invite More
+                        </button>
+                    </slot>
+                    <slot template="templates/listbox-row.html">
+                        <span slot="label">Total Plan Credits Earned</span>
+                        <b slot="value">$0.96</b>
+                        <button slot="action" class="listboxAction">
+                            Redeem
+                        </button>
+                    </slot>
+                </slot>
+
+                <div class="rewardsSection">
+                    <p class="rewardsSectionLabel">
+                        Referral Rewards, Invite Friends and Claim Rewards.
+                    </p>
+
+                    <div class="rewardsMilestones">
+                        <div class="rewardsMilestonesScroll">
+                            <!-- Top row: cards with downward connectors -->
+                            <div class="rewardsRow rewardsRow--top">
+                                <div class="rewardItem rewardItem--top">
+                                    <div class="rewardCard">
+                                        <div class="rewardCardBadge">
+                                            <img
+                                                src="icons/people.svg"
+                                                alt=""
+                                            />
+                                            <span
+                                                class="rewardCardCheck"
+                                            ></span>
+                                        </div>
+                                        <div class="rewardCardText">
+                                            <b>6 Invites</b>
+                                            <span>Earn X thing</span>
+                                        </div>
+                                        <button
+                                            class="rewardCardBtn rewardCardBtn--claimed"
+                                        >
+                                            Claimed
+                                        </button>
+                                    </div>
+                                    <div class="rewardConnector"></div>
+                                </div>
+                                <div class="rewardItem rewardItem--top">
+                                    <div class="rewardCard rewardCard--upgrade">
+                                        <div
+                                            class="rewardCardBadge rewardCardBadge--upgrade"
+                                        >
+                                            <img
+                                                src="icons/people.svg"
+                                                alt=""
+                                            />
+                                            <span
+                                                class="rewardCardCheck"
+                                            ></span>
+                                        </div>
+                                        <div class="rewardCardText">
+                                            <b>Earn X thing</b>
+                                            <span>Earn X thing</span>
+                                        </div>
+                                        <button
+                                            class="rewardCardBtn rewardCardBtn--upgrade"
+                                        >
+                                            Upgrade to Claim
+                                        </button>
+                                    </div>
+                                    <div class="rewardConnector"></div>
+                                </div>
+                                <div class="rewardItem rewardItem--top">
+                                    <div class="rewardCard">
+                                        <div class="rewardCardBadge">
+                                            <img
+                                                src="icons/people.svg"
+                                                alt=""
+                                            />
+                                            <span
+                                                class="rewardCardCheck"
+                                            ></span>
+                                        </div>
+                                        <div class="rewardCardText">
+                                            <b>Earn X thing</b>
+                                            <span>Earn X thing</span>
+                                        </div>
+                                        <button
+                                            class="rewardCardBtn rewardCardBtn--claim"
+                                        >
+                                            Claim
+                                        </button>
+                                    </div>
+                                    <div class="rewardConnector"></div>
+                                </div>
+                                <div class="rewardItem rewardItem--top">
+                                    <div class="rewardCard">
+                                        <div class="rewardCardBadge">
+                                            <img
+                                                src="icons/people.svg"
+                                                alt=""
+                                            />
+                                            <span
+                                                class="rewardCardCheck"
+                                            ></span>
+                                        </div>
+                                        <div class="rewardCardText">
+                                            <b>Earn X thing</b>
+                                            <span>Earn X thing</span>
+                                        </div>
+                                        <button
+                                            class="rewardCardBtn rewardCardBtn--claim"
+                                        >
+                                            Claim
+                                        </button>
+                                    </div>
+                                    <div class="rewardConnector"></div>
+                                </div>
+                                <div class="rewardItem rewardItem--top">
+                                    <div class="rewardCard">
+                                        <div class="rewardCardBadge">
+                                            <img
+                                                src="icons/people.svg"
+                                                alt=""
+                                            />
+                                            <span
+                                                class="rewardCardCheck"
+                                            ></span>
+                                        </div>
+                                        <div class="rewardCardText">
+                                            <b>Earn X thing</b>
+                                            <span>Earn X thing</span>
+                                        </div>
+                                        <button
+                                            class="rewardCardBtn rewardCardBtn--claim"
+                                        >
+                                            Claim
+                                        </button>
+                                    </div>
+                                    <div class="rewardConnector"></div>
+                                </div>
+                            </div>
+
+                            <!-- Progress bar with milestone labels -->
+                            <div class="rewardsProgressBar">
+                                <div class="rewardsProgressFill"></div>
+                                <span
+                                    class="rewardsMilestoneLabel"
+                                    style="left: 68px"
+                                    >1 Invite</span
+                                >
+                                <span
+                                    class="rewardsMilestoneLabel"
+                                    style="left: 240px"
+                                    >4 Invites</span
+                                >
+                                <span
+                                    class="rewardsMilestoneLabel"
+                                    style="left: 415px"
+                                    >5 Invites</span
+                                >
+                                <span
+                                    class="rewardsMilestoneLabel"
+                                    style="left: 595px"
+                                    >6 Invites</span
+                                >
+                            </div>
+
+                            <!-- Bottom row: upward connectors then cards -->
+                            <div class="rewardsRow rewardsRow--bottom">
+                                <div class="rewardItem rewardItem--bottom">
+                                    <div class="rewardConnector"></div>
+                                    <div class="rewardCard">
+                                        <div class="rewardCardBadge">
+                                            <img
+                                                src="icons/people.svg"
+                                                alt=""
+                                            />
+                                            <span
+                                                class="rewardCardCheck"
+                                            ></span>
+                                        </div>
+                                        <div class="rewardCardText">
+                                            <b>Earn X thing</b>
+                                            <span>Earn X thing</span>
+                                        </div>
+                                        <button
+                                            class="rewardCardBtn rewardCardBtn--locked"
+                                        >
+                                            Locked
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="rewardItem rewardItem--bottom">
+                                    <div class="rewardConnector"></div>
+                                    <div class="rewardCard">
+                                        <div class="rewardCardBadge">
+                                            <img
+                                                src="icons/people.svg"
+                                                alt=""
+                                            />
+                                            <span
+                                                class="rewardCardCheck"
+                                            ></span>
+                                        </div>
+                                        <div class="rewardCardText">
+                                            <b>Earn X thing</b>
+                                            <span>Earn X thing</span>
+                                        </div>
+                                        <button
+                                            class="rewardCardBtn rewardCardBtn--claim"
+                                        >
+                                            Claim
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="rewardItem rewardItem--bottom">
+                                    <div class="rewardConnector"></div>
+                                    <div class="rewardCard">
+                                        <div class="rewardCardBadge">
+                                            <img
+                                                src="icons/people.svg"
+                                                alt=""
+                                            />
+                                            <span
+                                                class="rewardCardCheck"
+                                            ></span>
+                                        </div>
+                                        <div class="rewardCardText">
+                                            <b>Earn X thing</b>
+                                            <span>Earn X thing</span>
+                                        </div>
+                                        <button
+                                            class="rewardCardBtn rewardCardBtn--claim"
+                                        >
+                                            Claim
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="rewardItem rewardItem--bottom">
+                                    <div class="rewardConnector"></div>
+                                    <div class="rewardCard">
+                                        <div class="rewardCardBadge">
+                                            <img
+                                                src="icons/people.svg"
+                                                alt=""
+                                            />
+                                            <span
+                                                class="rewardCardCheck"
+                                            ></span>
+                                        </div>
+                                        <div class="rewardCardText">
+                                            <b>Earn X thing</b>
+                                            <span>Earn X thing</span>
+                                        </div>
+                                        <button
+                                            class="rewardCardBtn rewardCardBtn--claim"
+                                        >
+                                            Claim
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="rewardItem rewardItem--bottom">
+                                    <div class="rewardConnector"></div>
+                                    <div class="rewardCard">
+                                        <div class="rewardCardBadge">
+                                            <img
+                                                src="icons/people.svg"
+                                                alt=""
+                                            />
+                                            <span
+                                                class="rewardCardCheck"
+                                            ></span>
+                                        </div>
+                                        <div class="rewardCardText">
+                                            <b>Earn X thing</b>
+                                            <span>Earn X thing</span>
+                                        </div>
+                                        <button
+                                            class="rewardCardBtn rewardCardBtn--claim"
+                                        >
+                                            Claim
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </settingsView>
+        </mainView>
+    </body>
+</html>
