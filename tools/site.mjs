@@ -1,4 +1,5 @@
 import { createServer } from "node:http";
+import { watch } from "node:fs";
 import {
   copyFile,
   mkdir,
@@ -43,6 +44,13 @@ const MIME_TYPES = {
 };
 
 const BUILD_EXTENSIONS = new Set(Object.keys(MIME_TYPES).concat(".txt"));
+const WATCH_EXTENSIONS = new Set(Object.keys(MIME_TYPES));
+const DEV_RELOAD_SCRIPT = `<script data-dev-reload>
+  (() => {
+    const events = new EventSource("/__dev/reload");
+    events.addEventListener("reload", () => location.reload());
+  })();
+</script>`;
 const VOID_ELEMENTS = new Set([
   "area",
   "base",
@@ -274,6 +282,54 @@ async function renderPage(file) {
   return markActiveRoute(rendered, file.split(sep).pop());
 }
 
+function injectDevReload(html) {
+  if (html.includes("</body>")) {
+    return html.replace("</body>", `${DEV_RELOAD_SCRIPT}\n</body>`);
+  }
+
+  return html + DEV_RELOAD_SCRIPT;
+}
+
+function watchDevelopmentFiles(clients) {
+  let reloadTimer;
+
+  const watcher = watch(ROOT, { recursive: true }, function (_, filename) {
+    if (!filename) return;
+
+    const changedPath = filename.toString().replaceAll("\\", "/");
+    const topLevelDirectory = changedPath.split("/")[0];
+    const ignoredDirectories = new Set([
+      ".git",
+      ".github",
+      ".direnv",
+      "dist",
+      "tools",
+    ]);
+
+    if (ignoredDirectories.has(topLevelDirectory)) return;
+    if (!WATCH_EXTENSIONS.has(extname(changedPath).toLowerCase())) return;
+
+    clearTimeout(reloadTimer);
+    reloadTimer = setTimeout(function () {
+      const event = `event: reload\ndata: ${JSON.stringify({ path: changedPath })}\n\n`;
+
+      clients.forEach(function (client) {
+        try {
+          client.write(event);
+        } catch {
+          clients.delete(client);
+        }
+      });
+    }, 75);
+  });
+
+  watcher.on("error", function (error) {
+    console.error("File watcher error:", error);
+  });
+
+  return watcher;
+}
+
 async function copyDirectory(source, destination) {
   await mkdir(destination, { recursive: true });
   const entries = await readdir(source, { withFileTypes: true });
@@ -334,10 +390,34 @@ function getPort(argumentsList) {
 
 async function serve(argumentsList) {
   const port = getPort(argumentsList);
+  const reloadClients = new Set();
+  const watcher = watchDevelopmentFiles(reloadClients);
+
+  const keepAlive = setInterval(function () {
+    reloadClients.forEach(function (client) {
+      client.write(": keep-alive\n\n");
+    });
+  }, 15000);
+  keepAlive.unref();
 
   const server = createServer(async function (request, response) {
     try {
       const url = new URL(request.url, `http://${request.headers.host}`);
+
+      if (url.pathname === "/__dev/reload") {
+        response.writeHead(200, {
+          "Cache-Control": "no-cache, no-transform",
+          Connection: "keep-alive",
+          "Content-Type": "text/event-stream",
+        });
+        response.write("retry: 1000\nevent: ready\ndata: {}\n\n");
+        reloadClients.add(response);
+        request.on("close", function () {
+          reloadClients.delete(response);
+        });
+        return;
+      }
+
       const requestPath = decodeURIComponent(
         url.pathname === "/" ? "/index.html" : url.pathname,
       );
@@ -353,7 +433,7 @@ async function serve(argumentsList) {
       const extension = extname(target).toLowerCase();
       const content =
         extension === ".html"
-          ? await renderPage(target)
+          ? injectDevReload(await renderPage(target))
           : await readFile(target);
 
       response.writeHead(200, {
@@ -372,6 +452,15 @@ async function serve(argumentsList) {
 
   server.listen(port, function () {
     console.log(`ForgeGUI dev server: http://localhost:${port}`);
+    console.log("Watching files; changes trigger a full browser reload.");
+  });
+
+  server.on("close", function () {
+    watcher.close();
+    clearInterval(keepAlive);
+    reloadClients.forEach(function (client) {
+      client.end();
+    });
   });
 }
 

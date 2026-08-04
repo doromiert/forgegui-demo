@@ -24,6 +24,10 @@ The development server defaults to `http://localhost:8080`. Use `--port` to chan
 node tools/site.mjs serve --port 3000
 ```
 
+The development server recursively watches HTML, templates, stylesheets, scripts, and browser assets. Changes send a server-sent event to open pages, which perform a real `location.reload()`. The reload client is injected only into development responses and is never written to `dist/`.
+
+Changes to `tools/site.mjs` itself require restarting the development server.
+
 ## Include a partial
 
 ```html
@@ -72,3 +76,22 @@ The asset bar, input, and final action can be replaced per page:
 ```
 
 Keep interactive behavior in regular `.js` files. Templates only control HTML composition.
+
+## Class-based component variants
+
+Keep the modifier class on a wrapper that remains after rendering, then include the shared component structure inside it:
+
+```html
+<planCard class="plan-card plan-card--pro">
+  <slot template="templates/plan-card.html">
+    <span slot="title">Pro</span>
+    <span slot="badge">Most Popular</span>
+    <span slot="price">$19.99</span>
+    <ul slot="included-features">
+      <li>Faster Generations</li>
+    </ul>
+  </slot>
+</planCard>
+```
+
+The template owns shared markup, named slots own content, and classes such as `.plan-card--starter`, `.plan-card--pro`, and `.plan-card--max` own visual differences.

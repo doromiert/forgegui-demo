@@ -1,0 +1,84 @@
+<chatBox>
+  <slot name="asset-bar">
+    <assetBar>
+      <button type="button" aria-label="Add asset">
+        <img src="icons/add.svg" alt="" />
+      </button>
+    </assetBar>
+  </slot>
+
+  <slot name="input">
+    <textarea placeholder="Describe what you want..."></textarea>
+  </slot>
+
+  <bottom>
+    <button
+      class="chatboxButton"
+      type="button"
+      data-context-target="chatboxGamePicker"
+    >
+      <img src="icons/roblox.svg" alt="" />
+      <span>Roblox</span>
+      <img src="icons/arrow.svg" alt="" />
+    </button>
+    <contextMenu
+      id="chatboxGamePicker"
+      class="hidden"
+      data-context-target="chatboxGamePicker"
+    >
+      <button><img src="icons/roblox.svg" alt="" />Roblox</button>
+      <button><img src="icons/ue.svg" alt="" />Unreal Engine</button>
+      <button><img src="icons/unity.svg" alt="" />Unity</button>
+    </contextMenu>
+
+    <button
+      class="chatboxButton"
+      type="button"
+      data-context-target="chatboxStyle"
+    >
+      <img src="icons/pencil.svg" alt="" />
+      <span>Auto-Detect</span>
+      <img src="icons/arrow.svg" alt="" />
+    </button>
+    <contextMenu
+      id="chatboxStyle"
+      class="hidden"
+      style="left: 120px"
+      data-context-target="chatboxStyle"
+    >
+      <button>Auto-Detect</button>
+      <button>Realistic</button>
+      <button>Cartoon</button>
+      <button>Pixel Art</button>
+    </contextMenu>
+
+    <button
+      class="chatboxButton"
+      type="button"
+      data-context-target="chatboxModel"
+    >
+      <img src="icons/ai.svg" alt="" />
+      <span>Yunes Pro</span>
+      <img src="icons/arrow.svg" alt="" />
+    </button>
+    <contextMenu
+      id="chatboxModel"
+      class="hidden"
+      style="left: 328px"
+      data-context-target="chatboxModel"
+    >
+      <button>Yunes Pro</button>
+      <button>GoyAI</button>
+      <button>SahurML</button>
+    </contextMenu>
+
+    <span style="flex: 1"></span>
+
+    <slot name="actions">
+      <button class="chatboxButton send" type="button">
+        <span>Create</span>
+        <img src="icons/send.svg" alt="" />
+      </button>
+    </slot>
+  </bottom>
+</chatBox>

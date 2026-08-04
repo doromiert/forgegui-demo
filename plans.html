@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ForgeGUI</title>
+    <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="plans.css" />
+    <script src="site.js" defer></script>
+    <meta name="theme-color" content="#0D0D0D" />
+    <meta name="description" content="ForgeGUI - Create anything with AI" />
+    <meta property="og:title" content="ForgeGUI" />
+    <meta property="og:description" content="Powerful AI tool for creators" />
+    <meta property="og:type" content="website" />
+    <meta name="color-scheme" content="dark" />
+
+    <style></style>
+  </head>
+
+  <body class="chat">
+    <slot template="templates/app-shell.html">
+      <mainView slot="content">
+        <top>
+          <span>Plans</span>
+          <button>
+            <img src="icons/card.svg" />
+            Billing Settings
+          </button>
+        </top>
+        <header>
+          <h1>Select a plan that suits you best.</h1>
+          <span> We have all types of plans to fit any kind of customer. </span>
+          <billingPicker>
+            <dateOption class="selected"> Monthly </dateOption>
+            <dateOption> Yearly </dateOption>
+          </billingPicker>
+        </header>
+        <plans>
+          <planCard class="plan-card plan-card--starter">
+            <slot template="templates/plan-card.html">
+              <span slot="title">Starter</span>
+              <span slot="price">$15.99</span>
+              <span slot="button">Get Starter</span>
+              <div slot="price-benefits">
+                <p>Unlimited (with normal daily rate limits)</p>
+                <p>Subject to abuse protections.</p>
+              </div>
+              <ul slot="ai-features">
+                <li>Access to Google Nano Banana</li>
+                <li>Access to Meshy</li>
+                <li>Access to GPT Image V2</li>
+                <li>10s of more models.</li>
+              </ul>
+              <ul slot="included-features">
+                <li>Access to Community Blue</li>
+                <li>Premium Customer Support</li>
+                <li>Priority queue</li>
+                <li>Generate more than 1 asset per prompt</li>
+              </ul>
+            </slot>
+          </planCard>
+
+          <planCard class="plan-card plan-card--pro">
+            <slot template="templates/plan-card.html">
+              <span slot="title">Pro</span>
+              <span slot="badge">Most Popular</span>
+              <span slot="price">$19.99</span>
+              <span slot="original-price">$59.99</span>
+              <span slot="button">Get Pro</span>
+              <div slot="price-benefits">
+                <p>Unlimited (with light rate limits)</p>
+                <p>Subject to abuse protections.</p>
+              </div>
+              <ul slot="ai-features">
+                <li>Access to Google Nano Banana</li>
+                <li>Access to Meshy</li>
+                <li>Access to GPT Image V2</li>
+                <li>10s of more models.</li>
+              </ul>
+              <ul slot="included-features">
+                <li>Everything in the Starter Tier</li>
+                <li>Custom Pro Role</li>
+                <li>Faster Generations</li>
+              </ul>
+            </slot>
+          </planCard>
+
+          <planCard class="plan-card plan-card--max">
+            <slot template="templates/plan-card.html">
+              <span slot="title">Max</span>
+              <span slot="price">$199.99</span>
+              <span slot="button">Get Max</span>
+              <div slot="price-benefits">
+                <p>Truly Unlimited. No rate limits.</p>
+                <p>Subject to abuse protections.</p>
+              </div>
+              <ul slot="ai-features">
+                <li>Access to Google Nano Banana</li>
+                <li>Access to Meshy</li>
+                <li>Access to GPT Image V2</li>
+                <li>10s of more models.</li>
+              </ul>
+              <ul slot="included-features">
+                <li>Everything in Pro Tier</li>
+                <li>Access to Exclusive Chat</li>
+                <li>Exclusive Tag</li>
+                <li>No Rate Limits (Subject to abuse protections)</li>
+              </ul>
+            </slot>
+          </planCard>
+        </plans>
+        <footer>
+          Are you a business?
+          <a href="businessPlans.html">Check our Business Plans</a>
+        </footer>
+      </mainView>
+    </slot>
+  </body>
+</html>

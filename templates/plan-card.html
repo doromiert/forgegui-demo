@@ -1,0 +1,28 @@
+<planTitle>
+  <h2><slot name="title">Plan</slot></h2>
+  <planBadge><slot name="badge"></slot></planBadge>
+</planTitle>
+
+<planPrice>
+  <priceLine>
+    <strong><slot name="price">$0.00</slot></strong>
+    <del><slot name="original-price"></slot></del>
+    <span>/month</span>
+  </priceLine>
+  <priceBenefits>
+    <slot name="price-benefits"></slot>
+  </priceBenefits>
+</planPrice>
+
+<button type="button"><slot name="button">Choose Plan</slot></button>
+
+<planFeatures>
+  <featureGroup>
+    <h3><img src="icons/ai.svg" alt="" /> AI models</h3>
+    <slot name="ai-features"></slot>
+  </featureGroup>
+  <featureGroup>
+    <h3><img src="icons/crown.svg" alt="" /> Included Features</h3>
+    <slot name="included-features"></slot>
+  </featureGroup>
+</planFeatures>
