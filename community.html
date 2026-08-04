@@ -1,170 +1,221 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ForgeGUI</title>
-    <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
-    <link rel="stylesheet" href="base.css" />
-    <script src="site.js" defer></script>
-    <meta name="theme-color" content="#0D0D0D" />
-    <meta name="description" content="ForgeGUI - Create anything with AI" />
-    <meta property="og:title" content="ForgeGUI" />
-    <meta property="og:description" content="Powerful AI tool for creators" />
-    <meta property="og:type" content="website" />
-    <meta name="color-scheme" content="dark" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+        <link rel="stylesheet" href="base.css" />
+        <script src="site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
 
-    <style></style>
-  </head>
+        <style></style>
+    </head>
 
-  <body class="chat">
-    <slot template="templates/app-shell.html">
-      <mainView id="community" slot="content">
-        <sticky>
-          <top>
-            <img src="icons/people.svg" />
-            <span>Community</span>
-          </top>
-          <communityTags>
-            <communityTag class="active"> 🔥 Trending </communityTag>
-            <communityTag> 🎸 Music </communityTag>
-            <communityTag> 📣 Announcements </communityTag>
-            <communityTag> 👾 Development </communityTag>
-            <communityTag> 🕹️ Gaming </communityTag>
-            <communityTag> ✏️ Drawing </communityTag>
-            <communityTag> 📝 Writing </communityTag>
-            <searchWrapper>
-              <img src="icons/search.svg" />
-              <input type="text" placeholder="Search" />
-            </searchWrapper>
-          </communityTags>
-          <button class="postButton">
-            <img src="icons/s-add.svg" /><span>Post</span>
-          </button>
-        </sticky>
-        <timeline>
-          <post>
-            <top>
-              <img src="generic.png" />
-              <username>generic</username>
-              <div
-                style="
-                  width: 6px;
-                  height: 6px;
-                  border-radius: 50%;
-                  background-color: white;
-                  flex-shrink: 0;
-                "
-              ></div>
-              <timestamp>1h ago</timestamp>
-              <div style="flex: 1"></div>
-              <postTag class="ai">AI Generated</postTag>
-              <img src="icons/3dots.svg" />
-            </top>
-            <content class="img">
-              <img src="generic.png" />
-            </content>
-            <bottom>
-              <img src="icons/share.svg" />
-              <div style="flex: 1"></div>
-              <engagement>
-                <img src="icons/heart.svg" />
-                <span>2137</span>
-              </engagement>
-              <engagement>
-                <img src="icons/message.svg" />
-                <span>2137</span>
-              </engagement>
-            </bottom>
-          </post>
-          <post>
-            <top>
-              <img src="generic.png" />
-              <span>generic</span>
-              <div
-                style="
-                  width: 6px;
-                  height: 6px;
-                  border-radius: 50%;
-                  background-color: white;
-                  flex-shrink: 0;
-                "
-              ></div>
-              <span>1h ago</span>
-              <div style="flex: 1"></div>
-              <postTag class="ai">AI Generated</postTag>
-              <img src="icons/3dots.svg" />
-            </top>
-            <content class="text">
-              <h1>Post with text</h1>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-            </content>
-            <bottom>
-              <img src="icons/share.svg" />
-              <div style="flex: 1"></div>
-              <engagement>
-                <img src="icons/heart.svg" />
-                <span>2137</span>
-              </engagement>
-              <engagement>
-                <img src="icons/message.svg" />
-                <span>2137</span>
-              </engagement>
-            </bottom>
-          </post>
-          <post>
-            <top>
-              <img src="generic.png" />
-              <span>generic</span>
-              <div
-                style="
-                  width: 6px;
-                  height: 6px;
-                  border-radius: 50%;
-                  background-color: white;
-                  flex-shrink: 0;
-                "
-              ></div>
-              <span>1h ago</span>
-              <div style="flex: 1"></div>
-              <postTag class="ai">AI Generated</postTag>
-              <img src="icons/3dots.svg" />
-            </top>
-            <content class="text">
-              <h1>Post with text</h1>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-            </content>
-            <bottom>
-              <img src="icons/share.svg" />
-              <div style="flex: 1"></div>
-              <engagement>
-                <img src="icons/heart.svg" />
-                <span>2137</span>
-              </engagement>
-              <engagement>
-                <img src="icons/message.svg" />
-                <span>2137</span>
-              </engagement>
-            </bottom>
-          </post>
-        </timeline>
-      </mainView>
-    </slot>
-  </body>
+    <body class="chat">
+        <slot template="templates/app-shell.html">
+            <mainView id="community" slot="content">
+                <sticky>
+                    <top>
+                        <img src="icons/people.svg" />
+                        <span>Community</span>
+                    </top>
+                    <communityTags>
+                        <communityTag class="active">
+                            🔥 Trending
+                        </communityTag>
+                        <communityTag> 🎸 Music </communityTag>
+                        <communityTag> 📣 Announcements </communityTag>
+                        <communityTag> 👾 Development </communityTag>
+                        <communityTag> 🕹️ Gaming </communityTag>
+                        <communityTag> ✏️ Drawing </communityTag>
+                        <communityTag> 📝 Writing </communityTag>
+                        <searchWrapper>
+                            <img src="icons/search.svg" />
+                            <input type="text" placeholder="Search" />
+                        </searchWrapper>
+                    </communityTags>
+                    <button class="postButton">
+                        <img src="icons/s-add.svg" /><span>Post</span>
+                    </button>
+                </sticky>
+                <timeline>
+                    <post>
+                        <top>
+                            <img src="generic.png" />
+                            <username>generic</username>
+                            <div
+                                style="
+                                    width: 6px;
+                                    height: 6px;
+                                    border-radius: 50%;
+                                    background-color: white;
+                                    flex-shrink: 0;
+                                "
+                            ></div>
+                            <timestamp>1h ago</timestamp>
+                            <div style="flex: 1"></div>
+                            <postTag class="ai">AI Generated</postTag>
+                            <img src="icons/3dots.svg" />
+                        </top>
+                        <content class="img">
+                            <img src="generic.png" />
+                        </content>
+                        <bottom>
+                            <img src="icons/share.svg" />
+                            <div style="flex: 1"></div>
+                            <engagement>
+                                <img src="icons/heart.svg" />
+                                <span>2137</span>
+                            </engagement>
+                            <engagement>
+                                <img src="icons/message.svg" />
+                                <span>2137</span>
+                            </engagement>
+                        </bottom>
+                    </post>
+                    <post>
+                        <top>
+                            <img src="generic.png" />
+                            <span>generic</span>
+                            <div
+                                style="
+                                    width: 6px;
+                                    height: 6px;
+                                    border-radius: 50%;
+                                    background-color: white;
+                                    flex-shrink: 0;
+                                "
+                            ></div>
+                            <span>1h ago</span>
+                            <div style="flex: 1"></div>
+                            <postTag class="ai">AI Generated</postTag>
+                            <img src="icons/3dots.svg" />
+                        </top>
+                        <content class="text">
+                            <h1>Post with text</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut
+                                enim ad minim veniam, quis nostrud exercitation
+                                ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in
+                                reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat nulla pariatur. Excepteur sint
+                                occaecat cupidatat non proident, sunt in culpa
+                                qui officia deserunt mollit anim id est laborum.
+                            </p>
+                        </content>
+                        <bottom>
+                            <img src="icons/share.svg" />
+                            <div style="flex: 1"></div>
+                            <engagement>
+                                <img src="icons/heart.svg" />
+                                <span>2137</span>
+                            </engagement>
+                            <engagement>
+                                <img src="icons/message.svg" />
+                                <span>2137</span>
+                            </engagement>
+                        </bottom>
+                    </post>
+                    <post>
+                        <top>
+                            <img src="generic.png" />
+                            <span>generic</span>
+                            <div
+                                style="
+                                    width: 6px;
+                                    height: 6px;
+                                    border-radius: 50%;
+                                    background-color: white;
+                                    flex-shrink: 0;
+                                "
+                            ></div>
+                            <span>1h ago</span>
+                            <div style="flex: 1"></div>
+                            <postTag class="ai">AI Generated</postTag>
+                            <img src="icons/3dots.svg" />
+                        </top>
+                        <content class="text">
+                            <h1>Post with text</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut
+                                enim ad minim veniam, quis nostrud exercitation
+                                ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in
+                                reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat nulla pariatur. Excepteur sint
+                                occaecat cupidatat non proident, sunt in culpa
+                                qui officia deserunt mollit anim id est laborum.
+                            </p>
+                        </content>
+                        <bottom>
+                            <img src="icons/share.svg" />
+                            <div style="flex: 1"></div>
+                            <engagement>
+                                <img src="icons/heart.svg" />
+                                <span>2137</span>
+                            </engagement>
+                            <engagement>
+                                <img src="icons/message.svg" />
+                                <span>2137</span>
+                            </engagement>
+                        </bottom>
+                    </post>
+                </timeline>
+                <userCtx>
+                    <banner>
+                        <img src="generic.png" />
+                    </banner>
+                    <doxx>
+                        <b>generic</b>
+                        <span>@generic</span>
+                    </doxx>
+                    <buttons>
+                        <button class="profileButton active">
+                            <b>Follow</b><span>2K</span>
+                        </button>
+                        <button class="profileButton">
+                            <b>View Profile</b>
+                        </button>
+                    </buttons>
+                </userCtx>
+            </mainView>
+        </slot>
+        <script>
+            document.addEventListener("click", function (e) {
+                var ctx = document.querySelector("userCtx");
+                if (!ctx) return;
+
+                // PFP click: the first img inside post > top
+                var postTop = e.target.closest("post > top");
+                if (postTop && e.target.tagName === "IMG" && e.target === postTop.querySelector("img")) {
+                    e.stopPropagation();
+                    var rect = e.target.getBoundingClientRect();
+                    // Align top of menu with the PFP, 10px gap to its left
+                    ctx.style.top = rect.top + "px";
+                    ctx.style.left = rect.left - 280 - 10 + "px";
+                    ctx.classList.add("visible");
+                    return;
+                }
+
+                // Close when clicking outside the menu
+                if (!ctx.contains(e.target)) {
+                    ctx.classList.remove("visible");
+                }
+            });
+        </script>
+    </body>
 </html>
