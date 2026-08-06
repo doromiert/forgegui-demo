@@ -43,18 +43,22 @@
                     <slot template="templates/listbox-row.html">
                         <span slot="label">Name</span>
                         <b slot="value">Generic</b>
+                        <button slot="action" class="listboxAction" onclick="openSettingsPopup('changeNamePopup')">Edit</button>
                     </slot>
                     <slot template="templates/listbox-row.html">
                         <span slot="label">Username</span>
                         <b slot="value">@generic</b>
+                        <button slot="action" class="listboxAction" onclick="openSettingsPopup('changeUsernamePopup')">Edit</button>
                     </slot>
                     <slot template="templates/listbox-row.html">
                         <span slot="label">Email Address</span>
                         <b slot="value">generic@gmail.com</b>
+                        <button slot="action" class="listboxAction" onclick="openSettingsPopup('changeEmailPopup')">Edit</button>
                     </slot>
                     <slot template="templates/listbox-row.html">
                         <span slot="label">Security</span>
                         <b slot="value">Password &amp; Email Verification</b>
+                        <button slot="action" class="listboxAction" onclick="openSettingsPopup('changePasswordPopup')">Edit</button>
                     </slot>
                 </slot>
 
@@ -71,14 +75,20 @@
 
                 <slot template="templates/listbox.html">
                     <span slot="header">Account Management</span>
-                    <slot template="templates/listbox-row.html" class="reversed">
+                    <slot
+                        template="templates/listbox-row.html"
+                        class="reversed"
+                    >
                         <span slot="label">Log out of all devices</span>
                         <b slot="value">Log Out</b>
                         <button slot="action" class="listboxAction">
                             Log Out Now
                         </button>
                     </slot>
-                    <slot template="templates/listbox-row.html" class="reversed">
+                    <slot
+                        template="templates/listbox-row.html"
+                        class="reversed"
+                    >
                         <span slot="label">This action is permanent.</span>
                         <b slot="value">Delete my Account</b>
                         <button slot="action" class="listboxAction destructive">
@@ -88,5 +98,115 @@
                 </slot>
             </settingsView>
         </mainView>
+        <popupContainer class="hidden">
+
+            <!-- Change Username -->
+            <changeUsernamePopup class="hidden">
+                <top>
+                    <h1>Change Username</h1>
+                    <span>You can only change your username once every 30 days.</span>
+                </top>
+                <form>
+                    <fieldGroup>
+                        <input type="password" placeholder="Password" />
+                        <fieldError>Incorrect password, try again.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup>
+                        <input type="text" placeholder="New Username" />
+                        <fieldError>Hmm... It looks like that username is already taken.</fieldError>
+                    </fieldGroup>
+                    <hint>Make sure your new username follows our content guidelines.</hint>
+                </form>
+                <bottom>
+                    <button class="popupButton" onclick="closeSettingsPopup()">Cancel</button>
+                    <button class="popupButton active" onclick="confirmSettingsPopup(this)">Confirm</button>
+                </bottom>
+            </changeUsernamePopup>
+
+            <!-- Change Name -->
+            <changeNamePopup class="hidden">
+                <top>
+                    <h1>Change Name</h1>
+                    <span>This only applies to your account name, not your username.</span>
+                </top>
+                <form>
+                    <fieldGroup>
+                        <input type="text" placeholder="Name" />
+                        <fieldError>Name is required.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup data-optional>
+                        <input type="text" placeholder="Last Name (Optional)" />
+                    </fieldGroup>
+                    <hint>Make sure your name does not violate our content guidelines.</hint>
+                </form>
+                <bottom>
+                    <button class="popupButton" onclick="closeSettingsPopup()">Cancel</button>
+                    <button class="popupButton active" onclick="confirmSettingsPopup(this)">Confirm</button>
+                </bottom>
+            </changeNamePopup>
+
+            <!-- Change Email -->
+            <changeEmailPopup class="hidden">
+                <top>
+                    <h1>Change Email</h1>
+                    <span>Change your account email.</span>
+                </top>
+                <form>
+                    <fieldGroup>
+                        <input type="password" placeholder="Password" />
+                        <fieldError>Incorrect password, try again.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup>
+                        <input type="text" placeholder="2FA Code" />
+                        <fieldError>Invalid 2FA code.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup>
+                        <input type="email" placeholder="Enter Previous Email" />
+                        <fieldError>Please enter your previous email.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup>
+                        <input type="email" placeholder="New Email" />
+                        <fieldError>Please enter a valid email address.</fieldError>
+                    </fieldGroup>
+                    <hint>You have 30 days to send a request from your previous email to revert this action.</hint>
+                </form>
+                <bottom>
+                    <button class="popupButton" onclick="closeSettingsPopup()">Cancel</button>
+                    <button class="popupButton active" onclick="confirmSettingsPopup(this)">Confirm</button>
+                </bottom>
+            </changeEmailPopup>
+
+            <!-- Change Password -->
+            <changePasswordPopup class="hidden">
+                <top>
+                    <h1>Change Password</h1>
+                    <span>Before you continue, enter your 2FA code.</span>
+                </top>
+                <form>
+                    <fieldGroup>
+                        <input type="password" placeholder="Old Password" />
+                        <fieldError>Incorrect password, try again.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup>
+                        <input type="text" placeholder="2FA Code" />
+                        <fieldError>Invalid 2FA code.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup>
+                        <input type="password" placeholder="New Password" data-match-target />
+                        <fieldError>Password must be at least 8 characters.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup>
+                        <input type="password" placeholder="Confirm Password" data-match-source />
+                        <fieldError>Passwords do not match.</fieldError>
+                    </fieldGroup>
+                    <a href="placeholder.html" class="forgotLink">I Forgot My Password...</a>
+                </form>
+                <bottom>
+                    <button class="popupButton" onclick="closeSettingsPopup()">Cancel</button>
+                    <button class="popupButton active" onclick="confirmSettingsPopup(this)">Confirm</button>
+                </bottom>
+            </changePasswordPopup>
+
+        </popupContainer>
     </body>
 </html>

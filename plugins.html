@@ -1,156 +1,283 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ForgeGUI</title>
-    <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
-    <link rel="stylesheet" href="base.css" />
-    <script src="site.js" defer></script>
-    <meta name="theme-color" content="#0D0D0D" />
-    <meta name="description" content="ForgeGUI - Create anything with AI" />
-    <meta property="og:title" content="ForgeGUI" />
-    <meta property="og:description" content="Powerful AI tool for creators" />
-    <meta property="og:type" content="website" />
-    <meta name="color-scheme" content="dark" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+        <link rel="stylesheet" href="base.css" />
+        <script src="site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
 
-    <style></style>
-  </head>
+        <style></style>
+    </head>
 
-  <body class="chat">
-    <slot template="templates/app-shell.html">
-      <mainView id="plugins" slot="content">
-        <banner>
-          <h1>Plugins</h1>
-          <span
-            >Enhance your ForgeGUI experience with plugins that slot right in
-            with your engine of choice.</span
-          >
-        </banner>
-        <pluginHeader>
-          <vertical>
-            <b>Game Engines</b>
-            <span
-              >Enhance your ForgeGUI experience with plugins that slot right in
-              with your engine of choice.</span
-            >
-          </vertical>
-          <selectWrapper>
-            <span>Show Only: <b id="filterLabel">All</b></span>
-            <img src="icons/arrow.svg" class="selectArrow" />
-            <select
-              onchange="
-              document.getElementById('filterLabel').textContent =
-                this.options[this.selectedIndex].text
-            "
-            >
-              <option value="all">All</option>
-            </select>
-          </selectWrapper>
-        </pluginHeader>
-        <pluginGrid>
-          <pluginBox class="premium">
-            <top>
-              <img src="icons/roblox.svg" />
-              <div>
-                <premiumBadge>
-                  <img src="icons/crown.svg" />
-                  <span>Premium</span>
-                </premiumBadge>
-                <pluginChip class="active"> Beta </pluginChip>
-                <pluginChip> 1.4 </pluginChip>
-              </div>
-            </top>
-            <bottom>
-              <vertical>
-                <b>ForgeGUI Connect</b>
-                <span>for Roblox Studio</span>
-              </vertical>
-              <button>Install <img src="icons/download.svg" /></button>
-            </bottom>
-          </pluginBox>
-          <pluginBox>
-            <top>
-              <img src="icons/unity.svg" />
-              <div>
-                <pluginChip class="active"> Beta </pluginChip>
-                <pluginChip> 1.4 </pluginChip>
-              </div>
-            </top>
-            <bottom>
-              <vertical>
-                <b>ForgeGUI Connect</b>
-                <span>for Unity</span>
-              </vertical>
-              <button>Install <img src="icons/download.svg" /></button>
-            </bottom>
-          </pluginBox>
-          <pluginBox>
-            <top>
-              <img src="icons/ue.svg" />
-              <div>
-                <pluginChip class="active"> Beta </pluginChip>
-                <pluginChip> 1.4 </pluginChip>
-              </div>
-            </top>
-            <bottom>
-              <vertical>
-                <b>ForgeGUI Connect</b>
-                <span>for Unreal Engine</span>
-              </vertical>
-              <button>Install <img src="icons/download.svg" /></button>
-            </bottom>
-          </pluginBox>
-          <pluginBox>
-            <top>
-              <img src="icons/godot.svg" />
-              <div>
-                <pluginChip class="active"> Beta </pluginChip>
-                <pluginChip> 1.4 </pluginChip>
-              </div>
-            </top>
-            <bottom>
-              <vertical>
-                <b>ForgeGUI Connect</b>
-                <span>for Godot</span>
-              </vertical>
-              <button>Install <img src="icons/download.svg" /></button>
-            </bottom>
-          </pluginBox>
-          <pluginBox>
-            <top>
-              <img src="icons/blender.svg" />
-              <div>
-                <pluginChip class="active"> Beta </pluginChip>
-                <pluginChip> 1.4 </pluginChip>
-              </div>
-            </top>
-            <bottom>
-              <vertical>
-                <b>ForgeGUI Connect</b>
-                <span>for Blender</span>
-              </vertical>
-              <button>Install <img src="icons/download.svg" /></button>
-            </bottom>
-          </pluginBox>
-          <pluginBox>
-            <top>
-              <img src="icons/ai.svg" />
-              <div>
-                <pluginChip class="active"> Beta </pluginChip>
-                <pluginChip> 1.4 </pluginChip>
-              </div>
-            </top>
-            <bottom>
-              <vertical>
-                <b>ForgeGUI Connect</b>
-                <span>for MCP</span>
-              </vertical>
-              <button>Install <img src="icons/download.svg" /></button>
-            </bottom>
-          </pluginBox>
-        </pluginGrid>
-      </mainView>
-    </slot>
-  </body>
+    <body class="chat">
+        <slot template="templates/app-shell.html">
+            <mainView id="plugins" slot="content">
+                <banner>
+                    <h1>Plugins</h1>
+                    <span
+                        >Enhance your ForgeGUI experience with plugins that slot
+                        right in with your engine of choice.</span
+                    >
+                </banner>
+                <pluginHeader>
+                    <vertical>
+                        <b>Game Engines</b>
+                        <span
+                            >Enhance your ForgeGUI experience with plugins that
+                            slot right in with your engine of choice.</span
+                        >
+                    </vertical>
+                    <selectWrapper>
+                        <span>Show Only: <b id="filterLabel">All</b></span>
+                        <img src="icons/arrow.svg" class="selectArrow" />
+                        <select
+                            onchange="
+                                document.getElementById(
+                                    'filterLabel',
+                                ).textContent =
+                                    this.options[this.selectedIndex].text
+                            "
+                        >
+                            <option value="all">All</option>
+                        </select>
+                    </selectWrapper>
+                </pluginHeader>
+                <pluginGrid>
+                    <pluginBox class="premium">
+                        <top>
+                            <img src="icons/roblox.svg" />
+                            <div>
+                                <premiumBadge>
+                                    <img src="icons/crown.svg" />
+                                    <span>Premium</span>
+                                </premiumBadge>
+                                <pluginChip class="active"> Beta </pluginChip>
+                                <pluginChip> 1.4 </pluginChip>
+                            </div>
+                        </top>
+                        <bottom>
+                            <vertical>
+                                <b>ForgeGUI Connect</b>
+                                <span>for Roblox Studio</span>
+                            </vertical>
+                            <button>
+                                Install <img src="icons/download.svg" />
+                            </button>
+                        </bottom>
+                    </pluginBox>
+                    <pluginBox>
+                        <top>
+                            <img src="icons/unity.svg" />
+                            <div>
+                                <pluginChip class="active"> Beta </pluginChip>
+                                <pluginChip> 1.4 </pluginChip>
+                            </div>
+                        </top>
+                        <bottom>
+                            <vertical>
+                                <b>ForgeGUI Connect</b>
+                                <span>for Unity</span>
+                            </vertical>
+                            <button>
+                                Install <img src="icons/download.svg" />
+                            </button>
+                        </bottom>
+                    </pluginBox>
+                    <pluginBox>
+                        <top>
+                            <img src="icons/ue.svg" />
+                            <div>
+                                <pluginChip class="active"> Beta </pluginChip>
+                                <pluginChip> 1.4 </pluginChip>
+                            </div>
+                        </top>
+                        <bottom>
+                            <vertical>
+                                <b>ForgeGUI Connect</b>
+                                <span>for Unreal Engine</span>
+                            </vertical>
+                            <button>
+                                Install <img src="icons/download.svg" />
+                            </button>
+                        </bottom>
+                    </pluginBox>
+                    <pluginBox>
+                        <top>
+                            <img src="icons/godot.svg" />
+                            <div>
+                                <pluginChip class="active"> Beta </pluginChip>
+                                <pluginChip> 1.4 </pluginChip>
+                            </div>
+                        </top>
+                        <bottom>
+                            <vertical>
+                                <b>ForgeGUI Connect</b>
+                                <span>for Godot</span>
+                            </vertical>
+                            <button>
+                                Install <img src="icons/download.svg" />
+                            </button>
+                        </bottom>
+                    </pluginBox>
+                    <pluginBox>
+                        <top>
+                            <img src="icons/blender.svg" />
+                            <div>
+                                <pluginChip class="active"> Beta </pluginChip>
+                                <pluginChip> 1.4 </pluginChip>
+                            </div>
+                        </top>
+                        <bottom>
+                            <vertical>
+                                <b>ForgeGUI Connect</b>
+                                <span>for Blender</span>
+                            </vertical>
+                            <button>
+                                Install <img src="icons/download.svg" />
+                            </button>
+                        </bottom>
+                    </pluginBox>
+                    <pluginBox>
+                        <top>
+                            <img src="icons/ai.svg" />
+                            <div>
+                                <pluginChip class="active"> Beta </pluginChip>
+                                <pluginChip> 1.4 </pluginChip>
+                            </div>
+                        </top>
+                        <bottom>
+                            <vertical>
+                                <b>ForgeGUI Connect</b>
+                                <span>for MCP</span>
+                            </vertical>
+                            <button>
+                                Install <img src="icons/download.svg" />
+                            </button>
+                        </bottom>
+                    </pluginBox>
+                </pluginGrid>
+            </mainView>
+        </slot>
+        <popupContainer class="hidden">
+            <pluginPopup class="hidden">
+                <top>
+                    <img
+                        src="icons/arrow.svg"
+                        style="rotate: 90deg"
+                        onclick="closePluginPopup()"
+                    />
+                    <span>Plugins</span>
+                    <div style="flex: 1"></div>
+                    <img class="more" src="icons/3dots.svg" />
+                </top>
+                <banner>
+                    <img src="coursePlaceholder.jpg" />
+                </banner>
+                <info>
+                    <top>
+                        <img src="icons/fg.svg" />
+                        <vertical>
+                            <h1>ForgeGUI Connect</h1>
+                            <div>
+                                <span>For</span>
+                                <img src="icons/roblox.svg" />
+                                <span>Roblox Studio</span>
+                            </div>
+                        </vertical>
+                        <button
+                            class="installButton"
+                            onclick="openInstallPopup()"
+                        >
+                            <span>Install</span>
+                            <img src="icons/download.svg" />
+                        </button>
+                    </top>
+                    <bottom>
+                        <left>
+                            ForgeGUI Connect is an AI-powered Roblox Studio
+                            integration designed to streamline game development
+                            by bridging web-based asset generation directly into
+                            your workspace. Instead of manually downloading,
+                            managing, and importing generated assets or copying
+                            code snippets, the plugin links your ForgeGUI
+                            account directly to Roblox Studio for seamless
+                            workflow execution.
+                        </left>
+                        <right>
+                            <topBox>
+                                <h1>Requirements</h1>
+                                <ul>
+                                    <li>Windows 10 or Later</li>
+                                    <li>Roblox Studio</li>
+                                    <li>ForgeGUI Pro Tier</li>
+                                </ul>
+                            </topBox>
+                            <bottomBox>
+                                <h1>Plugin Info</h1>
+                                <ul>
+                                    <li>Version 1.4</li>
+                                    <li>Premium Plugin</li>
+                                </ul>
+                            </bottomBox>
+                        </right>
+                    </bottom>
+                </info>
+            </pluginPopup>
+            <installPopup class="hidden">
+                <top>
+                    <h1>Install Roblox Plugin</h1>
+                    <span>Let's get you connected to ForgeGUI on Roblox</span>
+                </top>
+                <pluginVideo>
+                    <button class="playButton">
+                        <img src="icons/Play.svg" />
+                    </button>
+                </pluginVideo>
+                <slot template="templates/listbox.html">
+                    <slot template="templates/listbox-row.html">
+                        <span slot="label">Downloads</span>
+                        <b slot="value">Download the Plugin</b>
+                        <button slot="action" class="listboxAction">
+                            Open in Roblox Studio
+                        </button>
+                    </slot>
+                    <slot template="templates/listbox-row.html">
+                        <span slot="label">Connections</span>
+                        <b slot="value">Link your Roblox Account</b>
+                        <!-- ↓↓↓ when linked, it should be black on white and say "Already Linked" -->
+                        <button
+                            slot="action"
+                            class="listboxAction"
+                            data-linked-label="Already Linked"
+                            onclick="toggleLinked(this)"
+                        >
+                            Link Roblox Account
+                        </button>
+                    </slot>
+                </slot>
+                <bottom>
+                    <button class="popupButton" onclick="closeInstallPopup()">
+                        Cancel
+                    </button>
+                    <button
+                        class="popupButton active"
+                        onclick="closeInstallPopup()"
+                    >
+                        Done
+                    </button>
+                </bottom>
+            </installPopup>
+        </popupContainer>
+    </body>
 </html>
