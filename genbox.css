@@ -1,0 +1,267 @@
+/* genbox — image generation placeholder
+   everything is scoped under .genbox. recolour via the custom properties below. */
+
+.genbox {
+   /* ---- palette ---- */
+   --gb-1: #4f6bff; /* blue    */
+   --gb-2: #8b5cf6; /* violet  */
+   --gb-3: #22d3ee; /* cyan    */
+   --gb-4: #c026d3; /* magenta */
+   --gb-plate: #0e0c16; /* box fill */
+   --gb-radius: 20px;
+   --gb-ratio: 4/5;
+   --gb-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+
+   position: relative;
+   width: 100%;
+   aspect-ratio: var(--gb-ratio);
+   border-radius: var(--gb-radius);
+   overflow: hidden;
+   isolation: isolate;
+   background: var(--gb-plate);
+   border: 1px solid #ffffff12;
+   box-shadow: 0 20px 50px -24px #4f6bff55;
+}
+
+/* ---- 1. drifting glow ---- */
+.genbox-glow {
+   position: absolute;
+   inset: -30%;
+   filter: blur(46px);
+   pointer-events: none;
+}
+.genbox-blob {
+   position: absolute;
+   border-radius: 50%;
+   mix-blend-mode: screen;
+   will-change: transform;
+}
+.genbox-b1 {
+   width: 95%;
+   height: 60%;
+   left: -18%;
+   bottom: -10%;
+   background: radial-gradient(circle, var(--gb-1) 0%, #4f6bff00 68%);
+   animation: gb-d1 17s ease-in-out infinite;
+}
+.genbox-b2 {
+   width: 85%;
+   height: 55%;
+   right: -16%;
+   bottom: -6%;
+   background: radial-gradient(circle, var(--gb-3) 0%, #22d3ee00 66%);
+   animation: gb-d2 21s ease-in-out infinite;
+}
+.genbox-b3 {
+   width: 70%;
+   height: 44%;
+   left: 12%;
+   bottom: 4%;
+   background: radial-gradient(circle, var(--gb-2) 0%, #8b5cf600 64%);
+   animation: gb-d3 13s ease-in-out infinite;
+}
+.genbox-b4 {
+   width: 130%;
+   height: 30%;
+   left: -14%;
+   top: -14%;
+   background: radial-gradient(
+      ellipse at 50% 100%,
+      var(--gb-2) 0%,
+      #8b5cf600 70%
+   );
+   animation: gb-d4 19s ease-in-out infinite;
+}
+.genbox-b5 {
+   width: 45%;
+   height: 38%;
+   left: -12%;
+   bottom: 22%;
+   background: radial-gradient(circle, var(--gb-4) 0%, #c026d300 65%);
+   animation: gb-d2 25s ease-in-out infinite reverse;
+}
+
+@keyframes gb-d1 {
+   0%,
+   100% {
+      transform: translate3d(0, 0, 0) scale(1);
+   }
+   33% {
+      transform: translate3d(9%, -6%, 0) scale(1.15);
+   }
+   66% {
+      transform: translate3d(-6%, 4%, 0) scale(0.92);
+   }
+}
+@keyframes gb-d2 {
+   0%,
+   100% {
+      transform: translate3d(0, 0, 0) scale(1.05);
+   }
+   40% {
+      transform: translate3d(-11%, -8%, 0) scale(0.9);
+   }
+   70% {
+      transform: translate3d(5%, 3%, 0) scale(1.2);
+   }
+}
+@keyframes gb-d3 {
+   0%,
+   100% {
+      transform: translate3d(0, 0, 0) scale(0.95);
+   }
+   50% {
+      transform: translate3d(14%, -10%, 0) scale(1.25);
+   }
+}
+@keyframes gb-d4 {
+   0%,
+   100% {
+      transform: translate3d(-4%, 0, 0) scale(1);
+   }
+   50% {
+      transform: translate3d(6%, 2%, 0) scale(1.1);
+   }
+}
+
+/* ---- 2. warping dot mesh ---- */
+.genbox-mesh {
+   position: absolute;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   height: 78%;
+   mix-blend-mode: screen;
+   pointer-events: none;
+}
+
+/* ---- 3. upward progressive blur (layers injected by JS) ---- */
+.genbox-pblur {
+   position: absolute;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   height: 72%;
+   pointer-events: none;
+}
+.genbox-pblur div {
+   position: absolute;
+   inset: 0;
+}
+
+/* ---- 4. radial gradient + edge ring ---- */
+.genbox-rad {
+   position: absolute;
+   inset: 0;
+   pointer-events: none;
+   mix-blend-mode: screen;
+   background: radial-gradient(
+      115% 85% at 50% 112%,
+      #8b9cff70 0%,
+      #4f6bff30 36%,
+      #00000000 72%
+   );
+}
+.genbox-vign {
+   position: absolute;
+   inset: 0;
+   pointer-events: none;
+   background: radial-gradient(
+      125% 95% at 50% 115%,
+      #00000000 42%,
+      #000000a0 100%
+   );
+}
+.genbox-ring {
+   position: absolute;
+   inset: 0;
+   pointer-events: none;
+   border-radius: inherit;
+   mix-blend-mode: screen;
+}
+
+/* ---- status ---- */
+.genbox-label {
+   position: absolute;
+   left: 16px;
+   right: 16px;
+   bottom: 16px;
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   font-family: var(--gb-mono);
+   font-size: 12px;
+   letter-spacing: 0.02em;
+   color: #fff;
+   z-index: 2;
+}
+.genbox-label .genbox-txt {
+   flex: 1;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   opacity: 0.92;
+   font-size: 16px;
+   font-family: "atkinson hyperlegible next";
+}
+.genbox-label .genbox-pct {
+   opacity: 0.7;
+   font-variant-numeric: tabular-nums;
+}
+.genbox-track {
+   position: absolute;
+   left: 16px;
+   right: 16px;
+   bottom: 40px;
+   height: 2px;
+   border-radius: 2px;
+   background: #ffffff1f;
+   overflow: hidden;
+   z-index: 2;
+}
+.genbox-track i {
+   display: block;
+   height: 100%;
+   width: 0;
+   border-radius: 2px;
+   background: linear-gradient(
+      90deg,
+      var(--gb-4),
+      var(--gb-2),
+      var(--gb-1),
+      var(--gb-3)
+   );
+   transition: width 0.5s ease;
+}
+
+/* ---- finished ---- */
+.genbox.is-done .genbox-pblur,
+.genbox.is-done .genbox-track,
+.genbox.is-done .genbox-label {
+   opacity: 0;
+   transition: opacity 0.7s ease;
+}
+.genbox.is-done .genbox-glow {
+   filter: blur(70px);
+   opacity: 0.75;
+   transition: all 1.2s ease;
+}
+.genbox-shot {
+   position: absolute;
+   inset: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   opacity: 0;
+   transition: opacity 1s ease;
+   z-index: 3;
+}
+.genbox.is-done .genbox-shot {
+   opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+   .genbox-blob {
+      animation: none;
+   }
+}

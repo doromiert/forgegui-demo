@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI — Settings</title>
+        <link rel="stylesheet" href="../base.css" />
+        <script src="../site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="color-scheme" content="dark" />
+        <style></style>
+      <meta name="forge-path" content="settings/overview.html">
+</head>
+
+    <body class="chat">
+        <sidebar class="collapsed">
+    <top class="sb">
+        <img src="../footerLogo.svg" class="fgLogo" alt="ForgeGUI" />
+        <button type="button" data-toggle-sidebar aria-label="Toggle sidebar">
+            <img src="../icons/sidebar.svg" alt="" />
+        </button>
+    </top>
+
+    <specialTabs>
+        <a href="../home.html" class="sidebarElem">
+            <img src="../icons/home.svg" alt="" />
+            <span>Home</span>
+        </a>
+        <a
+            href="../assets/overview.html"
+            class="sidebarElem"
+        >
+            <img src="../icons/file.svg" alt="" />
+            <span>Assets</span>
+        </a>
+        <a
+            href="../community.html"
+            class="sidebarElem"
+        >
+            <img src="../icons/people.svg" alt="" />
+            <span>Community</span>
+        </a>
+    </specialTabs>
+
+    <projects>
+        <topLabel>Game Projects</topLabel>
+        <a href="../oldChat.html" class="sidebarElem">
+            <img src="../icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="../oldChat.html" class="sidebarElem">
+            <img src="../icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="../oldChat.html" class="sidebarElem">
+            <img src="../icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="../oldChat.html" class="sidebarElem">
+            <img src="../icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="../oldChat.html" class="sidebarElem">
+            <img src="../icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="../oldChat.html" class="sidebarElem">
+            <img src="../icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="../oldChat.html" class="sidebarElem">
+            <img src="../icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+    </projects>
+
+    <contextMenu
+        id="userMenu"
+        class="hidden user"
+        style="width: 282px"
+        data-context-target="userMenu"
+    >
+        <button><img src="../icons/Exclamation.svg" alt="" /> Help</button>
+        <a href="../settings/overview.html"
+            ><img src="../icons/Settings.svg" alt="" /> Settings</a
+        >
+        <button>
+            <img src="../icons/Moon.svg" alt="" /> Theme
+            <span style="flex: 1"></span>
+            <span>System</span>
+            <img src="../icons/arrow.svg" alt="" style="rotate: -90deg" />
+        </button>
+        <button class="destructive">
+            <img src="../icons/SignOut.svg" alt="" /> Logout
+        </button>
+    </contextMenu>
+
+    <bottom class="sb">
+        <creditCounter>
+            <top>
+                <img src="../icons/coins.svg" alt="" />
+                <span>Starter Plan</span>
+                <span style="flex: 1"></span>
+                <a href="../getMoreCredits.html">Get More</a>
+            </top>
+            <bottom>
+                <creditSlider></creditSlider>
+                <span>1</span>
+            </bottom>
+        </creditCounter>
+
+        <a
+            href="../plans.html"
+            class="sidebarElem upgradeButton"
+        >
+            <img
+                src="../icons/crown.svg"
+                alt=""
+                style="image-rendering: optimizeQuality"
+            />
+            <span>Upgrade to Pro</span>
+        </a>
+
+        <actions>
+            <a
+                href="../courses.html"
+                class="sidebarElem"
+            >
+                <img src="../icons/book.svg" alt="" />
+                <span>Courses</span>
+            </a>
+            <a
+                href="../plugins.html"
+                class="sidebarElem"
+            >
+                <img src="../icons/plugin.svg" alt="" />
+                <span>Plugins</span>
+            </a>
+            <a href="../leaderboard.html" class="sidebarElem">
+                <img src="../icons/Trophy.svg" alt="" />
+                <span>Leaderboard</span>
+            </a>
+            <a href="../notifications.html" class="sidebarElem">
+                <img src="../icons/bell.svg" alt="" />
+                <span>Notifications</span>
+            </a>
+            <a href="../gameMaker.html" class="sidebarElem">
+                <img src="../icons/bell.svg" alt="" />
+                <span>[dev] game maker</span>
+            </a>
+        </actions>
+
+        <sidebarUserButton data-context-target="userMenu">
+            <img src="../generic.png" alt="" />
+            <vertical>
+                <b>generic</b>
+                <span>generic@gmail.com</span>
+            </vertical>
+            <img src="../icons/selection.svg" alt="" />
+        </sidebarUserButton>
+    </bottom>
+</sidebar>
+
+        <mainView class="settings">
+            <sidebar class="settingsSidebar">
+    <top> Settings </top>
+
+    <specialTabs>
+        <a href="../settings/overview.html" class="sidebarElem">
+            <img src="../icons/home.svg" alt="" />
+            <span>Account Overview</span>
+        </a>
+        <a
+            href="../settings/billing.html"
+            class="sidebarElem"
+        >
+            <img src="../icons/card.svg" alt="" />
+            <span>Plan & Billing</span>
+        </a>
+        <a href="../settings/rewards.html" class="sidebarElem">
+            <img src="../icons/Rewards.svg" alt="" />
+            <span>Referrals & Rewards</span>
+        </a>
+    </specialTabs>
+</sidebar>
+
+            <settingsView>
+                <banner>
+                    <span class="bannerEditHint"
+                        ><img src="../icons/pencil.svg" alt=""
+                    /></span>
+                    <userPFP>
+                        <img src="../generic.png" alt="" />
+                        <span class="pfpEditHint"
+                            ><img src="../icons/pencil.svg" alt=""
+                        /></span>
+                    </userPFP>
+                </banner>
+
+                <verifiedCTA>
+                    <img src="../icons/user-mark.svg" alt="" />
+                    Get Verified
+                </verifiedCTA>
+                <doxx>
+                    <b>Generic</b>
+                    <span>generic@gmail.com</span>
+                </doxx>
+                <button class="editProfileButton">Edit Public Profile</button>
+
+                <listbox>
+    <header><span>My Account</span></header>
+    <group><line>
+    <vertical>
+        <span><span>Name</span></span>
+        <b><b>Generic</b></b>
+    </vertical>
+    <button class="listboxAction" onclick="openSettingsPopup('changeNamePopup')">Edit</button>
+</line>
+
+                    <line>
+    <vertical>
+        <span><span>Username</span></span>
+        <b><b>@generic</b></b>
+    </vertical>
+    <button class="listboxAction" onclick="openSettingsPopup('changeUsernamePopup')">Edit</button>
+</line>
+
+                    <line>
+    <vertical>
+        <span><span>Email Address</span></span>
+        <b><b>generic@gmail.com</b></b>
+    </vertical>
+    <button class="listboxAction" onclick="openSettingsPopup('changeEmailPopup')">Edit</button>
+</line>
+
+                    <line>
+    <vertical>
+        <span><span>Security</span></span>
+        <b><b>Password &amp; Email Verification</b></b>
+    </vertical>
+    <button class="listboxAction" onclick="openSettingsPopup('changePasswordPopup')">Edit</button>
+</line></group>
+</listbox>
+
+
+                <listbox>
+    <header><span>Connections</span></header>
+    <group><line>
+    <vertical>
+        <span><span>Roblox Account</span></span>
+        <b><b>Not Linked</b></b>
+    </vertical>
+    <button class="listboxAction">
+                            Link Roblox Account
+                        </button>
+</line></group>
+</listbox>
+
+
+                <listbox>
+    <header><span>Account Management</span></header>
+    <group><line class="reversed">
+    <vertical>
+        <span><span>Log out of all devices</span></span>
+        <b><b>Log Out</b></b>
+    </vertical>
+    <button class="listboxAction">
+                            Log Out Now
+                        </button>
+</line>
+
+                    <line class="reversed">
+    <vertical>
+        <span><span>This action is permanent.</span></span>
+        <b><b>Delete my Account</b></b>
+    </vertical>
+    <button class="listboxAction destructive">
+                            Delete my Account
+                        </button>
+</line></group>
+</listbox>
+
+            </settingsView>
+        </mainView>
+        <popupContainer class="hidden">
+
+            <!-- Change Username -->
+            <changeUsernamePopup class="hidden">
+                <top>
+                    <h1>Change Username</h1>
+                    <span>You can only change your username once every 30 days.</span>
+                </top>
+                <form>
+                    <fieldGroup>
+                        <input type="password" placeholder="Password" />
+                        <fieldError>Incorrect password, try again.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup>
+                        <input type="text" placeholder="New Username" />
+                        <fieldError>Hmm... It looks like that username is already taken.</fieldError>
+                    </fieldGroup>
+                    <hint>Make sure your new username follows our content guidelines.</hint>
+                </form>
+                <bottom>
+                    <button class="popupButton" onclick="closeSettingsPopup()">Cancel</button>
+                    <button class="popupButton active" onclick="confirmSettingsPopup(this)">Confirm</button>
+                </bottom>
+            </changeUsernamePopup>
+
+            <!-- Change Name -->
+            <changeNamePopup class="hidden">
+                <top>
+                    <h1>Change Name</h1>
+                    <span>This only applies to your account name, not your username.</span>
+                </top>
+                <form>
+                    <fieldGroup>
+                        <input type="text" placeholder="Name" />
+                        <fieldError>Name is required.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup data-optional>
+                        <input type="text" placeholder="Last Name (Optional)" />
+                    </fieldGroup>
+                    <hint>Make sure your name does not violate our content guidelines.</hint>
+                </form>
+                <bottom>
+                    <button class="popupButton" onclick="closeSettingsPopup()">Cancel</button>
+                    <button class="popupButton active" onclick="confirmSettingsPopup(this)">Confirm</button>
+                </bottom>
+            </changeNamePopup>
+
+            <!-- Change Email -->
+            <changeEmailPopup class="hidden">
+                <top>
+                    <h1>Change Email</h1>
+                    <span>Change your account email.</span>
+                </top>
+                <form>
+                    <fieldGroup>
+                        <input type="password" placeholder="Password" />
+                        <fieldError>Incorrect password, try again.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup>
+                        <input type="text" placeholder="2FA Code" />
+                        <fieldError>Invalid 2FA code.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup>
+                        <input type="email" placeholder="Enter Previous Email" />
+                        <fieldError>Please enter your previous email.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup>
+                        <input type="email" placeholder="New Email" />
+                        <fieldError>Please enter a valid email address.</fieldError>
+                    </fieldGroup>
+                    <hint>You have 30 days to send a request from your previous email to revert this action.</hint>
+                </form>
+                <bottom>
+                    <button class="popupButton" onclick="closeSettingsPopup()">Cancel</button>
+                    <button class="popupButton active" onclick="confirmSettingsPopup(this)">Confirm</button>
+                </bottom>
+            </changeEmailPopup>
+
+            <!-- Change Password -->
+            <changePasswordPopup class="hidden">
+                <top>
+                    <h1>Change Password</h1>
+                    <span>Before you continue, enter your 2FA code.</span>
+                </top>
+                <form>
+                    <fieldGroup>
+                        <input type="password" placeholder="Old Password" />
+                        <fieldError>Incorrect password, try again.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup>
+                        <input type="text" placeholder="2FA Code" />
+                        <fieldError>Invalid 2FA code.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup>
+                        <input type="password" placeholder="New Password" data-match-target />
+                        <fieldError>Password must be at least 8 characters.</fieldError>
+                    </fieldGroup>
+                    <fieldGroup>
+                        <input type="password" placeholder="Confirm Password" data-match-source />
+                        <fieldError>Passwords do not match.</fieldError>
+                    </fieldGroup>
+                    <a href="../placeholder.html" class="forgotLink">I Forgot My Password...</a>
+                </form>
+                <bottom>
+                    <button class="popupButton" onclick="closeSettingsPopup()">Cancel</button>
+                    <button class="popupButton active" onclick="confirmSettingsPopup(this)">Confirm</button>
+                </bottom>
+            </changePasswordPopup>
+
+        </popupContainer>
+    </body>
+</html>

@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+        <link rel="stylesheet" href="base.css" />
+        <script src="site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
+
+        <style></style>
+      <meta name="forge-path" content="leaderboard.html">
+</head>
+
+    <body class="chat">
+        <sidebar>
+    <top class="sb">
+        <img src="footerLogo.svg" class="fgLogo" alt="ForgeGUI" />
+        <button type="button" data-toggle-sidebar aria-label="Toggle sidebar">
+            <img src="icons/sidebar.svg" alt="" />
+        </button>
+    </top>
+
+    <specialTabs>
+        <a href="home.html" class="sidebarElem">
+            <img src="icons/home.svg" alt="" />
+            <span>Home</span>
+        </a>
+        <a
+            href="assets/overview.html"
+            class="sidebarElem"
+        >
+            <img src="icons/file.svg" alt="" />
+            <span>Assets</span>
+        </a>
+        <a
+            href="community.html"
+            class="sidebarElem"
+        >
+            <img src="icons/people.svg" alt="" />
+            <span>Community</span>
+        </a>
+    </specialTabs>
+
+    <projects>
+        <topLabel>Game Projects</topLabel>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+    </projects>
+
+    <contextMenu
+        id="userMenu"
+        class="hidden user"
+        style="width: 282px"
+        data-context-target="userMenu"
+    >
+        <button><img src="icons/Exclamation.svg" alt="" /> Help</button>
+        <a href="settings/overview.html"
+            ><img src="icons/Settings.svg" alt="" /> Settings</a
+        >
+        <button>
+            <img src="icons/Moon.svg" alt="" /> Theme
+            <span style="flex: 1"></span>
+            <span>System</span>
+            <img src="icons/arrow.svg" alt="" style="rotate: -90deg" />
+        </button>
+        <button class="destructive">
+            <img src="icons/SignOut.svg" alt="" /> Logout
+        </button>
+    </contextMenu>
+
+    <bottom class="sb">
+        <creditCounter>
+            <top>
+                <img src="icons/coins.svg" alt="" />
+                <span>Starter Plan</span>
+                <span style="flex: 1"></span>
+                <a href="getMoreCredits.html">Get More</a>
+            </top>
+            <bottom>
+                <creditSlider></creditSlider>
+                <span>1</span>
+            </bottom>
+        </creditCounter>
+
+        <a
+            href="plans.html"
+            class="sidebarElem upgradeButton"
+        >
+            <img
+                src="icons/crown.svg"
+                alt=""
+                style="image-rendering: optimizeQuality"
+            />
+            <span>Upgrade to Pro</span>
+        </a>
+
+        <actions>
+            <a
+                href="courses.html"
+                class="sidebarElem"
+            >
+                <img src="icons/book.svg" alt="" />
+                <span>Courses</span>
+            </a>
+            <a
+                href="plugins.html"
+                class="sidebarElem"
+            >
+                <img src="icons/plugin.svg" alt="" />
+                <span>Plugins</span>
+            </a>
+            <a href="leaderboard.html" class="sidebarElem">
+                <img src="icons/Trophy.svg" alt="" />
+                <span>Leaderboard</span>
+            </a>
+            <a href="notifications.html" class="sidebarElem">
+                <img src="icons/bell.svg" alt="" />
+                <span>Notifications</span>
+            </a>
+            <a href="gameMaker.html" class="sidebarElem">
+                <img src="icons/bell.svg" alt="" />
+                <span>[dev] game maker</span>
+            </a>
+        </actions>
+
+        <sidebarUserButton data-context-target="userMenu">
+            <img src="generic.png" alt="" />
+            <vertical>
+                <b>generic</b>
+                <span>generic@gmail.com</span>
+            </vertical>
+            <img src="icons/selection.svg" alt="" />
+        </sidebarUserButton>
+    </bottom>
+</sidebar>
+
+<mainView class="leaderboard">
+                <fomo> <b>57</b><span>Days Left</span> </fomo>
+                <h1>Leaderboard</h1>
+                <leaderboard>
+                    <leaderboardheader>Top 4</leaderboardheader>
+                    <leaderboardPosition id="n1">
+                        <badge class="n1">1st</badge>
+                        <img src="generic.png" />
+                        <username>Generic</username>
+                        <img src="trophy.svg" />
+                        <likesCount>49K Likes</likesCount>
+                        <playsCount><b>100B+</b> Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n2">
+                        <badge>2nd</badge>
+                        <img src="generic.png" />
+                        <username>Generic</username>
+                        <img src="trophy.svg" />
+                        <likesCount>49K Likes</likesCount>
+                        <playsCount><b>100B+</b> Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n3">
+                        <badge>3rd</badge>
+                        <img src="generic.png" />
+                        <username>Generic</username>
+                        <img src="trophy.svg" />
+                        <likesCount>49K Likes</likesCount>
+                        <playsCount><b>100B+</b> Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n4">
+                        <badge>4th</badge>
+                        <img src="generic.png" />
+                        <username>Generic</username>
+                        <img src="trophy.svg" />
+                        <likesCount>49K Likes</likesCount>
+                        <playsCount><b>100B+</b> Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardheader class="more-header">More...</leaderboardheader>
+                    <leaderboardPosition id="n5" class="extra-row">
+                        <badge>5th</badge>
+                        <img src="generic.png" />
+                        <username>Username</username>
+                        <img src="trophy.svg" />
+                        <likesCount>50K Likes</likesCount>
+                        <playsCount><b>105B+</b> Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n6" class="extra-row">
+                        <badge>6th</badge>
+                        <img src="generic.png" />
+                        <username>Username</username>
+                        <img src="trophy.svg" />
+                        <likesCount>52K Likes</likesCount>
+                        <playsCount>110B+ Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n7" class="extra-row">
+                        <badge>7th</badge>
+                        <img src="generic.png" />
+                        <username>Username</username>
+                        <img src="trophy.svg" />
+                        <likesCount>48K Likes</likesCount>
+                        <playsCount>95B+ Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n8" class="extra-row">
+                        <badge>8th</badge>
+                        <img src="generic.png" />
+                        <username>Username</username>
+                        <img src="trophy.svg" />
+                        <likesCount>51K Likes</likesCount>
+                        <playsCount>102B+ Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n9" class="extra-row">
+                        <badge>9th</badge>
+                        <img src="generic.png" />
+                        <username>Username</username>
+                        <likesCount>53K Likes</likesCount>
+                        <playsCount>108B+ Plays</playsCount>
+                    </leaderboardPosition>
+                    <leaderboardPosition id="n10" class="extra-row">
+                        <badge>10th</badge>
+                        <img src="generic.png" />
+                        <username>Username</username>
+                        <likesCount>54K Likes</likesCount>
+                        <playsCount>115B+ Plays</playsCount>
+                    </leaderboardPosition>
+                </leaderboard>
+                <button class="showMoreButton" onclick="toggleLeaderboard(this)">Show More...</button>
+                <div class="leaderboardBottom">
+                    <leaderboardPosition id="you">
+                        <badge>67th</badge>
+                        <img src="generic.png" />
+                        <username>YOU</username>
+                        <likesCount>49K Likes</likesCount>
+                        <playsCount><b>100B+</b> Plays</playsCount>
+                    </leaderboardPosition>
+                    <span>50M Plays to 1st place!</span>
+                </div>
+                <physicalBox>
+                    <img src="trophy.svg" />
+                    <h1>Physical Trophy Winners</h1>
+                    <p>
+                        Every month, 10 users are selected for a ForgeGUI
+                        trophy. You can earn one by continuing to contribute to
+                        the community and getting plays.
+                    </p>
+                    <winners>
+                        <winner>
+                            <img src="generic.png" />
+                            <span>Username</span>
+                            <trophyType>GOLD</trophyType>
+                        </winner>
+                        <winner>
+                            <img src="generic.png" />
+                            <span>Username</span>
+                            <trophyType>SILVER</trophyType>
+                        </winner>
+                        <winner>
+                            <img src="generic.png" />
+                            <span>Username</span>
+                            <trophyType>BRONZE</trophyType>
+                        </winner>
+                    </winners>
+                </physicalBox>
+            </mainView>
+
+        <script>
+            function toggleLeaderboard(btn) {
+                var mv = document.querySelector("mainView.leaderboard");
+                mv.classList.toggle("is-expanded");
+                var expanded = mv.classList.contains("is-expanded");
+                btn.textContent = expanded ? "Show Less" : "Show More...";
+                if (expanded) mv.querySelector("leaderboard").scrollTop = 0;
+            }
+        </script>
+    </body>
+</html>

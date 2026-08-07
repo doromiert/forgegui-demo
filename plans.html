@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+        <link rel="stylesheet" href="base.css" />
+        <link rel="stylesheet" href="plans.css" />
+        <script src="site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
+
+        <style></style>
+      <meta name="forge-path" content="plans.html">
+</head>
+
+    <body class="chat">
+        <sidebar>
+    <top class="sb">
+        <img src="footerLogo.svg" class="fgLogo" alt="ForgeGUI" />
+        <button type="button" data-toggle-sidebar aria-label="Toggle sidebar">
+            <img src="icons/sidebar.svg" alt="" />
+        </button>
+    </top>
+
+    <specialTabs>
+        <a href="home.html" class="sidebarElem">
+            <img src="icons/home.svg" alt="" />
+            <span>Home</span>
+        </a>
+        <a
+            href="assets/overview.html"
+            class="sidebarElem"
+        >
+            <img src="icons/file.svg" alt="" />
+            <span>Assets</span>
+        </a>
+        <a
+            href="community.html"
+            class="sidebarElem"
+        >
+            <img src="icons/people.svg" alt="" />
+            <span>Community</span>
+        </a>
+    </specialTabs>
+
+    <projects>
+        <topLabel>Game Projects</topLabel>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+        <a href="oldChat.html" class="sidebarElem">
+            <img src="icons/s-3d.svg" alt="" />
+            <span>Message 1</span>
+        </a>
+    </projects>
+
+    <contextMenu
+        id="userMenu"
+        class="hidden user"
+        style="width: 282px"
+        data-context-target="userMenu"
+    >
+        <button><img src="icons/Exclamation.svg" alt="" /> Help</button>
+        <a href="settings/overview.html"
+            ><img src="icons/Settings.svg" alt="" /> Settings</a
+        >
+        <button>
+            <img src="icons/Moon.svg" alt="" /> Theme
+            <span style="flex: 1"></span>
+            <span>System</span>
+            <img src="icons/arrow.svg" alt="" style="rotate: -90deg" />
+        </button>
+        <button class="destructive">
+            <img src="icons/SignOut.svg" alt="" /> Logout
+        </button>
+    </contextMenu>
+
+    <bottom class="sb">
+        <creditCounter>
+            <top>
+                <img src="icons/coins.svg" alt="" />
+                <span>Starter Plan</span>
+                <span style="flex: 1"></span>
+                <a href="getMoreCredits.html">Get More</a>
+            </top>
+            <bottom>
+                <creditSlider></creditSlider>
+                <span>1</span>
+            </bottom>
+        </creditCounter>
+
+        <a
+            href="plans.html"
+            class="sidebarElem upgradeButton selected"
+        >
+            <img
+                src="icons/crown.svg"
+                alt=""
+                style="image-rendering: optimizeQuality"
+            />
+            <span>Upgrade to Pro</span>
+        </a>
+
+        <actions>
+            <a
+                href="courses.html"
+                class="sidebarElem"
+            >
+                <img src="icons/book.svg" alt="" />
+                <span>Courses</span>
+            </a>
+            <a
+                href="plugins.html"
+                class="sidebarElem"
+            >
+                <img src="icons/plugin.svg" alt="" />
+                <span>Plugins</span>
+            </a>
+            <a href="leaderboard.html" class="sidebarElem">
+                <img src="icons/Trophy.svg" alt="" />
+                <span>Leaderboard</span>
+            </a>
+            <a href="notifications.html" class="sidebarElem">
+                <img src="icons/bell.svg" alt="" />
+                <span>Notifications</span>
+            </a>
+            <a href="gameMaker.html" class="sidebarElem">
+                <img src="icons/bell.svg" alt="" />
+                <span>[dev] game maker</span>
+            </a>
+        </actions>
+
+        <sidebarUserButton data-context-target="userMenu">
+            <img src="generic.png" alt="" />
+            <vertical>
+                <b>generic</b>
+                <span>generic@gmail.com</span>
+            </vertical>
+            <img src="icons/selection.svg" alt="" />
+        </sidebarUserButton>
+    </bottom>
+</sidebar>
+
+<mainView class="plans">
+                <top>
+                    <span>Plans</span>
+                    <button class="topButton">
+                        <img src="icons/card.svg" />
+                        Billing Settings
+                    </button>
+                </top>
+                <header>
+                    <h1>Select a plan that suits you best.</h1>
+                    <span>
+                        We have all types of plans to fit any kind of customer.
+                    </span>
+                    <billingPicker>
+                        <dateOption class="selected"> Monthly </dateOption>
+                        <dateOption> Yearly </dateOption>
+                    </billingPicker>
+                </header>
+                <plans>
+                    <planCard class="plan-card plan-card--starter">
+                        <planTitle>
+    <h2><span>Starter</span></h2>
+    <planBadge></planBadge>
+</planTitle>
+
+<planPrice>
+    <priceLine>
+        <strong><span>$15.99</span></strong>
+        <del></del>
+        <span>/month</span>
+    </priceLine>
+    <priceBenefits>
+        <div>
+                                <p>Unlimited (with normal daily rate limits)</p>
+                                <p>Subject to abuse protections.</p>
+                            </div>
+    </priceBenefits>
+</planPrice>
+
+<button class="planButton"><span>Get Starter</span></button>
+
+<planFeatures>
+    <featureGroup>
+        <h3><img src="icons/ai.svg" alt="" /> AI models</h3>
+        <ul>
+                                <li>Access to Google Nano Banana</li>
+                                <li>Access to Meshy</li>
+                                <li>Access to GPT Image V2</li>
+                                <li>10s of more models.</li>
+                            </ul>
+    </featureGroup>
+    <featureGroup>
+        <h3><img src="icons/crown.svg" alt="" /> Included Features</h3>
+        <ul>
+                                <li>Access to Community Blue</li>
+                                <li>Premium Customer Support</li>
+                                <li>Priority queue</li>
+                                <li>Generate more than 1 asset per prompt</li>
+                            </ul>
+    </featureGroup>
+</planFeatures>
+
+                    </planCard>
+
+                    <planCard class="plan-card plan-card--pro">
+                        <planTitle>
+    <h2><span>Pro</span></h2>
+    <planBadge><span>Most Popular</span></planBadge>
+</planTitle>
+
+<planPrice>
+    <priceLine>
+        <strong><span>$19.99</span></strong>
+        <del><span>$59.99</span></del>
+        <span>/month</span>
+    </priceLine>
+    <priceBenefits>
+        <div>
+                                <p>Unlimited (with light rate limits)</p>
+                                <p>Subject to abuse protections.</p>
+                            </div>
+    </priceBenefits>
+</planPrice>
+
+<button class="planButton"><span>Get Pro</span></button>
+
+<planFeatures>
+    <featureGroup>
+        <h3><img src="icons/ai.svg" alt="" /> AI models</h3>
+        <ul>
+                                <li>Access to Google Nano Banana</li>
+                                <li>Access to Meshy</li>
+                                <li>Access to GPT Image V2</li>
+                                <li>10s of more models.</li>
+                            </ul>
+    </featureGroup>
+    <featureGroup>
+        <h3><img src="icons/crown.svg" alt="" /> Included Features</h3>
+        <ul>
+                                <li>Everything in the Starter Tier</li>
+                                <li>Custom Pro Role</li>
+                                <li>Faster Generations</li>
+                            </ul>
+    </featureGroup>
+</planFeatures>
+
+                    </planCard>
+
+                    <planCard class="plan-card plan-card--max">
+                        <planTitle>
+    <h2><span>Max</span></h2>
+    <planBadge></planBadge>
+</planTitle>
+
+<planPrice>
+    <priceLine>
+        <strong><span>$199.99</span></strong>
+        <del></del>
+        <span>/month</span>
+    </priceLine>
+    <priceBenefits>
+        <div>
+                                <p>Truly Unlimited. No rate limits.</p>
+                                <p>Subject to abuse protections.</p>
+                            </div>
+    </priceBenefits>
+</planPrice>
+
+<button class="planButton"><span>Get Max</span></button>
+
+<planFeatures>
+    <featureGroup>
+        <h3><img src="icons/ai.svg" alt="" /> AI models</h3>
+        <ul>
+                                <li>Access to Google Nano Banana</li>
+                                <li>Access to Meshy</li>
+                                <li>Access to GPT Image V2</li>
+                                <li>10s of more models.</li>
+                            </ul>
+    </featureGroup>
+    <featureGroup>
+        <h3><img src="icons/crown.svg" alt="" /> Included Features</h3>
+        <ul>
+                                <li>Everything in Pro Tier</li>
+                                <li>Access to Exclusive Chat</li>
+                                <li>Exclusive Tag</li>
+                                <li>
+                                    No Rate Limits (Subject to abuse
+                                    protections)
+                                </li>
+                            </ul>
+    </featureGroup>
+</planFeatures>
+
+                    </planCard>
+                </plans>
+                <footer>
+                    Are you a business?
+                    <a href="businessPlans.html">Check our Business Plans</a>
+                </footer>
+            </mainView>
+
+    </body>
+</html>

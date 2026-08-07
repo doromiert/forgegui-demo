@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <link rel="stylesheet" href="../../base.css" />
+        <script src="../../site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="color-scheme" content="dark" />
+        <style></style>
+      <meta name="forge-path" content="course/randomCourse/part1.html">
+</head>
+
+    <body class="chat">
+        <sidebar>
+    <top class="sb">
+        <img src="../../course-fg.svg" class="fgLogo" alt="ForgeGUI" />
+        <button type="button" data-toggle-sidebar aria-label="Toggle sidebar">
+            <img src="../../icons/sidebar.svg" alt="" />
+        </button>
+    </top>
+
+    <specialTabs>
+        <a href="../../courses.html" class="sidebarElem">
+            <img src="../../icons/arrow.svg" alt="" style="rotate: 90deg" />
+            <span>Back to Courses</span>
+        </a>
+    </specialTabs>
+
+    <projects>
+        <a href="../../course/part1.html" class="sidebarElem">
+            <img src="../../icons/Play.svg" alt="" />
+            <span>Part 1</span>
+        </a>
+        <a href="../../course/part2.html" class="sidebarElem">
+            <img src="../../icons/Play.svg" alt="" />
+            <span>Part 2</span>
+        </a>
+        <a href="../../course/part3.html" class="sidebarElem">
+            <img src="../../icons/Play.svg" alt="" />
+            <span>Part 3</span>
+        </a>
+        <a href="../../course/part4.html" class="sidebarElem">
+            <img src="../../icons/Play.svg" alt="" />
+            <span>Part 4</span> </a
+        ><a href="../../course/part5.html" class="sidebarElem">
+            <img src="../../icons/Play.svg" alt="" />
+            <span>Part 5</span>
+        </a>
+        <a href="../../course/part6.html" class="sidebarElem">
+            <img src="../../icons/Play.svg" alt="" />
+            <span>Part 6</span>
+        </a>
+    </projects>
+
+    <contextMenu
+        id="userMenu"
+        class="hidden user"
+        style="width: 282px"
+        data-context-target="userMenu"
+    >
+        <button><img src="../../icons/Exclamation.svg" alt="" /> Help</button>
+        <a href="../../settings/overview.html"
+            ><img src="../../icons/Settings.svg" alt="" /> Settings</a
+        >
+        <button>
+            <img src="../../icons/Moon.svg" alt="" /> Theme
+            <span style="flex: 1"></span>
+            <span>System</span>
+            <img src="../../icons/arrow.svg" alt="" style="rotate: -90deg" />
+        </button>
+        <button class="destructive">
+            <img src="../../icons/SignOut.svg" alt="" /> Logout
+        </button>
+    </contextMenu>
+
+    <bottom class="sb">
+        <a
+            href="../../plans.html"
+            class="sidebarElem upgradeButton"
+        >
+            <img
+                src="../../icons/crown.svg"
+                alt=""
+                style="image-rendering: optimizeQuality"
+            />
+            <span>Upgrade to Pro</span>
+        </a>
+
+        <sidebarUserButton data-context-target="userMenu">
+            <img src="../../generic.png" alt="" />
+            <vertical>
+                <b>generic</b>
+                <span>generic@gmail.com</span>
+            </vertical>
+            <img src="../../icons/selection.svg" alt="" />
+        </sidebarUserButton>
+    </bottom>
+</sidebar>
+
+        <mainView slot="content" class="courses">
+            <top>
+                <path>
+                    <span>Course Title</span>
+                    <img src="../../icons/arrow.svg" style="rotate: -90deg" />
+                    <b>Chapter 1</b>
+                </path>
+                <button class="topButton">
+                    <img src="../../icons/ai.svg" />
+                    AI Summary
+                </button>
+            </top>
+            <coursePlayer>
+                <button class="playButton">
+                    <img src="../../icons/Play.svg" />
+                </button>
+                <div class="coursePlayerInfo">
+                    <h1>Part 1</h1>
+                    <h2>Course Name, Chapter 1</h2>
+                </div>
+                <span>Click to begin course video.</span>
+            </coursePlayer>
+            <bottom>
+                <button class="courseSwitchButton">
+                    <img src="../../icons/arrow.svg" style="rotate: 90deg" />
+                </button>
+                <completionBar>
+                    <meat> <b>25%</b><span> Complete</span> </meat>
+                </completionBar>
+                <button class="courseSwitchButton active">
+                    <img src="../../icons/arrow.svg" style="rotate: -90deg" />
+                </button>
+            </bottom>
+        </mainView>
+    </body>
+</html>
