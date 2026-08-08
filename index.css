@@ -78,9 +78,8 @@ a {
    min-height: var(--header-height);
    padding: 10px 15px 10px 20px;
    margin: 0;
-   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-   background: rgba(15, 15, 15, 0.82);
-   backdrop-filter: blur(18px);
+   background: transparent;
+   z-index: 1000000000000000000;
 }
 
 .brand img {
@@ -141,6 +140,7 @@ a {
 }
 
 .hero {
+   z-index: 10000;
    --hero-scroll: 0;
    --hero-portal-y: calc(50% - 380px);
    --hero-portal-scale: 0.82;
@@ -159,8 +159,8 @@ a {
    z-index: 0;
    top: 52%;
    left: 50%;
-   width: 1050px;
-   height: 1050px;
+   width: min(1050px, calc(100svh - var(--header-height)));
+   height: min(1050px, calc(100svh - var(--header-height)));
    content: "";
    border-radius: 50%;
    background: radial-gradient(
@@ -608,8 +608,23 @@ a {
 }
 
 .feature-story .feature h2 {
-   transform: translate3d(0, var(--scene-translate, 0px), 0);
-   will-change: transform;
+   display: flex;
+   flex-direction: column;
+}
+
+.feature-copy-line {
+   display: block;
+   max-height: 0;
+   overflow: hidden;
+   opacity: 0;
+   transition:
+      max-height 260ms ease,
+      opacity 180ms ease;
+}
+
+.feature-copy-line.is-visible {
+   max-height: 3em;
+   opacity: 1;
 }
 
 .feature-story .orbit-stage,
@@ -624,18 +639,6 @@ a {
    transform: none;
    translate: -50% 0;
    transform-origin: center;
-}
-
-.feature-story .feature-models {
-   --scene-translate: 0px;
-}
-
-.feature-story .feature-collage {
-   --scene-translate: 100vh;
-}
-
-.feature-story .feature-platforms {
-   --scene-translate: 200vh;
 }
 
 .feature-story .feature-rail {
@@ -1503,6 +1506,98 @@ a {
    display: block;
 }
 
+.landing-footer {
+   display: flex;
+   width: 100%;
+   padding: 30px 230px 15px;
+   align-items: center;
+   justify-content: center;
+   background: #000;
+}
+
+.landing-footer-inner {
+   display: flex;
+   width: 100%;
+   max-width: 1460px;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.landing-footer-links,
+.landing-footer-meta,
+.landing-footer-socials {
+   display: flex;
+   align-items: center;
+}
+
+.landing-footer-links {
+   gap: 30px;
+}
+
+.landing-footer-links > a:not(.landing-footer-brand) {
+   font-size: 20px;
+   font-weight: 500;
+   white-space: nowrap;
+}
+
+.landing-footer-brand {
+   display: block;
+   width: 117px;
+   height: 25px;
+   flex: 0 0 117px;
+}
+
+.landing-footer-brand img {
+   width: 117px;
+   height: 25px;
+   object-fit: contain;
+}
+
+.landing-footer-meta {
+   min-width: 0;
+   justify-content: flex-end;
+   gap: 9px;
+}
+
+.landing-footer-meta > p {
+   font-size: 18px;
+   font-weight: 500;
+   white-space: nowrap;
+}
+
+.landing-footer-socials {
+   gap: 0;
+}
+
+.landing-footer-socials a {
+   display: grid;
+   width: 39px;
+   height: 39px;
+   flex: 0 0 39px;
+   place-items: center;
+   border-radius: 50%;
+}
+
+.landing-footer-socials a:hover,
+.landing-footer-links a:hover {
+   opacity: 0.72;
+}
+
+.footer-discord-icon {
+   width: 25px;
+   height: 20px;
+}
+
+.footer-x-icon {
+   width: 22px;
+   height: 20px;
+}
+
+.footer-reddit-icon {
+   width: 28px;
+   height: 24px;
+}
+
 @media (max-width: 1500px) {
    .main-nav a {
       gap: 6px;
@@ -1547,6 +1642,19 @@ a {
    }
    .builder-shell {
       left: auto;
+   }
+   .landing-footer {
+      padding-right: 60px;
+      padding-left: 60px;
+   }
+   .landing-footer-links {
+      gap: 20px;
+   }
+   .landing-footer-links > a:not(.landing-footer-brand) {
+      font-size: 18px;
+   }
+   .landing-footer-meta > p {
+      font-size: 16px;
    }
 }
 
@@ -1703,6 +1811,21 @@ a {
    .builder-toolbar > a img {
       width: 40px;
       height: 40px;
+   }
+   .landing-footer {
+      padding: 30px 40px 24px;
+   }
+   .landing-footer-inner {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 24px;
+   }
+   .landing-footer-links {
+      flex-wrap: wrap;
+   }
+   .landing-footer-meta {
+      width: 100%;
+      justify-content: space-between;
    }
 }
 
@@ -1948,6 +2071,28 @@ a {
    .accordion {
       width: 100%;
       margin-top: 35px;
+   }
+   .landing-footer {
+      padding: 30px 20px 24px;
+   }
+   .landing-footer-links {
+      display: grid;
+      width: 100%;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px 24px;
+   }
+   .landing-footer-brand {
+      grid-column: 1 / -1;
+      margin-bottom: 4px;
+   }
+   .landing-footer-meta {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 12px;
+   }
+   .landing-footer-meta > p {
+      font-size: 15px;
+      white-space: normal;
    }
 }
 

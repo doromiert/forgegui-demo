@@ -170,8 +170,17 @@
                         aria-labelledby="models-title"
                     >
                         <h2 id="models-title">
-                            All of the <strong>top AI models</strong>, in one
-                            place.
+                            <span class="feature-copy-line is-visible"
+                                >All of the <strong>top AI models</strong>, in
+                                one place.</span
+                            >
+                            <span class="feature-copy-line"
+                                >Configured for <strong>Game Devs.</strong></span
+                            >
+                            <span class="feature-copy-line"
+                                ><strong>Anywhere</strong> you want to
+                                build.</span
+                            >
                         </h2>
                         <div class="feature-count">
                             <strong>01</strong><span>/03</span>
@@ -237,12 +246,8 @@
                     <section
                         class="feature feature-collage"
                         data-feature-step="1"
-                        aria-labelledby="collage-title"
+                        aria-label="Configured for Game Devs"
                     >
-                        <h2 id="collage-title">
-                            All of the top AI models, in one place.<br />
-                            Configured for <strong>Game Devs.</strong>
-                        </h2>
                         <div class="feature-count">
                             <strong>02</strong><span>/03</span>
                         </div>
@@ -352,13 +357,8 @@
                     <section
                         class="feature feature-platforms"
                         data-feature-step="2"
-                        aria-labelledby="platforms-title"
+                        aria-label="Anywhere you want to build"
                     >
-                        <h2 id="platforms-title">
-                            All of the top AI models, in one place.<br />
-                            Configured for Game Devs.<br />
-                            <strong>Anywhere</strong> you want to build.
-                        </h2>
                         <div class="feature-count">
                             <strong>03</strong><span>/03</span>
                         </div>
@@ -638,6 +638,48 @@
                 </div>
             </section>
         </main>
+
+        <footer class="landing-footer">
+            <div class="landing-footer-inner">
+                <nav class="landing-footer-links" aria-label="Footer links">
+                    <a class="landing-footer-brand" href="#top">
+                        <img src="footerLogo.svg" alt="ForgeGUI" />
+                    </a>
+                    <a href="#">Careers</a>
+                    <a href="#community">Company</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Blog</a>
+                </nav>
+
+                <div class="landing-footer-meta">
+                    <p>© 2026 ForgeGUI. All rights reserved.</p>
+                    <div class="landing-footer-socials">
+                        <a href="#" aria-label="ForgeGUI on Discord">
+                            <img
+                                class="footer-discord-icon"
+                                src="landing-assets/footer-discord.svg"
+                                alt=""
+                            />
+                        </a>
+                        <a href="#" aria-label="ForgeGUI on X">
+                            <img
+                                class="footer-x-icon"
+                                src="landing-assets/footer-x.svg"
+                                alt=""
+                            />
+                        </a>
+                        <a href="#" aria-label="ForgeGUI on Reddit">
+                            <img
+                                class="footer-reddit-icon"
+                                src="landing-assets/footer-reddit.svg"
+                                alt=""
+                            />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
         <div class="login-modal" data-login-modal hidden>
             <div
@@ -1023,6 +1065,9 @@
             const featureSteps = Array.from(
                 document.querySelectorAll("[data-feature-step]"),
             );
+            const featureCopyLines = Array.from(
+                document.querySelectorAll(".feature-copy-line"),
+            );
             const featureAssets = featureSteps.map(function (step) {
                 return Array.from(
                     step.querySelectorAll(
@@ -1228,14 +1273,16 @@
                     "translateY(" + Math.round(railTravel * progress) + "px)";
 
                 const baseScene = Math.floor(scenePosition);
+                const visibleCopyCount = Math.round(scenePosition) + 1;
+                featureCopyLines.forEach(function (line, index) {
+                    line.classList.toggle(
+                        "is-visible",
+                        index < visibleCopyCount,
+                    );
+                });
                 let platformLayout;
                 let platformReveal = 0;
                 featureSteps.forEach(function (step, index) {
-                    step.style.setProperty(
-                        "--scene-translate",
-                        ((index - scenePosition) * viewportHeight).toFixed(1) +
-                            "px",
-                    );
                     let visibility = 0;
                     if (index === baseScene) {
                         visibility = Math.max(0, 1 - switchPosition * 2);
