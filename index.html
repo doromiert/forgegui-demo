@@ -177,7 +177,8 @@
                                 one place.</span
                             >
                             <span class="feature-copy-line"
-                                >Configured for <strong>Game Devs.</strong></span
+                                >Configured for
+                                <strong>Game Devs.</strong></span
                             >
                             <span class="feature-copy-line"
                                 ><strong>Anywhere</strong> you want to
@@ -404,6 +405,68 @@
                                 viewBox="0 0 1630 1010"
                                 aria-hidden="true"
                             >
+                                <defs>
+                                    <linearGradient
+                                        id="engine-line-gradient-0"
+                                        gradientUnits="userSpaceOnUse"
+                                    >
+                                        <stop
+                                            offset="0"
+                                            stop-color="white"
+                                            stop-opacity="0.04"
+                                        />
+                                        <stop
+                                            offset="0.42"
+                                            stop-color="white"
+                                            stop-opacity="0.22"
+                                        />
+                                        <stop
+                                            offset="1"
+                                            stop-color="white"
+                                            stop-opacity="0.9"
+                                        />
+                                    </linearGradient>
+                                    <linearGradient
+                                        id="engine-line-gradient-1"
+                                        gradientUnits="userSpaceOnUse"
+                                    >
+                                        <stop
+                                            offset="0"
+                                            stop-color="white"
+                                            stop-opacity="0.04"
+                                        />
+                                        <stop
+                                            offset="0.42"
+                                            stop-color="white"
+                                            stop-opacity="0.2"
+                                        />
+                                        <stop
+                                            offset="1"
+                                            stop-color="white"
+                                            stop-opacity="0.82"
+                                        />
+                                    </linearGradient>
+                                    <linearGradient
+                                        id="engine-line-gradient-2"
+                                        gradientUnits="userSpaceOnUse"
+                                    >
+                                        <stop
+                                            offset="0"
+                                            stop-color="white"
+                                            stop-opacity="0.04"
+                                        />
+                                        <stop
+                                            offset="0.42"
+                                            stop-color="white"
+                                            stop-opacity="0.21"
+                                        />
+                                        <stop
+                                            offset="1"
+                                            stop-color="white"
+                                            stop-opacity="0.86"
+                                        />
+                                    </linearGradient>
+                                </defs>
                                 <path
                                     d="M815 505 C905 455 964 363 915 275 C870 194 914 106 1058 145"
                                 />
@@ -414,6 +477,7 @@
                                     d="M815 505 C785 606 891 654 925 747 C958 838 866 895 744 848"
                                 />
                             </svg>
+                            <span id="questionMark">?</span>
                         </div>
                     </section>
                 </div>
@@ -1109,6 +1173,9 @@
             const snakePaths = Array.from(
                 document.querySelectorAll(".generated-snakes path"),
             );
+            const snakeGradients = Array.from(
+                document.querySelectorAll(".generated-snakes linearGradient"),
+            );
             const snakeCanvas = document.querySelector(".generated-snakes");
             function smoothStep(value) {
                 return value * value * (3 - 2 * value);
@@ -1199,6 +1266,12 @@
                 snakePaths.forEach(function (path, index) {
                     const target = layout.positions[index];
                     if (!target) return;
+                    const gradient = snakeGradients[index];
+
+                    gradient.setAttribute("x1", String(layout.centerX));
+                    gradient.setAttribute("y1", String(layout.centerY));
+                    gradient.setAttribute("x2", String(target.x));
+                    gradient.setAttribute("y2", String(target.y));
 
                     const dx = target.x - layout.centerX;
                     const dy = target.y - layout.centerY;
@@ -1331,18 +1404,14 @@
                     }
                 });
                 const pushProgress = smoothStep(
-                    Math.min(
-                        1,
-                        Math.max(0, (switchPosition - 0.5) * 2),
-                    ),
+                    Math.min(1, Math.max(0, (switchPosition - 0.5) * 2)),
                 );
                 const copyRailTop = sharedCounter.parentElement.offsetTop;
                 const initialCopyOffset =
                     copyRailTop +
                     Math.min(70, viewportHeight * 0.08) -
                     viewportHeight / 2;
-                const topCopyOffset =
-                    copyRailTop - viewportHeight / 2;
+                const topCopyOffset = copyRailTop - viewportHeight / 2;
                 const copyOffset =
                     baseScene > 0
                         ? topCopyOffset

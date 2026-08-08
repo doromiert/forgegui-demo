@@ -1010,22 +1010,25 @@ a {
 
 .generated-snakes path {
    fill: none;
-   stroke: rgba(255, 255, 255, 0.78);
    stroke-width: 13;
    stroke-linecap: round;
    stroke-linejoin: round;
    vector-effect: non-scaling-stroke;
-   filter: drop-shadow(0 0 16px rgba(115, 164, 255, 0.3));
+   filter: blur(12px) drop-shadow(0 0 16px rgba(115, 164, 255, 0.3));
 }
 
-.generated-snakes path:nth-child(2) {
+.generated-snakes > path:nth-of-type(1) {
+   stroke: url("#engine-line-gradient-0");
+}
+
+.generated-snakes > path:nth-of-type(2) {
    stroke-width: 10;
-   stroke: rgba(255, 255, 255, 0.62);
+   stroke: url("#engine-line-gradient-1");
 }
 
-.generated-snakes path:nth-child(3) {
+.generated-snakes > path:nth-of-type(3) {
    stroke-width: 16;
-   stroke: rgba(255, 255, 255, 0.7);
+   stroke: url("#engine-line-gradient-2");
 }
 
 .generations {
@@ -2572,4 +2575,17 @@ body.modal-open {
 
 section {
    overflow: visible !important;
+}
+
+#questionMark {
+   position: absolute;
+   top: 20%;
+   right: 0%;
+   color: #fff;
+   font-family: "Atkinson Hyperlegible Next";
+   font-size: 227.881px;
+   font-style: normal;
+   font-weight: 500;
+   line-height: 100%; /* 227.881px */
+   transform: rotate(16deg);
 }
