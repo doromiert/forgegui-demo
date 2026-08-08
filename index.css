@@ -336,7 +336,7 @@ a {
    background: rgba(36, 36, 36, 0.9);
    box-shadow: inset 0 0 91px rgba(0, 94, 255, 0.25);
    opacity: calc(1 - var(--hero-scroll) * 1.35);
-   animation: hero-control-in 700ms 1.15s both ease-out;
+   animation: hero-control-in 300ms 0.2s both ease-out;
 }
 
 .hero-prompt input {
@@ -381,12 +381,7 @@ a {
    margin-top: 40px;
    border: 3px solid transparent;
    background:
-      radial-gradient(
-            ellipse at top,
-            #3794ff 0%,
-            #1c86ff 50%,
-            var(--blue) 100%
-         )
+      radial-gradient(ellipse at top, #3794ff 0%, #1c86ff 50%, var(--blue) 100%)
          padding-box,
       linear-gradient(
             180deg,
@@ -403,7 +398,7 @@ a {
    font-weight: 600;
    white-space: nowrap;
    opacity: calc(1 - var(--hero-scroll) * 1.35);
-   animation: hero-control-in 700ms 1.35s both ease-out;
+   animation: hero-control-in 300ms 0.3s both ease-out;
 }
 
 .scroll-cue {
@@ -1964,12 +1959,12 @@ a {
       transition: none;
    }
    .hero::before,
-    .hero-visual,
-    .hero-portal-outline,
-    .hero-scene,
-    .hero-platform-orbit,
-    .hero-platform,
-    .hero-prompt,
+   .hero-visual,
+   .hero-portal-outline,
+   .hero-scene,
+   .hero-platform-orbit,
+   .hero-platform,
+   .hero-prompt,
    .hero-cta,
    .scroll-cue,
    .feature.is-active .model-logo,
