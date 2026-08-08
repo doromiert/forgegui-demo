@@ -131,7 +131,9 @@
                     </button>
                 </form>
 
-                <a class="hero-cta" href="onboarding.html">Try it for free</a>
+                <a class="hero-cta" href="onboarding.html" data-open-login
+                    >Try it for free</a
+                >
                 <a
                     class="scroll-cue"
                     href="#models"
@@ -489,44 +491,65 @@
             >
                 <h2 id="catalog-title">Premium Stock Catalog</h2>
                 <div class="catalog-grid">
-                    <a class="catalog-card" href="community.html">
-                        <img
-                            src="landing-assets/catalog-card.png"
-                            alt="Generated 3D asset catalog"
-                        />
-                        <span>3D Generation</span><strong>3D assets</strong>
-                    </a>
-                    <a
-                        class="catalog-card catalog-card-gui"
-                        href="community.html"
-                    >
-                        <img
-                            src="landing-assets/hero-art-a.png"
-                            alt="Generated interface catalog"
-                        />
-                        <span>GUI Generations</span><strong>GUI</strong>
-                    </a>
-                    <a
-                        class="catalog-card catalog-card-audio"
-                        href="community.html"
-                    >
-                        <img
-                            src="landing-assets/generation-card.png"
-                            alt="Generated audio catalog"
-                        />
-                        <span>Audio Generations</span
-                        ><strong>Music &amp; SFX</strong>
-                    </a>
-                    <a
-                        class="catalog-card catalog-card-template"
-                        href="community.html"
-                    >
-                        <img
-                            src="landing-assets/collage-10.png"
-                            alt="Game templates catalog"
-                        />
-                        <span>Game Templates</span><strong>Templates</strong>
-                    </a>
+                    <div class="catalog-item">
+                        <a class="catalog-card" href="community.html">
+                            <img
+                                src="landing-assets/catalog-card.png"
+                                alt="Generated 3D asset catalog"
+                            />
+                            <span>3D Generation</span><strong>3D assets</strong>
+                        </a>
+                        <a class="catalog-explore" href="community.html"
+                            >Explore</a
+                        >
+                    </div>
+                    <div class="catalog-item">
+                        <a
+                            class="catalog-card catalog-card-gui"
+                            href="community.html"
+                        >
+                            <img
+                                src="landing-assets/hero-art-a.png"
+                                alt="Generated interface catalog"
+                            />
+                            <span>GUI Generations</span><strong>GUI</strong>
+                        </a>
+                        <a class="catalog-explore" href="community.html"
+                            >Explore</a
+                        >
+                    </div>
+                    <div class="catalog-item">
+                        <a
+                            class="catalog-card catalog-card-audio"
+                            href="community.html"
+                        >
+                            <img
+                                src="landing-assets/generation-card.png"
+                                alt="Generated audio catalog"
+                            />
+                            <span>Audio Generations</span
+                            ><strong>Music &amp; SFX</strong>
+                        </a>
+                        <a class="catalog-explore" href="community.html"
+                            >Explore</a
+                        >
+                    </div>
+                    <div class="catalog-item">
+                        <a
+                            class="catalog-card catalog-card-template"
+                            href="community.html"
+                        >
+                            <img
+                                src="landing-assets/collage-10.png"
+                                alt="Game templates catalog"
+                            />
+                            <span>Game Templates</span
+                            ><strong>Templates</strong>
+                        </a>
+                        <a class="catalog-explore" href="community.html"
+                            >Explore</a
+                        >
+                    </div>
                 </div>
                 <p>
                     Download free high quality community assets, royalty free,
@@ -923,7 +946,9 @@
             const menuButton = document.querySelector(".menu-button");
             const nav = document.querySelector(".main-nav");
             const loginModal = document.querySelector("[data-login-modal]");
-            const loginTrigger = document.querySelector("[data-open-login]");
+            const loginTriggers = Array.from(
+                document.querySelectorAll("[data-open-login]"),
+            );
             const loginSteps = Array.from(
                 loginModal.querySelectorAll("[data-login-step]"),
             );
@@ -963,7 +988,12 @@
                 if (loginReturnFocus) loginReturnFocus.focus();
             }
 
-            loginTrigger.addEventListener("click", openLogin);
+            loginTriggers.forEach(function (trigger) {
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    openLogin();
+                });
+            });
             loginModal.addEventListener("click", function (event) {
                 const stepTrigger = event.target.closest("[data-login-go]");
                 if (!stepTrigger) return;
@@ -1068,6 +1098,7 @@
             const featureCopyLines = Array.from(
                 document.querySelectorAll(".feature-copy-line"),
             );
+            const featureCopy = document.querySelector("#models-title");
             const featureAssets = featureSteps.map(function (step) {
                 return Array.from(
                     step.querySelectorAll(
@@ -1273,13 +1304,51 @@
                     "translateY(" + Math.round(railTravel * progress) + "px)";
 
                 const baseScene = Math.floor(scenePosition);
-                const visibleCopyCount = Math.round(scenePosition) + 1;
+                const incomingCopyIndex =
+                    switchPosition > 0 ? baseScene + 1 : -1;
+                let settledCopyHeight = 0;
                 featureCopyLines.forEach(function (line, index) {
-                    line.classList.toggle(
-                        "is-visible",
-                        index < visibleCopyCount,
-                    );
+                    const isSettled = index <= baseScene;
+                    const isIncoming = index === incomingCopyIndex;
+                    if (isSettled) settledCopyHeight += line.scrollHeight;
+
+                    if (isSettled || isIncoming) {
+                        line.style.maxHeight = line.scrollHeight + "px";
+                    } else {
+                        line.style.maxHeight = "0px";
+                    }
+
+                    if (isIncoming) {
+                        const approachProgress = smoothStep(
+                            Math.min(1, switchPosition * 2),
+                        );
+                        line.style.opacity = String(approachProgress);
+                        line.style.translate =
+                            "0 " +
+                            (1 - approachProgress) * (viewportHeight / 2) +
+                            "px";
+                    } else {
+                        line.style.opacity = isSettled ? "1" : "0";
+                        line.style.translate = "0 0";
+                    }
                 });
+                const pushProgress = smoothStep(
+                    Math.min(
+                        1,
+                        Math.max(0, (switchPosition - 0.5) * 2),
+                    ),
+                );
+                const centeredCopyOffset = -settledCopyHeight / 2;
+                const topCopyOffset =
+                    sharedCounter.parentElement.offsetTop -
+                    viewportHeight / 2;
+                const copyOffset =
+                    baseScene > 0
+                        ? topCopyOffset
+                        : centeredCopyOffset +
+                          (topCopyOffset - centeredCopyOffset) * pushProgress;
+                featureCopy.style.transform =
+                    "translate3d(0, " + copyOffset + "px, 0)";
                 let platformLayout;
                 let platformReveal = 0;
                 featureSteps.forEach(function (step, index) {
