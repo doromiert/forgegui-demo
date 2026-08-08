@@ -64,11 +64,18 @@
                 </h1>
 
                 <div class="hero-visual" aria-hidden="true">
-                    <img
+                    <video
                         class="hero-scene"
-                        src="landing-assets/hero-art-a.png"
-                        alt=""
-                    />
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        preload="metadata"
+                        poster="landing-assets/hero-art-a.png"
+                    >
+                        <source src="hero.mp4" type="video/mp4" />
+                        <img src="landing-assets/hero-art-a.png" alt="" />
+                    </video>
                     <div class="hero-portal-outline">
                         <img
                             class="hero-orbit hero-orbit-outer"
