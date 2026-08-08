@@ -200,4 +200,152 @@
       if (linkPath === forgePath) link.classList.add("selected");
     });
   }
+
+  (function installMouseTail() {
+    if (
+      !window.matchMedia("(pointer: fine)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
+    var canvas = document.createElement("canvas");
+    var context = canvas.getContext("2d");
+    var points = [];
+    var frameId = 0;
+    var fadeDuration = 460;
+    var maximumPoints = 64;
+    var pixelRatio = 1;
+
+    canvas.setAttribute("aria-hidden", "true");
+    canvas.style.position = "fixed";
+    canvas.style.zIndex = "9999";
+    canvas.style.inset = "0";
+    canvas.style.width = "100vw";
+    canvas.style.height = "100vh";
+    canvas.style.pointerEvents = "none";
+    canvas.style.contain = "strict";
+    document.body.appendChild(canvas);
+
+    function resizeCanvas() {
+      pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(window.innerWidth * pixelRatio);
+      canvas.height = Math.round(window.innerHeight * pixelRatio);
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      points = [];
+    }
+
+    function scheduleFrame() {
+      if (!frameId) frameId = requestAnimationFrame(drawTail);
+    }
+
+    function addPoint(event) {
+      var now = performance.now();
+      var previous = points[points.length - 1];
+      var x = event.clientX;
+      var y = event.clientY;
+
+      if (previous) {
+        var dx = x - previous.x;
+        var dy = y - previous.y;
+        var distance = Math.hypot(dx, dy);
+
+        if (distance < 2) {
+          previous.x = x;
+          previous.y = y;
+          previous.time = now;
+          scheduleFrame();
+          return;
+        }
+
+        if (now - previous.time < 12 && distance < 12) return;
+      }
+
+      points.push({ x: x, y: y, time: now });
+      if (points.length > maximumPoints) points.shift();
+      scheduleFrame();
+    }
+
+    function pointAlpha(point, now, index) {
+      var ageProgress = (now - point.time) / fadeDuration;
+      var alpha = Math.max(0, 1 - ageProgress);
+      var edgeFade = Math.min(1, index / 3, (points.length - 1 - index) / 2);
+      return alpha * edgeFade;
+    }
+
+    function drawTail(now) {
+      frameId = 0;
+      points = points.filter(function (point) {
+        return now - point.time < fadeDuration;
+      });
+      context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      if (points.length > 1) {
+        context.lineCap = "round";
+        context.lineJoin = "round";
+        context.globalCompositeOperation = "lighter";
+        context.shadowBlur = 12;
+        context.shadowColor = "rgba(0, 119, 255, 0.7)";
+
+        for (var index = 1; index < points.length; index += 1) {
+          var previous = points[index - 1];
+          var current = points[index];
+          var next = points[index + 1] || current;
+          var startX =
+            index === 1 ? previous.x : (previous.x + current.x) / 2;
+          var startY =
+            index === 1 ? previous.y : (previous.y + current.y) / 2;
+          var endX =
+            index === points.length - 1
+              ? current.x
+              : (current.x + next.x) / 2;
+          var endY =
+            index === points.length - 1
+              ? current.y
+              : (current.y + next.y) / 2;
+          var startAlpha = pointAlpha(previous, now, index - 1);
+          var endAlpha = pointAlpha(current, now, index);
+          var gradient = context.createLinearGradient(
+            startX,
+            startY,
+            endX,
+            endY,
+          );
+
+          gradient.addColorStop(
+            0,
+            "rgba(0, 89, 255, " + (startAlpha * 0.72).toFixed(3) + ")",
+          );
+          gradient.addColorStop(
+            1,
+            "rgba(89, 167, 255, " + (endAlpha * 0.92).toFixed(3) + ")",
+          );
+
+          context.beginPath();
+          context.moveTo(startX, startY);
+          context.quadraticCurveTo(current.x, current.y, endX, endY);
+          context.lineWidth = 2.5 + Math.max(startAlpha, endAlpha) * 3.5;
+          context.strokeStyle = gradient;
+          context.stroke();
+        }
+
+        context.globalCompositeOperation = "source-over";
+        context.shadowBlur = 0;
+      }
+
+      if (points.length) scheduleFrame();
+    }
+
+    document.addEventListener("pointermove", function (event) {
+      var samples = event.getCoalescedEvents
+        ? event.getCoalescedEvents()
+        : [event];
+      samples.forEach(addPoint);
+    });
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) points = [];
+    });
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+  })();
 })();

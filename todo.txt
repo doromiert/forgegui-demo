@@ -1,0 +1,15 @@
+make the text in the scroll anim section move up as you scroll instead of fading in and out
+
+make it so that icons in the scroll section dont ever overlap unless during the switch animation
+
+make it so that the background itself shrinks and pops back up during the scroll switch animation
+
+make the hero section 100vw 100vh (minus the topbar) so that the bottom chevron is visible
+
+make the sizing smaller across the landing page
+
+make the hero portal appear from the center of the screen and act as an expanding mask over a static picture; the picture should not scale with the portal outline
+
+restore the orbiting motion in the scroll animation without letting objects overlap outside the switch animation
+
+make scroll-animation objects collapse into and expand out from the centered ForgeGUI logo instead of popping in and out from the right side

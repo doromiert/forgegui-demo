@@ -10,6 +10,7 @@
             content="ForgeGUI brings the top AI models together for game developers."
         />
         <link rel="stylesheet" href="index.css" />
+        <script src="site.js" defer></script>
     </head>
     <body>
         <header class="site-header">
@@ -64,45 +65,49 @@
 
                 <div class="hero-visual" aria-hidden="true">
                     <img
-                        class="hero-orbit hero-orbit-outer"
-                        src="landing-assets/hero-orbit-outer.svg"
-                        alt=""
-                    />
-                    <img
-                        class="hero-orbit hero-orbit-inner"
-                        src="landing-assets/hero-orbit-inner.svg"
-                        alt=""
-                    />
-                    <img
                         class="hero-scene"
                         src="landing-assets/hero-art-a.png"
                         alt=""
                     />
-                    <img
-                        class="hero-platform hero-blender"
-                        src="landing-assets/blender.svg"
-                        alt=""
-                    />
-                    <img
-                        class="hero-platform hero-godot"
-                        src="landing-assets/godot.svg"
-                        alt=""
-                    />
-                    <img
-                        class="hero-platform hero-unity"
-                        src="landing-assets/unity.svg"
-                        alt=""
-                    />
-                    <img
-                        class="hero-platform hero-roblox"
-                        src="landing-assets/roblox.svg"
-                        alt=""
-                    />
-                    <img
-                        class="hero-platform hero-unreal"
-                        src="landing-assets/unreal.svg"
-                        alt=""
-                    />
+                    <div class="hero-portal-outline">
+                        <img
+                            class="hero-orbit hero-orbit-outer"
+                            src="landing-assets/hero-orbit-outer.svg"
+                            alt=""
+                        />
+                        <img
+                            class="hero-orbit hero-orbit-inner"
+                            src="landing-assets/hero-orbit-inner.svg"
+                            alt=""
+                        />
+                        <div class="hero-platform-orbit">
+                            <img
+                                class="hero-platform hero-blender"
+                                src="landing-assets/blender.svg"
+                                alt=""
+                            />
+                            <img
+                                class="hero-platform hero-godot"
+                                src="landing-assets/godot.svg"
+                                alt=""
+                            />
+                            <img
+                                class="hero-platform hero-unity"
+                                src="landing-assets/unity.svg"
+                                alt=""
+                            />
+                            <img
+                                class="hero-platform hero-roblox"
+                                src="landing-assets/roblox.svg"
+                                alt=""
+                            />
+                            <img
+                                class="hero-platform hero-unreal"
+                                src="landing-assets/unreal.svg"
+                                alt=""
+                            />
+                        </div>
+                    </div>
                 </div>
 
                 <form class="hero-prompt" action="home.html">
@@ -560,49 +565,14 @@
                     </div>
                     <p>Describe what you want...</p>
                     <div class="builder-toolbar">
-                        <div class="builder-options">
-                            <button type="button">
-                                <img
-                                    src="landing-assets/builder-roblox.svg"
-                                    alt=""
-                                />Roblox
-                                <img
-                                    src="landing-assets/builder-arrow.svg"
-                                    alt=""
-                                />
-                            </button>
-                            <button type="button">
-                                <img
-                                    src="landing-assets/pencil.svg"
-                                    alt=""
-                                />Auto-Detect
-                                <img
-                                    src="landing-assets/builder-arrow.svg"
-                                    alt=""
-                                />
-                            </button>
-                            <button type="button">
-                                <span class="spark"
-                                    ><img
-                                        src="landing-assets/star-a.svg"
-                                        alt="" /><img
-                                        src="landing-assets/star-b.svg"
-                                        alt="" /></span
-                                >Yunes Pro
-                                <img
-                                    src="landing-assets/builder-arrow.svg"
-                                    alt=""
-                                />
-                            </button>
-                        </div>
                         <a href="onboarding.html"
                             >Start creating now
                             <img
                                 src="icons/arrow.svg"
                                 alt=""
                                 style="
-                                    height: 128px;
-                                    width: 128px;
+                                    height: 64px;
+                                    width: 64px;
                                     rotate: -90deg;
                                 "
                         /></a>
@@ -782,7 +752,8 @@
                             </button>
 
                             <div class="login-divider" aria-hidden="true">
-                                <span></span><b>Other Options...</b><span></span>
+                                <span></span><b>Other Options...</b
+                                ><span></span>
                             </div>
 
                             <div class="login-secondary-row">
@@ -872,7 +843,8 @@
                             </button>
 
                             <div class="login-divider" aria-hidden="true">
-                                <span></span><b>Other Options...</b><span></span>
+                                <span></span><b>Other Options...</b
+                                ><span></span>
                             </div>
 
                             <button
@@ -1036,6 +1008,9 @@
             const sharedCounter = document.querySelector(
                 ".shared-feature-count strong",
             );
+            const sharedLogo = document.querySelector(
+                ".shared-feature-logo-layer img",
+            );
             const sharedRail = document.querySelector(".shared-feature-rail");
             const sharedThumb = sharedRail.querySelector("span");
             const featureSteps = Array.from(
@@ -1052,11 +1027,6 @@
                 document.querySelectorAll(".generated-snakes path"),
             );
             const snakeCanvas = document.querySelector(".generated-snakes");
-            const sceneReveal = featureSteps.map(function (_, index) {
-                return index === 0 ? 1 : 0;
-            });
-            let lastFrameTime = performance.now();
-
             function smoothStep(value) {
                 return value * value * (3 - 2 * value);
             }
@@ -1080,10 +1050,19 @@
                 orbitPhase,
             ) {
                 const stage = step.querySelector(".orbit-stage");
-                const centerX = stage.clientWidth / 2;
-                const centerY = stage.clientHeight / 2;
-                const radiusProgress = revealProgress * revealProgress;
+                const stageRect = stage.getBoundingClientRect();
+                const logoRect = sharedLogo.getBoundingClientRect();
+                const renderedScaleX = stageRect.width / stage.clientWidth;
+                const renderedScaleY = stageRect.height / stage.clientHeight;
+                const centerX =
+                    (logoRect.left + logoRect.width / 2 - stageRect.left) /
+                    renderedScaleX;
+                const centerY =
+                    (logoRect.top + logoRect.height / 2 - stageRect.top) /
+                    renderedScaleY;
+                const radiusProgress = smoothStep(revealProgress);
                 const positions = [];
+                const ambientAngle = orbitPhase * 0.72;
 
                 assets.forEach(function (asset, assetIndex) {
                     const finalX = asset.offsetLeft + asset.offsetWidth / 2;
@@ -1091,13 +1070,11 @@
                     const radiusX = finalX - centerX;
                     const radiusY = finalY - centerY;
                     const orbitDirection = assetIndex % 2 === 0 ? -1 : 1;
-                    const orbitSpeed =
-                        step.dataset.featureStep === "2"
-                            ? 0.3 + assetIndex * 0.85
-                            : 0.72 + (assetIndex % 5) * 0.14;
                     const orbitAngle =
-                        orbitPhase * orbitSpeed +
-                        (1 - revealProgress) * orbitDirection * 0.9;
+                        ambientAngle +
+                        (1 - revealProgress) *
+                            orbitDirection *
+                            (0.9 + assetIndex * 0.08);
                     const cosine = Math.cos(orbitAngle);
                     const sine = Math.sin(orbitAngle);
                     const curvedX =
@@ -1113,7 +1090,7 @@
                         "px " +
                         (displayedY - finalY) +
                         "px";
-                    asset.style.scale = String(0.16 + revealProgress * 0.84);
+                    asset.style.scale = String(radiusProgress);
                     asset.style.opacity = String(
                         Math.min(1, revealProgress * 1.8),
                     );
@@ -1123,7 +1100,9 @@
                 return {
                     centerX: centerX,
                     centerY: centerY,
+                    height: stage.clientHeight,
                     positions: positions,
+                    width: stage.clientWidth,
                 };
             }
 
@@ -1131,7 +1110,7 @@
                 if (!layout) return;
                 snakeCanvas.setAttribute(
                     "viewBox",
-                    "0 0 " + layout.centerX * 2 + " " + layout.centerY * 2,
+                    "0 0 " + layout.width + " " + layout.height,
                 );
 
                 snakePaths.forEach(function (path, index) {
@@ -1189,11 +1168,6 @@
             }
 
             function updateStory(frameTime) {
-                const deltaTime = Math.min(
-                    0.05,
-                    Math.max(0, (frameTime - lastFrameTime) / 1000),
-                );
-                lastFrameTime = frameTime;
                 const viewportHeight = window.innerHeight;
                 const heroProgress = Math.min(
                     1,
@@ -1222,10 +1196,18 @@
                     1,
                     Math.max(0.58, (viewportHeight - 220) / 1010),
                 );
+                const switchPosition = scenePosition % 1;
+                const switchCompression = Math.sin(Math.PI * switchPosition);
+                const sharedWorldScale =
+                    viewportFit * smoothStep(1 - switchCompression);
 
                 featureStack.style.setProperty(
                     "--shared-stage-scale",
                     viewportFit.toFixed(3),
+                );
+                featureStack.style.setProperty(
+                    "--shared-world-scale",
+                    sharedWorldScale.toFixed(3),
                 );
                 sharedCounter.textContent = String(
                     Math.round(scenePosition) + 1,
@@ -1238,18 +1220,24 @@
                 sharedThumb.style.transform =
                     "translateY(" + Math.round(railTravel * progress) + "px)";
 
+                const baseScene = Math.floor(scenePosition);
                 let platformLayout;
+                let platformReveal = 0;
                 featureSteps.forEach(function (step, index) {
-                    const distance = Math.abs(index - scenePosition);
-                    const targetVisibility = Math.max(0, 1 - distance);
-                    const easing = 1 - Math.exp(-deltaTime * 5.5);
-                    sceneReveal[index] +=
-                        (targetVisibility - sceneReveal[index]) * easing;
-                    const visibility = sceneReveal[index];
                     step.style.setProperty(
-                        "--scene-opacity",
-                        visibility.toFixed(3),
+                        "--scene-translate",
+                        ((index - scenePosition) * viewportHeight).toFixed(1) +
+                            "px",
                     );
+                    let visibility = 0;
+                    if (index === baseScene) {
+                        visibility = Math.max(0, 1 - switchPosition * 2);
+                    } else if (
+                        index === baseScene + 1 &&
+                        switchPosition > 0.5
+                    ) {
+                        visibility = (switchPosition - 0.5) * 2;
+                    }
                     step.style.setProperty(
                         "--stage-scale",
                         viewportFit.toFixed(3),
@@ -1261,10 +1249,13 @@
                         visibility,
                         ambientOrbit,
                     );
-                    if (index === 2) platformLayout = layout;
+                    if (index === 2) {
+                        platformLayout = layout;
+                        platformReveal = visibility;
+                    }
                 });
 
-                updateSnakePaths(platformLayout, sceneReveal[2], ambientOrbit);
+                updateSnakePaths(platformLayout, platformReveal, ambientOrbit);
                 requestAnimationFrame(updateStory);
             }
 
