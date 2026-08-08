@@ -2190,7 +2190,7 @@ body.modal-open {
 
 .login-modal {
    position: fixed;
-   z-index: 100;
+   z-index: 2147483647;
    inset: 0;
    display: grid;
    padding: 24px;

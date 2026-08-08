@@ -1306,11 +1306,9 @@
                 const baseScene = Math.floor(scenePosition);
                 const incomingCopyIndex =
                     switchPosition > 0 ? baseScene + 1 : -1;
-                let settledCopyHeight = 0;
                 featureCopyLines.forEach(function (line, index) {
                     const isSettled = index <= baseScene;
                     const isIncoming = index === incomingCopyIndex;
-                    if (isSettled) settledCopyHeight += line.scrollHeight;
 
                     if (isSettled || isIncoming) {
                         line.style.maxHeight = line.scrollHeight + "px";
@@ -1338,15 +1336,18 @@
                         Math.max(0, (switchPosition - 0.5) * 2),
                     ),
                 );
-                const centeredCopyOffset = -settledCopyHeight / 2;
-                const topCopyOffset =
-                    sharedCounter.parentElement.offsetTop -
+                const copyRailTop = sharedCounter.parentElement.offsetTop;
+                const initialCopyOffset =
+                    copyRailTop +
+                    Math.min(70, viewportHeight * 0.08) -
                     viewportHeight / 2;
+                const topCopyOffset =
+                    copyRailTop - viewportHeight / 2;
                 const copyOffset =
                     baseScene > 0
                         ? topCopyOffset
-                        : centeredCopyOffset +
-                          (topCopyOffset - centeredCopyOffset) * pushProgress;
+                        : initialCopyOffset +
+                          (topCopyOffset - initialCopyOffset) * pushProgress;
                 featureCopy.style.transform =
                     "translate3d(0, " + copyOffset + "px, 0)";
                 let platformLayout;
