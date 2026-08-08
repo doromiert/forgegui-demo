@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+        <link rel="stylesheet" href="base.css" />
+        <link rel="stylesheet" href="plans.css" />
+        <script src="site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
+
+        <style></style>
+    </head>
+
+    <body class="onboarding">
+        <topBar>
+            <img src="footerLogo.svg" />
+            <a href="home.html" class="skipOnboardingButton"
+                >Skip On-Boarding</a
+            >
+            <div style="flex: 1"></div>
+            <img src="generic.png" style="height: 42px" />
+        </topBar>
+        <mainView class="onboarding carousel">
+            <carouselPage id="page1">
+                <onboardingHeader>
+                    <h1>Howdy! Where did you come from?</h1>
+                    <span>Select between one of the options below.</span>
+                </onboardingHeader>
+                <onboardingOptionsGrid>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="icons/yt.svg" />
+                        Youtube
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="icons/twitter.svg" />
+                        X/Twitter
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="icons/tiktok.svg" />
+                        TikTok
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="icons/google.svg" />
+                        Search Engine
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="icons/3dots.svg" />
+                        Friend/Other
+                    </button>
+                </onboardingOptionsGrid>
+            </carouselPage>
+            <carouselPage id="page2">
+                <onboardingHeader>
+                    <h1>What platform will you use ForgeGUI for?</h1>
+                    <span>Select between one of the options below.</span>
+                </onboardingHeader>
+                <onboardingOptionsGrid>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="icons/roblox.svg" />
+                        Roblox
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="icons/ue.svg" />
+                        UEFN
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="icons/unity.svg" />
+                        Unity
+                    </button>
+                </onboardingOptionsGrid>
+            </carouselPage>
+            <carouselPage id="page3">
+                <onboardingHeader>
+                    <h1>What's your role?</h1>
+                    <span>Select between one of the options below.</span>
+                </onboardingHeader>
+                <onboardingOptionsGrid>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="icons/heart.svg" />
+                        Yes, I'm new
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="icons/Programming.svg" />
+                        No, I'm not new
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="icons/x.svg" />
+                        I'm not a dev
+                    </button>
+                </onboardingOptionsGrid>
+            </carouselPage>
+            <carouselPage id="page4">
+                <onboardingHeader>
+                    <h1>Let's get you connected!</h1>
+                    <span>Before you can continue, follow <strong>3</strong> accounts.</span>
+                </onboardingHeader>
+                <followList>
+                    <followItem>
+                        <div class="followAvatar">
+                            <img src="generic.png" />
+                        </div>
+                        <div class="followInfo">
+                            <strong>Account Name</strong>
+                            <span>@username</span>
+                        </div>
+                        <button class="followBtn" onclick="toggleFollow(this)">Not Followed</button>
+                    </followItem>
+                    <followItem>
+                        <div class="followAvatar">
+                            <img src="generic.png" />
+                        </div>
+                        <div class="followInfo">
+                            <strong>Account Name</strong>
+                            <span>@username</span>
+                        </div>
+                        <button class="followBtn" onclick="toggleFollow(this)">Not Followed</button>
+                    </followItem>
+                    <followItem>
+                        <div class="followAvatar">
+                            <img src="generic.png" />
+                        </div>
+                        <div class="followInfo">
+                            <strong>Account Name</strong>
+                            <span>@username</span>
+                        </div>
+                        <button class="followBtn" onclick="toggleFollow(this)">Not Followed</button>
+                    </followItem>
+
+                </followList>
+                <button class="postButton" onclick="followAll()">
+                    <img src="icons/People.svg">
+                    <span>
+                        Follow All 3
+                    </span>
+                </button>
+            </carouselPage>
+            <carouselPage id="page5">
+                <onboardingHeader>
+                    <h1>Let's create your first game!</h1>
+                    <span>First, give us a name for your project.</span>
+                </onboardingHeader>
+                <form>
+                    <div class="onboardingInput">
+                        <input type="text" placeholder="Name" maxlength="50" />
+                        <span class="charCounter">0/50</span>
+                    </div>
+                    <span> Or, Use suggested </span>
+                    <button
+                        type="button"
+                        class="suggestionButton"
+                        onclick="carousel.next()"
+                    >
+                        <img src="icons/ai.svg" />
+                        Epic Gun Game
+                    </button>
+                    <button
+                        type="button"
+                        class="postButton"
+                        style="width: 300px; align-self: center"
+                        onclick="carousel.next()"
+                    >
+                        <span>Create Project</span><img src="icons/add.svg" />
+                    </button>
+                </form>
+            </carouselPage>
+            <carouselPage id="page6">
+                <onboardingHeader>
+                    <h1>Select a prompt to start generating.</h1>
+                    <span>Generate the first asset for your game.</span>
+                </onboardingHeader>
+                <stockPrompts>
+                    <button class="suggestionButton">
+                        <img src="icons/ai.svg" onclick="carousel.next()" />
+                        Generate an AK47 3D model
+                    </button>
+                    <button class="suggestionButton">
+                        <img src="icons/ai.svg" onclick="carousel.next()" />
+                        Generate an fps thumbnail for my game
+                    </button>
+                    <button class="suggestionButton">
+                        <img src="icons/ai.svg" onclick="carousel.next()" />
+                        Generate a gun shot sound effect
+                    </button>
+                </stockPrompts>
+                <hr class="onboardingHR" />
+                <ownPrompt>
+                    <span>Or type your own prompt...</span>
+                    <div class="promptInput">
+                        <input type="text" placeholder="Enter Text" />
+                        <button class="createBtn" onclick="carousel.next()">
+                            Create
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M14.5 1.5L1.5 6.5L6.5 8.5M14.5 1.5L9.5 14.5L6.5 8.5M14.5 1.5L6.5 8.5"
+                                    stroke="white"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </ownPrompt>
+            </carouselPage>
+            <carouselPage id="page7">
+                    <onboardingHeader>
+                        <h1>You're in luck!</h1>
+                        <span
+                            >You've earned a 55% discount on the Pro tier!</span
+                        >
+                    </onboardingHeader>
+                    <div class="promoCodeBanner">
+                        <div class="promoCodeTop">
+                            Promo Code: <span>Code Name</span>
+                        </div>
+                        <div class="promoCodeBody">
+                            <div class="promoStat">
+                                <strong>75% <em>OFF</em></strong>
+                                <small>PROMO</small>
+                            </div>
+                            <div class="promoDivider"></div>
+                            <div class="promoStat">
+                                <strong>10:00</strong>
+                                <small>TIME LEFT</small>
+                            </div>
+                        </div>
+                    </div>
+                    <planCard class="plan-card plan-card--pro plan-card--offer">
+                        <slot template="templates/plan-card.html">
+                            <span slot="title">Pro</span>
+                            <span slot="badge">55% OFF</span>
+                            <span slot="price">$14.99</span>
+                            <span slot="original-price">$59.99</span>
+                            <span slot="button">Claim Discount!</span>
+                            <div slot="price-benefits">
+                                <p><em>TRULY UNLIMITED GENERATIONS.</em></p>
+                                <p>Subject to abuse protections.</p>
+                            </div>
+                            <ul slot="ai-features">
+                                <li>Access to Google Nano Banana</li>
+                                <li>Access to Meshy</li>
+                                <li>Fable 5</li>
+                                <li>Access to Tripo</li>
+                                <li>Access to GPT Image V2</li>
+                                <li>10s of more models.</li>
+                            </ul>
+                            <ul slot="included-features">
+                                <li>Pro AI models for any task.</li>
+                                <li>Custom Pro Role</li>
+                                <li>Faster Generations</li>
+                                <li>Skip the Waitlist</li>
+                                <li>Everything in the Starter Tier</li>
+                            </ul>
+                        </slot>
+                    </planCard>
+                    <button
+                        type="button"
+                        class="skipOfferBtn"
+                        onclick="
+                            var p = document.getElementById('page7');
+                            p.classList.add('skipped');
+                            p.style.overflowY = 'hidden';
+                            p.scrollTop = 0;
+                        "
+                    >
+                        Skip Offer
+                    </button>
+                </div>
+                <div class="freePlanView">
+                    <onboardingHeader>
+                        <h1>You're using the free plan.</h1>
+                        <span
+                            >You have unlimited free daily generations, subject
+                            to daily rate limits.</span
+                        >
+                    </onboardingHeader>
+                    <div class="freePlanActions">
+                        <a href="home.html" type="button" class="understoodBtn">
+                            Understood
+                        </a>
+                        <a href="home.html" type="button" class="upgradeBtn">
+                            Upgrade
+                        </a>
+                    </div>
+                </div>
+            </carouselPage>
+            <carouselSteps></carouselSteps>
+        </mainView>
+        <script>
+            document.querySelectorAll(".onboardingButton").forEach((btn) => {
+                btn.addEventListener("mousemove", (e) => {
+                    if (btn.matches(":active")) return;
+                    const r = btn.getBoundingClientRect();
+                    const x = (e.clientX - r.left) / r.width - 0.5;
+                    const y = (e.clientY - r.top) / r.height - 0.5;
+                    btn.style.transform = `perspective(600px) rotateX(${-y * 14}deg) rotateY(${x * 14}deg)`;
+                });
+                btn.addEventListener("mousedown", () => {
+                    btn.style.transform = "";
+                });
+                btn.addEventListener("mouseleave", () => {
+                    btn.style.transform = "";
+                });
+            });
+
+            function toggleFollow(btn) {
+                btn.classList.toggle("is-followed");
+                btn.textContent = btn.classList.contains("is-followed") ? "Following" : "Not Followed";
+                var allFollowed = Array.from(
+                    document.getElementById("page4").querySelectorAll(".followBtn")
+                ).every((b) => b.classList.contains("is-followed"));
+                if (allFollowed) carousel.next();
+            }
+
+            function followAll() {
+                document.getElementById("page4").querySelectorAll(".followBtn").forEach((btn) => {
+                    btn.classList.add("is-followed");
+                    btn.textContent = "Following";
+                });
+                carousel.next();
+            }
+        </script>
+    </body>
+</html>

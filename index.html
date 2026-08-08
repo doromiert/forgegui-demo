@@ -3,404 +3,975 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ForgeGUI</title>
-        <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
-        <link rel="stylesheet" href="base.css" />
-        <link rel="stylesheet" href="plans.css" />
-        <script src="site.js" defer></script>
-        <meta name="theme-color" content="#0D0D0D" />
-        <meta name="description" content="ForgeGUI - Create anything with AI" />
-        <meta property="og:title" content="ForgeGUI" />
+        <title>ForgeGUI - AI for Game Developers</title>
+        <meta name="theme-color" content="#0f0f0f" />
         <meta
-            property="og:description"
-            content="Powerful AI tool for creators"
+            name="description"
+            content="ForgeGUI brings the top AI models together for game developers."
         />
-        <meta property="og:type" content="website" />
-        <meta name="color-scheme" content="dark" />
-
-        <style></style>
+        <link rel="stylesheet" href="index.css" />
     </head>
+    <body>
+        <header class="site-header">
+            <a class="brand" href="#top" aria-label="ForgeGUI home">
+                <img src="footerLogo.svg" alt="ForgeGUI" />
+            </a>
 
-    <body class="onboarding">
-        <topBar>
-            <img src="footerLogo.svg" />
-            <a href="home.html" class="skipOnboardingButton"
-                >Skip On-Boarding</a
+            <nav class="main-nav" aria-label="Primary navigation">
+                <a href="#models"
+                    >AI Tools <img src="landing-assets/chevron-down.svg" alt=""
+                /></a>
+                <a href="#catalog"
+                    >Plans <img src="landing-assets/chevron-down.svg" alt=""
+                /></a>
+                <a href="#community"
+                    >Community
+                    <img src="landing-assets/chevron-down.svg" alt=""
+                /></a>
+                <a href="#faq"
+                    >Support <img src="landing-assets/chevron-down.svg" alt=""
+                /></a>
+                <a href="#community"
+                    >Company <img src="landing-assets/chevron-down.svg" alt=""
+                /></a>
+            </nav>
+
+            <div class="auth-actions">
+                <a href="home.html">Sign In</a>
+                <a href="onboarding.html">Sign Up</a>
+            </div>
+
+            <button
+                class="menu-button"
+                type="button"
+                aria-label="Toggle navigation"
+                aria-expanded="false"
             >
-            <div style="flex: 1"></div>
-            <img src="generic.png" style="height: 42px" />
-        </topBar>
-        <mainView class="onboarding carousel">
-            <carouselPage id="page1">
-                <onboardingHeader>
-                    <h1>Howdy! Where did you come from?</h1>
-                    <span>Select between one of the options below.</span>
-                </onboardingHeader>
-                <onboardingOptionsGrid>
-                    <button
-                        class="onboardingButton"
-                        onclick="
-                            this.classList.toggle('is-active');
-                            carousel.next();
-                        "
-                    >
-                        <img src="icons/yt.svg" />
-                        Youtube
-                    </button>
-                    <button
-                        class="onboardingButton"
-                        onclick="
-                            this.classList.toggle('is-active');
-                            carousel.next();
-                        "
-                    >
-                        <img src="icons/twitter.svg" />
-                        X/Twitter
-                    </button>
-                    <button
-                        class="onboardingButton"
-                        onclick="
-                            this.classList.toggle('is-active');
-                            carousel.next();
-                        "
-                    >
-                        <img src="icons/tiktok.svg" />
-                        TikTok
-                    </button>
-                    <button
-                        class="onboardingButton"
-                        onclick="
-                            this.classList.toggle('is-active');
-                            carousel.next();
-                        "
-                    >
-                        <img src="icons/google.svg" />
-                        Search Engine
-                    </button>
-                    <button
-                        class="onboardingButton"
-                        onclick="
-                            this.classList.toggle('is-active');
-                            carousel.next();
-                        "
-                    >
-                        <img src="icons/3dots.svg" />
-                        Friend/Other
-                    </button>
-                </onboardingOptionsGrid>
-            </carouselPage>
-            <carouselPage id="page2">
-                <onboardingHeader>
-                    <h1>What platform will you use ForgeGUI for?</h1>
-                    <span>Select between one of the options below.</span>
-                </onboardingHeader>
-                <onboardingOptionsGrid>
-                    <button
-                        class="onboardingButton"
-                        onclick="
-                            this.classList.toggle('is-active');
-                            carousel.next();
-                        "
-                    >
-                        <img src="icons/roblox.svg" />
-                        Roblox
-                    </button>
-                    <button
-                        class="onboardingButton"
-                        onclick="
-                            this.classList.toggle('is-active');
-                            carousel.next();
-                        "
-                    >
-                        <img src="icons/ue.svg" />
-                        UEFN
-                    </button>
-                    <button
-                        class="onboardingButton"
-                        onclick="
-                            this.classList.toggle('is-active');
-                            carousel.next();
-                        "
-                    >
-                        <img src="icons/unity.svg" />
-                        Unity
-                    </button>
-                </onboardingOptionsGrid>
-            </carouselPage>
-            <carouselPage id="page3">
-                <onboardingHeader>
-                    <h1>What's your role?</h1>
-                    <span>Select between one of the options below.</span>
-                </onboardingHeader>
-                <onboardingOptionsGrid>
-                    <button
-                        class="onboardingButton"
-                        onclick="
-                            this.classList.toggle('is-active');
-                            carousel.next();
-                        "
-                    >
-                        <img src="icons/heart.svg" />
-                        Yes, I'm new
-                    </button>
-                    <button
-                        class="onboardingButton"
-                        onclick="
-                            this.classList.toggle('is-active');
-                            carousel.next();
-                        "
-                    >
-                        <img src="icons/Programming.svg" />
-                        No, I'm not new
-                    </button>
-                    <button
-                        class="onboardingButton"
-                        onclick="
-                            this.classList.toggle('is-active');
-                            carousel.next();
-                        "
-                    >
-                        <img src="icons/x.svg" />
-                        I'm not a dev
-                    </button>
-                </onboardingOptionsGrid>
-            </carouselPage>
-            <carouselPage id="page4">
-                <onboardingHeader>
-                    <h1>Let's get you connected!</h1>
-                    <span>Before you can continue, follow <strong>3</strong> accounts.</span>
-                </onboardingHeader>
-                <followList>
-                    <followItem>
-                        <div class="followAvatar">
-                            <img src="generic.png" />
-                        </div>
-                        <div class="followInfo">
-                            <strong>Account Name</strong>
-                            <span>@username</span>
-                        </div>
-                        <button class="followBtn" onclick="toggleFollow(this)">Not Followed</button>
-                    </followItem>
-                    <followItem>
-                        <div class="followAvatar">
-                            <img src="generic.png" />
-                        </div>
-                        <div class="followInfo">
-                            <strong>Account Name</strong>
-                            <span>@username</span>
-                        </div>
-                        <button class="followBtn" onclick="toggleFollow(this)">Not Followed</button>
-                    </followItem>
-                    <followItem>
-                        <div class="followAvatar">
-                            <img src="generic.png" />
-                        </div>
-                        <div class="followInfo">
-                            <strong>Account Name</strong>
-                            <span>@username</span>
-                        </div>
-                        <button class="followBtn" onclick="toggleFollow(this)">Not Followed</button>
-                    </followItem>
+                <span></span><span></span><span></span>
+            </button>
+        </header>
 
-                </followList>
-                <button class="postButton" onclick="followAll()">
-                    <img src="icons/People.svg">
-                    <span>
-                        Follow All 3
-                    </span>
-                </button>
-            </carouselPage>
-            <carouselPage id="page5">
-                <onboardingHeader>
-                    <h1>Let's create your first game!</h1>
-                    <span>First, give us a name for your project.</span>
-                </onboardingHeader>
-                <form>
-                    <div class="onboardingInput">
-                        <input type="text" placeholder="Name" maxlength="50" />
-                        <span class="charCounter">0/50</span>
-                    </div>
-                    <span> Or, Use suggested </span>
-                    <button
-                        type="button"
-                        class="suggestionButton"
-                        onclick="carousel.next()"
+        <main id="top">
+            <section class="hero" aria-labelledby="hero-title">
+                <p class="hero-proof">
+                    <strong>400K+</strong> creators have joined our mission.
+                </p>
+                <h1 id="hero-title">
+                    <span>The </span><em>#1</em><span> AI platform for</span
+                    ><br />
+                    <strong>game developers.</strong>
+                </h1>
+
+                <div class="hero-visual" aria-hidden="true">
+                    <img
+                        class="hero-orbit hero-orbit-outer"
+                        src="landing-assets/hero-orbit-outer.svg"
+                        alt=""
+                    />
+                    <img
+                        class="hero-orbit hero-orbit-inner"
+                        src="landing-assets/hero-orbit-inner.svg"
+                        alt=""
+                    />
+                    <img
+                        class="hero-scene"
+                        src="landing-assets/hero-art-a.png"
+                        alt=""
+                    />
+                    <img
+                        class="hero-platform hero-blender"
+                        src="landing-assets/blender.svg"
+                        alt=""
+                    />
+                    <img
+                        class="hero-platform hero-godot"
+                        src="landing-assets/godot.svg"
+                        alt=""
+                    />
+                    <img
+                        class="hero-platform hero-unity"
+                        src="landing-assets/unity.svg"
+                        alt=""
+                    />
+                    <img
+                        class="hero-platform hero-roblox"
+                        src="landing-assets/roblox.svg"
+                        alt=""
+                    />
+                    <img
+                        class="hero-platform hero-unreal"
+                        src="landing-assets/unreal.svg"
+                        alt=""
+                    />
+                </div>
+
+                <form class="hero-prompt" action="home.html">
+                    <label class="visually-hidden" for="hero-prompt"
+                        >Describe the game you want to create</label
                     >
-                        <img src="icons/ai.svg" />
-                        Epic Gun Game
-                    </button>
-                    <button
-                        type="button"
-                        class="postButton"
-                        style="width: 300px; align-self: center"
-                        onclick="carousel.next()"
-                    >
-                        <span>Create Project</span><img src="icons/add.svg" />
+                    <input
+                        id="hero-prompt"
+                        name="prompt"
+                        placeholder="Create your game today..."
+                    />
+                    <button type="submit" aria-label="Create game">
+                        <img src="landing-assets/send.svg" alt="" />
                     </button>
                 </form>
-            </carouselPage>
-            <carouselPage id="page6">
-                <onboardingHeader>
-                    <h1>Select a prompt to start generating.</h1>
-                    <span>Generate the first asset for your game.</span>
-                </onboardingHeader>
-                <stockPrompts>
-                    <button class="suggestionButton">
-                        <img src="icons/ai.svg" onclick="carousel.next()" />
-                        Generate an AK47 3D model
-                    </button>
-                    <button class="suggestionButton">
-                        <img src="icons/ai.svg" onclick="carousel.next()" />
-                        Generate an fps thumbnail for my game
-                    </button>
-                    <button class="suggestionButton">
-                        <img src="icons/ai.svg" onclick="carousel.next()" />
-                        Generate a gun shot sound effect
-                    </button>
-                </stockPrompts>
-                <hr class="onboardingHR" />
-                <ownPrompt>
-                    <span>Or type your own prompt...</span>
-                    <div class="promptInput">
-                        <input type="text" placeholder="Enter Text" />
-                        <button class="createBtn" onclick="carousel.next()">
-                            Create
+
+                <a class="hero-cta" href="onboarding.html">Try it for free</a>
+                <a
+                    class="scroll-cue"
+                    href="#models"
+                    aria-label="Explore ForgeGUI features"
+                >
+                    <img src="landing-assets/scroll-arrow.svg" alt="" />
+                </a>
+            </section>
+
+            <div class="feature-story" id="models">
+                <div class="feature-stack">
+                    <div class="shared-feature-world" aria-hidden="true">
+                        <img
+                            class="orbit outer"
+                            src="landing-assets/model-orbit-outer.svg"
+                            alt=""
+                        />
+                        <img
+                            class="orbit inner"
+                            src="landing-assets/model-orbit-inner.svg"
+                            alt=""
+                        />
+                    </div>
+                    <div class="shared-feature-logo-layer" aria-hidden="true">
+                        <img src="landing-assets/forge-symbol.svg" alt="" />
+                    </div>
+                    <div class="shared-feature-count">
+                        <strong>01</strong><span>/03</span>
+                    </div>
+                    <div class="shared-feature-rail" aria-hidden="true">
+                        <span></span>
+                    </div>
+                    <section
+                        class="feature feature-models is-active"
+                        data-feature-step="0"
+                        aria-labelledby="models-title"
+                    >
+                        <h2 id="models-title">
+                            All of the <strong>top AI models</strong>, in one
+                            place.
+                        </h2>
+                        <div class="feature-count">
+                            <strong>01</strong><span>/03</span>
+                        </div>
+                        <div class="feature-rail"><span></span></div>
+                        <div class="orbit-stage model-stage" aria-hidden="true">
+                            <img
+                                class="orbit outer"
+                                src="landing-assets/model-orbit-outer.svg"
+                                alt=""
+                            />
+                            <img
+                                class="orbit inner"
+                                src="landing-assets/model-orbit-inner.svg"
+                                alt=""
+                            />
+                            <img
+                                class="orbit-center"
+                                src="landing-assets/forge-symbol.svg"
+                                alt=""
+                            />
+                            <img
+                                class="model-logo model-codex"
+                                src="landing-assets/codex.svg"
+                                alt=""
+                            />
+                            <img
+                                class="model-logo model-tripo"
+                                src="landing-assets/tripo.png"
+                                alt=""
+                            />
+                            <img
+                                class="model-logo model-fal"
+                                src="landing-assets/fal.png"
+                                alt=""
+                            />
+                            <img
+                                class="model-logo model-hunyuan"
+                                src="landing-assets/hunyuan.svg"
+                                alt=""
+                            />
+                            <img
+                                class="model-logo model-meshy"
+                                src="landing-assets/meshy.svg"
+                                alt=""
+                            />
+                            <span class="model-logo model-luma"
+                                ><img src="landing-assets/luma.png" alt=""
+                            /></span>
+                            <img
+                                class="model-logo model-symbol"
+                                src="landing-assets/model-symbol.svg"
+                                alt=""
+                            />
+                            <img
+                                class="model-logo model-extra"
+                                src="landing-assets/model-logo-masked.svg"
+                                alt=""
+                            />
+                        </div>
+                    </section>
+
+                    <section
+                        class="feature feature-collage"
+                        data-feature-step="1"
+                        aria-labelledby="collage-title"
+                    >
+                        <h2 id="collage-title">
+                            All of the top AI models, in one place.<br />
+                            Configured for <strong>Game Devs.</strong>
+                        </h2>
+                        <div class="feature-count">
+                            <strong>02</strong><span>/03</span>
+                        </div>
+                        <div class="feature-rail"><span></span></div>
+                        <div
+                            class="orbit-stage collage-stage"
+                            aria-hidden="true"
+                        >
+                            <img
+                                class="orbit outer"
+                                src="landing-assets/model-orbit-outer.svg"
+                                alt=""
+                            />
+                            <img
+                                class="orbit inner"
+                                src="landing-assets/model-orbit-inner.svg"
+                                alt=""
+                            />
+                            <img
+                                class="orbit-center"
+                                src="landing-assets/forge-symbol.svg"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-01"
+                                src="landing-assets/collage-01.png"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-02"
+                                src="landing-assets/collage-02.png"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-03"
+                                src="landing-assets/collage-03.png"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-04"
+                                src="landing-assets/collage-04.png"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-05"
+                                src="landing-assets/collage-05.png"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-06"
+                                src="landing-assets/collage-06.png"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-07"
+                                src="landing-assets/collage-07.png"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-08"
+                                src="landing-assets/collage-08.png"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-09"
+                                src="landing-assets/collage-09.png"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-10"
+                                src="landing-assets/collage-10.png"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-11"
+                                src="landing-assets/collage-11.png"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-12"
+                                src="landing-assets/collage-12.png"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-13"
+                                src="landing-assets/collage-13.png"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-14"
+                                src="landing-assets/collage-14.png"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-15"
+                                src="landing-assets/collage-15.png"
+                                alt=""
+                            />
+                            <img
+                                class="collage collage-16"
+                                src="landing-assets/collage-16.png"
+                                alt=""
+                            />
+                        </div>
+                    </section>
+
+                    <section
+                        class="feature feature-platforms"
+                        data-feature-step="2"
+                        aria-labelledby="platforms-title"
+                    >
+                        <h2 id="platforms-title">
+                            All of the top AI models, in one place.<br />
+                            Configured for Game Devs.<br />
+                            <strong>Anywhere</strong> you want to build.
+                        </h2>
+                        <div class="feature-count">
+                            <strong>03</strong><span>/03</span>
+                        </div>
+                        <div class="feature-rail"><span></span></div>
+                        <div
+                            class="orbit-stage platform-stage"
+                            aria-hidden="true"
+                        >
+                            <img
+                                class="orbit outer"
+                                src="landing-assets/platform-orbit-outer.svg"
+                                alt=""
+                            />
+                            <img
+                                class="orbit inner"
+                                src="landing-assets/platform-orbit-inner.svg"
+                                alt=""
+                            />
+                            <img
+                                class="orbit-center"
+                                src="landing-assets/forge-symbol.svg"
+                                alt=""
+                            />
+                            <img
+                                class="platform-logo platform-roblox"
+                                src="landing-assets/roblox-large.svg"
+                                alt=""
+                            />
+                            <img
+                                class="platform-logo platform-unity"
+                                src="landing-assets/unity-large.svg"
+                                alt=""
+                            />
+                            <img
+                                class="platform-logo platform-unreal"
+                                src="landing-assets/unreal-large.svg"
+                                alt=""
+                            />
                             <svg
-                                width="16"
-                                height="16"
-                                viewBox="0 0 16 16"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
+                                class="generated-snakes"
+                                viewBox="0 0 1630 1010"
+                                aria-hidden="true"
                             >
                                 <path
-                                    d="M14.5 1.5L1.5 6.5L6.5 8.5M14.5 1.5L9.5 14.5L6.5 8.5M14.5 1.5L6.5 8.5"
-                                    stroke="white"
-                                    stroke-width="1.5"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
+                                    d="M815 505 C905 455 964 363 915 275 C870 194 914 106 1058 145"
+                                />
+                                <path
+                                    d="M815 505 C724 530 665 462 589 418 C491 360 393 418 424 546"
+                                />
+                                <path
+                                    d="M815 505 C785 606 891 654 925 747 C958 838 866 895 744 848"
                                 />
                             </svg>
-                        </button>
-                    </div>
-                </ownPrompt>
-            </carouselPage>
-            <carouselPage id="page7">
-                    <onboardingHeader>
-                        <h1>You're in luck!</h1>
-                        <span
-                            >You've earned a 55% discount on the Pro tier!</span
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <section class="generations" aria-labelledby="generations-title">
+                <h2 id="generations-title">Everything we generate</h2>
+                <div class="generation-window">
+                    <img
+                        class="generation-glow"
+                        src="landing-assets/carousel-glow.svg"
+                        alt=""
+                    />
+                    <div class="generation-track">
+                        <article
+                            class="generation-card card-far-left generation-clouds"
+                            aria-label="Generated music"
                         >
-                    </onboardingHeader>
-                    <div class="promoCodeBanner">
-                        <div class="promoCodeTop">
-                            Promo Code: <span>Code Name</span>
-                        </div>
-                        <div class="promoCodeBody">
-                            <div class="promoStat">
-                                <strong>75% <em>OFF</em></strong>
-                                <small>PROMO</small>
-                            </div>
-                            <div class="promoDivider"></div>
-                            <div class="promoStat">
-                                <strong>10:00</strong>
-                                <small>TIME LEFT</small>
-                            </div>
-                        </div>
+                            <h3>Music</h3>
+                        </article>
+                        <article
+                            class="generation-card card-left generation-assets"
+                            aria-label="Generated 3D assets and interfaces"
+                        >
+                            <h3>3D assets &amp; GUI</h3>
+                        </article>
+                        <article
+                            class="generation-card card-center generation-clouds"
+                            aria-label="Generated games"
+                        >
+                            <h3>Games</h3>
+                        </article>
+                        <article
+                            class="generation-card card-right generation-clouds"
+                            aria-label="Generated music and sound effects"
+                        >
+                            <h3>Music &amp; SFX</h3>
+                        </article>
+                        <article
+                            class="generation-card card-far-right generation-assets"
+                            aria-label="Generated music"
+                        >
+                            <h3>Music</h3>
+                        </article>
                     </div>
-                    <planCard class="plan-card plan-card--pro plan-card--offer">
-                        <slot template="templates/plan-card.html">
-                            <span slot="title">Pro</span>
-                            <span slot="badge">55% OFF</span>
-                            <span slot="price">$14.99</span>
-                            <span slot="original-price">$59.99</span>
-                            <span slot="button">Claim Discount!</span>
-                            <div slot="price-benefits">
-                                <p><em>TRULY UNLIMITED GENERATIONS.</em></p>
-                                <p>Subject to abuse protections.</p>
-                            </div>
-                            <ul slot="ai-features">
-                                <li>Access to Google Nano Banana</li>
-                                <li>Access to Meshy</li>
-                                <li>Fable 5</li>
-                                <li>Access to Tripo</li>
-                                <li>Access to GPT Image V2</li>
-                                <li>10s of more models.</li>
-                            </ul>
-                            <ul slot="included-features">
-                                <li>Pro AI models for any task.</li>
-                                <li>Custom Pro Role</li>
-                                <li>Faster Generations</li>
-                                <li>Skip the Waitlist</li>
-                                <li>Everything in the Starter Tier</li>
-                            </ul>
-                        </slot>
-                    </planCard>
                     <button
+                        class="carousel-control previous"
                         type="button"
-                        class="skipOfferBtn"
-                        onclick="
-                            var p = document.getElementById('page7');
-                            p.classList.add('skipped');
-                            p.style.overflowY = 'hidden';
-                            p.scrollTop = 0;
-                        "
+                        aria-label="Previous generation type"
                     >
-                        Skip Offer
+                        <img
+                            src="icons/arrow.svg"
+                            alt=""
+                            style="height: 48px; width: 48px; rotate: 90deg"
+                        />
+                    </button>
+                    <button
+                        class="carousel-control next"
+                        type="button"
+                        aria-label="Next generation type"
+                    >
+                        <img
+                            src="icons/arrow.svg"
+                            alt=""
+                            style="height: 48px; width: 48px; rotate: -90deg"
+                        />
                     </button>
                 </div>
-                <div class="freePlanView">
-                    <onboardingHeader>
-                        <h1>You're using the free plan.</h1>
-                        <span
-                            >You have unlimited free daily generations, subject
-                            to daily rate limits.</span
-                        >
-                    </onboardingHeader>
-                    <div class="freePlanActions">
-                        <a href="home.html" type="button" class="understoodBtn">
-                            Understood
-                        </a>
-                        <a href="home.html" type="button" class="upgradeBtn">
-                            Upgrade
-                        </a>
+            </section>
+
+            <section
+                class="catalog"
+                id="catalog"
+                aria-labelledby="catalog-title"
+            >
+                <h2 id="catalog-title">Premium Stock Catalog</h2>
+                <div class="catalog-grid">
+                    <a class="catalog-card" href="community.html">
+                        <img
+                            src="landing-assets/catalog-card.png"
+                            alt="Generated 3D asset catalog"
+                        />
+                        <span>3D Generation</span><strong>3D assets</strong>
+                    </a>
+                    <a
+                        class="catalog-card catalog-card-gui"
+                        href="community.html"
+                    >
+                        <img
+                            src="landing-assets/hero-art-a.png"
+                            alt="Generated interface catalog"
+                        />
+                        <span>GUI Generations</span><strong>GUI</strong>
+                    </a>
+                    <a
+                        class="catalog-card catalog-card-audio"
+                        href="community.html"
+                    >
+                        <img
+                            src="landing-assets/generation-card.png"
+                            alt="Generated audio catalog"
+                        />
+                        <span>Audio Generations</span
+                        ><strong>Music &amp; SFX</strong>
+                    </a>
+                    <a
+                        class="catalog-card catalog-card-template"
+                        href="community.html"
+                    >
+                        <img
+                            src="landing-assets/collage-10.png"
+                            alt="Game templates catalog"
+                        />
+                        <span>Game Templates</span><strong>Templates</strong>
+                    </a>
+                </div>
+                <p>
+                    Download free high quality community assets, royalty free,
+                    ready for your games, anywhere you build.
+                </p>
+            </section>
+
+            <section
+                class="community-proof"
+                id="community"
+                aria-labelledby="community-title"
+            >
+                <img
+                    src="landing-assets/community-glow.png"
+                    alt=""
+                    style="height: 400px"
+                />
+                <h2 id="community-title">
+                    <strong>400K+</strong> Game Devs<br />choose ForgeGUI
+                </h2>
+                <ul>
+                    <li>
+                        <img src="landing-assets/check.svg" alt="" />Access to
+                        10+ AI Models
+                    </li>
+                    <li>
+                        <img src="landing-assets/check.svg" alt="" />Community
+                        of 100,000s of game devs
+                    </li>
+                    <li>
+                        <img src="landing-assets/check.svg" alt="" />Built for
+                        you to create Your game
+                    </li>
+                </ul>
+            </section>
+
+            <section class="builder-preview" aria-label="Start creating">
+                <div class="builder-shell">
+                    <div class="builder-top">
+                        <button type="button" aria-label="Add attachment">
+                            <img src="landing-assets/add.svg" alt="" />
+                        </button>
+                    </div>
+                    <p>Describe what you want...</p>
+                    <div class="builder-toolbar">
+                        <div class="builder-options">
+                            <button type="button">
+                                <img
+                                    src="landing-assets/builder-roblox.svg"
+                                    alt=""
+                                />Roblox
+                                <img
+                                    src="landing-assets/builder-arrow.svg"
+                                    alt=""
+                                />
+                            </button>
+                            <button type="button">
+                                <img
+                                    src="landing-assets/pencil.svg"
+                                    alt=""
+                                />Auto-Detect
+                                <img
+                                    src="landing-assets/builder-arrow.svg"
+                                    alt=""
+                                />
+                            </button>
+                            <button type="button">
+                                <span class="spark"
+                                    ><img
+                                        src="landing-assets/star-a.svg"
+                                        alt="" /><img
+                                        src="landing-assets/star-b.svg"
+                                        alt="" /></span
+                                >Yunes Pro
+                                <img
+                                    src="landing-assets/builder-arrow.svg"
+                                    alt=""
+                                />
+                            </button>
+                        </div>
+                        <a href="onboarding.html"
+                            >Start creating now
+                            <img
+                                src="icons/arrow.svg"
+                                alt=""
+                                style="
+                                    height: 128px;
+                                    width: 128px;
+                                    rotate: -90deg;
+                                "
+                        /></a>
                     </div>
                 </div>
-            </carouselPage>
-            <carouselSteps></carouselSteps>
-        </mainView>
+            </section>
+
+            <section class="faq" id="faq" aria-labelledby="faq-title">
+                <h2 id="faq-title">Frequently Asked Questions</h2>
+                <div class="accordion">
+                    <article>
+                        <button type="button" aria-expanded="false">
+                            <span>Question 1</span
+                            ><img
+                                src="icons/arrow.svg"
+                                alt=""
+                                style="height: 42px; width: 42px"
+                            />
+                        </button>
+                        <p>
+                            ForgeGUI combines leading AI tools in one workspace
+                            built specifically for game creation.
+                        </p>
+                    </article>
+                    <article>
+                        <button type="button" aria-expanded="false">
+                            <span>Question 2</span
+                            ><img
+                                src="icons/arrow.svg"
+                                alt=""
+                                style="height: 42px; width: 42px"
+                            />
+                        </button>
+                        <p>
+                            Generate games, interfaces, 3D assets, music, sound
+                            effects, and production-ready templates.
+                        </p>
+                    </article>
+                    <article class="expanded">
+                        <button type="button" aria-expanded="true">
+                            <span>Question 3 (Expanded</span
+                            ><img
+                                src="icons/arrow.svg"
+                                alt=""
+                                style="height: 42px; width: 42px"
+                            />
+                        </button>
+                        <p>
+                            Word Word Word Word Word Word Word Word Word Word
+                            Word Word Word Word Word Word Word Word Word Word
+                            Word Word Word Word Word Word Word Word Word Word
+                            Word Word Word Word Word Word Word Word Word Word
+                            Word Word Word vWord
+                        </p>
+                    </article>
+                </div>
+            </section>
+        </main>
+
         <script>
-            document.querySelectorAll(".onboardingButton").forEach((btn) => {
-                btn.addEventListener("mousemove", (e) => {
-                    if (btn.matches(":active")) return;
-                    const r = btn.getBoundingClientRect();
-                    const x = (e.clientX - r.left) / r.width - 0.5;
-                    const y = (e.clientY - r.top) / r.height - 0.5;
-                    btn.style.transform = `perspective(600px) rotateX(${-y * 14}deg) rotateY(${x * 14}deg)`;
-                });
-                btn.addEventListener("mousedown", () => {
-                    btn.style.transform = "";
-                });
-                btn.addEventListener("mouseleave", () => {
-                    btn.style.transform = "";
-                });
+            const menuButton = document.querySelector(".menu-button");
+            const nav = document.querySelector(".main-nav");
+
+            menuButton.addEventListener("click", function () {
+                const open = nav.classList.toggle("is-open");
+                menuButton.setAttribute("aria-expanded", String(open));
             });
 
-            function toggleFollow(btn) {
-                btn.classList.toggle("is-followed");
-                btn.textContent = btn.classList.contains("is-followed") ? "Following" : "Not Followed";
-                var allFollowed = Array.from(
-                    document.getElementById("page4").querySelectorAll(".followBtn")
-                ).every((b) => b.classList.contains("is-followed"));
-                if (allFollowed) carousel.next();
+            document
+                .querySelectorAll(".accordion article button")
+                .forEach(function (button) {
+                    button.addEventListener("click", function () {
+                        const item = button.closest("article");
+                        const expanded = item.classList.toggle("expanded");
+                        button.setAttribute("aria-expanded", String(expanded));
+                    });
+                });
+
+            const track = document.querySelector(".generation-track");
+            const generationCards = Array.from(
+                track.querySelectorAll(".generation-card"),
+            );
+            let generationSlide = 0;
+
+            function generationSlot(relativePosition) {
+                const distance = Math.abs(relativePosition);
+
+                return {
+                    left: 1246 + relativePosition * 600,
+                    top:
+                        distance === 0
+                            ? 25
+                            : distance === 1
+                              ? 77
+                              : 230 + Math.max(0, distance - 2) * 150,
+                    rotation: relativePosition * 9,
+                    layer: 10 - distance,
+                };
             }
 
-            function followAll() {
-                document.getElementById("page4").querySelectorAll(".followBtn").forEach((btn) => {
-                    btn.classList.add("is-followed");
-                    btn.textContent = "Following";
+            function layoutGenerationCarousel() {
+                generationCards.forEach(function (card, index) {
+                    const slot = generationSlot(index - 2 - generationSlide);
+                    card.style.left = slot.left + "px";
+                    card.style.top = slot.top + "px";
+                    card.style.transform = "rotate(" + slot.rotation + "deg)";
+                    card.style.zIndex = String(slot.layer);
                 });
-                carousel.next();
             }
+
+            function moveGenerationCarousel(direction) {
+                generationSlide = Math.max(
+                    -2,
+                    Math.min(2, generationSlide + direction),
+                );
+                layoutGenerationCarousel();
+            }
+
+            document
+                .querySelector(".carousel-control.previous")
+                .addEventListener("click", function () {
+                    moveGenerationCarousel(-1);
+                });
+            document
+                .querySelector(".carousel-control.next")
+                .addEventListener("click", function () {
+                    moveGenerationCarousel(1);
+                });
+            layoutGenerationCarousel();
+
+            const hero = document.querySelector(".hero");
+            const story = document.querySelector(".feature-story");
+            const featureStack = document.querySelector(".feature-stack");
+            const sharedCounter = document.querySelector(
+                ".shared-feature-count strong",
+            );
+            const sharedRail = document.querySelector(".shared-feature-rail");
+            const sharedThumb = sharedRail.querySelector("span");
+            const featureSteps = Array.from(
+                document.querySelectorAll("[data-feature-step]"),
+            );
+            const featureAssets = featureSteps.map(function (step) {
+                return Array.from(
+                    step.querySelectorAll(
+                        ".model-logo, .collage, .platform-logo, .platform-question",
+                    ),
+                );
+            });
+            const snakePaths = Array.from(
+                document.querySelectorAll(".generated-snakes path"),
+            );
+            const snakeCanvas = document.querySelector(".generated-snakes");
+            const sceneReveal = featureSteps.map(function (_, index) {
+                return index === 0 ? 1 : 0;
+            });
+            let lastFrameTime = performance.now();
+
+            function smoothStep(value) {
+                return value * value * (3 - 2 * value);
+            }
+
+            function bufferedScenePosition(progress) {
+                if (progress <= 0.22) return 0;
+                if (progress < 0.38) {
+                    return smoothStep((progress - 0.22) / 0.16);
+                }
+                if (progress <= 0.62) return 1;
+                if (progress < 0.78) {
+                    return 1 + smoothStep((progress - 0.62) / 0.16);
+                }
+                return 2;
+            }
+
+            function orbitFeatureAssets(
+                step,
+                assets,
+                revealProgress,
+                orbitPhase,
+            ) {
+                const stage = step.querySelector(".orbit-stage");
+                const centerX = stage.clientWidth / 2;
+                const centerY = stage.clientHeight / 2;
+                const radiusProgress = revealProgress * revealProgress;
+                const positions = [];
+
+                assets.forEach(function (asset, assetIndex) {
+                    const finalX = asset.offsetLeft + asset.offsetWidth / 2;
+                    const finalY = asset.offsetTop + asset.offsetHeight / 2;
+                    const radiusX = finalX - centerX;
+                    const radiusY = finalY - centerY;
+                    const orbitDirection = assetIndex % 2 === 0 ? -1 : 1;
+                    const orbitSpeed =
+                        step.dataset.featureStep === "2"
+                            ? 0.3 + assetIndex * 0.85
+                            : 0.72 + (assetIndex % 5) * 0.14;
+                    const orbitAngle =
+                        orbitPhase * orbitSpeed +
+                        (1 - revealProgress) * orbitDirection * 0.9;
+                    const cosine = Math.cos(orbitAngle);
+                    const sine = Math.sin(orbitAngle);
+                    const curvedX =
+                        (radiusX * cosine - radiusY * sine) * radiusProgress;
+                    const curvedY =
+                        (radiusX * sine + radiusY * cosine) * radiusProgress;
+                    const displayedX = centerX + curvedX;
+                    const displayedY = centerY + curvedY;
+
+                    asset.style.translate =
+                        displayedX -
+                        finalX +
+                        "px " +
+                        (displayedY - finalY) +
+                        "px";
+                    asset.style.scale = String(0.16 + revealProgress * 0.84);
+                    asset.style.opacity = String(
+                        Math.min(1, revealProgress * 1.8),
+                    );
+                    positions.push({ x: displayedX, y: displayedY });
+                });
+
+                return {
+                    centerX: centerX,
+                    centerY: centerY,
+                    positions: positions,
+                };
+            }
+
+            function updateSnakePaths(layout, revealProgress, ambientPhase) {
+                if (!layout) return;
+                snakeCanvas.setAttribute(
+                    "viewBox",
+                    "0 0 " + layout.centerX * 2 + " " + layout.centerY * 2,
+                );
+
+                snakePaths.forEach(function (path, index) {
+                    const target = layout.positions[index];
+                    if (!target) return;
+
+                    const dx = target.x - layout.centerX;
+                    const dy = target.y - layout.centerY;
+                    const distance = Math.max(Math.hypot(dx, dy), 1);
+                    const normalX = -dy / distance;
+                    const normalY = dx / distance;
+                    const bendPulse =
+                        0.8 + Math.sin(ambientPhase * 12 + index * 1.7) * 0.35;
+                    const bend =
+                        Math.min(105, distance * 0.25) *
+                        bendPulse *
+                        (index % 2 ? -1 : 1);
+                    const firstX = layout.centerX + dx * 0.32 + normalX * bend;
+                    const firstY = layout.centerY + dy * 0.32 + normalY * bend;
+                    const secondX =
+                        layout.centerX + dx * 0.68 - normalX * bend * 0.65;
+                    const secondY =
+                        layout.centerY + dy * 0.68 - normalY * bend * 0.65;
+
+                    path.setAttribute(
+                        "d",
+                        "M " +
+                            layout.centerX +
+                            " " +
+                            layout.centerY +
+                            " C " +
+                            firstX +
+                            " " +
+                            firstY +
+                            ", " +
+                            secondX +
+                            " " +
+                            secondY +
+                            ", " +
+                            target.x +
+                            " " +
+                            target.y,
+                    );
+
+                    const length = path.getTotalLength();
+                    const pathProgress = Math.max(
+                        0,
+                        Math.min(1, revealProgress * 1.25 - index * 0.1),
+                    );
+                    path.style.strokeDasharray = String(length);
+                    path.style.strokeDashoffset = String(
+                        length * (1 - pathProgress),
+                    );
+                });
+            }
+
+            function updateStory(frameTime) {
+                const deltaTime = Math.min(
+                    0.05,
+                    Math.max(0, (frameTime - lastFrameTime) / 1000),
+                );
+                lastFrameTime = frameTime;
+                const viewportHeight = window.innerHeight;
+                const heroProgress = Math.min(
+                    1,
+                    Math.max(
+                        0,
+                        window.scrollY / Math.max(hero.offsetHeight, 1),
+                    ),
+                );
+                hero.style.setProperty(
+                    "--hero-scroll",
+                    heroProgress.toFixed(3),
+                );
+
+                const storyTop = story.offsetTop;
+                const storyRange = Math.max(
+                    story.offsetHeight - viewportHeight,
+                    1,
+                );
+                const progress = Math.min(
+                    1,
+                    Math.max(0, (window.scrollY - storyTop) / storyRange),
+                );
+                const scenePosition = bufferedScenePosition(progress);
+                const ambientOrbit = frameTime * 0.0002;
+                const viewportFit = Math.min(
+                    1,
+                    Math.max(0.58, (viewportHeight - 220) / 1010),
+                );
+
+                featureStack.style.setProperty(
+                    "--shared-stage-scale",
+                    viewportFit.toFixed(3),
+                );
+                sharedCounter.textContent = String(
+                    Math.round(scenePosition) + 1,
+                ).padStart(2, "0");
+
+                const railTravel = Math.max(
+                    sharedRail.clientHeight - sharedThumb.offsetHeight - 12,
+                    0,
+                );
+                sharedThumb.style.transform =
+                    "translateY(" + Math.round(railTravel * progress) + "px)";
+
+                let platformLayout;
+                featureSteps.forEach(function (step, index) {
+                    const distance = Math.abs(index - scenePosition);
+                    const targetVisibility = Math.max(0, 1 - distance);
+                    const easing = 1 - Math.exp(-deltaTime * 5.5);
+                    sceneReveal[index] +=
+                        (targetVisibility - sceneReveal[index]) * easing;
+                    const visibility = sceneReveal[index];
+                    step.style.setProperty(
+                        "--scene-opacity",
+                        visibility.toFixed(3),
+                    );
+                    step.style.setProperty(
+                        "--stage-scale",
+                        viewportFit.toFixed(3),
+                    );
+                    step.classList.toggle("is-active", visibility > 0.5);
+                    const layout = orbitFeatureAssets(
+                        step,
+                        featureAssets[index],
+                        visibility,
+                        ambientOrbit,
+                    );
+                    if (index === 2) platformLayout = layout;
+                });
+
+                updateSnakePaths(platformLayout, sceneReveal[2], ambientOrbit);
+                requestAnimationFrame(updateStory);
+            }
+
+            requestAnimationFrame(updateStory);
         </script>
     </body>
 </html>

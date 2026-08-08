@@ -1,0 +1,14 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="754.937" height="763.648" viewBox="0 0 754.937 763.648" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Ellipse 45">
+<ellipse cx="377.469" cy="381.824" rx="377.469" ry="381.824" fill="url(#paint0_radial_0_142)"/>
+</g>
+<defs>
+<radialGradient id="paint0_radial_0_142" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(377.469 381.824) rotate(90) scale(381.824 377.469)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<g id="stroke0_0_142" data-figma-scatter-ref="stroke0_0_142_ref" data-figma-scatter="f0.25_w0_aj95_sj0_r45_s6269536826924720722_sw109.587">
+</g>
+<path id="stroke0_0_142_ref" d="M754.937 381.824C754.937 592.7 585.939 763.648 377.469 763.648C168.998 763.648 0 592.7 0 381.824C0 170.948 168.998 0 377.469 0C585.939 0 754.937 170.948 754.937 381.824Z"/>
+</defs>
+</svg>
