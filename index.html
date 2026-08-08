@@ -37,7 +37,7 @@
             </nav>
 
             <div class="auth-actions">
-                <a href="home.html">Sign In</a>
+                <button type="button" data-open-login>Sign In</button>
                 <a href="onboarding.html">Sign Up</a>
             </div>
 
@@ -662,9 +662,306 @@
             </section>
         </main>
 
+        <div class="login-modal" data-login-modal hidden>
+            <div
+                class="login-panel"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="login-title"
+            >
+                <div class="login-step-stack">
+                    <section class="login-content" data-login-step="options">
+                        <header class="login-intro">
+                            <span class="login-logo" aria-hidden="true">
+                                <img src="icons/fg.svg" alt="" />
+                            </span>
+                            <h2 id="login-title">Let’s Get Started</h2>
+                            <p>You need to use an account to continue.</p>
+                        </header>
+
+                        <div class="login-actions">
+                            <button
+                                class="login-button login-button-create"
+                                type="button"
+                                data-login-go="signup"
+                            >
+                                Create an Account
+                            </button>
+                            <a class="login-button" href="home.html">
+                                <img
+                                    class="provider-icon"
+                                    src="landing-assets/login-google.svg"
+                                    alt=""
+                                />
+                                Continue with Google
+                            </a>
+                            <a class="login-button" href="home.html">
+                                <img
+                                    class="provider-icon provider-icon-roblox"
+                                    src="landing-assets/login-roblox.png"
+                                    alt=""
+                                />
+                                Continue with Roblox
+                            </a>
+
+                            <div class="login-divider" aria-hidden="true">
+                                <span></span><b>or...</b><span></span>
+                            </div>
+
+                            <button
+                                class="login-button login-button-email"
+                                type="button"
+                                data-login-go="signin"
+                            >
+                                <span class="mail-icon" aria-hidden="true">
+                                    <img
+                                        src="landing-assets/login-mail.svg"
+                                        alt=""
+                                    />
+                                </span>
+                                Continue with Email
+                            </button>
+                        </div>
+                    </section>
+
+                    <section
+                        class="login-content login-form-step"
+                        data-login-step="signin"
+                        hidden
+                    >
+                        <header class="login-form-header">
+                            <button
+                                class="login-back"
+                                type="button"
+                                data-login-go="options"
+                                aria-label="Back to login options"
+                            >
+                                <img src="icons/arrow.svg" alt="" />
+                            </button>
+                            <div>
+                                <h2 id="login-signin-title">Sign In</h2>
+                                <p>You need to use an account to continue.</p>
+                            </div>
+                        </header>
+
+                        <form class="login-form" data-auth-form>
+                            <label class="login-field">
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    required
+                                />
+                                <span class="login-field-icon">
+                                    <img
+                                        src="landing-assets/login-mail.svg"
+                                        alt=""
+                                    />
+                                </span>
+                            </label>
+                            <label class="login-field">
+                                <input
+                                    type="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    required
+                                />
+                                <span class="login-field-icon login-lock">
+                                    <i></i>
+                                    <img
+                                        src="landing-assets/login-lock-arc.svg"
+                                        alt=""
+                                    />
+                                </span>
+                            </label>
+                            <button
+                                class="login-button login-button-email"
+                                type="submit"
+                            >
+                                Sign In
+                            </button>
+
+                            <div class="login-divider" aria-hidden="true">
+                                <span></span><b>Other Options...</b><span></span>
+                            </div>
+
+                            <div class="login-secondary-row">
+                                <button
+                                    class="login-button"
+                                    type="button"
+                                    data-login-go="signup"
+                                >
+                                    Sign Up
+                                </button>
+                                <button class="login-button" type="button">
+                                    I Forgot
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <section
+                        class="login-content login-form-step"
+                        data-login-step="signup"
+                        hidden
+                    >
+                        <header class="login-form-header">
+                            <button
+                                class="login-back"
+                                type="button"
+                                data-login-go="options"
+                                aria-label="Back to login options"
+                            >
+                                <img src="icons/arrow.svg" alt="" />
+                            </button>
+                            <div>
+                                <h2 id="login-signup-title">Sign Up</h2>
+                                <p>Create an account for ForgeGUI</p>
+                            </div>
+                        </header>
+
+                        <form class="login-form" data-auth-form>
+                            <label class="login-field">
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder="Name"
+                                    required
+                                />
+                                <span class="login-field-icon">
+                                    <img
+                                        src="landing-assets/login-person.svg"
+                                        alt=""
+                                    />
+                                </span>
+                            </label>
+                            <label class="login-field">
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    required
+                                />
+                                <span class="login-field-icon">
+                                    <img
+                                        src="landing-assets/login-mail.svg"
+                                        alt=""
+                                    />
+                                </span>
+                            </label>
+                            <label class="login-field">
+                                <input
+                                    type="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    required
+                                />
+                                <span class="login-field-icon login-lock">
+                                    <i></i>
+                                    <img
+                                        src="landing-assets/login-lock-arc.svg"
+                                        alt=""
+                                    />
+                                </span>
+                            </label>
+                            <button
+                                class="login-button login-button-email"
+                                type="submit"
+                            >
+                                Sign Up
+                            </button>
+
+                            <div class="login-divider" aria-hidden="true">
+                                <span></span><b>Other Options...</b><span></span>
+                            </div>
+
+                            <button
+                                class="login-button"
+                                type="button"
+                                data-login-go="signin"
+                            >
+                                Sign In Instead
+                            </button>
+                        </form>
+                    </section>
+                </div>
+
+                <aside
+                    class="login-artwork"
+                    aria-label="ForgeGUI supported platforms"
+                >
+                    <img
+                        src="plugin-banner.png"
+                        alt="ForgeGUI platform artwork"
+                    />
+                </aside>
+            </div>
+        </div>
+
         <script>
             const menuButton = document.querySelector(".menu-button");
             const nav = document.querySelector(".main-nav");
+            const loginModal = document.querySelector("[data-login-modal]");
+            const loginTrigger = document.querySelector("[data-open-login]");
+            const loginSteps = Array.from(
+                loginModal.querySelectorAll("[data-login-step]"),
+            );
+            let loginReturnFocus;
+
+            function showLoginStep(stepName) {
+                loginSteps.forEach(function (step) {
+                    step.hidden = step.dataset.loginStep !== stepName;
+                });
+
+                const activeStep = loginSteps.find(function (step) {
+                    return step.dataset.loginStep === stepName;
+                });
+                const title = activeStep.querySelector("h2");
+                loginModal
+                    .querySelector("[role='dialog']")
+                    .setAttribute("aria-labelledby", title.id);
+
+                requestAnimationFrame(function () {
+                    const focusTarget = activeStep.querySelector(
+                        "input, .login-button, .login-back",
+                    );
+                    if (focusTarget) focusTarget.focus();
+                });
+            }
+
+            function openLogin() {
+                loginReturnFocus = document.activeElement;
+                showLoginStep("options");
+                loginModal.hidden = false;
+                document.body.classList.add("modal-open");
+            }
+
+            function closeLogin() {
+                loginModal.hidden = true;
+                document.body.classList.remove("modal-open");
+                if (loginReturnFocus) loginReturnFocus.focus();
+            }
+
+            loginTrigger.addEventListener("click", openLogin);
+            loginModal.addEventListener("click", function (event) {
+                const stepTrigger = event.target.closest("[data-login-go]");
+                if (!stepTrigger) return;
+                showLoginStep(stepTrigger.dataset.loginGo);
+            });
+            loginModal
+                .querySelectorAll("[data-auth-form]")
+                .forEach(function (form) {
+                    form.addEventListener("submit", function (event) {
+                        event.preventDefault();
+                        window.location.href = "home.html";
+                    });
+                });
+            loginModal.addEventListener("click", function (event) {
+                if (event.target === loginModal) closeLogin();
+            });
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape" && !loginModal.hidden) closeLogin();
+            });
 
             menuButton.addEventListener("click", function () {
                 const open = nav.classList.toggle("is-open");
