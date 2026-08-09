@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI Documentation</title>
+        <meta name="description" content="Guides and references for building with ForgeGUI." />
+        <meta name="theme-color" content="#0a0a0a" />
+        <meta name="color-scheme" content="dark" />
+        <link rel="stylesheet" href="styles/public.css" />
+        <link rel="stylesheet" href="styles/blog.css" />
+        <link rel="stylesheet" href="styles/docs-landing.css" />
+        <script src="scripts/site.js" defer></script>
+        <script src="scripts/public-pages.js" defer></script>
+    </head>
+    <body class="publicPage docsLandingPage">
+        <fg-include data-template="templates/docs-header.html"></fg-include>
+        <main class="publicSurface">
+            <fg-client-include data-template="templates/help-hero.html">
+                <span data-slot="title">Help</span>
+                <span data-slot="description">Learn how to use ForgeGUI.</span>
+            </fg-client-include>
+
+            <section class="blogListing docsListing" aria-labelledby="docs-guides-title">
+                <div class="publicSectionHeader">
+                    <h2 id="docs-guides-title">Support Topics</h2>
+                    <label class="publicSearch">
+                        <img src="icons/search.svg" alt="" />
+                        <span class="visually-hidden">Search documentation</span>
+                        <input type="search" placeholder="Search" data-list-search data-list-target="docs-grid" />
+                    </label>
+                </div>
+
+                <div class="blogGrid docsGrid" id="docs-grid">
+                    <a class="blogCard docsCard" href="docs/index.html" data-search-item="markdown reference typography components documentation basics">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--blue"></span>
+                        <span class="docsCardNumber">01</span>
+                        <span class="blogCardDate">Reference</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Documentation Basics</span>
+                            <h2>Markdown Reference</h2>
+                            <p>See every supported content style in one place.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="docs/part-2.html" data-search-item="core concepts projects assets workspace">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--violet"></span>
+                        <span class="docsCardNumber">02</span>
+                        <span class="blogCardDate">Start Here</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Getting Started</span>
+                            <h2>Core Concepts</h2>
+                            <p>Understand projects, assets, and connected workflows.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="docs/part-3.html" data-search-item="create workspace project team invite setup">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--cyan"></span>
+                        <span class="docsCardNumber">03</span>
+                        <span class="blogCardDate">Setup</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Getting Started</span>
+                            <h2>Create a Workspace</h2>
+                            <p>Start a project and bring your collaborators in.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="docs/part-4.html" data-search-item="generate assets prompt models ai create">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--green"></span>
+                        <span class="docsCardNumber">04</span>
+                        <span class="blogCardDate">Workflow</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Creation</span>
+                            <h2>Generate Assets</h2>
+                            <p>Write better prompts and refine model output.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="docs/part-5.html" data-search-item="manage assets organize review share versions">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--orange"></span>
+                        <span class="docsCardNumber">05</span>
+                        <span class="blogCardDate">Workflow</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Asset Library</span>
+                            <h2>Manage Assets</h2>
+                            <p>Organize versions, review work, and share safely.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="docs/part-6.html" data-search-item="integrations plugins engine creative tools install">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--pink"></span>
+                        <span class="docsCardNumber">06</span>
+                        <span class="blogCardDate">Connect</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Plugins</span>
+                            <h2>Integrations</h2>
+                            <p>Connect ForgeGUI to your engine and creative tools.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="docs/part-7.html" data-search-item="collaboration team comments feedback share">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--indigo"></span>
+                        <span class="docsCardNumber">07</span>
+                        <span class="blogCardDate">Teams</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Collaboration</span>
+                            <h2>Work Together</h2>
+                            <p>Keep project context and feedback visible.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="docs/part-8.html" data-search-item="troubleshooting connection upload problems help">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--red"></span>
+                        <span class="docsCardNumber">08</span>
+                        <span class="blogCardDate">Help</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Troubleshooting</span>
+                            <h2>Fix Common Issues</h2>
+                            <p>Resolve connection, permission, and upload problems.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="docs/part-9.html" data-search-item="contact support diagnostics report issue help">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--gold"></span>
+                        <span class="docsCardNumber">09</span>
+                        <span class="blogCardDate">Support</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Need More Help?</span>
+                            <h2>Contact Support</h2>
+                            <p>Send the details our support team needs.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="helpEmpty" data-list-empty hidden>
+                    <h2>No Support Topics Available.</h2>
+                    <p>Check again later.</p>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
+        <link rel="stylesheet" href="styles/base.css" />
+        <link rel="stylesheet" href="styles/leaderboard.css" />
+        <script src="scripts/site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
+
+        <style></style>
+    </head>
+
+    <body class="chat">
+        <fg-include data-template="templates/app-shell.html">
+            <fg-mainview data-slot="content" class="leaderboard">
+                <fg-fomo> <b>57</b><span>Days Left</span> </fg-fomo>
+                <h1>Leaderboard</h1>
+                <fg-leaderboard>
+                    <fg-leaderboardheader>Top 4</fg-leaderboardheader>
+                    <fg-leaderboardposition id="n1">
+                        <fg-badge class="n1">1st</fg-badge>
+                        <img src="assets/generic.png" />
+                        <fg-username>Generic</fg-username>
+                        <img src="assets/trophy.svg" />
+                        <fg-likescount>49K Likes</fg-likescount>
+                        <fg-playscount><b>100B+</b> Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n2">
+                        <fg-badge>2nd</fg-badge>
+                        <img src="assets/generic.png" />
+                        <fg-username>Generic</fg-username>
+                        <img src="assets/trophy.svg" />
+                        <fg-likescount>49K Likes</fg-likescount>
+                        <fg-playscount><b>100B+</b> Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n3">
+                        <fg-badge>3rd</fg-badge>
+                        <img src="assets/generic.png" />
+                        <fg-username>Generic</fg-username>
+                        <img src="assets/trophy.svg" />
+                        <fg-likescount>49K Likes</fg-likescount>
+                        <fg-playscount><b>100B+</b> Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n4">
+                        <fg-badge>4th</fg-badge>
+                        <img src="assets/generic.png" />
+                        <fg-username>Generic</fg-username>
+                        <img src="assets/trophy.svg" />
+                        <fg-likescount>49K Likes</fg-likescount>
+                        <fg-playscount><b>100B+</b> Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardheader class="more-header">More...</fg-leaderboardheader>
+                    <fg-leaderboardposition id="n5" class="extra-row">
+                        <fg-badge>5th</fg-badge>
+                        <img src="assets/generic.png" />
+                        <fg-username>Username</fg-username>
+                        <img src="assets/trophy.svg" />
+                        <fg-likescount>50K Likes</fg-likescount>
+                        <fg-playscount><b>105B+</b> Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n6" class="extra-row">
+                        <fg-badge>6th</fg-badge>
+                        <img src="assets/generic.png" />
+                        <fg-username>Username</fg-username>
+                        <img src="assets/trophy.svg" />
+                        <fg-likescount>52K Likes</fg-likescount>
+                        <fg-playscount>110B+ Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n7" class="extra-row">
+                        <fg-badge>7th</fg-badge>
+                        <img src="assets/generic.png" />
+                        <fg-username>Username</fg-username>
+                        <img src="assets/trophy.svg" />
+                        <fg-likescount>48K Likes</fg-likescount>
+                        <fg-playscount>95B+ Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n8" class="extra-row">
+                        <fg-badge>8th</fg-badge>
+                        <img src="assets/generic.png" />
+                        <fg-username>Username</fg-username>
+                        <img src="assets/trophy.svg" />
+                        <fg-likescount>51K Likes</fg-likescount>
+                        <fg-playscount>102B+ Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n9" class="extra-row">
+                        <fg-badge>9th</fg-badge>
+                        <img src="assets/generic.png" />
+                        <fg-username>Username</fg-username>
+                        <fg-likescount>53K Likes</fg-likescount>
+                        <fg-playscount>108B+ Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n10" class="extra-row">
+                        <fg-badge>10th</fg-badge>
+                        <img src="assets/generic.png" />
+                        <fg-username>Username</fg-username>
+                        <fg-likescount>54K Likes</fg-likescount>
+                        <fg-playscount>115B+ Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                </fg-leaderboard>
+                <button class="showMoreButton" onclick="toggleLeaderboard(this)">Show More...</button>
+                <div class="leaderboardBottom">
+                    <fg-leaderboardposition id="you">
+                        <fg-badge>67th</fg-badge>
+                        <img src="assets/generic.png" />
+                        <fg-username>YOU</fg-username>
+                        <fg-likescount>49K Likes</fg-likescount>
+                        <fg-playscount><b>100B+</b> Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <span>50M Plays to 1st place!</span>
+                </div>
+                <fg-physicalbox>
+                    <img src="assets/trophy.svg" />
+                    <h1>Physical Trophy Winners</h1>
+                    <p>
+                        Every month, 10 users are selected for a ForgeGUI
+                        trophy. You can earn one by continuing to contribute to
+                        the community and getting plays.
+                    </p>
+                    <fg-winners>
+                        <fg-winner>
+                            <img src="assets/generic.png" />
+                            <span>Username</span>
+                            <fg-trophytype>GOLD</fg-trophytype>
+                        </fg-winner>
+                        <fg-winner>
+                            <img src="assets/generic.png" />
+                            <span>Username</span>
+                            <fg-trophytype>SILVER</fg-trophytype>
+                        </fg-winner>
+                        <fg-winner>
+                            <img src="assets/generic.png" />
+                            <span>Username</span>
+                            <fg-trophytype>BRONZE</fg-trophytype>
+                        </fg-winner>
+                    </fg-winners>
+                </fg-physicalbox>
+            </fg-mainview>
+        </fg-include>
+        <script>
+            function toggleLeaderboard(btn) {
+                var mv = document.querySelector("fg-mainview.leaderboard");
+                mv.classList.toggle("is-expanded");
+                var expanded = mv.classList.contains("is-expanded");
+                btn.textContent = expanded ? "Show Less" : "Show More...";
+                if (expanded) mv.querySelector("fg-leaderboard").scrollTop = 0;
+            }
+        </script>
+    </body>
+</html>

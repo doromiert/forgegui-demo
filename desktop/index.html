@@ -1,0 +1,1572 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI - AI for Game Developers</title>
+        <meta name="theme-color" content="#0f0f0f" />
+        <meta
+            name="description"
+            content="ForgeGUI brings the top AI models together for game developers."
+        />
+        <link rel="stylesheet" href="styles/index.css" />
+        <script src="scripts/site.js" defer></script>
+    </head>
+    <body class="landing-page">
+        <fg-include data-template="templates/public-header.html"></fg-include>
+
+        <main id="top">
+            <section class="hero" aria-labelledby="hero-title">
+                <p class="hero-proof">
+                    <strong>400K+</strong> creators have joined our mission.
+                </p>
+                <h1 id="hero-title">
+                    <span>The </span><em>#1</em><span> AI platform for</span
+                    ><br />
+                    <strong>game developers.</strong>
+                </h1>
+
+                <div class="hero-visual" aria-hidden="true">
+                    <video
+                        class="hero-scene"
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        preload="metadata"
+                        poster="assets/landing/hero-art-a.png"
+                    >
+                        <source
+                            src="assets/hero.mp4"
+                            type="video/mp4"
+                            media="(min-width: 651px)"
+                        />
+                        <img src="assets/landing/hero-art-a.png" alt="" />
+                    </video>
+                    <div class="hero-portal-outline">
+                        <img
+                            class="hero-orbit hero-orbit-outer"
+                            src="assets/landing/hero-orbit-outer.svg"
+                            alt=""
+                        />
+                        <img
+                            class="hero-orbit hero-orbit-inner"
+                            src="assets/landing/hero-orbit-inner.svg"
+                            alt=""
+                        />
+                        <div class="hero-platform-orbit">
+                            <img
+                                class="hero-platform hero-blender"
+                                src="assets/landing/blender.svg"
+                                alt=""
+                            />
+                            <img
+                                class="hero-platform hero-godot"
+                                src="assets/landing/godot.svg"
+                                alt=""
+                            />
+                            <img
+                                class="hero-platform hero-unity"
+                                src="assets/landing/unity.svg"
+                                alt=""
+                            />
+                            <img
+                                class="hero-platform hero-roblox"
+                                src="assets/landing/roblox.svg"
+                                alt=""
+                            />
+                            <img
+                                class="hero-platform hero-unreal"
+                                src="assets/landing/unreal.svg"
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <form class="hero-prompt" action="home.html">
+                    <label class="visually-hidden" for="hero-prompt"
+                        >Describe the game you want to create</label
+                    >
+                    <input
+                        id="hero-prompt"
+                        name="prompt"
+                        placeholder="Create your game today..."
+                    />
+                    <button type="submit" aria-label="Create game">
+                        <img src="assets/landing/send.svg" alt="" />
+                    </button>
+                </form>
+
+                <a class="hero-cta" href="onboarding.html" data-open-login
+                    >Try it for free</a
+                >
+                <a
+                    class="scroll-cue"
+                    href="#models"
+                    aria-label="Explore ForgeGUI features"
+                >
+                    <img src="assets/landing/scroll-arrow.svg" alt="" />
+                </a>
+            </section>
+
+            <div class="feature-story" id="models">
+                <div class="feature-stack">
+                    <div class="shared-feature-world" aria-hidden="true">
+                        <img
+                            class="orbit outer"
+                            src="assets/landing/model-orbit-outer.svg"
+                            alt=""
+                        />
+                        <img
+                            class="orbit inner"
+                            src="assets/landing/model-orbit-inner.svg"
+                            alt=""
+                        />
+                    </div>
+                    <div class="shared-feature-logo-layer" aria-hidden="true">
+                        <img src="assets/landing/forge-symbol.svg" alt="" />
+                    </div>
+                    <div class="shared-feature-count">
+                        <strong>01</strong><span>/03</span>
+                    </div>
+                    <div class="shared-feature-rail" aria-hidden="true">
+                        <span></span>
+                    </div>
+                    <section
+                        class="feature feature-models"
+                        data-feature-step="0"
+                        aria-labelledby="models-title"
+                    >
+                        <h2 id="models-title">
+                            <span class="feature-copy-line"
+                                >All of the <strong>top AI models</strong>, in
+                                one place.</span
+                            >
+                            <span class="feature-copy-line"
+                                >Configured for
+                                <strong>Game Devs.</strong></span
+                            >
+                            <span class="feature-copy-line"
+                                ><strong>Anywhere</strong> you want to
+                                build.</span
+                            >
+                        </h2>
+                        <div class="feature-count">
+                            <strong>01</strong><span>/03</span>
+                        </div>
+                        <div class="feature-rail"><span></span></div>
+                        <div class="orbit-stage model-stage" aria-hidden="true">
+                            <img
+                                class="model-logo model-codex"
+                                src="assets/landing/codex.svg"
+                                alt=""
+                            />
+                            <img
+                                class="model-logo model-tripo"
+                                src="assets/landing/tripo.png"
+                                alt=""
+                            />
+                            <img
+                                class="model-logo model-fal"
+                                src="assets/landing/fal.png"
+                                alt=""
+                            />
+                            <img
+                                class="model-logo model-hunyuan"
+                                src="assets/landing/hunyuan.svg"
+                                alt=""
+                            />
+                            <img
+                                class="model-logo model-meshy"
+                                src="assets/landing/meshy.svg"
+                                alt=""
+                            />
+                            <span class="model-logo model-luma"
+                                ><img src="assets/landing/luma.png" alt=""
+                            /></span>
+                            <img
+                                class="model-logo model-symbol"
+                                src="assets/landing/model-symbol.svg"
+                                alt=""
+                            />
+                            <img
+                                class="model-logo model-extra"
+                                src="assets/landing/model-logo-masked.svg"
+                                alt=""
+                            />
+                        </div>
+                    </section>
+
+                    <section
+                        class="feature feature-collage"
+                        data-feature-step="1"
+                        aria-label="Configured for Game Devs"
+                    >
+                        <div class="feature-count">
+                            <strong>02</strong><span>/03</span>
+                        </div>
+                        <div class="feature-rail"><span></span></div>
+                        <div
+                            class="orbit-stage collage-stage"
+                            aria-hidden="true"
+                        >
+                            <img
+                                class="collage collage-01"
+                                src="assets/landing/collage-01.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="collage collage-02"
+                                src="assets/landing/collage-02.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="collage collage-03"
+                                src="assets/landing/collage-03.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="collage collage-04"
+                                src="assets/landing/collage-04.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="collage collage-05"
+                                src="assets/landing/collage-05.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="collage collage-06"
+                                src="assets/landing/collage-06.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="collage collage-07"
+                                src="assets/landing/collage-07.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="collage collage-08"
+                                src="assets/landing/collage-08.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="collage collage-09"
+                                src="assets/landing/collage-09.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="collage collage-10"
+                                src="assets/landing/collage-10.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="collage collage-11"
+                                src="assets/landing/collage-11.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="collage collage-12"
+                                src="assets/landing/collage-12.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="collage collage-13"
+                                src="assets/landing/collage-13.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="collage collage-14"
+                                src="assets/landing/collage-14.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="collage collage-15"
+                                src="assets/landing/collage-15.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="collage collage-16"
+                                src="assets/landing/collage-16.png"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                    </section>
+
+                    <section
+                        class="feature feature-platforms"
+                        data-feature-step="2"
+                        aria-label="Anywhere you want to build"
+                    >
+                        <div class="feature-count">
+                            <strong>03</strong><span>/03</span>
+                        </div>
+                        <div class="feature-rail"><span></span></div>
+                        <div
+                            class="orbit-stage platform-stage"
+                            aria-hidden="true"
+                        >
+                            <img
+                                class="platform-logo platform-roblox"
+                                src="assets/landing/roblox-large.svg"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="platform-logo platform-unity"
+                                src="assets/landing/unity-large.svg"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <img
+                                class="platform-logo platform-unreal"
+                                src="assets/landing/unreal-large.svg"
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <svg
+                                class="generated-snakes"
+                                viewBox="0 0 1630 1010"
+                                aria-hidden="true"
+                            >
+                                <defs>
+                                    <linearGradient
+                                        id="engine-line-gradient-0"
+                                        gradientUnits="userSpaceOnUse"
+                                    >
+                                        <stop
+                                            offset="0"
+                                            stop-color="white"
+                                            stop-opacity="0.04"
+                                        />
+                                        <stop
+                                            offset="0.42"
+                                            stop-color="white"
+                                            stop-opacity="0.22"
+                                        />
+                                        <stop
+                                            offset="1"
+                                            stop-color="white"
+                                            stop-opacity="0.9"
+                                        />
+                                    </linearGradient>
+                                    <linearGradient
+                                        id="engine-line-gradient-1"
+                                        gradientUnits="userSpaceOnUse"
+                                    >
+                                        <stop
+                                            offset="0"
+                                            stop-color="white"
+                                            stop-opacity="0.04"
+                                        />
+                                        <stop
+                                            offset="0.42"
+                                            stop-color="white"
+                                            stop-opacity="0.2"
+                                        />
+                                        <stop
+                                            offset="1"
+                                            stop-color="white"
+                                            stop-opacity="0.82"
+                                        />
+                                    </linearGradient>
+                                    <linearGradient
+                                        id="engine-line-gradient-2"
+                                        gradientUnits="userSpaceOnUse"
+                                    >
+                                        <stop
+                                            offset="0"
+                                            stop-color="white"
+                                            stop-opacity="0.04"
+                                        />
+                                        <stop
+                                            offset="0.42"
+                                            stop-color="white"
+                                            stop-opacity="0.21"
+                                        />
+                                        <stop
+                                            offset="1"
+                                            stop-color="white"
+                                            stop-opacity="0.86"
+                                        />
+                                    </linearGradient>
+                                </defs>
+                                <path
+                                    d="M815 505 C905 455 964 363 915 275 C870 194 914 106 1058 145"
+                                />
+                                <path
+                                    d="M815 505 C724 530 665 462 589 418 C491 360 393 418 424 546"
+                                />
+                                <path
+                                    d="M815 505 C785 606 891 654 925 747 C958 838 866 895 744 848"
+                                />
+                            </svg>
+                            <span id="questionMark" class="platform-question">?</span>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <section class="generations" aria-labelledby="generations-title">
+                <h2 id="generations-title">Everything we generate</h2>
+                <div class="generation-window">
+                    <img
+                        class="generation-glow"
+                        src="assets/landing/carousel-glow.svg"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                    />
+                    <div class="generation-track">
+                        <article
+                            class="generation-card card-far-left generation-clouds"
+                            aria-label="Generated music"
+                        >
+                            <h3>Music</h3>
+                        </article>
+                        <article
+                            class="generation-card card-left generation-assets"
+                            aria-label="Generated 3D assets and interfaces"
+                        >
+                            <h3>3D assets &amp; GUI</h3>
+                        </article>
+                        <article
+                            class="generation-card card-center generation-clouds"
+                            aria-label="Generated games"
+                        >
+                            <h3>Games</h3>
+                        </article>
+                        <article
+                            class="generation-card card-right generation-clouds"
+                            aria-label="Generated music and sound effects"
+                        >
+                            <h3>Music &amp; SFX</h3>
+                        </article>
+                        <article
+                            class="generation-card card-far-right generation-assets"
+                            aria-label="Generated music"
+                        >
+                            <h3>Music</h3>
+                        </article>
+                    </div>
+                    <button
+                        class="carousel-control previous"
+                        type="button"
+                        aria-label="Previous generation type"
+                    >
+                        <img
+                            src="icons/arrow.svg"
+                            alt=""
+                            style="height: 48px; width: 48px; rotate: 90deg"
+                        />
+                    </button>
+                    <button
+                        class="carousel-control next"
+                        type="button"
+                        aria-label="Next generation type"
+                    >
+                        <img
+                            src="icons/arrow.svg"
+                            alt=""
+                            style="height: 48px; width: 48px; rotate: -90deg"
+                        />
+                    </button>
+                </div>
+            </section>
+
+            <section
+                class="catalog"
+                id="catalog"
+                aria-labelledby="catalog-title"
+            >
+                <h2 id="catalog-title">Premium Stock Catalog</h2>
+                <div class="catalog-grid">
+                    <div class="catalog-item">
+                        <a class="catalog-card" href="community.html">
+                            <img
+                                src="assets/landing/catalog-card.png"
+                                alt="Generated 3D asset catalog"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <span>3D Generation</span><strong>3D assets</strong>
+                        </a>
+                        <a class="catalog-explore" href="community.html"
+                            >Explore</a
+                        >
+                    </div>
+                    <div class="catalog-item">
+                        <a
+                            class="catalog-card catalog-card-gui"
+                            href="community.html"
+                        >
+                            <img
+                                src="assets/landing/hero-art-a.png"
+                                alt="Generated interface catalog"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <span>GUI Generations</span><strong>GUI</strong>
+                        </a>
+                        <a class="catalog-explore" href="community.html"
+                            >Explore</a
+                        >
+                    </div>
+                    <div class="catalog-item">
+                        <a
+                            class="catalog-card catalog-card-audio"
+                            href="community.html"
+                        >
+                            <img
+                                src="assets/landing/generation-card.png"
+                                alt="Generated audio catalog"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <span>Audio Generations</span
+                            ><strong>Music &amp; SFX</strong>
+                        </a>
+                        <a class="catalog-explore" href="community.html"
+                            >Explore</a
+                        >
+                    </div>
+                    <div class="catalog-item">
+                        <a
+                            class="catalog-card catalog-card-template"
+                            href="community.html"
+                        >
+                            <img
+                                src="assets/landing/collage-10.png"
+                                alt="Game templates catalog"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <span>Game Templates</span
+                            ><strong>Templates</strong>
+                        </a>
+                        <a class="catalog-explore" href="community.html"
+                            >Explore</a
+                        >
+                    </div>
+                </div>
+                <p>
+                    Download free high quality community assets, royalty free,
+                    ready for your games, anywhere you build.
+                </p>
+            </section>
+
+            <section
+                class="community-proof"
+                id="community"
+                aria-labelledby="community-title"
+            >
+                <img
+                    src="assets/landing/community-glow.png"
+                    alt=""
+                    style="height: 400px"
+                    loading="lazy"
+                    decoding="async"
+                />
+                <h2 id="community-title">
+                    <strong>400K+</strong> Game Devs<br />choose ForgeGUI
+                </h2>
+                <ul>
+                    <li>
+                        <img src="assets/landing/check.svg" alt="" />Access to
+                        10+ AI Models
+                    </li>
+                    <li>
+                        <img src="assets/landing/check.svg" alt="" />Community
+                        of 100,000s of game devs
+                    </li>
+                    <li>
+                        <img src="assets/landing/check.svg" alt="" />Built for
+                        you to create Your game
+                    </li>
+                </ul>
+            </section>
+
+            <section class="builder-preview" aria-label="Start creating">
+                <div class="builder-shell">
+                    <div class="builder-top">
+                        <button type="button" aria-label="Add attachment">
+                            <img src="assets/landing/add.svg" alt="" />
+                        </button>
+                    </div>
+                    <p>Describe what you want...</p>
+                    <div class="builder-toolbar">
+                        <a href="onboarding.html"
+                            >Start creating now
+                            <img
+                                src="icons/arrow.svg"
+                                alt=""
+                                style="
+                                    height: 64px;
+                                    width: 64px;
+                                    rotate: -90deg;
+                                "
+                        /></a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="faq" id="faq" aria-labelledby="faq-title">
+                <h2 id="faq-title">Frequently Asked Questions</h2>
+                <div class="accordion">
+                    <article>
+                        <button type="button" aria-expanded="false">
+                            <span>Question 1</span
+                            ><img
+                                src="icons/arrow.svg"
+                                alt=""
+                                style="height: 42px; width: 42px"
+                            />
+                        </button>
+                        <p>
+                            ForgeGUI combines leading AI tools in one workspace
+                            built specifically for game creation.
+                        </p>
+                    </article>
+                    <article>
+                        <button type="button" aria-expanded="false">
+                            <span>Question 2</span
+                            ><img
+                                src="icons/arrow.svg"
+                                alt=""
+                                style="height: 42px; width: 42px"
+                            />
+                        </button>
+                        <p>
+                            Generate games, interfaces, 3D assets, music, sound
+                            effects, and production-ready templates.
+                        </p>
+                    </article>
+                    <article class="expanded">
+                        <button type="button" aria-expanded="true">
+                            <span>Question 3 (Expanded</span
+                            ><img
+                                src="icons/arrow.svg"
+                                alt=""
+                                style="height: 42px; width: 42px"
+                            />
+                        </button>
+                        <p>
+                            Word Word Word Word Word Word Word Word Word Word
+                            Word Word Word Word Word Word Word Word Word Word
+                            Word Word Word Word Word Word Word Word Word Word
+                            Word Word Word Word Word Word Word Word Word Word
+                            Word Word Word vWord
+                        </p>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="landing-footer">
+            <div class="landing-footer-inner">
+                <nav class="landing-footer-links" aria-label="Footer links">
+                    <a class="landing-footer-brand" href="#top">
+                        <img src="assets/footerLogo.svg" alt="ForgeGUI" />
+                    </a>
+                    <a href="#">Careers</a>
+                    <a href="#community">Company</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="blog.html">Blog</a>
+                </nav>
+
+                <div class="landing-footer-meta">
+                    <p>© 2026 ForgeGUI. All rights reserved.</p>
+                    <div class="landing-footer-socials">
+                        <a href="#" aria-label="ForgeGUI on Discord">
+                            <img
+                                class="footer-discord-icon"
+                                src="assets/landing/footer-discord.svg"
+                                alt=""
+                            />
+                        </a>
+                        <a href="#" aria-label="ForgeGUI on X">
+                            <img
+                                class="footer-x-icon"
+                                src="assets/landing/footer-x.svg"
+                                alt=""
+                            />
+                        </a>
+                        <a href="#" aria-label="ForgeGUI on Reddit">
+                            <img
+                                class="footer-reddit-icon"
+                                src="assets/landing/footer-reddit.svg"
+                                alt=""
+                            />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <div class="login-modal" data-login-modal hidden>
+            <div
+                class="login-panel"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="login-title"
+            >
+                <div class="login-step-stack">
+                    <section class="login-content" data-login-step="options">
+                        <header class="login-intro">
+                            <span class="login-logo" aria-hidden="true">
+                                <img src="icons/fg.svg" alt="" />
+                            </span>
+                            <h2 id="login-title">Let’s Get Started</h2>
+                            <p>You need to use an account to continue.</p>
+                        </header>
+
+                        <div class="login-actions">
+                            <button
+                                class="login-button login-button-create"
+                                type="button"
+                                data-login-go="signup"
+                            >
+                                Create an Account
+                            </button>
+                            <a class="login-button" href="home.html">
+                                <img
+                                    class="provider-icon"
+                                    src="assets/landing/login-google.svg"
+                                    alt=""
+                                />
+                                Continue with Google
+                            </a>
+                            <a class="login-button" href="home.html">
+                                <img
+                                    class="provider-icon provider-icon-roblox"
+                                    src="assets/landing/login-roblox.png"
+                                    alt=""
+                                />
+                                Continue with Roblox
+                            </a>
+
+                            <div class="login-divider" aria-hidden="true">
+                                <span></span><b>or...</b><span></span>
+                            </div>
+
+                            <button
+                                class="login-button login-button-email"
+                                type="button"
+                                data-login-go="signin"
+                            >
+                                <span class="mail-icon" aria-hidden="true">
+                                    <img
+                                        src="assets/landing/login-mail.svg"
+                                        alt=""
+                                    />
+                                </span>
+                                Continue with Email
+                            </button>
+                        </div>
+                    </section>
+
+                    <section
+                        class="login-content login-form-step"
+                        data-login-step="signin"
+                        hidden
+                    >
+                        <header class="login-form-header">
+                            <button
+                                class="login-back"
+                                type="button"
+                                data-login-go="options"
+                                aria-label="Back to login options"
+                            >
+                                <img src="icons/arrow.svg" alt="" />
+                            </button>
+                            <div>
+                                <h2 id="login-signin-title">Sign In</h2>
+                                <p>You need to use an account to continue.</p>
+                            </div>
+                        </header>
+
+                        <form class="login-form" data-auth-form>
+                            <label class="login-field">
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    required
+                                />
+                                <span class="login-field-icon">
+                                    <img
+                                        src="assets/landing/login-mail.svg"
+                                        alt=""
+                                    />
+                                </span>
+                            </label>
+                            <label class="login-field">
+                                <input
+                                    type="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    required
+                                />
+                                <span class="login-field-icon login-lock">
+                                    <i></i>
+                                    <img
+                                        src="assets/landing/login-lock-arc.svg"
+                                        alt=""
+                                    />
+                                </span>
+                            </label>
+                            <button
+                                class="login-button login-button-email"
+                                type="submit"
+                            >
+                                Sign In
+                            </button>
+
+                            <div class="login-divider" aria-hidden="true">
+                                <span></span><b>Other Options...</b
+                                ><span></span>
+                            </div>
+
+                            <div class="login-secondary-row">
+                                <button
+                                    class="login-button"
+                                    type="button"
+                                    data-login-go="signup"
+                                >
+                                    Sign Up
+                                </button>
+                                <button class="login-button" type="button">
+                                    I Forgot
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <section
+                        class="login-content login-form-step"
+                        data-login-step="signup"
+                        hidden
+                    >
+                        <header class="login-form-header">
+                            <button
+                                class="login-back"
+                                type="button"
+                                data-login-go="options"
+                                aria-label="Back to login options"
+                            >
+                                <img src="icons/arrow.svg" alt="" />
+                            </button>
+                            <div>
+                                <h2 id="login-signup-title">Sign Up</h2>
+                                <p>Create an account for ForgeGUI</p>
+                            </div>
+                        </header>
+
+                        <form class="login-form" data-auth-form>
+                            <label class="login-field">
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder="Name"
+                                    required
+                                />
+                                <span class="login-field-icon">
+                                    <img
+                                        src="assets/landing/login-person.svg"
+                                        alt=""
+                                    />
+                                </span>
+                            </label>
+                            <label class="login-field">
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    required
+                                />
+                                <span class="login-field-icon">
+                                    <img
+                                        src="assets/landing/login-mail.svg"
+                                        alt=""
+                                    />
+                                </span>
+                            </label>
+                            <label class="login-field">
+                                <input
+                                    type="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    required
+                                />
+                                <span class="login-field-icon login-lock">
+                                    <i></i>
+                                    <img
+                                        src="assets/landing/login-lock-arc.svg"
+                                        alt=""
+                                    />
+                                </span>
+                            </label>
+                            <button
+                                class="login-button login-button-email"
+                                type="submit"
+                            >
+                                Sign Up
+                            </button>
+
+                            <div class="login-divider" aria-hidden="true">
+                                <span></span><b>Other Options...</b
+                                ><span></span>
+                            </div>
+
+                            <button
+                                class="login-button"
+                                type="button"
+                                data-login-go="signin"
+                            >
+                                Sign In Instead
+                            </button>
+                        </form>
+                    </section>
+                </div>
+
+                <aside
+                    class="login-artwork"
+                    aria-label="ForgeGUI supported platforms"
+                >
+                    <img
+                        src="assets/plugin-banner.png"
+                        alt="ForgeGUI platform artwork"
+                        loading="lazy"
+                        decoding="async"
+                    />
+                </aside>
+            </div>
+        </div>
+
+        <script>
+            const loginModal = document.querySelector("[data-login-modal]");
+            const heroVideo = document.querySelector(".hero-scene");
+            let heroVideoVisible = true;
+            const loginTriggers = Array.from(
+                document.querySelectorAll("[data-open-login]"),
+            );
+            const loginSteps = Array.from(
+                loginModal.querySelectorAll("[data-login-step]"),
+            );
+            let loginReturnFocus;
+
+            function showLoginStep(stepName) {
+                loginSteps.forEach(function (step) {
+                    step.hidden = step.dataset.loginStep !== stepName;
+                });
+
+                const activeStep = loginSteps.find(function (step) {
+                    return step.dataset.loginStep === stepName;
+                });
+                const title = activeStep.querySelector("h2");
+                loginModal
+                    .querySelector("[role='dialog']")
+                    .setAttribute("aria-labelledby", title.id);
+
+                requestAnimationFrame(function () {
+                    const focusTarget = activeStep.querySelector(
+                        "input, .login-button, .login-back",
+                    );
+                    if (focusTarget) focusTarget.focus();
+                });
+            }
+
+            function openLogin() {
+                loginReturnFocus = document.activeElement;
+                showLoginStep("options");
+                loginModal.hidden = false;
+                document.body.classList.add("modal-open");
+                if (heroVideo) heroVideo.pause();
+            }
+
+            function closeLogin() {
+                loginModal.hidden = true;
+                document.body.classList.remove("modal-open");
+                if (heroVideo && heroVideoVisible) {
+                    heroVideo.play().catch(function () {});
+                }
+                if (loginReturnFocus) loginReturnFocus.focus();
+            }
+
+            loginTriggers.forEach(function (trigger) {
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    openLogin();
+                });
+            });
+            loginModal.addEventListener("click", function (event) {
+                const stepTrigger = event.target.closest("[data-login-go]");
+                if (!stepTrigger) return;
+                showLoginStep(stepTrigger.dataset.loginGo);
+            });
+            loginModal
+                .querySelectorAll("[data-auth-form]")
+                .forEach(function (form) {
+                    form.addEventListener("submit", function (event) {
+                        event.preventDefault();
+                        window.location.href = "home.html";
+                    });
+                });
+            loginModal.addEventListener("click", function (event) {
+                if (event.target === loginModal) closeLogin();
+            });
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape" && !loginModal.hidden) closeLogin();
+            });
+
+            document
+                .querySelectorAll(".accordion article button")
+                .forEach(function (button) {
+                    button.addEventListener("click", function () {
+                        const item = button.closest("article");
+                        const expanded = item.classList.toggle("expanded");
+                        button.setAttribute("aria-expanded", String(expanded));
+                    });
+                });
+
+            const track = document.querySelector(".generation-track");
+            const generationCards = Array.from(
+                track.querySelectorAll(".generation-card"),
+            );
+            let generationSlide = 0;
+
+            function generationSlot(relativePosition) {
+                const distance = Math.abs(relativePosition);
+
+                return {
+                    left: 1246 + relativePosition * 600,
+                    top:
+                        distance === 0
+                            ? 25
+                            : distance === 1
+                              ? 77
+                              : 230 + Math.max(0, distance - 2) * 150,
+                    rotation: relativePosition * 9,
+                    layer: 10 - distance,
+                };
+            }
+
+            function layoutGenerationCarousel() {
+                generationCards.forEach(function (card, index) {
+                    const slot = generationSlot(index - 2 - generationSlide);
+                    card.style.left = slot.left + "px";
+                    card.style.top = slot.top + "px";
+                    card.style.transform = "rotate(" + slot.rotation + "deg)";
+                    card.style.zIndex = String(slot.layer);
+                });
+            }
+
+            function moveGenerationCarousel(direction) {
+                generationSlide = Math.max(
+                    -2,
+                    Math.min(2, generationSlide + direction),
+                );
+                layoutGenerationCarousel();
+            }
+
+            document
+                .querySelector(".carousel-control.previous")
+                .addEventListener("click", function () {
+                    moveGenerationCarousel(-1);
+                });
+            document
+                .querySelector(".carousel-control.next")
+                .addEventListener("click", function () {
+                    moveGenerationCarousel(1);
+                });
+            layoutGenerationCarousel();
+
+            const collageImages = Array.from(
+                document.querySelectorAll(".collage-stage .collage"),
+            );
+
+            function scheduleIdleWork(callback) {
+                if ("requestIdleCallback" in window) {
+                    window.requestIdleCallback(callback, { timeout: 500 });
+                } else {
+                    window.setTimeout(callback, 32);
+                }
+            }
+
+            function decodeCollageImage(index) {
+                if (index >= collageImages.length) return;
+                const image = collageImages[index];
+                const decoded = image.decode
+                    ? image.decode()
+                    : Promise.resolve();
+                decoded.catch(function () {}).finally(function () {
+                    scheduleIdleWork(function () {
+                        decodeCollageImage(index + 1);
+                    });
+                });
+            }
+
+            window.addEventListener(
+                "load",
+                function () {
+                    collageImages.forEach(function (image) {
+                        image.loading = "eager";
+                    });
+                    scheduleIdleWork(function () {
+                        decodeCollageImage(0);
+                    });
+                },
+                { once: true },
+            );
+
+            const hero = document.querySelector(".hero");
+            const story = document.querySelector(".feature-story");
+            const featureStack = document.querySelector(".feature-stack");
+            const sharedCounter = document.querySelector(
+                ".shared-feature-count strong",
+            );
+            const sharedRail = document.querySelector(".shared-feature-rail");
+            const sharedThumb = sharedRail.querySelector("span");
+            const featureSteps = Array.from(
+                document.querySelectorAll("[data-feature-step]"),
+            );
+            const featureCopyLines = Array.from(
+                document.querySelectorAll(".feature-copy-line"),
+            );
+            const featureCopy = document.querySelector("#models-title");
+            const featureAssets = featureSteps.map(function (step) {
+                return Array.from(
+                    step.querySelectorAll(
+                        ".model-logo, .collage, .platform-logo, .platform-question",
+                    ),
+                );
+            });
+            const snakePaths = Array.from(
+                document.querySelectorAll(".generated-snakes path"),
+            );
+            const snakeGradients = Array.from(
+                document.querySelectorAll(".generated-snakes linearGradient"),
+            );
+            const snakeCanvas = document.querySelector(".generated-snakes");
+            let storyFrame = 0;
+            let storyVisible = true;
+            let storyMetrics;
+            let featureLayouts = [];
+
+            snakePaths.forEach(function (path) {
+                path.setAttribute("pathLength", "1");
+                path.style.strokeDasharray = "1";
+            });
+            function smoothStep(value) {
+                return value * value * (3 - 2 * value);
+            }
+
+            function bufferedScenePosition(progress) {
+                if (progress <= 0.22) return 0;
+                if (progress < 0.38) {
+                    return smoothStep((progress - 0.22) / 0.16);
+                }
+                if (progress <= 0.62) return 1;
+                if (progress < 0.78) {
+                    return 1 + smoothStep((progress - 0.62) / 0.16);
+                }
+                return 2;
+            }
+
+            function orbitFeatureAssets(
+                assets,
+                revealProgress,
+                layout,
+            ) {
+                const radiusProgress = smoothStep(revealProgress);
+                const positions = [];
+
+                assets.forEach(function (asset, assetIndex) {
+                    const finalPosition = layout.finalPositions[assetIndex];
+                    const displayedX =
+                        layout.centerX +
+                        (finalPosition.x - layout.centerX) * radiusProgress;
+                    const displayedY =
+                        layout.centerY +
+                        (finalPosition.y - layout.centerY) * radiusProgress;
+
+                    asset.style.translate =
+                        displayedX -
+                        finalPosition.x +
+                        "px " +
+                        (displayedY - finalPosition.y) +
+                        "px";
+                    asset.style.scale = String(radiusProgress);
+                    asset.style.opacity = String(
+                        Math.min(1, revealProgress * 1.8),
+                    );
+                    positions.push({ x: displayedX, y: displayedY });
+                });
+
+                return {
+                    centerX: layout.centerX,
+                    centerY: layout.centerY,
+                    height: layout.height,
+                    positions: positions,
+                    width: layout.width,
+                };
+            }
+
+            function updateSnakePaths(layout, revealProgress) {
+                if (!layout) return;
+
+                snakePaths.forEach(function (path, index) {
+                    const target = layout.positions[index];
+                    if (!target) return;
+                    const gradient = snakeGradients[index];
+
+                    gradient.setAttribute("x1", String(layout.centerX));
+                    gradient.setAttribute("y1", String(layout.centerY));
+                    gradient.setAttribute("x2", String(target.x));
+                    gradient.setAttribute("y2", String(target.y));
+
+                    const dx = target.x - layout.centerX;
+                    const dy = target.y - layout.centerY;
+                    const distance = Math.max(Math.hypot(dx, dy), 1);
+                    const normalX = -dy / distance;
+                    const normalY = dx / distance;
+                    const bend =
+                        Math.min(105, distance * 0.25) *
+                        0.8 *
+                        (index % 2 ? -1 : 1);
+                    const firstX = layout.centerX + dx * 0.32 + normalX * bend;
+                    const firstY = layout.centerY + dy * 0.32 + normalY * bend;
+                    const secondX =
+                        layout.centerX + dx * 0.68 - normalX * bend * 0.65;
+                    const secondY =
+                        layout.centerY + dy * 0.68 - normalY * bend * 0.65;
+
+                    path.setAttribute(
+                        "d",
+                        "M " +
+                            layout.centerX +
+                            " " +
+                            layout.centerY +
+                            " C " +
+                            firstX +
+                            " " +
+                            firstY +
+                            ", " +
+                            secondX +
+                            " " +
+                            secondY +
+                            ", " +
+                            target.x +
+                            " " +
+                            target.y,
+                    );
+
+                    const pathProgress = Math.max(
+                        0,
+                        Math.min(1, revealProgress * 1.25 - index * 0.1),
+                    );
+                    path.style.strokeDashoffset = String(1 - pathProgress);
+                });
+            }
+
+            function measureStory() {
+                const viewportHeight = window.innerHeight;
+                featureLayouts = featureSteps.map(function (step, index) {
+                    const stage = step.querySelector(".orbit-stage");
+                    const width = stage.clientWidth;
+                    const height = stage.clientHeight;
+                    const layout = {
+                        centerX: width / 2,
+                        centerY: height / 2,
+                        finalPositions: featureAssets[index].map(function (asset) {
+                            return {
+                                x: asset.offsetLeft + asset.offsetWidth / 2,
+                                y: asset.offsetTop + asset.offsetHeight / 2,
+                            };
+                        }),
+                        height: height,
+                        width: width,
+                    };
+                    return layout;
+                });
+                const platformLayout = featureLayouts[2];
+                snakeCanvas.setAttribute(
+                    "viewBox",
+                    "0 0 " + platformLayout.width + " " + platformLayout.height,
+                );
+                storyMetrics = {
+                    copyRailTop: sharedCounter.parentElement.offsetTop,
+                    heroHeight: Math.max(hero.offsetHeight, 1),
+                    lineHeights: featureCopyLines.map(function (line) {
+                        return line.scrollHeight;
+                    }),
+                    railTravel: Math.max(
+                        sharedRail.clientHeight -
+                            sharedThumb.offsetHeight -
+                            12,
+                        0,
+                    ),
+                    storyRange: Math.max(
+                        story.offsetHeight - viewportHeight,
+                        1,
+                    ),
+                    storyTop: story.offsetTop,
+                };
+            }
+
+            function updateStory() {
+                storyFrame = 0;
+                if (!storyVisible || document.hidden) return;
+                if (!storyMetrics) measureStory();
+                const viewportHeight = window.innerHeight;
+                const heroProgress = Math.min(
+                    1,
+                    Math.max(
+                        0,
+                        window.scrollY / storyMetrics.heroHeight,
+                    ),
+                );
+                hero.style.setProperty(
+                    "--hero-scroll",
+                    heroProgress.toFixed(3),
+                );
+
+                const progress = Math.min(
+                    1,
+                    Math.max(
+                        0,
+                        (window.scrollY - storyMetrics.storyTop) /
+                            storyMetrics.storyRange,
+                    ),
+                );
+                const introProgress = smoothStep(
+                    Math.min(
+                        1,
+                        Math.max(
+                            0,
+                            (window.scrollY -
+                                storyMetrics.storyTop +
+                                viewportHeight * 0.55) /
+                                Math.max(viewportHeight * 0.45, 1),
+                        ),
+                    ),
+                );
+                const scenePosition = bufferedScenePosition(progress);
+                const viewportFit = Math.min(
+                    1,
+                    Math.max(0.58, (viewportHeight - 220) / 1010),
+                );
+                const switchPosition = scenePosition % 1;
+                const switchCompression = Math.sin(Math.PI * switchPosition);
+                const sharedWorldScale =
+                    viewportFit * smoothStep(1 - switchCompression);
+
+                featureStack.style.setProperty(
+                    "--shared-stage-scale",
+                    viewportFit.toFixed(3),
+                );
+                featureStack.style.setProperty(
+                    "--story-intro",
+                    introProgress.toFixed(3),
+                );
+                featureStack.style.setProperty(
+                    "--shared-world-scale",
+                    sharedWorldScale.toFixed(3),
+                );
+                sharedCounter.textContent = String(
+                    Math.round(scenePosition) + 1,
+                ).padStart(2, "0");
+
+                sharedThumb.style.transform =
+                    "translateY(" +
+                    Math.round(storyMetrics.railTravel * progress) +
+                    "px)";
+
+                const baseScene = Math.floor(scenePosition);
+                const incomingCopyIndex =
+                    switchPosition > 0 ? baseScene + 1 : -1;
+                featureCopyLines.forEach(function (line, index) {
+                    const isSettled = index <= baseScene;
+                    const isIncoming = index === incomingCopyIndex;
+
+                    if (isSettled || isIncoming) {
+                        line.style.maxHeight =
+                            storyMetrics.lineHeights[index] + "px";
+                    } else {
+                        line.style.maxHeight = "0px";
+                    }
+
+                    if (isIncoming) {
+                        const approachProgress = smoothStep(
+                            Math.min(1, switchPosition * 2),
+                        );
+                        line.style.opacity = String(approachProgress);
+                        line.style.translate =
+                            "0 " +
+                            (1 - approachProgress) * (viewportHeight / 2) +
+                            "px";
+                    } else {
+                        line.style.opacity = isSettled
+                            ? String(introProgress)
+                            : "0";
+                        line.style.translate = "0 0";
+                    }
+                });
+                const pushProgress = smoothStep(
+                    Math.min(1, Math.max(0, (switchPosition - 0.5) * 2)),
+                );
+                const initialCopyOffset =
+                    storyMetrics.copyRailTop +
+                    Math.min(70, viewportHeight * 0.08) -
+                    viewportHeight / 2;
+                const topCopyOffset =
+                    storyMetrics.copyRailTop - viewportHeight / 2;
+                const copyOffset =
+                    baseScene > 0
+                        ? topCopyOffset
+                        : initialCopyOffset +
+                          (topCopyOffset - initialCopyOffset) * pushProgress;
+                featureCopy.style.transform =
+                    "translate3d(0, " + copyOffset + "px, 0)";
+                let platformLayout;
+                let platformReveal = 0;
+                featureSteps.forEach(function (step, index) {
+                    let visibility = 0;
+                    if (index === baseScene) {
+                        visibility = Math.max(0, 1 - switchPosition * 2);
+                    } else if (
+                        index === baseScene + 1 &&
+                        switchPosition > 0.5
+                    ) {
+                        visibility = (switchPosition - 0.5) * 2;
+                    }
+                    if (index === 0) visibility *= introProgress;
+                    step.style.setProperty(
+                        "--stage-scale",
+                        viewportFit.toFixed(3),
+                    );
+                    step.classList.toggle("is-active", visibility > 0.5);
+                    const wasVisible = step.dataset.orbitVisible === "true";
+                    let layout;
+                    if (visibility > 0 || wasVisible) {
+                        layout = orbitFeatureAssets(
+                            featureAssets[index],
+                            visibility,
+                            featureLayouts[index],
+                        );
+                    }
+                    step.dataset.orbitVisible = String(visibility > 0);
+                    if (index === 2) {
+                        platformLayout = layout;
+                        platformReveal = visibility;
+                    }
+                });
+
+                snakeCanvas.style.opacity = String(platformReveal);
+                updateSnakePaths(platformLayout, platformReveal);
+            }
+
+            function scheduleStory() {
+                if (!storyFrame && storyVisible && !document.hidden) {
+                    storyFrame = requestAnimationFrame(updateStory);
+                }
+            }
+
+            const visibleStorySections = new Set();
+            const storyObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.target === story) {
+                        featureStack.classList.toggle(
+                            "is-in-view",
+                            entry.isIntersecting,
+                        );
+                    }
+                    if (entry.isIntersecting) {
+                        visibleStorySections.add(entry.target);
+                    } else {
+                        visibleStorySections.delete(entry.target);
+                    }
+                });
+                storyVisible = visibleStorySections.size > 0;
+                scheduleStory();
+            });
+            storyObserver.observe(hero);
+            storyObserver.observe(story);
+
+            if (heroVideo) {
+                const videoObserver = new IntersectionObserver(
+                    function (entries) {
+                        heroVideoVisible = entries[0].isIntersecting;
+                        hero.classList.toggle(
+                            "is-visible",
+                            heroVideoVisible,
+                        );
+                        if (
+                            heroVideoVisible &&
+                            !document.body.classList.contains("modal-open")
+                        ) {
+                            heroVideo.play().catch(function () {});
+                        } else {
+                            heroVideo.pause();
+                        }
+                    },
+                    { threshold: 0.05 },
+                );
+                videoObserver.observe(hero);
+            }
+
+            window.addEventListener("scroll", scheduleStory, { passive: true });
+            window.addEventListener("resize", function () {
+                storyMetrics = null;
+                layoutGenerationCarousel();
+                scheduleStory();
+            });
+            document.addEventListener("visibilitychange", scheduleStory);
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(function () {
+                    storyMetrics = null;
+                    scheduleStory();
+                });
+            }
+            measureStory();
+            scheduleStory();
+        </script>
+    </body>
+</html>

@@ -1,6 +1,6 @@
 
 {
-  description = "ForgeGUI server-rendered HTML template development environment";
+  description = "ForgeGUI responsive hybrid HTML development environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -17,7 +17,7 @@
           packages = [ pkgs.nodejs_22 ];
 
           shellHook = ''
-            echo "Run: serve   (server-rendered dev site at http://localhost:8080)"
+            echo "Run: serve   (responsive dev site at http://localhost:8080)"
             echo "Run: build   (render the production site into dist/)"
             alias serve="node tools/site.mjs serve"
             alias build="node tools/site.mjs build"

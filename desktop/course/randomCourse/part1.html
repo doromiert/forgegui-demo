@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <link rel="stylesheet" href="styles/base.css" />
+        <link rel="stylesheet" href="styles/course-player.css" />
+        <script src="scripts/site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="color-scheme" content="dark" />
+        <style></style>
+    </head>
+
+    <body class="chat">
+        <fg-include data-template="templates/course-sidebar.html"> </fg-include>
+        <fg-mainview data-slot="content" class="courses">
+            <fg-top>
+                <fg-breadcrumb>
+                    <span>Course Title</span>
+                    <img src="icons/arrow.svg" style="rotate: -90deg" />
+                    <b>Chapter 1</b>
+                </fg-breadcrumb>
+                <button class="topButton">
+                    <img src="icons/ai.svg" />
+                    AI Summary
+                </button>
+            </fg-top>
+            <fg-courseplayer>
+                <button class="playButton">
+                    <img src="icons/Play.svg" />
+                </button>
+                <div class="coursePlayerInfo">
+                    <h1>Part 1</h1>
+                    <h2>Course Name, Chapter 1</h2>
+                </div>
+                <span>Click to begin course video.</span>
+            </fg-courseplayer>
+            <fg-bottom>
+                <button class="courseSwitchButton">
+                    <img src="icons/arrow.svg" style="rotate: 90deg" />
+                </button>
+                <fg-completionbar>
+                    <fg-meat> <b>25%</b><span> Complete</span> </fg-meat>
+                </fg-completionbar>
+                <button class="courseSwitchButton active">
+                    <img src="icons/arrow.svg" style="rotate: -90deg" />
+                </button>
+            </fg-bottom>
+        </fg-mainview>
+    </body>
+</html>

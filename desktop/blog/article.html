@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>News Title - ForgeGUI Blog</title>
+        <meta name="description" content="The latest ForgeGUI product news." />
+        <meta name="theme-color" content="#0a0a0a" />
+        <meta name="color-scheme" content="dark" />
+        <link rel="stylesheet" href="styles/public.css" />
+        <link rel="stylesheet" href="styles/blog.css" />
+        <script src="scripts/site.js" defer></script>
+        <script src="scripts/public-pages.js" defer></script>
+    </head>
+    <body class="publicPage articlePage">
+        <fg-include data-template="templates/public-header.html"></fg-include>
+        <main class="articleLayout">
+            <aside class="articleNav" aria-label="Article navigation">
+                <a class="articleBack" href="blog.html">
+                    <img src="icons/arrow.svg" alt="" />
+                    Back to News
+                </a>
+                <nav>
+                    <a class="active" href="#part-1">Part 1</a>
+                    <a href="#part-2">Part 2</a>
+                    <a href="#part-3">Part 3</a>
+                    <a href="#part-4">Part 4</a>
+                    <a href="#part-5">Part 5</a>
+                    <a href="#part-6">Part 6</a>
+                    <a href="#part-7">Part 7</a>
+                    <a href="#part-8">Part 8</a>
+                    <a href="#part-9">Part 9</a>
+                </nav>
+            </aside>
+
+            <article class="articleSurface">
+                <div class="articleColumns">
+                    <div class="articleContent">
+                        <img class="articleCover" src="assets/landing/blog-article.jpg" alt="Clouds lit by sunset" />
+                        <section id="part-1">
+                            <h1>Big Subtitle</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        </section>
+                        <section id="part-2">
+                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </section>
+                        <section id="part-3"><p>ForgeGUI continues to bring creative tooling, generation workflows, and game-development integrations into one connected workspace.</p></section>
+                        <section id="part-4"><p>More product details and examples will be published as each feature becomes available.</p></section>
+                        <section id="part-5"><p>Creators can follow the blog for release notes, tutorials, and behind-the-scenes updates.</p></section>
+                        <section id="part-6"><p>Community feedback remains central to the direction of the ForgeGUI platform.</p></section>
+                        <section id="part-7"><p>New integrations will continue to support the engines and tools creators already use.</p></section>
+                        <section id="part-8"><p>Performance, accessibility, and reliable creative workflows remain key priorities.</p></section>
+                        <section id="part-9"><p>Check back soon for the next ForgeGUI update.</p></section>
+                    </div>
+
+                    <aside class="articleMeta">
+                        <dl>
+                            <div><dt>Published by:</dt><dd>Guilio Greco (CEO)</dd></div>
+                            <div><dt>Published</dt><dd>Mar 5, 2027</dd></div>
+                            <div><dt>Last Edited</dt><dd>1 hour ago.</dd></div>
+                        </dl>
+                        <button class="summarizeButton" type="button" data-summarize aria-expanded="false">
+                            <span class="aiStars" aria-hidden="true">
+                                <img class="aiStarLarge" src="assets/landing/ai-star-large.svg" alt="" />
+                                <img class="aiStarSmall top" src="assets/landing/ai-star-small.svg" alt="" />
+                                <img class="aiStarSmall bottom" src="assets/landing/ai-star-small.svg" alt="" />
+                            </span>
+                            Summarize with AI
+                        </button>
+                        <div class="articleSummary" hidden>
+                            ForgeGUI is expanding its connected creative platform with new tools, integrations, and creator-focused improvements.
+                        </div>
+                    </aside>
+                </div>
+            </article>
+        </main>
+    </body>
+</html>

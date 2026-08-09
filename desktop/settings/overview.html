@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI — Settings</title>
+        <link rel="stylesheet" href="styles/base.css" />
+        <link rel="stylesheet" href="styles/settings-overview.css" />
+        <script src="scripts/site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="color-scheme" content="dark" />
+        <style></style>
+    </head>
+
+    <body class="chat">
+        <fg-include data-template="templates/settings-shell.html">
+            <fg-settingsview data-slot="content">
+                <fg-banner>
+                    <span class="bannerEditHint"
+                        ><img src="icons/pencil.svg" alt=""
+                    /></span>
+                    <fg-userpfp>
+                        <img src="assets/generic.png" alt="" />
+                        <span class="pfpEditHint"
+                            ><img src="icons/pencil.svg" alt=""
+                        /></span>
+                    </fg-userpfp>
+                </fg-banner>
+
+                <fg-verifiedcta>
+                    <img src="icons/user-mark.svg" alt="" />
+                    Get Verified
+                </fg-verifiedcta>
+                <fg-doxx>
+                    <b>Generic</b>
+                    <span>generic@gmail.com</span>
+                </fg-doxx>
+                <button class="editProfileButton">Edit Public Profile</button>
+
+                <fg-include data-template="templates/listbox.html">
+                    <span data-slot="header">My Account</span>
+                    <fg-include data-template="templates/listbox-row.html">
+                        <span data-slot="label">Name</span>
+                        <b data-slot="value">Generic</b>
+                        <button data-slot="action" class="listboxAction" data-popup-open="change-name">Edit</button>
+                    </fg-include>
+                    <fg-include data-template="templates/listbox-row.html">
+                        <span data-slot="label">Username</span>
+                        <b data-slot="value">@generic</b>
+                        <button data-slot="action" class="listboxAction" data-popup-open="change-username">Edit</button>
+                    </fg-include>
+                    <fg-include data-template="templates/listbox-row.html">
+                        <span data-slot="label">Email Address</span>
+                        <b data-slot="value">generic@gmail.com</b>
+                        <button data-slot="action" class="listboxAction" data-popup-open="change-email">Edit</button>
+                    </fg-include>
+                    <fg-include data-template="templates/listbox-row.html">
+                        <span data-slot="label">Security</span>
+                        <b data-slot="value">Password &amp; Email Verification</b>
+                        <button data-slot="action" class="listboxAction" data-popup-open="change-password">Edit</button>
+                    </fg-include>
+                </fg-include>
+
+                <fg-include data-template="templates/listbox.html">
+                    <span data-slot="header">Connections</span>
+                    <fg-include data-template="templates/listbox-row.html">
+                        <span data-slot="label">Roblox Account</span>
+                        <b data-slot="value">Not Linked</b>
+                        <button data-slot="action" class="listboxAction">
+                            Link Roblox Account
+                        </button>
+                    </fg-include>
+                </fg-include>
+
+                <fg-include data-template="templates/listbox.html">
+                    <span data-slot="header">Account Management</span>
+                    <fg-include
+                        data-template="templates/listbox-row.html"
+                        class="reversed"
+                    >
+                        <span data-slot="label">Log out of all devices</span>
+                        <b data-slot="value">Log Out</b>
+                        <button data-slot="action" class="listboxAction">
+                            Log Out Now
+                        </button>
+                    </fg-include>
+                    <fg-include
+                        data-template="templates/listbox-row.html"
+                        class="reversed"
+                    >
+                        <span data-slot="label">This action is permanent.</span>
+                        <b data-slot="value">Delete my Account</b>
+                        <button data-slot="action" class="listboxAction destructive">
+                            Delete my Account
+                        </button>
+                    </fg-include>
+                </fg-include>
+            </fg-settingsview>
+        </fg-include>
+        <fg-popupcontainer class="hidden">
+            <fg-popup id="change-username" class="settingsPopup hidden">
+                <fg-include data-template="templates/popup-frame.html">
+                    <span data-slot="title">Change Username</span>
+                    <span data-slot="description">You can only change your username once every 30 days.</span>
+                    <form data-slot="content">
+                        <fg-include data-template="templates/form-field.html">
+                            <input data-slot="input" type="password" placeholder="Password" />
+                            <span data-slot="error">Incorrect password, try again.</span>
+                        </fg-include>
+                        <fg-include data-template="templates/form-field.html">
+                            <input data-slot="input" type="text" placeholder="New Username" />
+                            <span data-slot="error">Hmm... It looks like that username is already taken.</span>
+                        </fg-include>
+                        <fg-hint>Make sure your new username follows our content guidelines.</fg-hint>
+                    </form>
+                    <button data-slot="actions" class="popupButton" type="button" data-popup-close>Cancel</button>
+                    <button data-slot="actions" class="popupButton active" type="button" onclick="confirmSettingsPopup(this)">Confirm</button>
+                </fg-include>
+            </fg-popup>
+
+            <fg-popup id="change-name" class="settingsPopup hidden">
+                <fg-include data-template="templates/popup-frame.html">
+                    <span data-slot="title">Change Name</span>
+                    <span data-slot="description">This only applies to your account name, not your username.</span>
+                    <form data-slot="content">
+                        <fg-include data-template="templates/form-field.html">
+                            <input data-slot="input" type="text" placeholder="Name" />
+                            <span data-slot="error">Name is required.</span>
+                        </fg-include>
+                        <fg-fieldgroup data-optional>
+                            <input type="text" placeholder="Last Name (Optional)" />
+                        </fg-fieldgroup>
+                        <fg-hint>Make sure your name does not violate our content guidelines.</fg-hint>
+                    </form>
+                    <button data-slot="actions" class="popupButton" type="button" data-popup-close>Cancel</button>
+                    <button data-slot="actions" class="popupButton active" type="button" onclick="confirmSettingsPopup(this)">Confirm</button>
+                </fg-include>
+            </fg-popup>
+
+            <fg-popup id="change-email" class="settingsPopup hidden">
+                <fg-include data-template="templates/popup-frame.html">
+                    <span data-slot="title">Change Email</span>
+                    <span data-slot="description">Change your account email.</span>
+                    <form data-slot="content">
+                        <fg-include data-template="templates/form-field.html">
+                            <input data-slot="input" type="password" placeholder="Password" />
+                            <span data-slot="error">Incorrect password, try again.</span>
+                        </fg-include>
+                        <fg-include data-template="templates/form-field.html">
+                            <input data-slot="input" type="text" placeholder="2FA Code" />
+                            <span data-slot="error">Invalid 2FA code.</span>
+                        </fg-include>
+                        <fg-include data-template="templates/form-field.html">
+                            <input data-slot="input" type="email" placeholder="Enter Previous Email" />
+                            <span data-slot="error">Please enter your previous email.</span>
+                        </fg-include>
+                        <fg-include data-template="templates/form-field.html">
+                            <input data-slot="input" type="email" placeholder="New Email" />
+                            <span data-slot="error">Please enter a valid email address.</span>
+                        </fg-include>
+                        <fg-hint>You have 30 days to send a request from your previous email to revert this action.</fg-hint>
+                    </form>
+                    <button data-slot="actions" class="popupButton" type="button" data-popup-close>Cancel</button>
+                    <button data-slot="actions" class="popupButton active" type="button" onclick="confirmSettingsPopup(this)">Confirm</button>
+                </fg-include>
+            </fg-popup>
+
+            <fg-popup id="change-password" class="settingsPopup hidden">
+                <fg-include data-template="templates/popup-frame.html">
+                    <span data-slot="title">Change Password</span>
+                    <span data-slot="description">Before you continue, enter your 2FA code.</span>
+                    <form data-slot="content">
+                        <fg-include data-template="templates/form-field.html">
+                            <input data-slot="input" type="password" placeholder="Old Password" />
+                            <span data-slot="error">Incorrect password, try again.</span>
+                        </fg-include>
+                        <fg-include data-template="templates/form-field.html">
+                            <input data-slot="input" type="text" placeholder="2FA Code" />
+                            <span data-slot="error">Invalid 2FA code.</span>
+                        </fg-include>
+                        <fg-include data-template="templates/form-field.html">
+                            <input data-slot="input" type="password" placeholder="New Password" minlength="8" data-match-target />
+                            <span data-slot="error">Password must be at least 8 characters.</span>
+                        </fg-include>
+                        <fg-include data-template="templates/form-field.html">
+                            <input data-slot="input" type="password" placeholder="Confirm Password" data-match-source />
+                            <span data-slot="error">Passwords do not match.</span>
+                        </fg-include>
+                        <a href="placeholder.html" class="forgotLink">I Forgot My Password...</a>
+                    </form>
+                    <button data-slot="actions" class="popupButton" type="button" data-popup-close>Cancel</button>
+                    <button data-slot="actions" class="popupButton active" type="button" onclick="confirmSettingsPopup(this)">Confirm</button>
+                </fg-include>
+            </fg-popup>
+        </fg-popupcontainer>
+    </body>
+</html>

@@ -1,0 +1,207 @@
+.docsBrand {
+   display: flex;
+   min-width: 0;
+   align-items: center;
+   gap: 15px;
+   font-size: 24px;
+   font-weight: 500;
+   white-space: nowrap;
+}
+
+.docsBrand img {
+   width: 120px;
+   height: 26px;
+   object-fit: contain;
+}
+
+.helpHero {
+   display: flex;
+   width: 100%;
+   height: 330px;
+   padding: 40px 190px 45px 100px;
+   align-items: center;
+   justify-content: space-between;
+   overflow: hidden;
+   border-bottom: 1px solid #3f3f3f;
+   background: linear-gradient(180deg, rgba(0, 0, 0, 0.46), #000);
+}
+
+.helpHeroCopy {
+   display: flex;
+   flex-direction: column;
+   gap: 40px;
+}
+
+.helpHero h1 {
+   margin: 0;
+   font-size: 90px;
+   font-weight: 600;
+   line-height: 1;
+   background: linear-gradient(180deg, #fff, rgba(255, 255, 255, 0.5));
+   background-clip: text;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+}
+
+.helpHero p {
+   margin: 0;
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 24px;
+   font-weight: 500;
+}
+
+.helpHeroBook {
+   width: 170px;
+   height: 170px;
+   flex: 0 0 170px;
+}
+
+.helpEmpty {
+   display: flex;
+   width: 100%;
+   min-height: 500px;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 36px;
+   color: #fff;
+   text-align: center;
+}
+
+.helpEmpty[hidden] {
+   display: none;
+}
+
+.helpEmpty h2,
+.helpEmpty p {
+   margin: 0;
+}
+
+.helpEmpty h2 {
+   font-size: 48px;
+   font-weight: 600;
+}
+
+.helpEmpty p {
+   font-size: 32px;
+}
+
+.docsCard {
+   isolation: isolate;
+}
+
+.docsCardBackdrop {
+   background:
+      radial-gradient(circle at 76% 20%, var(--docs-card-glow), transparent 36%),
+      linear-gradient(140deg, #111 10%, var(--docs-card-color) 160%);
+}
+
+.docsCardBackdrop::before,
+.docsCardBackdrop::after {
+   position: absolute;
+   border: 1px solid rgba(255, 255, 255, 0.12);
+   border-radius: 50%;
+   content: "";
+}
+
+.docsCardBackdrop::before {
+   top: -112px;
+   right: -58px;
+   width: 280px;
+   height: 280px;
+}
+
+.docsCardBackdrop::after {
+   top: -65px;
+   right: -10px;
+   width: 180px;
+   height: 180px;
+}
+
+.docsCardBackdrop--blue { --docs-card-color: #004e9d; --docs-card-glow: rgba(0, 119, 255, 0.65); }
+.docsCardBackdrop--violet { --docs-card-color: #44218c; --docs-card-glow: rgba(132, 76, 255, 0.58); }
+.docsCardBackdrop--cyan { --docs-card-color: #00596b; --docs-card-glow: rgba(0, 211, 255, 0.48); }
+.docsCardBackdrop--green { --docs-card-color: #005e36; --docs-card-glow: rgba(0, 255, 135, 0.4); }
+.docsCardBackdrop--orange { --docs-card-color: #713100; --docs-card-glow: rgba(255, 127, 0, 0.5); }
+.docsCardBackdrop--pink { --docs-card-color: #741c55; --docs-card-glow: rgba(255, 72, 177, 0.46); }
+.docsCardBackdrop--indigo { --docs-card-color: #282e91; --docs-card-glow: rgba(84, 97, 255, 0.5); }
+.docsCardBackdrop--red { --docs-card-color: #741e25; --docs-card-glow: rgba(255, 64, 80, 0.46); }
+.docsCardBackdrop--gold { --docs-card-color: #695100; --docs-card-glow: rgba(255, 205, 43, 0.44); }
+
+.docsCardNumber {
+   position: absolute;
+   z-index: 1;
+   top: -20px;
+   right: 18px;
+   color: rgba(255, 255, 255, 0.1);
+   font-size: 126px;
+   font-weight: 700;
+   line-height: 1;
+   letter-spacing: -10px;
+}
+
+.docsCard .blogCardDate {
+   z-index: 3;
+   border: 1px solid rgba(255, 255, 255, 0.12);
+   background: rgba(10, 10, 10, 0.58);
+   backdrop-filter: blur(8px);
+}
+
+.docsCard .blogCardCopy {
+   max-width: 92%;
+}
+
+.docsCard .blogCardTopic {
+   color: rgba(255, 255, 255, 0.66);
+}
+
+@media (max-width: 1050px) {
+   .helpHero {
+      padding-right: 60px;
+      padding-left: 60px;
+   }
+}
+
+@media (max-width: 650px) {
+   .docsBrand span {
+      display: none;
+   }
+
+   .docsBrand img {
+      width: 112px;
+      height: 25px;
+   }
+
+   .helpHero {
+      height: auto;
+      min-height: 250px;
+      padding: 44px 24px;
+   }
+
+   .helpHero h1 {
+      font-size: 48px;
+   }
+
+   .helpHero p {
+      font-size: 19px;
+   }
+
+   .helpHeroBook {
+      width: 110px;
+      height: 110px;
+      flex-basis: 110px;
+   }
+
+   .helpEmpty {
+      min-height: 360px;
+      gap: 20px;
+   }
+
+   .helpEmpty h2 {
+      font-size: 34px;
+   }
+
+   .helpEmpty p {
+      font-size: 24px;
+   }
+}
