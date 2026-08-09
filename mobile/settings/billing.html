@@ -1,1 +1,27 @@
-<fg-page data-source="desktop/settings/billing.html"></fg-page>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Plan &amp; Billing - ForgeGUI</title>
+        <meta name="theme-color" content="#161616" />
+        <meta name="color-scheme" content="dark" />
+        <link rel="stylesheet" href="styles/base.css" />
+        <link rel="stylesheet" href="styles/mobile-settings.css" />
+        <script src="scripts/mobile-settings.js" defer></script>
+    </head>
+    <body class="mobile-settings">
+        <main class="mobile-settings-shell">
+            <fg-include data-template="templates/mobile-settings-header.html"></fg-include>
+            <div class="mobile-settings-content">
+                <a class="mobile-settings-back" href="settings/overview.html"><img src="icons/arrow.svg" alt="" />Plan &amp; Billing</a>
+                <div class="mobile-settings-list mobile-billing-list">
+                    <article><div><span>Selected Plan</span><strong>ForgeGUI Pro</strong></div><a href="plans.html">Change Plan</a></article>
+                    <article><div><span>Daily Rate Limit</span><strong>30% used</strong></div><a href="plans.html">Upgrade Max</a></article>
+                    <article><div><span>Billed to</span><strong>VISA-0094</strong></div><button type="button">Edit Billing Info</button></article>
+                </div>
+            </div>
+            <fg-include data-template="templates/mobile-settings-footer.html"></fg-include>
+        </main>
+    </body>
+</html>

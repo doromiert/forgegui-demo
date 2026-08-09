@@ -1,5 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap");
 
+html:not(.forge-motion-ready),
+html:not(.forge-motion-ready) *,
+html:not(.forge-motion-ready) *::before,
+html:not(.forge-motion-ready) *::after {
+   animation: none !important;
+   transition: none !important;
+}
+
 * {
    font-family: "Atkinson Hyperlegible Next", sans-serif;
    font-optical-sizing: auto;

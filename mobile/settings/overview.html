@@ -1,1 +1,31 @@
-<fg-page data-source="desktop/settings/overview.html"></fg-page>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI Settings</title>
+        <meta name="theme-color" content="#161616" />
+        <meta name="color-scheme" content="dark" />
+        <link rel="stylesheet" href="styles/base.css" />
+        <link rel="stylesheet" href="styles/mobile-settings.css" />
+        <script src="scripts/mobile-settings.js" defer></script>
+    </head>
+    <body class="mobile-settings">
+        <main class="mobile-settings-shell">
+            <fg-include data-template="templates/mobile-settings-header.html"></fg-include>
+            <div class="mobile-settings-content mobile-settings-menu">
+                <h1>Settings</h1>
+                <section class="mobile-settings-user">
+                    <img src="assets/generic.png" alt="" />
+                    <div><strong>Johny Blessings</strong><span>email@email.com</span></div>
+                </section>
+                <nav class="mobile-settings-nav" aria-label="Settings sections">
+                    <a href="settings/account.html"><img src="icons/home.svg" alt="" /><span>Account Overview</span><img src="icons/arrow.svg" alt="" /></a>
+                    <a href="settings/billing.html"><img src="icons/card.svg" alt="" /><span>Plan &amp; Billing</span><img src="icons/arrow.svg" alt="" /></a>
+                    <a href="settings/rewards.html"><img src="icons/Rewards.svg" alt="" /><span>Referrals Rewards</span><img src="icons/arrow.svg" alt="" /></a>
+                </nav>
+            </div>
+            <fg-include data-template="templates/mobile-settings-footer.html"></fg-include>
+        </main>
+    </body>
+</html>

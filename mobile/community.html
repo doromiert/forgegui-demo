@@ -1,1 +1,325 @@
-<fg-page data-source="desktop/community.html"></fg-page>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI Community</title>
+        <meta name="theme-color" content="#050505" />
+        <meta name="color-scheme" content="dark" />
+        <link rel="stylesheet" href="styles/base.css" />
+        <link rel="stylesheet" href="styles/mobile-home.css" />
+        <link rel="stylesheet" href="styles/mobile-community.css" />
+        <script src="scripts/mobile-home.js" defer></script>
+        <script src="scripts/mobile-community.js" defer></script>
+    </head>
+    <body class="mobile-home mobile-community">
+        <main class="mobile-home-shell">
+            <header class="mobile-home-topbar mobile-community-topbar">
+                <div class="mobile-home-brand">
+                    <button
+                        class="mobile-hamburger"
+                        type="button"
+                        aria-label="Open game projects"
+                        aria-controls="mobile-home-drawer"
+                        aria-expanded="false"
+                        data-open-drawer
+                    >
+                        <span></span><span></span><span></span>
+                    </button>
+                    <img src="icons/fg.svg" alt="ForgeGUI" />
+                </div>
+                <label class="mobile-community-search"
+                    ><img src="icons/search.svg" alt="" /><input
+                        type="search"
+                        placeholder="Search"
+                        aria-label="Search Community"
+                        data-community-search
+                /></label>
+            </header>
+
+            <div
+                class="mobile-home-scroll mobile-community-scroll"
+                data-home-scroll
+            >
+                <section
+                    class="mobile-community-feed"
+                    data-community-view="feed"
+                >
+                    <div
+                        class="mobile-community-categories"
+                        role="tablist"
+                        aria-label="Community categories"
+                    >
+                        <button class="is-active" type="button">
+                            🔥 <span>Trending</span>
+                        </button>
+                        <button type="button">🎸 <span>Music</span></button>
+                        <button type="button">
+                            📣 <span>Announcements</span>
+                        </button>
+                        <button type="button">
+                            👾 <span>Development</span>
+                        </button>
+                        <button type="button">🕹️ <span>Gaming</span></button>
+                        <button type="button">✏️ <span>Drawing</span></button>
+                    </div>
+                    <button
+                        class="mobile-community-post-button"
+                        type="button"
+                        data-community-open="create"
+                    >
+                        <img src="icons/add.svg" alt="" />Post
+                    </button>
+
+                    <div class="mobile-community-posts">
+                        <article
+                            class="mobile-feed-post"
+                            data-community-item="username ai generated sky image trending"
+                            data-community-open="detail"
+                            tabindex="0"
+                        >
+                            <header>
+                                <img src="assets/generic.png" alt="" /><strong
+                                    >Username</strong
+                                ><i></i><span>1h ago</span><b>AI</b
+                                ><button
+                                    type="button"
+                                    aria-label="Post options"
+                                >
+                                    <img src="icons/3dots.svg" alt="" />
+                                </button>
+                            </header>
+                            <img
+                                class="mobile-feed-media"
+                                src="assets/landing/blog-article.jpg"
+                                alt="Cloudy sky above a neighborhood"
+                            />
+                            <footer>
+                                <button type="button" aria-label="Share">
+                                    <img src="icons/share.svg" alt="" /></button
+                                ><span></span
+                                ><button type="button" data-like>
+                                    <img src="icons/heart.svg" alt="" /><em
+                                        >54</em
+                                    ></button
+                                ><button type="button">
+                                    <img src="icons/message.svg" alt="" /><em
+                                        >54</em
+                                    >
+                                </button>
+                            </footer>
+                        </article>
+                        <article
+                            class="mobile-feed-post"
+                            data-community-item="username text trending"
+                            data-community-open="detail"
+                            tabindex="0"
+                        >
+                            <header>
+                                <img src="assets/generic.png" alt="" /><strong
+                                    >Username</strong
+                                ><i></i><span>1h ago</span
+                                ><button
+                                    type="button"
+                                    aria-label="Post options"
+                                >
+                                    <img src="icons/3dots.svg" alt="" />
+                                </button>
+                            </header>
+                            <div class="mobile-feed-text">
+                                <h2>Post with text</h2>
+                                <p>Post with text</p>
+                            </div>
+                            <footer>
+                                <button type="button" aria-label="Share">
+                                    <img src="icons/share.svg" alt="" /></button
+                                ><span></span
+                                ><button type="button" data-like>
+                                    <img src="icons/heart.svg" alt="" /><em
+                                        >54</em
+                                    ></button
+                                ><button type="button">
+                                    <img src="icons/message.svg" alt="" /><em
+                                        >54</em
+                                    >
+                                </button>
+                            </footer>
+                        </article>
+                        <article
+                            class="mobile-feed-post"
+                            data-community-item="username development game"
+                            data-community-open="detail"
+                            tabindex="0"
+                        >
+                            <header>
+                                <img src="assets/generic.png" alt="" /><strong
+                                    >Username</strong
+                                ><i></i><span>1h ago</span
+                                ><button
+                                    type="button"
+                                    aria-label="Post options"
+                                >
+                                    <img src="icons/3dots.svg" alt="" />
+                                </button>
+                            </header>
+                            <div class="mobile-feed-text">
+                                <h2>Building something new</h2>
+                                <p>Sharing an early look at this project.</p>
+                            </div>
+                            <footer>
+                                <button type="button" aria-label="Share">
+                                    <img src="icons/share.svg" alt="" /></button
+                                ><span></span
+                                ><button type="button" data-like>
+                                    <img src="icons/heart.svg" alt="" /><em
+                                        >54</em
+                                    ></button
+                                ><button type="button">
+                                    <img src="icons/message.svg" alt="" /><em
+                                        >54</em
+                                    >
+                                </button>
+                            </footer>
+                        </article>
+                    </div>
+                </section>
+            </div>
+
+            <section
+                class="mobile-community-subview mobile-community-detail"
+                data-community-view="detail"
+                hidden
+            >
+                <header class="mobile-community-subview-title">
+                    <button
+                        type="button"
+                        aria-label="Back to Community"
+                        data-community-close
+                    >
+                        <img src="icons/arrow.svg" alt="" />
+                    </button>
+                    <h1>Community Posts</h1>
+                    <img src="icons/3dots.svg" alt="" />
+                </header>
+                <div class="mobile-community-author">
+                    <img src="assets/generic.png" alt="" />
+                    <div>
+                        <strong>Alex Chen</strong><span>@AlexRocks33</span>
+                    </div>
+                    <button type="button" data-follow-community>
+                        Follow <img src="icons/follow.svg" alt="" />
+                    </button>
+                </div>
+                <div class="mobile-community-detail-copy">
+                    <h2>Mountain Retreat</h2>
+                    <p>
+                        A secluded getaway nestled between alpine peaks and
+                        evergreen forests.
+                    </p>
+                    <div><b>Nature</b><b>Travel</b></div>
+                </div>
+                <img
+                    class="mobile-community-detail-media"
+                    src="assets/roblox-connect-bg.jpg"
+                    alt="Mountain retreat"
+                />
+                <div class="mobile-community-detail-actions">
+                    <button type="button">
+                        <img src="icons/share.svg" alt="" /></button
+                    ><span></span
+                    ><button type="button" data-like>
+                        <img src="icons/heart.svg" alt="" /><em>54</em></button
+                    ><button type="button">
+                        <img src="icons/message.svg" alt="" /><em>54</em>
+                    </button>
+                </div>
+                <section class="mobile-comments">
+                    <header>
+                        <h2>Comments</h2>
+                        <span><b data-comment-count>43</b> Comments</span>
+                    </header>
+                    <form data-comment-form>
+                        <input
+                            type="text"
+                            placeholder="Type Comment..."
+                            aria-label="Comment"
+                        /><button type="submit">
+                            <img src="icons/send.svg" alt="Send" />
+                        </button>
+                    </form>
+                    <div data-comments-list>
+                        <article>
+                            <header>
+                                <img src="assets/generic.png" alt="" /><strong
+                                    >Username</strong
+                                ><span>1h ago</span>
+                            </header>
+                            <h3>Post with text</h3>
+                            <p>Post with text</p>
+                        </article>
+                    </div>
+                </section>
+            </section>
+
+            <section
+                class="mobile-community-subview mobile-community-create"
+                data-community-view="create"
+                hidden
+            >
+                <header class="mobile-community-subview-title">
+                    <button
+                        type="button"
+                        aria-label="Back to Community"
+                        data-community-close
+                    >
+                        <img src="icons/arrow.svg" alt="" />
+                    </button>
+                    <h1>Create Post</h1>
+                </header>
+                <form data-create-post-form>
+                    <label class="mobile-post-field"
+                        ><input
+                            type="text"
+                            maxlength="50"
+                            placeholder="Title"
+                            aria-label="Post title"
+                        /><span>0/50</span></label
+                    >
+                    <label class="mobile-post-field is-body">
+                        <textarea
+                            maxlength="1000"
+                            placeholder="Text"
+                            aria-label="Post text"
+                        ></textarea
+                        ><span>0/1000</span></label
+                    >
+                    <section class="mobile-post-media">
+                        <header>
+                            <div>
+                                <img src="icons/picture.svg" alt="" /><strong
+                                    >Media</strong
+                                >
+                            </div>
+                            <span>Up to 4 Images</span>
+                        </header>
+                        <div>
+                            <button type="button" aria-label="Add image">
+                                <img src="icons/add.svg" alt="" /></button
+                            ><i></i><i></i>
+                        </div>
+                    </section>
+                    <button class="mobile-upload-post" type="submit">
+                        Upload Post <img src="icons/send.svg" alt="" />
+                    </button>
+                </form>
+            </section>
+
+            <fg-include
+                data-template="templates/mobile-app-drawer.html"
+            ></fg-include>
+            <fg-include
+                data-template="templates/mobile-bottom-nav.html"
+            ></fg-include>
+        </main>
+    </body>
+</html>

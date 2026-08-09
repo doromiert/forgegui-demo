@@ -1,1 +1,113 @@
-<fg-page data-source="desktop/library/overview.html"></fg-page>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI Assets</title>
+        <meta name="theme-color" content="#0a0a0a" />
+        <meta name="description" content="Manage projects and discover community assets" />
+        <meta name="color-scheme" content="dark" />
+        <link rel="stylesheet" href="styles/base.css" />
+        <link rel="stylesheet" href="styles/mobile-home.css" />
+        <link rel="stylesheet" href="styles/mobile-assets.css" />
+        <script src="scripts/mobile-home.js" defer></script>
+        <script src="scripts/mobile-assets.js" defer></script>
+    </head>
+    <body class="mobile-home mobile-assets">
+        <main class="mobile-home-shell">
+            <header class="mobile-home-topbar mobile-assets-topbar">
+                <div class="mobile-home-brand">
+                    <button
+                        class="mobile-hamburger"
+                        type="button"
+                        aria-label="Open game projects"
+                        aria-controls="mobile-home-drawer"
+                        aria-expanded="false"
+                        data-open-drawer
+                    >
+                        <span></span><span></span><span></span>
+                    </button>
+                    <img src="icons/fg.svg" alt="ForgeGUI" />
+                </div>
+                <a class="mobile-new-project" href="library/project.html">
+                    <img src="icons/add.svg" alt="" />
+                    <span>New Project</span>
+                </a>
+            </header>
+
+            <div class="mobile-home-scroll mobile-assets-scroll" data-home-scroll>
+                <section class="mobile-project-library">
+                    <label class="mobile-assets-search">
+                        <img src="icons/search.svg" alt="" />
+                        <input type="search" placeholder="Search" aria-label="Search projects" data-project-search />
+                    </label>
+
+                    <div class="mobile-project-list">
+                        <article class="mobile-project-card" data-search-item="project name">
+                            <a class="mobile-project-preview" href="library/project.html" aria-label="Open Project Name">
+                                <img src="assets/landing/blog-article.jpg" alt="" />
+                                <img src="assets/landing/blog-article.jpg" alt="" />
+                                <img src="assets/landing/blog-article.jpg" alt="" />
+                                <img src="assets/landing/blog-article.jpg" alt="" />
+                            </a>
+                            <div class="mobile-project-info">
+                                <a href="library/project.html"><strong>Project Name</strong><span>Last Edited: Yesterday</span></a>
+                                <button type="button" aria-label="Project options"><img src="icons/3dots.svg" alt="" /></button>
+                            </div>
+                        </article>
+                        <article class="mobile-project-card" data-search-item="project name">
+                            <a class="mobile-project-preview" href="library/project.html" aria-label="Open Project Name">
+                                <img src="assets/landing/blog-article.jpg" alt="" />
+                                <img src="assets/landing/blog-article.jpg" alt="" />
+                                <img src="assets/landing/blog-article.jpg" alt="" />
+                                <img src="assets/landing/blog-article.jpg" alt="" />
+                            </a>
+                            <div class="mobile-project-info">
+                                <a href="library/project.html"><strong>Project Name</strong><span>Last Edited: Yesterday</span></a>
+                                <button type="button" aria-label="Project options"><img src="icons/3dots.svg" alt="" /></button>
+                            </div>
+                        </article>
+                        <article class="mobile-project-card" data-search-item="project name">
+                            <a class="mobile-project-preview" href="library/project.html" aria-label="Open Project Name">
+                                <img src="assets/landing/blog-article.jpg" alt="" />
+                                <img src="assets/landing/blog-article.jpg" alt="" />
+                                <img src="assets/landing/blog-article.jpg" alt="" />
+                                <img src="assets/landing/blog-article.jpg" alt="" />
+                            </a>
+                            <div class="mobile-project-info">
+                                <a href="library/project.html"><strong>Project Name</strong><span>Last Edited: Yesterday</span></a>
+                                <button type="button" aria-label="Project options"><img src="icons/3dots.svg" alt="" /></button>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="mobile-community-assets" id="mobile-community-assets">
+                    <h1>Discover Community Assets</h1>
+                    <label class="mobile-assets-search">
+                        <img src="icons/search.svg" alt="" />
+                        <input type="search" placeholder="Search" aria-label="Search community assets" data-community-search />
+                    </label>
+                    <div class="mobile-community-grid">
+                        <article class="mobile-community-card is-wide" data-search-item="alex chen mountain retreat nature travel">
+                            <img src="assets/roblox-connect-bg.jpg" alt="" />
+                            <div><p><img src="assets/generic.png" alt="" /><strong>Alex Chen</strong></p><h2>Mountain Retreat</h2><span>A secluded getaway nestled between alpine peaks...</span><footer><b>Nature</b><b>Travel</b></footer></div>
+                        </article>
+                        <article class="mobile-community-card is-wide" data-search-item="alex chen mountain retreat nature travel">
+                            <img src="assets/landing/blog-card.jpg" alt="" />
+                            <div><p><img src="assets/generic.png" alt="" /><strong>Alex Chen</strong></p><h2>Mountain Retreat</h2><span>A secluded getaway nestled between alpine peaks...</span><footer><b>Nature</b><b>Travel</b></footer></div>
+                        </article>
+                        <article class="mobile-community-card" data-search-item="mountain retreat nature"><img src="assets/roblox-connect-bg.jpg" alt="" /></article>
+                        <article class="mobile-community-card" data-search-item="night skyline city"><img src="assets/landing/blog-card.jpg" alt="" /></article>
+                        <article class="mobile-community-card" data-search-item="clouds sky nature"><img src="assets/landing/blog-article.jpg" alt="" /></article>
+                        <article class="mobile-community-card" data-search-item="castle game environment"><img src="assets/landing/hero-art-a.png" alt="" /></article>
+                        <article class="mobile-community-card is-wide" data-search-item="forest waterfall nature"><img src="assets/coursePlaceholder.jpg" alt="" /></article>
+                    </div>
+                </section>
+            </div>
+
+            <fg-include data-template="templates/mobile-app-drawer.html"></fg-include>
+            <fg-include data-template="templates/mobile-bottom-nav.html"></fg-include>
+        </main>
+    </body>
+</html>

@@ -1,1 +1,35 @@
-<fg-page data-source="desktop/settings/rewards.html"></fg-page>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Referrals &amp; Rewards - ForgeGUI</title>
+        <meta name="theme-color" content="#161616" />
+        <meta name="color-scheme" content="dark" />
+        <link rel="stylesheet" href="styles/base.css" />
+        <link rel="stylesheet" href="styles/mobile-settings.css" />
+        <link rel="stylesheet" href="styles/rewards.css" />
+        <script src="scripts/mobile-settings.js" defer></script>
+    </head>
+    <body class="mobile-settings">
+        <main class="mobile-settings-shell">
+            <fg-include data-template="templates/mobile-settings-header.html"></fg-include>
+            <div class="mobile-settings-content">
+                <a class="mobile-settings-back" href="settings/overview.html"><img src="icons/arrow.svg" alt="" />Referrals &amp; Rewards</a>
+                <section class="mobile-settings-group">
+                    <h2>Referrals</h2>
+                    <div class="mobile-settings-list">
+                        <article><div><span>Your Referral Link</span><strong class="mobile-referral-link">https://forgegui.com/referral/name</strong></div><button type="button" data-copy-referral>Copy</button></article>
+                        <article><div><span>People Referred</span><strong>3 People</strong></div><button type="button">Invite More</button></article>
+                        <article><div><span>Total Plan Credits Earned</span><strong>$0.96</strong></div><button type="button">Redeem</button></article>
+                    </div>
+                </section>
+                <section class="mobile-settings-group">
+                    <h2>Reward Timeline</h2>
+                    <fg-include data-template="templates/reward-timeline.html"></fg-include>
+                </section>
+            </div>
+            <fg-include data-template="templates/mobile-settings-footer.html"></fg-include>
+        </main>
+    </body>
+</html>

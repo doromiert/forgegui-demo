@@ -6,6 +6,24 @@
   var hydrationHandlers = new Map();
   var hydratedElements = new WeakSet();
 
+  function enableMotionAfterStablePaint() {
+    var loaded = new Promise(function (resolve) {
+      if (document.readyState === "complete") resolve();
+      else window.addEventListener("load", resolve, { once: true });
+    });
+    var fontsLoaded = document.fonts
+      ? Promise.resolve(document.fonts.ready).catch(function () {})
+      : Promise.resolve();
+
+    Promise.all([loaded, fontsLoaded]).then(function () {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          document.documentElement.classList.add("forge-motion-ready");
+        });
+      });
+    });
+  }
+
   function forgeMeta(name) {
     var meta = document.querySelector('meta[name="' + name + '"]');
     return meta ? meta.content : "";
@@ -188,6 +206,7 @@
     root: projectRoot,
   };
 
+  enableMotionAfterStablePaint();
   installVariantSwitching();
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () { render(document); }, { once: true });

@@ -677,7 +677,7 @@ function injectForgeMetadata(html, forgePath, route, variant) {
     `<meta name="forge-path" content="${escapeHtml(forgePath)}">`,
     `<meta name="forge-route" content="${escapeHtml(route)}">`,
     `<meta name="forge-variant" content="${escapeHtml(variant)}">`,
-    "<style>fg-client-include{display:none}</style>",
+    "<style>html:not(.forge-motion-ready),html:not(.forge-motion-ready) *,html:not(.forge-motion-ready) *::before,html:not(.forge-motion-ready) *::after{animation:none!important;transition:none!important}fg-client-include{display:none}</style>",
     '<script src="scripts/forge-loader.js"></script>',
     '<script src="scripts/forge-runtime.js" defer></script>',
   ].join("\n    ");

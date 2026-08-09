@@ -1,1 +1,270 @@
-<fg-page data-source="desktop/onboarding.html"></fg-page>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI Onboarding</title>
+        <meta name="theme-color" content="#0a0a0a" />
+        <meta name="description" content="Set up your ForgeGUI account" />
+        <meta name="color-scheme" content="dark" />
+        <link rel="stylesheet" href="styles/base.css" />
+        <link rel="stylesheet" href="styles/mobile-onboarding.css" />
+        <script src="scripts/mobile-onboarding.js" defer></script>
+    </head>
+    <body class="mobile-onboarding">
+        <main class="mobile-onboarding-shell">
+            <header class="mobile-onboarding-topbar">
+                <img
+                    class="mobile-onboarding-logo"
+                    src="assets/footerLogo.svg"
+                    alt="ForgeGUI"
+                />
+                <a class="mobile-onboarding-skip" href="home.html">Skip...</a>
+                <span class="mobile-onboarding-spacer"></span>
+                <img
+                    class="mobile-onboarding-profile"
+                    src="assets/generic.png"
+                    alt="Your profile"
+                />
+            </header>
+
+            <div class="mobile-onboarding-stage" aria-live="polite">
+                <section class="mobile-onboarding-step" data-onboarding-step="source">
+                    <div class="mobile-onboarding-heading">
+                        <h1>Howdy! Where did you come from?</h1>
+                        <p>Select between one of the options below.</p>
+                    </div>
+                    <div class="mobile-option-grid" data-choice-group>
+                        <button class="mobile-option-card is-selected" type="button" aria-pressed="true">
+                            <img src="icons/yt.svg" alt="" />
+                            <span>YouTube</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="icons/twitter.svg" alt="" />
+                            <span>X/Twitter</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="icons/tiktok.svg" alt="" />
+                            <span>TikTok</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="icons/google.svg" alt="" />
+                            <span>Search Engine</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="icons/3dots.svg" alt="" />
+                            <span>Friend/Other</span>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="mobile-onboarding-step" data-onboarding-step="platform" hidden>
+                    <div class="mobile-onboarding-heading">
+                        <h1>What do you use?</h1>
+                        <p>Select between one of the options below.</p>
+                    </div>
+                    <div class="mobile-option-grid" data-choice-group>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="icons/roblox.svg" alt="" />
+                            <span>Roblox</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="icons/ue.svg" alt="" />
+                            <span>UEFN</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="icons/unity.svg" alt="" />
+                            <span>Unity</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="icons/3dots.svg" alt="" />
+                            <span>Other/None</span>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="mobile-onboarding-step" data-onboarding-step="experience" hidden>
+                    <div class="mobile-onboarding-heading">
+                        <h1>Are you a new game developer?</h1>
+                        <p>Select between one of the options below.</p>
+                    </div>
+                    <div class="mobile-option-grid" data-choice-group>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="icons/heart.svg" alt="" />
+                            <span>Yes, I&rsquo;m new.</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="icons/Programming.svg" alt="" />
+                            <span>I&rsquo;m not new.</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="icons/x.svg" alt="" />
+                            <span>I&rsquo;m not a dev.</span>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="mobile-onboarding-step" data-onboarding-step="follow" hidden>
+                    <div class="mobile-onboarding-heading">
+                        <h1>Let&rsquo;s get you connected!</h1>
+                        <p>Before you can continue, follow 3 accounts.</p>
+                    </div>
+                    <div class="mobile-follow-list">
+                        <article class="mobile-follow-account">
+                            <img src="assets/generic.png" alt="" />
+                            <div>
+                                <strong>Account Name</strong>
+                                <span>@username</span>
+                            </div>
+                            <button type="button" data-follow>Not Followed</button>
+                        </article>
+                        <article class="mobile-follow-account">
+                            <img src="assets/generic.png" alt="" />
+                            <div>
+                                <strong>Account Name</strong>
+                                <span>@username</span>
+                            </div>
+                            <button type="button" data-follow>Not Followed</button>
+                        </article>
+                        <article class="mobile-follow-account">
+                            <img src="assets/generic.png" alt="" />
+                            <div>
+                                <strong>Account Name</strong>
+                                <span>@username</span>
+                            </div>
+                            <button type="button" data-follow>Not Followed</button>
+                        </article>
+                    </div>
+                    <button class="mobile-primary mobile-follow-all" type="button" data-follow-all>
+                        <span>Follow All 3</span>
+                        <img src="icons/People.svg" alt="" />
+                    </button>
+                </section>
+
+                <section class="mobile-onboarding-step" data-onboarding-step="project" hidden>
+                    <div class="mobile-onboarding-heading">
+                        <h1>Let&rsquo;s create your first game.</h1>
+                        <p>First, give us a name for your project.</p>
+                    </div>
+                    <div class="mobile-project-fields">
+                        <label class="mobile-name-input">
+                            <span class="sr-only">Project name</span>
+                            <input type="text" maxlength="50" placeholder="Name" data-project-name />
+                            <span data-character-count>0/50</span>
+                        </label>
+                        <p>Or, Use Suggested.</p>
+                        <button class="mobile-suggestion" type="button" data-name-suggestion>
+                            <img src="icons/ai.svg" alt="" />
+                            <span>Epic Gun Game</span>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="mobile-onboarding-step mobile-prompt-step" data-onboarding-step="prompt" hidden>
+                    <div class="mobile-onboarding-heading">
+                        <h1>Select a prompt to start generating.</h1>
+                        <p>Generate the first asset for your game.</p>
+                    </div>
+                    <div class="mobile-prompt-list" data-choice-group>
+                        <button class="mobile-prompt-card" type="button" aria-pressed="false">
+                            <img src="icons/ai.svg" alt="" />
+                            <span>Generate an AK47 3D Model.</span>
+                        </button>
+                        <button class="mobile-prompt-card" type="button" aria-pressed="false">
+                            <img src="icons/ai.svg" alt="" />
+                            <span>Generate a FPS thumbnail for my game.</span>
+                        </button>
+                        <button class="mobile-prompt-card" type="button" aria-pressed="false">
+                            <img src="icons/ai.svg" alt="" />
+                            <span>Generate a gunshot sound effect.</span>
+                        </button>
+                        <p>Or type your own...</p>
+                    </div>
+                    <label class="mobile-custom-prompt">
+                        <span class="sr-only">Custom prompt</span>
+                        <input type="text" placeholder="Enter Custom Prompt" />
+                        <button type="button" aria-label="Use custom prompt" data-custom-prompt>
+                            <img src="icons/send.svg" alt="" />
+                        </button>
+                    </label>
+                </section>
+
+                <section class="mobile-onboarding-step mobile-offer-step" data-onboarding-step="offer" hidden>
+                    <div class="mobile-onboarding-heading">
+                        <h1>You&rsquo;re in luck!</h1>
+                        <p>You&rsquo;ve received an exclusive discount.</p>
+                    </div>
+                    <div class="mobile-offer-content">
+                        <article class="mobile-promo">
+                            <div class="mobile-promo-code">Promo Code: <span>Code Name</span></div>
+                            <div class="mobile-promo-body">
+                                <div>
+                                    <strong>75% <span>OFF</span></strong>
+                                    <small>PROMO</small>
+                                </div>
+                                <span class="mobile-promo-divider"></span>
+                                <div>
+                                    <strong class="mobile-promo-time">10:00</strong>
+                                    <small>TIME LEFT</small>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="mobile-plan-card">
+                            <header>
+                                <h2>Pro</h2>
+                                <span>55% OFF</span>
+                            </header>
+                            <div class="mobile-plan-price">
+                                <p><strong>14.99</strong> <del>$59.99</del> <span>/month</span></p>
+                                <ul>
+                                    <li><em>UNLIMITED GENERATIONS.</em></li>
+                                    <li>Subject to abuse protections.</li>
+                                </ul>
+                            </div>
+                            <section class="mobile-plan-features">
+                                <h3><img src="icons/ai.svg" alt="" /> AI models configured for game devs</h3>
+                                <ul>
+                                    <li>Access to Google Nano Banana</li>
+                                    <li>Access to Meshy</li>
+                                    <li>Fable 5</li>
+                                    <li>Access to Tripo</li>
+                                    <li>Access to GPT Image V2</li>
+                                    <li>10s of more models.</li>
+                                </ul>
+                            </section>
+                            <section class="mobile-plan-features">
+                                <h3><img src="icons/crown.svg" alt="" /> Included Features</h3>
+                                <ul>
+                                    <li>Pro AI models for any task.</li>
+                                    <li>Custom Pro Role</li>
+                                    <li>Faster Generations</li>
+                                    <li>Skip the Waitlist</li>
+                                    <li>Everything in the Starter Tier</li>
+                                </ul>
+                            </section>
+                            <a class="mobile-primary mobile-claim-offer" href="plans.html">Claim Discount!</a>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="mobile-onboarding-step mobile-free-step" data-onboarding-step="free" hidden>
+                    <div class="mobile-onboarding-heading">
+                        <h1>You&rsquo;re using the free plan.</h1>
+                        <p>You have unlimited daily generations, subject to rate limits.</p>
+                    </div>
+                    <a class="mobile-understood" href="home.html">Understood</a>
+                </section>
+            </div>
+
+            <footer class="mobile-onboarding-footer">
+                <fg-carouselsteps
+                    class="mobile-progress"
+                    role="status"
+                    aria-label="Step 1 of 8"
+                ></fg-carouselsteps>
+                <button class="mobile-primary mobile-next" type="button" data-next-step>Next</button>
+            </footer>
+        </main>
+    </body>
+</html>

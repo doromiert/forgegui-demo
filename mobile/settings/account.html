@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Account Overview - ForgeGUI</title>
+        <meta name="theme-color" content="#161616" />
+        <meta name="color-scheme" content="dark" />
+        <link rel="stylesheet" href="styles/base.css" />
+        <link rel="stylesheet" href="styles/mobile-settings.css" />
+        <script src="scripts/mobile-settings.js" defer></script>
+    </head>
+    <body class="mobile-settings">
+        <main class="mobile-settings-shell">
+            <fg-include data-template="templates/mobile-settings-header.html"></fg-include>
+            <div class="mobile-settings-content">
+                <a class="mobile-settings-back" href="settings/overview.html"><img src="icons/arrow.svg" alt="" />Account Overview</a>
+                <section class="mobile-account-hero">
+                    <img src="assets/landing/blog-article.jpg" alt="" />
+                    <img src="assets/generic.png" alt="Johny Blessings" />
+                </section>
+                <section class="mobile-settings-group">
+                    <h2>My Account</h2>
+                    <div class="mobile-settings-list">
+                        <article><div><span>Name</span><strong>Johnny Blessings</strong></div><button type="button" data-settings-open="change-name">Edit</button></article>
+                        <article><div><span>Username</span><strong>@therealblessings</strong></div><button type="button" data-settings-open="change-username">Edit</button></article>
+                        <article><div><span>Email Address</span><strong>email@email.com</strong></div><button type="button" data-settings-open="change-email">Edit</button></article>
+                        <article><div><span>Security</span><strong>Password &amp; Email Verification</strong></div><button type="button" data-settings-open="change-password">Edit</button></article>
+                    </div>
+                </section>
+                <section class="mobile-settings-group">
+                    <h2>Connections</h2>
+                    <div class="mobile-settings-list"><article><div><span>Roblox Account</span><strong>Not Linked</strong></div><button type="button">Link Account</button></article></div>
+                </section>
+                <section class="mobile-settings-group">
+                    <h2>Account Management</h2>
+                    <div class="mobile-settings-list">
+                        <article><div><strong>Log Out</strong><span>Log out of all devices</span></div><button type="button">Log Out Now</button></article>
+                        <article><div><strong>Delete my Account</strong><span>This action is permanent.</span></div><button class="is-destructive" type="button">Delete Account</button></article>
+                    </div>
+                </section>
+            </div>
+            <fg-include data-template="templates/mobile-settings-footer.html"></fg-include>
+
+            <section class="mobile-settings-editor" data-settings-editor="change-name" hidden>
+                <header><button type="button" data-settings-close><img src="icons/arrow.svg" alt="" /></button><h2>Change Name</h2></header>
+                <form><p>This only applies to your account name, not your username.</p><label>Name<input required type="text" placeholder="Name" /></label><label>Last Name <span>Optional</span><input type="text" placeholder="Last Name" /></label><small>Names must follow our content guidelines.</small><button class="mobile-settings-save" type="submit">Save Name</button></form>
+            </section>
+            <section class="mobile-settings-editor" data-settings-editor="change-username" hidden>
+                <header><button type="button" data-settings-close><img src="icons/arrow.svg" alt="" /></button><h2>Change Username</h2></header>
+                <form><p>Your username can only be changed once every 30 days.</p><label>Password<input required type="password" placeholder="Password" /></label><label>New Username<input required type="text" placeholder="New Username" /></label><small>Usernames must follow our content guidelines.</small><button class="mobile-settings-save" type="submit">Save Username</button></form>
+            </section>
+            <section class="mobile-settings-editor" data-settings-editor="change-email" hidden>
+                <header><button type="button" data-settings-close><img src="icons/arrow.svg" alt="" /></button><h2>Change Email</h2></header>
+                <form><label>Password<input required type="password" placeholder="Password" /></label><label>2FA Code<input required type="text" inputmode="numeric" placeholder="2FA Code" /></label><label>Previous Email<input required type="email" placeholder="Enter Previous Email" /></label><label>New Email<input required type="email" placeholder="New Email" /></label><small>You can revert this change from your previous email for 30 days.</small><button class="mobile-settings-save" type="submit">Save Email</button></form>
+            </section>
+            <section class="mobile-settings-editor" data-settings-editor="change-password" hidden>
+                <header><button type="button" data-settings-close><img src="icons/arrow.svg" alt="" /></button><h2>Change Password</h2></header>
+                <form><label>Old Password<input required type="password" placeholder="Old Password" /></label><label>2FA Code<input required type="text" inputmode="numeric" placeholder="2FA Code" /></label><label>New Password<input required minlength="8" type="password" placeholder="New Password" data-new-password /></label><label>Confirm Password<input required minlength="8" type="password" placeholder="Confirm Password" data-confirm-password /></label><a href="placeholder.html">Forgot Password?</a><button class="mobile-settings-save" type="submit">Save Password</button></form>
+            </section>
+        </main>
+    </body>
+</html>
