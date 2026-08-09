@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ForgeGUI</title>
         <link rel="stylesheet" href="base.css" />
+        <link rel="stylesheet" href="course-player.css" />
         <script src="site.js" defer></script>
         <meta name="theme-color" content="#0D0D0D" />
         <meta name="color-scheme" content="dark" />
@@ -12,20 +13,20 @@
     </head>
 
     <body class="chat">
-        <slot template="templates/course-sidebar.html"> </slot>
-        <mainView slot="content" class="courses">
-            <top>
-                <path>
+        <fg-include data-template="templates/course-sidebar.html"> </fg-include>
+        <fg-mainview data-slot="content" class="courses">
+            <fg-top>
+                <fg-breadcrumb>
                     <span>Course Title</span>
                     <img src="icons/arrow.svg" style="rotate: -90deg" />
                     <b>Chapter 1</b>
-                </path>
+                </fg-breadcrumb>
                 <button class="topButton">
                     <img src="icons/ai.svg" />
                     AI Summary
                 </button>
-            </top>
-            <coursePlayer>
+            </fg-top>
+            <fg-courseplayer>
                 <button class="playButton">
                     <img src="icons/Play.svg" />
                 </button>
@@ -34,18 +35,18 @@
                     <h2>Course Name, Chapter 1</h2>
                 </div>
                 <span>Click to begin course video.</span>
-            </coursePlayer>
-            <bottom>
+            </fg-courseplayer>
+            <fg-bottom>
                 <button class="courseSwitchButton">
                     <img src="icons/arrow.svg" style="rotate: 90deg" />
                 </button>
-                <completionBar>
-                    <meat> <b>25%</b><span> Complete</span> </meat>
-                </completionBar>
+                <fg-completionbar>
+                    <fg-meat> <b>25%</b><span> Complete</span> </fg-meat>
+                </fg-completionbar>
                 <button class="courseSwitchButton active">
                     <img src="icons/arrow.svg" style="rotate: -90deg" />
                 </button>
-            </bottom>
-        </mainView>
+            </fg-bottom>
+        </fg-mainview>
     </body>
 </html>

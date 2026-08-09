@@ -490,6 +490,7 @@ a {
 
 .feature-stack {
    --orbit-center-x: 50%;
+   --story-intro: 0;
    position: sticky;
    z-index: 2;
    top: 0;
@@ -514,6 +515,7 @@ a {
    scale: var(--shared-world-scale, 1);
    transform-origin: center;
    will-change: translate, scale;
+   opacity: var(--story-intro);
 }
 
 .shared-feature-logo-layer {
@@ -528,6 +530,7 @@ a {
    scale: var(--shared-stage-scale, 1);
    transform-origin: center;
    pointer-events: none;
+   opacity: var(--story-intro);
 }
 
 .shared-feature-logo-layer img {
@@ -549,6 +552,7 @@ a {
    gap: 11px;
    font-family: "Rajdhani", sans-serif;
    line-height: 0.8;
+   opacity: var(--story-intro);
 }
 
 .shared-feature-count strong {
@@ -572,6 +576,7 @@ a {
    padding: 6px;
    border-radius: 56px;
    background: rgba(255, 255, 255, 0.02);
+   opacity: var(--story-intro);
 }
 
 .shared-feature-rail span {
@@ -788,6 +793,7 @@ a {
    position: absolute;
    z-index: 3;
    object-fit: contain;
+   opacity: 0;
 }
 
 .model-codex {
@@ -1006,6 +1012,7 @@ a {
    height: 100%;
    overflow: visible;
    pointer-events: none;
+   opacity: 0;
 }
 
 .generated-snakes path {

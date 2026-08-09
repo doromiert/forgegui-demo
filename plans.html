@@ -22,91 +22,91 @@
     </head>
 
     <body class="chat">
-        <slot template="templates/app-shell.html">
-            <mainView slot="content" class="plans">
-                <top>
+        <fg-include data-template="templates/app-shell.html">
+            <fg-mainview data-slot="content" class="plans">
+                <fg-top>
                     <span>Plans</span>
                     <button class="topButton">
                         <img src="icons/card.svg" />
                         Billing Settings
                     </button>
-                </top>
+                </fg-top>
                 <header>
                     <h1>Select a plan that suits you best.</h1>
                     <span>
                         We have all types of plans to fit any kind of customer.
                     </span>
-                    <billingPicker>
-                        <dateOption class="selected"> Monthly </dateOption>
-                        <dateOption> Yearly </dateOption>
-                    </billingPicker>
+                    <fg-billingpicker>
+                        <fg-dateoption class="selected"> Monthly </fg-dateoption>
+                        <fg-dateoption> Yearly </fg-dateoption>
+                    </fg-billingpicker>
                 </header>
-                <plans>
-                    <planCard class="plan-card plan-card--starter">
-                        <slot template="templates/plan-card.html">
-                            <span slot="title">Starter</span>
-                            <span slot="price">$15.99</span>
-                            <span slot="button">Get Starter</span>
-                            <div slot="price-benefits">
+                <fg-plans>
+                    <fg-plancard class="plan-card plan-card--starter">
+                        <fg-include data-template="templates/plan-card.html">
+                            <span data-slot="title">Starter</span>
+                            <span data-slot="price">$15.99</span>
+                            <span data-slot="button">Get Starter</span>
+                            <div data-slot="price-benefits">
                                 <p>Unlimited (with normal daily rate limits)</p>
                                 <p>Subject to abuse protections.</p>
                             </div>
-                            <ul slot="ai-features">
+                            <ul data-slot="ai-features">
                                 <li>Access to Google Nano Banana</li>
                                 <li>Access to Meshy</li>
                                 <li>Access to GPT Image V2</li>
                                 <li>10s of more models.</li>
                             </ul>
-                            <ul slot="included-features">
+                            <ul data-slot="included-features">
                                 <li>Access to Community Blue</li>
                                 <li>Premium Customer Support</li>
                                 <li>Priority queue</li>
                                 <li>Generate more than 1 asset per prompt</li>
                             </ul>
-                        </slot>
-                    </planCard>
+                        </fg-include>
+                    </fg-plancard>
 
-                    <planCard class="plan-card plan-card--pro">
-                        <slot template="templates/plan-card.html">
-                            <span slot="title">Pro</span>
-                            <span slot="badge">Most Popular</span>
-                            <span slot="price">$19.99</span>
-                            <span slot="original-price">$59.99</span>
-                            <span slot="button">Get Pro</span>
-                            <div slot="price-benefits">
+                    <fg-plancard class="plan-card plan-card--pro">
+                        <fg-include data-template="templates/plan-card.html">
+                            <span data-slot="title">Pro</span>
+                            <span data-slot="badge">Most Popular</span>
+                            <span data-slot="price">$19.99</span>
+                            <span data-slot="original-price">$59.99</span>
+                            <span data-slot="button">Get Pro</span>
+                            <div data-slot="price-benefits">
                                 <p>Unlimited (with light rate limits)</p>
                                 <p>Subject to abuse protections.</p>
                             </div>
-                            <ul slot="ai-features">
+                            <ul data-slot="ai-features">
                                 <li>Access to Google Nano Banana</li>
                                 <li>Access to Meshy</li>
                                 <li>Access to GPT Image V2</li>
                                 <li>10s of more models.</li>
                             </ul>
-                            <ul slot="included-features">
+                            <ul data-slot="included-features">
                                 <li>Everything in the Starter Tier</li>
                                 <li>Custom Pro Role</li>
                                 <li>Faster Generations</li>
                             </ul>
-                        </slot>
-                    </planCard>
+                        </fg-include>
+                    </fg-plancard>
 
-                    <planCard class="plan-card plan-card--max">
-                        <slot template="templates/plan-card.html">
-                            <span slot="title">Max</span>
-                            <span slot="price">$199.99</span>
-                            <span slot="button">Get Max</span>
-                            <div slot="price-benefits">
+                    <fg-plancard class="plan-card plan-card--max">
+                        <fg-include data-template="templates/plan-card.html">
+                            <span data-slot="title">Max</span>
+                            <span data-slot="price">$199.99</span>
+                            <span data-slot="button">Get Max</span>
+                            <div data-slot="price-benefits">
                                 <p>Truly Unlimited. No rate limits.</p>
                                 <p>Subject to abuse protections.</p>
                             </div>
-                            <ul slot="ai-features">
+                            <ul data-slot="ai-features">
                                 <li>Access to Google Nano Banana</li>
                                 <li>Access to Meshy</li>
                                 <li>Access to GPT Image V2</li>
                                 <li>10s of more models.</li>
                             </ul>
-                            <ul slot="included-features">
+                            <ul data-slot="included-features">
                                 <li>Everything in Pro Tier</li>
                                 <li>Access to Exclusive Chat</li>
                                 <li>Exclusive Tag</li>
@@ -115,14 +115,14 @@
                                     protections)
                                 </li>
                             </ul>
-                        </slot>
-                    </planCard>
-                </plans>
+                        </fg-include>
+                    </fg-plancard>
+                </fg-plans>
                 <footer>
                     Are you a business?
-                    <a href="businessPlans.html">Check our Business Plans</a>
+                    <a href="placeholder.html">Check our Business Plans</a>
                 </footer>
-            </mainView>
-        </slot>
+            </fg-mainview>
+        </fg-include>
     </body>
 </html>

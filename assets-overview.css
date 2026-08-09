@@ -1,0 +1,257 @@
+/* Assets overview styles. */
+
+/* ── Assets overview ────────────────────────────────────────── */
+fg-mainview.assets {
+   fg-projects {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #0b0b0b;
+      padding: 15px 35px 35px;
+      width: 100%;
+      box-sizing: border-box;
+      flex-shrink: 0;
+
+      > fg-top {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         height: 58px;
+         flex-shrink: 0;
+      }
+   }
+
+   fg-breadcrumb {
+      color: #fff;
+      font-size: 32px;
+      font-weight: 600;
+
+      b {
+         font-weight: 600;
+      }
+   }
+
+   fg-projectgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+      width: 100%;
+   }
+
+   .projectEntry {
+      display: flex;
+      text-decoration: none;
+      flex-direction: column;
+      gap: 15px;
+      flex-shrink: 0;
+
+      fg-previewgrid {
+         background: #161616;
+         border: 1px solid #333;
+         border-radius: 20px;
+         width: 100%;
+         height: 206px;
+         padding: 10px;
+         box-sizing: border-box;
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         grid-template-rows: 1fr 1fr;
+         gap: 10px;
+         overflow: hidden;
+         flex-shrink: 0;
+
+         img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+         }
+      }
+
+      fg-bottom {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         padding: 0 12px;
+
+         fg-vertical {
+            display: flex;
+            flex-direction: column;
+
+            b {
+               color: #fff;
+               font-size: 18px;
+               font-weight: 500;
+            }
+
+            span {
+               color: rgba(255, 255, 255, 0.48);
+               font-size: 18px;
+               font-weight: 400;
+            }
+         }
+
+         > img {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+         }
+      }
+   }
+
+}
+
+/* ── Community Assets ─────────────────────────────────────────── */
+fg-communityassets {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+
+   > fg-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 25px 35px 15px;
+
+      > span {
+         color: #fff;
+         font-size: 32px;
+         font-weight: 600;
+      }
+   }
+}
+
+fg-searchwrapper {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   height: 48px;
+   padding: 10px 18px;
+   border-radius: 47px;
+   border: 1px solid #373636;
+   background: #121212;
+   overflow: hidden;
+   flex-shrink: 0;
+   width: 430px;
+   box-sizing: border-box;
+
+   img {
+      width: 24px;
+      height: 24px;
+      opacity: 0.5;
+      flex-shrink: 0;
+   }
+
+   input {
+      background: none;
+      border: none;
+      outline: none;
+      color: rgba(255, 255, 255, 0.5);
+      font-family: "Atkinson Hyperlegible Next", sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+      flex: 1;
+      min-width: 0;
+   }
+}
+
+fg-communityassetsgrid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+   gap: 10px;
+   padding: 0 35px 15px;
+   width: 100%;
+   box-sizing: border-box;
+}
+
+fg-communityasset {
+   position: relative;
+   overflow: hidden;
+   height: 293px;
+   border: 1px solid rgba(255, 255, 255, 0.1);
+   border-radius: 20px;
+   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
+   padding: 25px;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+
+   &.long {
+      grid-column: span 2;
+   }
+
+   /* Full-bleed background image — direct child of the card,
+      absolutely positioned so it covers the entire card. */
+   > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+   }
+
+   fg-top {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.8));
+
+      span {
+         color: #fff;
+         font-size: 20px;
+         font-weight: 600;
+      }
+   }
+
+   fg-bottom {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.8));
+
+      b {
+         color: #fff;
+         font-size: 24px;
+         font-weight: 700;
+      }
+
+      > span {
+         color: rgba(255, 255, 255, 0.8);
+         font-size: 18px;
+         font-weight: 500;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         white-space: nowrap;
+      }
+   }
+}
+
+@media (max-width: 720px) {
+   fg-mainview.assets fg-projectgrid {
+      grid-template-columns: minmax(0, 1fr);
+      padding-left: 16px;
+      padding-right: 16px;
+   }
+
+   fg-mainview.assets fg-projects > fg-top,
+   fg-communityassets > fg-top {
+      padding-left: 16px;
+      padding-right: 16px;
+   }
+
+   fg-communityassets > fg-top {
+      align-items: stretch;
+      flex-direction: column;
+      gap: 12px;
+   }
+
+   fg-communityassets fg-searchwrapper {
+      width: 100%;
+   }
+}

@@ -1,28 +1,28 @@
-<planTitle>
-    <h2><slot name="title">Plan</slot></h2>
-    <planBadge><slot name="badge"></slot></planBadge>
-</planTitle>
+<fg-plantitle>
+    <h2><fg-slot data-name="title">Plan</fg-slot></h2>
+    <fg-planbadge><fg-slot data-name="badge"></fg-slot></fg-planbadge>
+</fg-plantitle>
 
-<planPrice>
-    <priceLine>
-        <strong><slot name="price">$0.00</slot></strong>
-        <del><slot name="original-price"></slot></del>
+<fg-planprice>
+    <fg-priceline>
+        <strong><fg-slot data-name="price">$0.00</fg-slot></strong>
+        <del><fg-slot data-name="original-price"></fg-slot></del>
         <span>/month</span>
-    </priceLine>
-    <priceBenefits>
-        <slot name="price-benefits"></slot>
-    </priceBenefits>
-</planPrice>
+    </fg-priceline>
+    <fg-pricebenefits>
+        <fg-slot data-name="price-benefits"></fg-slot>
+    </fg-pricebenefits>
+</fg-planprice>
 
-<button class="planButton"><slot name="button">Choose Plan</slot></button>
+<button class="planButton"><fg-slot data-name="button">Choose Plan</fg-slot></button>
 
-<planFeatures>
-    <featureGroup>
+<fg-planfeatures>
+    <fg-featuregroup>
         <h3><img src="icons/ai.svg" alt="" /> AI models</h3>
-        <slot name="ai-features"></slot>
-    </featureGroup>
-    <featureGroup>
+        <fg-slot data-name="ai-features"></fg-slot>
+    </fg-featuregroup>
+    <fg-featuregroup>
         <h3><img src="icons/crown.svg" alt="" /> Included Features</h3>
-        <slot name="included-features"></slot>
-    </featureGroup>
-</planFeatures>
+        <fg-slot data-name="included-features"></fg-slot>
+    </fg-featuregroup>
+</fg-planfeatures>

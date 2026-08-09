@@ -1,21 +1,60 @@
 (function () {
   "use strict";
 
-  window.showContext = function (id) {
+  function closeContexts() {
+    document.querySelectorAll("fg-contextmenu:not(.hidden)").forEach(function (menu) {
+      menu.classList.add("hidden");
+      document.querySelectorAll('[data-context-target="' + menu.id + '"]').forEach(function (trigger) {
+        trigger.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
+  window.showContext = function (id, trigger) {
     var context = document.getElementById(id);
-    if (context) context.classList.toggle("hidden");
+    if (!context) return;
+    var opening = context.classList.contains("hidden");
+    closeContexts();
+    context.classList.toggle("hidden", !opening);
+    if (trigger) trigger.setAttribute("aria-expanded", opening ? "true" : "false");
   };
+
+  document.querySelectorAll("[data-context-target]").forEach(function (trigger) {
+    trigger.setAttribute("aria-haspopup", "menu");
+    trigger.setAttribute("aria-expanded", "false");
+    trigger.setAttribute("aria-controls", trigger.dataset.contextTarget);
+  });
+  document.querySelectorAll("fg-contextmenu").forEach(function (menu) {
+    menu.setAttribute("role", "menu");
+  });
 
   document.addEventListener("click", function (event) {
     if (event.target.closest("[data-toggle-sidebar]")) {
-      var sidebar = document.querySelector("sidebar");
+      var sidebar = document.querySelector("fg-sidebar");
       if (sidebar) sidebar.classList.toggle("collapsed");
     }
 
     var contextTrigger = event.target.closest("[data-context-target]");
     if (contextTrigger) {
-      window.showContext(contextTrigger.dataset.contextTarget);
+      window.showContext(contextTrigger.dataset.contextTarget, contextTrigger);
+    } else if (event.target.closest("fg-contextmenu button")) {
+      closeContexts();
+    } else if (!event.target.closest("fg-contextmenu")) {
+      closeContexts();
     }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") closeContexts();
+  });
+
+  document.addEventListener("click", function (event) {
+    var menuButton = event.target.closest(".menu-button");
+    if (!menuButton) return;
+    var nav = document.querySelector(".main-nav");
+    if (!nav) return;
+    var open = nav.classList.toggle("is-open");
+    menuButton.setAttribute("aria-expanded", String(open));
   });
 
   // Carousel API — call carousel.next(), carousel.prev(), or carousel.goTo(n)
@@ -23,12 +62,12 @@
     var index = 0;
 
     function syncSteps(n, total) {
-      document.querySelectorAll("carouselSteps").forEach(function (el) {
+      document.querySelectorAll("fg-carouselsteps").forEach(function (el) {
         el.style.visibility = n === total - 1 ? "hidden" : "";
         if (el.children.length !== total) {
           el.innerHTML = "";
           for (var i = 0; i < total; i++) {
-            el.appendChild(document.createElement("carouselStep"));
+            el.appendChild(document.createElement("fg-carouselstep"));
           }
         }
         Array.from(el.children).forEach(function (step, i) {
@@ -38,7 +77,7 @@
     }
 
     function layout(n) {
-      var pages = document.querySelectorAll("carouselPage");
+      var pages = document.querySelectorAll("fg-carouselpage");
       if (!pages.length) return;
       index = Math.max(0, Math.min(n, pages.length - 1));
       var w = (pages[0].parentElement || document.body).clientWidth;
@@ -73,93 +112,122 @@
     if (counter) counter.textContent = input.value.length + "/" + max;
   });
 
-  // Popups — one shared backdrop, one visible popup at a time. Only the tags
-  // listed here are managed; other popupContainer children (e.g. newPostPopup)
-  // keep whatever toggling they already use.
-  var POPUPS = "assetsPopup, newPopup, pluginPopup, installPopup, changeUsernamePopup, changeNamePopup, changeEmailPopup, changePasswordPopup";
+  // One accessible controller owns every application popup. Pages declare
+  // relationships with data-popup-open/data-popup-close instead of adding JS.
+  var activePopup = null;
+  var popupTrigger = null;
 
-  function setPopup(tag) {
-    var container = document.querySelector("popupContainer");
-    if (!container) return;
-    var managed = container.querySelectorAll(POPUPS);
-    if (!managed.length) return;
-    managed.forEach(function (popup) {
-      popup.classList.toggle("hidden", popup.tagName.toLowerCase() !== tag);
+  function popupFocusables(popup) {
+    return Array.from(
+      popup.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      ),
+    ).filter(function (element) {
+      return !element.hidden && element.getClientRects().length > 0;
     });
-    container.classList.toggle("hidden", !tag);
   }
 
-  window.openAssetPopup = function () {
-    setPopup("assetspopup");
-  };
-  window.closeAssetsPopup = function () {
-    setPopup(null);
-  };
-  window.openNewPopup = function () {
-    setPopup("newpopup");
-  };
-  window.closeNewPopup = function () {
-    setPopup(null);
-  };
-  window.openPluginPopup = function () {
-    setPopup("pluginpopup");
-  };
-  window.closePluginPopup = function () {
-    setPopup(null);
-  };
-  // The Install (download) button inside pluginPopup swaps to the install steps.
-  window.openInstallPopup = function () {
-    setPopup("installpopup");
-  };
-  window.closeInstallPopup = function () {
-    setPopup(null);
-  };
+  function preparePopup(popup) {
+    popup.setAttribute("role", "dialog");
+    popup.setAttribute("aria-modal", "true");
+    popup.setAttribute("aria-hidden", popup.classList.contains("hidden") ? "true" : "false");
 
-  // Settings account popups — generic open/close used by overview.html.
-  window.openSettingsPopup = function (tag) {
-    // Clear any leftover errors from a previous open.
-    var container = document.querySelector("popupContainer");
-    if (container) {
-      container.querySelectorAll("fieldGroup.hasError").forEach(function (g) {
-        g.classList.remove("hasError");
+    var heading = popup.querySelector("h1");
+    if (heading && !popup.hasAttribute("aria-labelledby") && !popup.hasAttribute("aria-label")) {
+      if (!heading.id) heading.id = popup.id + "-title";
+      popup.setAttribute("aria-labelledby", heading.id);
+    }
+  }
+
+  window.openPopup = function (id, trigger) {
+    var popup = document.getElementById(id);
+    if (!popup || popup.tagName.toLowerCase() !== "fg-popup") return;
+
+    var container = popup.closest("fg-popupcontainer");
+    if (!container) return;
+
+    if (!activePopup || !trigger || !activePopup.contains(trigger)) {
+      popupTrigger = trigger || document.activeElement;
+    }
+
+    document.querySelectorAll("fg-popupcontainer > fg-popup").forEach(function (item) {
+      var visible = item === popup;
+      item.classList.toggle("hidden", !visible);
+      item.setAttribute("aria-hidden", visible ? "false" : "true");
+    });
+    document.querySelectorAll("fg-popupcontainer").forEach(function (item) {
+      var visible = item === container;
+      item.classList.toggle("hidden", !visible);
+      item.setAttribute("aria-hidden", visible ? "false" : "true");
+    });
+
+    if (popup.classList.contains("settingsPopup")) {
+      popup.querySelectorAll("fg-fieldgroup.hasError").forEach(function (group) {
+        group.classList.remove("hasError");
       });
-      container.querySelectorAll("fieldGroup input").forEach(function (i) {
-        i.value = "";
+      popup.querySelectorAll("fg-fieldgroup input").forEach(function (input) {
+        input.value = "";
       });
     }
-    setPopup(tag.toLowerCase());
+
+    activePopup = popup;
+    document.body.classList.add("popupOpen");
+    requestAnimationFrame(function () {
+      var focusTarget = popup.querySelector("[autofocus]") || popupFocusables(popup)[0];
+      if (focusTarget) focusTarget.focus();
+      else {
+        popup.setAttribute("tabindex", "-1");
+        popup.focus();
+      }
+    });
   };
-  window.closeSettingsPopup = function () {
-    setPopup(null);
+
+  window.closePopup = function () {
+    if (!activePopup) return;
+    var container = activePopup.closest("fg-popupcontainer");
+    activePopup.classList.add("hidden");
+    activePopup.setAttribute("aria-hidden", "true");
+    if (container) {
+      container.classList.add("hidden");
+      container.setAttribute("aria-hidden", "true");
+    }
+    activePopup = null;
+    document.body.classList.remove("popupOpen");
+    if (popupTrigger && popupTrigger.isConnected) popupTrigger.focus();
+    popupTrigger = null;
   };
-  // Legacy alias kept for backwards compat.
-  window.closeUsernamePopup = window.closeSettingsPopup;
+
+  document.querySelectorAll("fg-popupcontainer").forEach(function (container) {
+    container.setAttribute("aria-hidden", "true");
+  });
+  document.querySelectorAll("fg-popupcontainer > fg-popup").forEach(preparePopup);
 
   // Validate all required fieldGroups in the active popup. Returns true if clean.
   window.confirmSettingsPopup = function (btn) {
-    var popup = btn.closest("popupContainer > *");
+    var popup = btn.closest("fg-popup");
     if (!popup) return;
-    var groups = popup.querySelectorAll("fieldGroup:not([data-optional])");
+    var groups = popup.querySelectorAll("fg-fieldgroup:not([data-optional])");
     var valid = true;
     groups.forEach(function (group) {
       var input = group.querySelector("input");
       if (!input) return;
       var empty = input.value.trim() === "";
+      var invalid = !input.checkValidity();
       // Special case: Confirm Password must match New Password.
       var mismatch = false;
       if (!empty && input.hasAttribute("data-match-source")) {
         var target = popup.querySelector("[data-match-target]");
         if (target && input.value !== target.value) mismatch = true;
       }
-      group.classList.toggle("hasError", empty || mismatch);
-      if (empty || mismatch) valid = false;
+      group.classList.toggle("hasError", empty || invalid || mismatch);
+      if (empty || invalid || mismatch) valid = false;
     });
-    if (valid) closeSettingsPopup();
+    if (valid) closePopup();
   };
 
   // Clear a field's error as soon as the user starts typing.
   document.addEventListener("input", function (event) {
-    var group = event.target.closest && event.target.closest("fieldGroup");
+    var group = event.target.closest && event.target.closest("fg-fieldgroup");
     if (group) group.classList.remove("hasError");
   });
 
@@ -175,17 +243,49 @@
       : button.dataset.unlinkedLabel;
   };
 
-  // Any plugin card opens the plugin detail popup.
+  // Declarative triggers, close controls, backdrop dismissal, and focus trap.
   document.addEventListener("click", function (event) {
-    if (event.target.closest("pluginGrid pluginBox")) window.openPluginPopup();
-  });
-
-  // Click the backdrop (not the popup) or press Escape to dismiss.
-  document.addEventListener("click", function (event) {
-    if (event.target.matches("popupContainer")) setPopup(null);
+    var trigger = event.target.closest("[data-popup-open]");
+    if (trigger) {
+      window.openPopup(trigger.dataset.popupOpen, trigger);
+      return;
+    }
+    if (event.target.closest("[data-popup-close]") || event.target.matches("fg-popupcontainer")) {
+      window.closePopup();
+    }
   });
   document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") setPopup(null);
+    var trigger = event.target.closest && event.target.closest("[data-popup-open]");
+    if (trigger && !trigger.matches("button, a, input, select, textarea") && (event.key === "Enter" || event.key === " ")) {
+      event.preventDefault();
+      window.openPopup(trigger.dataset.popupOpen, trigger);
+      return;
+    }
+    if (event.key === "Escape" && activePopup) {
+      event.preventDefault();
+      window.closePopup();
+      return;
+    }
+    if (event.key !== "Tab" || !activePopup) return;
+
+    var focusables = popupFocusables(activePopup);
+    if (!focusables.length) {
+      event.preventDefault();
+      activePopup.focus();
+      return;
+    }
+    var first = focusables[0];
+    var last = focusables[focusables.length - 1];
+    if (!activePopup.contains(document.activeElement)) {
+      event.preventDefault();
+      (event.shiftKey ? last : first).focus();
+    } else if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   });
 
   // Highlight any sidebar link whose href resolves to the current page.
@@ -203,6 +303,7 @@
 
   (function installMouseTail() {
     if (
+      !document.body.classList.contains("landing-page") ||
       !window.matchMedia("(pointer: fine)").matches ||
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ) {

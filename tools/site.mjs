@@ -83,7 +83,7 @@ function parseAttributes(tag) {
 }
 
 function findSlotBlock(html, predicate, start = 0) {
-  const pattern = /<\/?slot\b[^>]*>/gi;
+  const pattern = /<\/?fg-(?:include|slot)\b[^>]*>/gi;
   pattern.lastIndex = start;
   let opening;
 
@@ -123,7 +123,7 @@ function findSlotBlock(html, predicate, start = 0) {
       }
     }
 
-    throw new Error("Unclosed <slot> element");
+    throw new Error("Unclosed template directive");
   }
 
   return null;
@@ -151,15 +151,18 @@ function collectProjectedContent(html) {
   const projected = new Map();
   const ranges = [];
   const pattern =
-    /<([A-Za-z][\w:-]*)\b[^>]*\sslot\s*=\s*(?:"([^"]+)"|'([^']+)')[^>]*>/gi;
+    /<([A-Za-z][\w:-]*)\b[^>]*\sdata-slot\s*=\s*(?:"([^"]+)"|'([^']+)')[^>]*>/gi;
   let match;
 
   while ((match = pattern.exec(html))) {
-    if (match[1].toLowerCase() === "slot") continue;
+    if (match[1].toLowerCase() === "fg-slot") continue;
 
     const end = findElementEnd(html, match[1], pattern.lastIndex);
     const name = match[2] ?? match[3];
-    const opening = match[0].replace(/\s+slot\s*=\s*(?:"[^"]*"|'[^']*')/i, "");
+    const opening = match[0].replace(
+      /\s+data-slot\s*=\s*(?:"[^"]*"|'[^']*')/i,
+      "",
+    );
     const element = opening + html.slice(pattern.lastIndex, end);
 
     if (!projected.has(name)) projected.set(name, []);
@@ -185,8 +188,8 @@ function projectContent(template, projected) {
   let output = template;
   let slot;
 
-  while ((slot = findSlotBlock(output, (attributes) => !attributes.template))) {
-    const name = slot.attributes.name || "";
+  while ((slot = findSlotBlock(output, (attributes) => !attributes["data-template"]))) {
+    const name = slot.attributes["data-name"] || "";
     const supplied = projected.get(name)?.join("\n");
     const replacement = supplied || slot.inner;
     output = output.slice(0, slot.start) + replacement + output.slice(slot.end);
@@ -238,8 +241,8 @@ async function expandTemplates(html, chain = []) {
   let output = html;
   let slot;
 
-  while ((slot = findSlotBlock(output, (attributes) => attributes.template))) {
-    const templateFile = resolveTemplatePath(slot.attributes.template);
+  while ((slot = findSlotBlock(output, (attributes) => attributes["data-template"]))) {
+    const templateFile = resolveTemplatePath(slot.attributes["data-template"]);
 
     if (chain.includes(templateFile)) {
       throw new Error(

@@ -6,7 +6,7 @@
         <title>ForgeGUI</title>
         <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
         <link rel="stylesheet" href="base.css" />
-        <link rel="stylesheet" href="plans.css" />
+        <link rel="stylesheet" href="courses.css" />
         <script src="site.js" defer></script>
         <meta name="theme-color" content="#0D0D0D" />
         <meta name="description" content="ForgeGUI - Create anything with AI" />
@@ -22,9 +22,9 @@
     </head>
 
     <body class="chat">
-        <slot template="templates/app-shell.html">
-            <mainView slot="content" class="courses">
-                <banner>
+        <fg-include data-template="templates/app-shell.html">
+            <fg-mainview data-slot="content" class="courses">
+                <fg-banner>
                     <h1>Courses</h1>
                     <span
                         >Learn how to build popular games using ForgeGUI.<br />
@@ -32,25 +32,25 @@
                     >
 
                     <img src="course-graph.svg" />
-                </banner>
-                <courseHeader> Available Courses </courseHeader>
-                <courseGrid>
-                    <slot template="templates/course.html"> </slot>
-                    <slot template="templates/course.html"> </slot>
-                    <slot template="templates/course.html"> </slot>
-                    <slot template="templates/course.html"> </slot>
-                    <slot template="templates/course.html"> </slot>
-                    <slot template="templates/course.html"> </slot>
-                    <slot template="templates/course.html"> </slot>
-                    <slot template="templates/course.html"> </slot>
-                    <slot template="templates/course.html"> </slot>
-                </courseGrid>
-                <completionBarBG>
-                    <completionBar>
-                        <meat> <b>25%</b><span>Complete</span> </meat>
-                    </completionBar>
-                </completionBarBG>
-            </mainView>
-        </slot>
+                </fg-banner>
+                <fg-courseheader> Available Courses </fg-courseheader>
+                <fg-coursegrid>
+                    <fg-include data-template="templates/course.html"> </fg-include>
+                    <fg-include data-template="templates/course.html"> </fg-include>
+                    <fg-include data-template="templates/course.html"> </fg-include>
+                    <fg-include data-template="templates/course.html"> </fg-include>
+                    <fg-include data-template="templates/course.html"> </fg-include>
+                    <fg-include data-template="templates/course.html"> </fg-include>
+                    <fg-include data-template="templates/course.html"> </fg-include>
+                    <fg-include data-template="templates/course.html"> </fg-include>
+                    <fg-include data-template="templates/course.html"> </fg-include>
+                </fg-coursegrid>
+                <fg-completionbarbg>
+                    <fg-completionbar>
+                        <fg-meat> <b>25%</b><span>Complete</span> </fg-meat>
+                    </fg-completionbar>
+                </fg-completionbarbg>
+            </fg-mainview>
+        </fg-include>
     </body>
 </html>

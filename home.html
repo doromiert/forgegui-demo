@@ -6,6 +6,7 @@
     <title>ForgeGUI</title>
     <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
     <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="home.css" />
     <script src="site.js" defer></script>
     <meta name="theme-color" content="#0D0D0D" />
     <meta name="description" content="ForgeGUI - Create anything with AI" />
@@ -18,202 +19,202 @@
   </head>
 
   <body class="chat">
-    <slot template="templates/app-shell.html">
-      <mainView slot="content">
-        <chatWindow>
+    <fg-include data-template="templates/app-shell.html">
+      <fg-mainview data-slot="content">
+        <fg-chatwindow>
           <span><b>544,200</b> users have created assets today.</span>
           <h1>Let's create a game, generic</h1>
-          <slot template="templates/chatbox.html"></slot>
-          <suggestionBar>
-            <suggestion>
+          <fg-include data-template="templates/chatbox.html"></fg-include>
+          <fg-suggestionbar>
+            <fg-suggestion>
               <img src="icons/placeholder.svg" />
               Suggestion
-            </suggestion>
-            <suggestion>
+            </fg-suggestion>
+            <fg-suggestion>
               <img src="icons/placeholder.svg" />
               Suggestion
-            </suggestion>
-            <suggestion>
+            </fg-suggestion>
+            <fg-suggestion>
               <img src="icons/placeholder.svg" />
               Suggestion
-            </suggestion>
-            <suggestion>
+            </fg-suggestion>
+            <fg-suggestion>
               <img src="icons/placeholder.svg" />
               Suggestion
-            </suggestion>
-            <suggestion>
+            </fg-suggestion>
+            <fg-suggestion>
               <img src="icons/placeholder.svg" />
               Suggestion
-            </suggestion>
-            <suggestion>
+            </fg-suggestion>
+            <fg-suggestion>
               <img src="icons/placeholder.svg" />
               Suggestion
-            </suggestion>
-          </suggestionBar>
-        </chatWindow>
-        <gallery>
-          <galleryTop><span>THE</span><b>FORGE</b></galleryTop>
+            </fg-suggestion>
+          </fg-suggestionbar>
+        </fg-chatwindow>
+        <fg-gallery>
+          <fg-gallerytop><span>THE</span><b>FORGE</b></fg-gallerytop>
 
-          <galleryLine>
-            <galleryTop>
+          <fg-galleryline>
+            <fg-gallerytop>
               <div>
                 <img src="icons/s-3d.svg" />
                 <span>Quick Tools</span>
               </div>
-              <horizButtons>
+              <fg-horizbuttons>
                 <button onclick="scrollGallery(this, -1)">
                   <img src="icons/arrow.svg" style="rotate: 90deg" />
                 </button>
                 <button onclick="scrollGallery(this, 1)">
                   <img src="icons/arrow.svg" style="rotate: 270deg" />
                 </button>
-              </horizButtons>
-            </galleryTop>
-            <galleryCarousel>
-              <galleryCard>
+              </fg-horizbuttons>
+            </fg-gallerytop>
+            <fg-gallerycarousel>
+              <fg-gallerycard>
                 <img src="generic.png" />
-                <cardInfo>
+                <fg-cardinfo>
                   <b>Placeholder Title</b>
                   <span>Placeholder subtext cuz why not</span>
-                </cardInfo>
-              </galleryCard>
-              <galleryCard>
+                </fg-cardinfo>
+              </fg-gallerycard>
+              <fg-gallerycard>
                 <img src="generic.png" />
-                <cardInfo>
+                <fg-cardinfo>
                   <b>Placeholder Title</b>
                   <span>Placeholder subtext cuz why not</span>
-                </cardInfo>
-              </galleryCard>
-              <galleryCard>
+                </fg-cardinfo>
+              </fg-gallerycard>
+              <fg-gallerycard>
                 <img src="generic.png" />
-                <cardInfo>
+                <fg-cardinfo>
                   <b>Placeholder Title</b>
                   <span>Placeholder subtext cuz why not</span>
-                </cardInfo>
-              </galleryCard>
-              <galleryCard>
+                </fg-cardinfo>
+              </fg-gallerycard>
+              <fg-gallerycard>
                 <img src="generic.png" />
-                <cardInfo>
+                <fg-cardinfo>
                   <b>Placeholder Title</b>
                   <span>Placeholder subtext cuz why not</span>
-                </cardInfo>
-              </galleryCard>
-              <galleryCard>
+                </fg-cardinfo>
+              </fg-gallerycard>
+              <fg-gallerycard>
                 <img src="generic.png" />
-                <cardInfo>
+                <fg-cardinfo>
                   <b>Placeholder Title</b>
                   <span>Placeholder subtext cuz why not</span>
-                </cardInfo>
-              </galleryCard>
-              <galleryCard>
+                </fg-cardinfo>
+              </fg-gallerycard>
+              <fg-gallerycard>
                 <img src="generic.png" />
-                <cardInfo>
+                <fg-cardinfo>
                   <b>Placeholder Title</b>
                   <span>Placeholder subtext cuz why not</span>
-                </cardInfo>
-              </galleryCard>
-              <galleryCard>
+                </fg-cardinfo>
+              </fg-gallerycard>
+              <fg-gallerycard>
                 <img src="generic.png" />
-                <cardInfo>
+                <fg-cardinfo>
                   <b>Placeholder Title</b>
                   <span>Placeholder subtext cuz why not</span>
-                </cardInfo>
-              </galleryCard>
-            </galleryCarousel>
-          </galleryLine>
+                </fg-cardinfo>
+              </fg-gallerycard>
+            </fg-gallerycarousel>
+          </fg-galleryline>
 
-          <galleryFeatured>
+          <fg-galleryfeatured>
             <img src="generic.png" />
-            <featuredInfo>
-              <cardInfo>
+            <fg-featuredinfo>
+              <fg-cardinfo>
                 <b>Placeholder Title</b>
                 <span>Placeholder subtext cuz why not</span>
-              </cardInfo>
+              </fg-cardinfo>
               <button
                 class="upgradeButton"
                 style="width: auto; padding: 12px 20px"
               >
                 <span style="font-size: 18px">Try Now</span>
               </button>
-            </featuredInfo>
-          </galleryFeatured>
+            </fg-featuredinfo>
+          </fg-galleryfeatured>
 
-          <galleryLine>
-            <galleryTop>
+          <fg-galleryline>
+            <fg-gallerytop>
               <div>
                 <img src="icons/picture.svg" />
                 <span>Other Tools</span>
               </div>
-              <horizButtons>
+              <fg-horizbuttons>
                 <button onclick="scrollGallery(this, -1)">
                   <img src="icons/arrow.svg" style="rotate: 90deg" />
                 </button>
                 <button onclick="scrollGallery(this, 1)">
                   <img src="icons/arrow.svg" style="rotate: 270deg" />
                 </button>
-              </horizButtons>
-            </galleryTop>
-            <galleryCarousel>
-              <galleryCard>
+              </fg-horizbuttons>
+            </fg-gallerytop>
+            <fg-gallerycarousel>
+              <fg-gallerycard>
                 <img src="generic.png" />
-                <cardInfo>
+                <fg-cardinfo>
                   <b>Placeholder Title</b>
                   <span>Placeholder subtext cuz why not</span>
-                </cardInfo>
-              </galleryCard>
-              <galleryCard>
+                </fg-cardinfo>
+              </fg-gallerycard>
+              <fg-gallerycard>
                 <img src="generic.png" />
-                <cardInfo>
+                <fg-cardinfo>
                   <b>Placeholder Title</b>
                   <span>Placeholder subtext cuz why not</span>
-                </cardInfo>
-              </galleryCard>
-              <galleryCard>
+                </fg-cardinfo>
+              </fg-gallerycard>
+              <fg-gallerycard>
                 <img src="generic.png" />
-                <cardInfo>
+                <fg-cardinfo>
                   <b>Placeholder Title</b>
                   <span>Placeholder subtext cuz why not</span>
-                </cardInfo>
-              </galleryCard>
-              <galleryCard>
+                </fg-cardinfo>
+              </fg-gallerycard>
+              <fg-gallerycard>
                 <img src="generic.png" />
-                <cardInfo>
+                <fg-cardinfo>
                   <b>Placeholder Title</b>
                   <span>Placeholder subtext cuz why not</span>
-                </cardInfo>
-              </galleryCard>
-              <galleryCard>
+                </fg-cardinfo>
+              </fg-gallerycard>
+              <fg-gallerycard>
                 <img src="generic.png" />
-                <cardInfo>
+                <fg-cardinfo>
                   <b>Placeholder Title</b>
                   <span>Placeholder subtext cuz why not</span>
-                </cardInfo>
-              </galleryCard>
-              <galleryCard>
+                </fg-cardinfo>
+              </fg-gallerycard>
+              <fg-gallerycard>
                 <img src="generic.png" />
-                <cardInfo>
+                <fg-cardinfo>
                   <b>Placeholder Title</b>
                   <span>Placeholder subtext cuz why not</span>
-                </cardInfo>
-              </galleryCard>
-              <galleryCard>
+                </fg-cardinfo>
+              </fg-gallerycard>
+              <fg-gallerycard>
                 <img src="generic.png" />
-                <cardInfo>
+                <fg-cardinfo>
                   <b>Placeholder Title</b>
                   <span>Placeholder subtext cuz why not</span>
-                </cardInfo>
-              </galleryCard>
-            </galleryCarousel>
-          </galleryLine>
-        </gallery>
-      </mainView>
-    </slot>
+                </fg-cardinfo>
+              </fg-gallerycard>
+            </fg-gallerycarousel>
+          </fg-galleryline>
+        </fg-gallery>
+      </fg-mainview>
+    </fg-include>
   </body>
   <script>
     function scrollGallery(btn, dir) {
       const carousel = btn
-        .closest("galleryLine")
-        .querySelector("galleryCarousel");
+        .closest("fg-galleryline")
+        .querySelector("fg-gallerycarousel");
       carousel.scrollBy({ left: dir * 440, behavior: "smooth" });
     }
   </script>

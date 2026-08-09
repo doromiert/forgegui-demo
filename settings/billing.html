@@ -12,36 +12,34 @@
     </head>
 
     <body class="chat">
-        <slot template="templates/sidebar.html" class="collapsed"></slot>
-        <mainView class="settings">
-            <slot template="templates/settings-sidebar.html"></slot>
-            <settingsView>
+        <fg-include data-template="templates/settings-shell.html">
+            <fg-settingsview data-slot="content">
                 <div style="height: 90px"></div>
-                <slot template="templates/listbox.html">
-                    <span slot="header">Plan Overview</span>
-                    <slot template="templates/listbox-row.html">
-                        <span slot="label">Selected Plan</span>
-                        <b slot="value">ForgeGUI Pro</b>
-                        <button slot="action" class="listboxAction">
+                <fg-include data-template="templates/listbox.html">
+                    <span data-slot="header">Plan Overview</span>
+                    <fg-include data-template="templates/listbox-row.html">
+                        <span data-slot="label">Selected Plan</span>
+                        <b data-slot="value">ForgeGUI Pro</b>
+                        <button data-slot="action" class="listboxAction">
                             Change Plan
                         </button>
-                    </slot>
-                    <slot template="templates/listbox-row.html">
-                        <span slot="label">Daily Rate Limit</span>
-                        <b slot="value">30% Used</b>
-                        <button slot="action" class="listboxAction">
+                    </fg-include>
+                    <fg-include data-template="templates/listbox-row.html">
+                        <span data-slot="label">Daily Rate Limit</span>
+                        <b data-slot="value">30% Used</b>
+                        <button data-slot="action" class="listboxAction">
                             Upgrade to Max
                         </button>
-                    </slot>
-                    <slot template="templates/listbox-row.html">
-                        <span slot="label">Billed to</span>
-                        <b slot="value">VISA-0094</b>
-                        <button slot="action" class="listboxAction">
+                    </fg-include>
+                    <fg-include data-template="templates/listbox-row.html">
+                        <span data-slot="label">Billed to</span>
+                        <b data-slot="value">VISA-0094</b>
+                        <button data-slot="action" class="listboxAction">
                             Edit Billing Info
                         </button>
-                    </slot>
-                </slot>
-            </settingsView>
-        </mainView>
+                    </fg-include>
+                </fg-include>
+            </fg-settingsview>
+        </fg-include>
     </body>
 </html>

@@ -6,6 +6,7 @@
     <title>ForgeGUI</title>
     <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
     <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="old-chat.css" />
     <script src="site.js" defer></script>
     <meta name="theme-color" content="#0D0D0D" />
     <meta name="description" content="ForgeGUI - Create anything with AI" />
@@ -18,19 +19,19 @@
     <style></style>
   </head>
   <body class="chat">
-    <slot template="templates/app-shell.html">
-      <mainView class="currentConvo" slot="content">
+    <fg-include data-template="templates/app-shell.html">
+      <fg-mainview class="currentConvo" data-slot="content">
         <header>
           <img src="icons/message.svg" />
           <span>Chat</span>
         </header>
-        <mainViewTop>
-          <chatContainer>
-            <top>
+        <fg-mainviewtop>
+          <fg-chatcontainer>
+            <fg-top>
               <img src="icons/assets.svg" />
               <span>Asset Grid</span>
-            </top>
-            <bottom class="assetGrid">
+            </fg-top>
+            <fg-bottom class="assetGrid">
               <img src="generic.png" />
               <img src="generic.png" />
               <img src="generic.png" />
@@ -53,33 +54,33 @@
               <img src="generic.png" />
               <img src="generic.png" />
               <img src="generic.png" />
-            </bottom>
-          </chatContainer>
-          <chatContainer class="convo">
-            <top>
+            </fg-bottom>
+          </fg-chatcontainer>
+          <fg-chatcontainer class="convo">
+            <fg-top>
               <img src="icons/message.svg" />
               <span>Conversation</span>
-            </top>
-            <bottom class="convo">
-              <message class="you"> my message </message>
-              <message
-                ><msgTop><img src="icons/ai.svg" /><span>Yunes</span></msgTop>
+            </fg-top>
+            <fg-bottom class="convo">
+              <fg-message class="you"> my message </fg-message>
+              <fg-message
+                ><fg-msgtop><img src="icons/ai.svg" /><span>Yunes</span></fg-msgtop>
                 clanker message
-              </message>
-              <message class="you"> my message </message>
-              <message
-                ><msgTop><img src="icons/ai.svg" /><span>Yunes</span></msgTop>
+              </fg-message>
+              <fg-message class="you"> my message </fg-message>
+              <fg-message
+                ><fg-msgtop><img src="icons/ai.svg" /><span>Yunes</span></fg-msgtop>
                 clanker message <br /><img src="icons/3dots.svg" />
                 <div id="slot" class="genbox" data-genbox></div
-              ></message>
-            </bottom>
-          </chatContainer>
-        </mainViewTop>
-        <bottom>
-          <slot template="templates/chatbox.html"></slot>
-        </bottom>
-      </mainView>
-    </slot>
+              ></fg-message>
+            </fg-bottom>
+          </fg-chatcontainer>
+        </fg-mainviewtop>
+        <fg-bottom>
+          <fg-include data-template="templates/chatbox.html"></fg-include>
+        </fg-bottom>
+      </fg-mainview>
+    </fg-include>
   </body>
   <script src="genbox.js"></script>
   <script>

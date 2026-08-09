@@ -6,7 +6,7 @@
         <title>ForgeGUI</title>
         <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
         <link rel="stylesheet" href="base.css" />
-        <link rel="stylesheet" href="plans.css" />
+        <link rel="stylesheet" href="onboarding.css" />
         <script src="site.js" defer></script>
         <meta name="theme-color" content="#0D0D0D" />
         <meta name="description" content="ForgeGUI - Create anything with AI" />
@@ -22,21 +22,21 @@
     </head>
 
     <body class="onboarding">
-        <topBar>
+        <fg-topbar>
             <img src="footerLogo.svg" />
             <a href="home.html" class="skipOnboardingButton"
                 >Skip On-Boarding</a
             >
             <div style="flex: 1"></div>
             <img src="generic.png" style="height: 42px" />
-        </topBar>
-        <mainView class="onboarding carousel">
-            <carouselPage id="page1">
-                <onboardingHeader>
+        </fg-topbar>
+        <fg-mainview class="onboarding carousel">
+            <fg-carouselpage id="page1">
+                <fg-onboardingheader>
                     <h1>Howdy! Where did you come from?</h1>
                     <span>Select between one of the options below.</span>
-                </onboardingHeader>
-                <onboardingOptionsGrid>
+                </fg-onboardingheader>
+                <fg-onboardingoptionsgrid>
                     <button
                         class="onboardingButton"
                         onclick="
@@ -87,14 +87,14 @@
                         <img src="icons/3dots.svg" />
                         Friend/Other
                     </button>
-                </onboardingOptionsGrid>
-            </carouselPage>
-            <carouselPage id="page2">
-                <onboardingHeader>
+                </fg-onboardingoptionsgrid>
+            </fg-carouselpage>
+            <fg-carouselpage id="page2">
+                <fg-onboardingheader>
                     <h1>What platform will you use ForgeGUI for?</h1>
                     <span>Select between one of the options below.</span>
-                </onboardingHeader>
-                <onboardingOptionsGrid>
+                </fg-onboardingheader>
+                <fg-onboardingoptionsgrid>
                     <button
                         class="onboardingButton"
                         onclick="
@@ -125,14 +125,14 @@
                         <img src="icons/unity.svg" />
                         Unity
                     </button>
-                </onboardingOptionsGrid>
-            </carouselPage>
-            <carouselPage id="page3">
-                <onboardingHeader>
+                </fg-onboardingoptionsgrid>
+            </fg-carouselpage>
+            <fg-carouselpage id="page3">
+                <fg-onboardingheader>
                     <h1>What's your role?</h1>
                     <span>Select between one of the options below.</span>
-                </onboardingHeader>
-                <onboardingOptionsGrid>
+                </fg-onboardingheader>
+                <fg-onboardingoptionsgrid>
                     <button
                         class="onboardingButton"
                         onclick="
@@ -163,15 +163,15 @@
                         <img src="icons/x.svg" />
                         I'm not a dev
                     </button>
-                </onboardingOptionsGrid>
-            </carouselPage>
-            <carouselPage id="page4">
-                <onboardingHeader>
+                </fg-onboardingoptionsgrid>
+            </fg-carouselpage>
+            <fg-carouselpage id="page4">
+                <fg-onboardingheader>
                     <h1>Let's get you connected!</h1>
                     <span>Before you can continue, follow <strong>3</strong> accounts.</span>
-                </onboardingHeader>
-                <followList>
-                    <followItem>
+                </fg-onboardingheader>
+                <fg-followlist>
+                    <fg-followitem>
                         <div class="followAvatar">
                             <img src="generic.png" />
                         </div>
@@ -180,8 +180,8 @@
                             <span>@username</span>
                         </div>
                         <button class="followBtn" onclick="toggleFollow(this)">Not Followed</button>
-                    </followItem>
-                    <followItem>
+                    </fg-followitem>
+                    <fg-followitem>
                         <div class="followAvatar">
                             <img src="generic.png" />
                         </div>
@@ -190,8 +190,8 @@
                             <span>@username</span>
                         </div>
                         <button class="followBtn" onclick="toggleFollow(this)">Not Followed</button>
-                    </followItem>
-                    <followItem>
+                    </fg-followitem>
+                    <fg-followitem>
                         <div class="followAvatar">
                             <img src="generic.png" />
                         </div>
@@ -200,21 +200,21 @@
                             <span>@username</span>
                         </div>
                         <button class="followBtn" onclick="toggleFollow(this)">Not Followed</button>
-                    </followItem>
+                    </fg-followitem>
 
-                </followList>
-                <button class="postButton" onclick="followAll()">
+                </fg-followlist>
+                <button type="button" class="postButton" onclick="followAll()">
                     <img src="icons/People.svg">
                     <span>
                         Follow All 3
                     </span>
                 </button>
-            </carouselPage>
-            <carouselPage id="page5">
-                <onboardingHeader>
+            </fg-carouselpage>
+            <fg-carouselpage id="page5">
+                <fg-onboardingheader>
                     <h1>Let's create your first game!</h1>
                     <span>First, give us a name for your project.</span>
-                </onboardingHeader>
+                </fg-onboardingheader>
                 <form>
                     <div class="onboardingInput">
                         <input type="text" placeholder="Name" maxlength="50" />
@@ -238,13 +238,13 @@
                         <span>Create Project</span><img src="icons/add.svg" />
                     </button>
                 </form>
-            </carouselPage>
-            <carouselPage id="page6">
-                <onboardingHeader>
+            </fg-carouselpage>
+            <fg-carouselpage id="page6">
+                <fg-onboardingheader>
                     <h1>Select a prompt to start generating.</h1>
                     <span>Generate the first asset for your game.</span>
-                </onboardingHeader>
-                <stockPrompts>
+                </fg-onboardingheader>
+                <fg-stockprompts>
                     <button class="suggestionButton">
                         <img src="icons/ai.svg" onclick="carousel.next()" />
                         Generate an AK47 3D model
@@ -257,9 +257,9 @@
                         <img src="icons/ai.svg" onclick="carousel.next()" />
                         Generate a gun shot sound effect
                     </button>
-                </stockPrompts>
+                </fg-stockprompts>
                 <hr class="onboardingHR" />
-                <ownPrompt>
+                <fg-ownprompt>
                     <span>Or type your own prompt...</span>
                     <div class="promptInput">
                         <input type="text" placeholder="Enter Text" />
@@ -282,15 +282,16 @@
                             </svg>
                         </button>
                     </div>
-                </ownPrompt>
-            </carouselPage>
-            <carouselPage id="page7">
-                    <onboardingHeader>
+                </fg-ownprompt>
+            </fg-carouselpage>
+            <fg-carouselpage id="page7">
+                <div class="offerView">
+                    <fg-onboardingheader>
                         <h1>You're in luck!</h1>
                         <span
                             >You've earned a 55% discount on the Pro tier!</span
                         >
-                    </onboardingHeader>
+                    </fg-onboardingheader>
                     <div class="promoCodeBanner">
                         <div class="promoCodeTop">
                             Promo Code: <span>Code Name</span>
@@ -307,18 +308,18 @@
                             </div>
                         </div>
                     </div>
-                    <planCard class="plan-card plan-card--pro plan-card--offer">
-                        <slot template="templates/plan-card.html">
-                            <span slot="title">Pro</span>
-                            <span slot="badge">55% OFF</span>
-                            <span slot="price">$14.99</span>
-                            <span slot="original-price">$59.99</span>
-                            <span slot="button">Claim Discount!</span>
-                            <div slot="price-benefits">
+                    <fg-plancard class="plan-card plan-card--pro plan-card--offer">
+                        <fg-include data-template="templates/plan-card.html">
+                            <span data-slot="title">Pro</span>
+                            <span data-slot="badge">55% OFF</span>
+                            <span data-slot="price">$14.99</span>
+                            <span data-slot="original-price">$59.99</span>
+                            <span data-slot="button">Claim Discount!</span>
+                            <div data-slot="price-benefits">
                                 <p><em>TRULY UNLIMITED GENERATIONS.</em></p>
                                 <p>Subject to abuse protections.</p>
                             </div>
-                            <ul slot="ai-features">
+                            <ul data-slot="ai-features">
                                 <li>Access to Google Nano Banana</li>
                                 <li>Access to Meshy</li>
                                 <li>Fable 5</li>
@@ -326,15 +327,15 @@
                                 <li>Access to GPT Image V2</li>
                                 <li>10s of more models.</li>
                             </ul>
-                            <ul slot="included-features">
+                            <ul data-slot="included-features">
                                 <li>Pro AI models for any task.</li>
                                 <li>Custom Pro Role</li>
                                 <li>Faster Generations</li>
                                 <li>Skip the Waitlist</li>
                                 <li>Everything in the Starter Tier</li>
                             </ul>
-                        </slot>
-                    </planCard>
+                        </fg-include>
+                    </fg-plancard>
                     <button
                         type="button"
                         class="skipOfferBtn"
@@ -349,13 +350,13 @@
                     </button>
                 </div>
                 <div class="freePlanView">
-                    <onboardingHeader>
+                    <fg-onboardingheader>
                         <h1>You're using the free plan.</h1>
                         <span
                             >You have unlimited free daily generations, subject
                             to daily rate limits.</span
                         >
-                    </onboardingHeader>
+                    </fg-onboardingheader>
                     <div class="freePlanActions">
                         <a href="home.html" type="button" class="understoodBtn">
                             Understood
@@ -365,9 +366,9 @@
                         </a>
                     </div>
                 </div>
-            </carouselPage>
-            <carouselSteps></carouselSteps>
-        </mainView>
+            </fg-carouselpage>
+            <fg-carouselsteps></fg-carouselsteps>
+        </fg-mainview>
         <script>
             document.querySelectorAll(".onboardingButton").forEach((btn) => {
                 btn.addEventListener("mousemove", (e) => {
@@ -395,11 +396,14 @@
             }
 
             function followAll() {
-                document.getElementById("page4").querySelectorAll(".followBtn").forEach((btn) => {
+                var followButtons = document
+                    .getElementById("page4")
+                    .querySelectorAll(".followBtn");
+                followButtons.forEach((btn) => {
                     btn.classList.add("is-followed");
                     btn.textContent = "Following";
                 });
-                carousel.next();
+                window.carousel.next();
             }
         </script>
     </body>

@@ -12,45 +12,8 @@
         <link rel="stylesheet" href="index.css" />
         <script src="site.js" defer></script>
     </head>
-    <body>
-        <header class="site-header">
-            <a class="brand" href="#top" aria-label="ForgeGUI home">
-                <img src="footerLogo.svg" alt="ForgeGUI" />
-            </a>
-
-            <nav class="main-nav" aria-label="Primary navigation">
-                <a href="#models"
-                    >AI Tools <img src="landing-assets/chevron-down.svg" alt=""
-                /></a>
-                <a href="#catalog"
-                    >Plans <img src="landing-assets/chevron-down.svg" alt=""
-                /></a>
-                <a href="#community"
-                    >Community
-                    <img src="landing-assets/chevron-down.svg" alt=""
-                /></a>
-                <a href="#faq"
-                    >Support <img src="landing-assets/chevron-down.svg" alt=""
-                /></a>
-                <a href="#community"
-                    >Company <img src="landing-assets/chevron-down.svg" alt=""
-                /></a>
-            </nav>
-
-            <div class="auth-actions">
-                <button type="button" data-open-login>Sign In</button>
-                <a href="onboarding.html">Sign Up</a>
-            </div>
-
-            <button
-                class="menu-button"
-                type="button"
-                aria-label="Toggle navigation"
-                aria-expanded="false"
-            >
-                <span></span><span></span><span></span>
-            </button>
-        </header>
+    <body class="landing-page">
+        <fg-include data-template="templates/public-header.html"></fg-include>
 
         <main id="top">
             <section class="hero" aria-labelledby="hero-title">
@@ -167,12 +130,12 @@
                         <span></span>
                     </div>
                     <section
-                        class="feature feature-models is-active"
+                        class="feature feature-models"
                         data-feature-step="0"
                         aria-labelledby="models-title"
                     >
                         <h2 id="models-title">
-                            <span class="feature-copy-line is-visible"
+                            <span class="feature-copy-line"
                                 >All of the <strong>top AI models</strong>, in
                                 one place.</span
                             >
@@ -736,7 +699,7 @@
                     <a href="#community">Company</a>
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms of Service</a>
-                    <a href="#">Blog</a>
+                    <a href="blog.html">Blog</a>
                 </nav>
 
                 <div class="landing-footer-meta">
@@ -1007,9 +970,9 @@
         </div>
 
         <script>
-            const menuButton = document.querySelector(".menu-button");
-            const nav = document.querySelector(".main-nav");
             const loginModal = document.querySelector("[data-login-modal]");
+            const heroVideo = document.querySelector(".hero-scene");
+            let heroVideoVisible = true;
             const loginTriggers = Array.from(
                 document.querySelectorAll("[data-open-login]"),
             );
@@ -1044,11 +1007,15 @@
                 showLoginStep("options");
                 loginModal.hidden = false;
                 document.body.classList.add("modal-open");
+                if (heroVideo) heroVideo.pause();
             }
 
             function closeLogin() {
                 loginModal.hidden = true;
                 document.body.classList.remove("modal-open");
+                if (heroVideo && heroVideoVisible) {
+                    heroVideo.play().catch(function () {});
+                }
                 if (loginReturnFocus) loginReturnFocus.focus();
             }
 
@@ -1076,11 +1043,6 @@
             });
             document.addEventListener("keydown", function (event) {
                 if (event.key === "Escape" && !loginModal.hidden) closeLogin();
-            });
-
-            menuButton.addEventListener("click", function () {
-                const open = nav.classList.toggle("is-open");
-                menuButton.setAttribute("aria-expanded", String(open));
             });
 
             document
@@ -1177,6 +1139,19 @@
                 document.querySelectorAll(".generated-snakes linearGradient"),
             );
             const snakeCanvas = document.querySelector(".generated-snakes");
+            const reducedMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)",
+            ).matches;
+            let storyFrame = 0;
+            let storyVisible = true;
+            let storyInView = false;
+            let lastStoryUpdate = 0;
+            let storyMetrics;
+
+            snakePaths.forEach(function (path) {
+                path.setAttribute("pathLength", "1");
+                path.style.strokeDasharray = "1";
+            });
             function smoothStep(value) {
                 return value * value * (3 - 2 * value);
             }
@@ -1311,25 +1286,55 @@
                             target.y,
                     );
 
-                    const length = path.getTotalLength();
                     const pathProgress = Math.max(
                         0,
                         Math.min(1, revealProgress * 1.25 - index * 0.1),
                     );
-                    path.style.strokeDasharray = String(length);
-                    path.style.strokeDashoffset = String(
-                        length * (1 - pathProgress),
-                    );
+                    path.style.strokeDashoffset = String(1 - pathProgress);
                 });
             }
 
+            function measureStory() {
+                const viewportHeight = window.innerHeight;
+                storyMetrics = {
+                    copyRailTop: sharedCounter.parentElement.offsetTop,
+                    heroHeight: Math.max(hero.offsetHeight, 1),
+                    lineHeights: featureCopyLines.map(function (line) {
+                        return line.scrollHeight;
+                    }),
+                    railTravel: Math.max(
+                        sharedRail.clientHeight -
+                            sharedThumb.offsetHeight -
+                            12,
+                        0,
+                    ),
+                    storyRange: Math.max(
+                        story.offsetHeight - viewportHeight,
+                        1,
+                    ),
+                    storyTop: story.offsetTop,
+                };
+            }
+
             function updateStory(frameTime) {
+                storyFrame = 0;
+                if (!storyVisible || document.hidden) return;
+                if (
+                    storyInView &&
+                    !reducedMotion &&
+                    frameTime - lastStoryUpdate < 1000 / 30
+                ) {
+                    storyFrame = requestAnimationFrame(updateStory);
+                    return;
+                }
+                lastStoryUpdate = frameTime;
+                if (!storyMetrics) measureStory();
                 const viewportHeight = window.innerHeight;
                 const heroProgress = Math.min(
                     1,
                     Math.max(
                         0,
-                        window.scrollY / Math.max(hero.offsetHeight, 1),
+                        window.scrollY / storyMetrics.heroHeight,
                     ),
                 );
                 hero.style.setProperty(
@@ -1337,17 +1342,26 @@
                     heroProgress.toFixed(3),
                 );
 
-                const storyTop = story.offsetTop;
-                const storyRange = Math.max(
-                    story.offsetHeight - viewportHeight,
-                    1,
-                );
                 const progress = Math.min(
                     1,
-                    Math.max(0, (window.scrollY - storyTop) / storyRange),
+                    Math.max(
+                        0,
+                        (window.scrollY - storyMetrics.storyTop) /
+                            storyMetrics.storyRange,
+                    ),
+                );
+                const introProgress = smoothStep(
+                    Math.min(
+                        1,
+                        Math.max(
+                            0,
+                            (window.scrollY - storyMetrics.storyTop) /
+                                Math.max(viewportHeight * 0.5, 1),
+                        ),
+                    ),
                 );
                 const scenePosition = bufferedScenePosition(progress);
-                const ambientOrbit = frameTime * 0.0002;
+                const ambientOrbit = reducedMotion ? 0 : frameTime * 0.0002;
                 const viewportFit = Math.min(
                     1,
                     Math.max(0.58, (viewportHeight - 220) / 1010),
@@ -1362,6 +1376,10 @@
                     viewportFit.toFixed(3),
                 );
                 featureStack.style.setProperty(
+                    "--story-intro",
+                    introProgress.toFixed(3),
+                );
+                featureStack.style.setProperty(
                     "--shared-world-scale",
                     sharedWorldScale.toFixed(3),
                 );
@@ -1369,12 +1387,10 @@
                     Math.round(scenePosition) + 1,
                 ).padStart(2, "0");
 
-                const railTravel = Math.max(
-                    sharedRail.clientHeight - sharedThumb.offsetHeight - 12,
-                    0,
-                );
                 sharedThumb.style.transform =
-                    "translateY(" + Math.round(railTravel * progress) + "px)";
+                    "translateY(" +
+                    Math.round(storyMetrics.railTravel * progress) +
+                    "px)";
 
                 const baseScene = Math.floor(scenePosition);
                 const incomingCopyIndex =
@@ -1384,7 +1400,8 @@
                     const isIncoming = index === incomingCopyIndex;
 
                     if (isSettled || isIncoming) {
-                        line.style.maxHeight = line.scrollHeight + "px";
+                        line.style.maxHeight =
+                            storyMetrics.lineHeights[index] + "px";
                     } else {
                         line.style.maxHeight = "0px";
                     }
@@ -1399,19 +1416,21 @@
                             (1 - approachProgress) * (viewportHeight / 2) +
                             "px";
                     } else {
-                        line.style.opacity = isSettled ? "1" : "0";
+                        line.style.opacity = isSettled
+                            ? String(introProgress)
+                            : "0";
                         line.style.translate = "0 0";
                     }
                 });
                 const pushProgress = smoothStep(
                     Math.min(1, Math.max(0, (switchPosition - 0.5) * 2)),
                 );
-                const copyRailTop = sharedCounter.parentElement.offsetTop;
                 const initialCopyOffset =
-                    copyRailTop +
+                    storyMetrics.copyRailTop +
                     Math.min(70, viewportHeight * 0.08) -
                     viewportHeight / 2;
-                const topCopyOffset = copyRailTop - viewportHeight / 2;
+                const topCopyOffset =
+                    storyMetrics.copyRailTop - viewportHeight / 2;
                 const copyOffset =
                     baseScene > 0
                         ? topCopyOffset
@@ -1431,28 +1450,93 @@
                     ) {
                         visibility = (switchPosition - 0.5) * 2;
                     }
+                    if (index === 0) visibility *= introProgress;
                     step.style.setProperty(
                         "--stage-scale",
                         viewportFit.toFixed(3),
                     );
                     step.classList.toggle("is-active", visibility > 0.5);
-                    const layout = orbitFeatureAssets(
-                        step,
-                        featureAssets[index],
-                        visibility,
-                        ambientOrbit,
-                    );
+                    const wasVisible = step.dataset.orbitVisible === "true";
+                    let layout;
+                    if (visibility > 0 || wasVisible) {
+                        layout = orbitFeatureAssets(
+                            step,
+                            featureAssets[index],
+                            visibility,
+                            ambientOrbit,
+                        );
+                    }
+                    step.dataset.orbitVisible = String(visibility > 0);
                     if (index === 2) {
                         platformLayout = layout;
                         platformReveal = visibility;
                     }
                 });
 
+                snakeCanvas.style.opacity = String(platformReveal);
                 updateSnakePaths(platformLayout, platformReveal, ambientOrbit);
-                requestAnimationFrame(updateStory);
+                if (storyInView && !reducedMotion && !document.hidden) {
+                    storyFrame = requestAnimationFrame(updateStory);
+                }
             }
 
-            requestAnimationFrame(updateStory);
+            function scheduleStory() {
+                if (!storyFrame && storyVisible && !document.hidden) {
+                    storyFrame = requestAnimationFrame(updateStory);
+                }
+            }
+
+            const visibleStorySections = new Set();
+            const storyObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.target === story) {
+                        storyInView = entry.isIntersecting;
+                    }
+                    if (entry.isIntersecting) {
+                        visibleStorySections.add(entry.target);
+                    } else {
+                        visibleStorySections.delete(entry.target);
+                    }
+                });
+                storyVisible = visibleStorySections.size > 0;
+                scheduleStory();
+            });
+            storyObserver.observe(hero);
+            storyObserver.observe(story);
+
+            if (heroVideo) {
+                const videoObserver = new IntersectionObserver(
+                    function (entries) {
+                        heroVideoVisible = entries[0].isIntersecting;
+                        if (
+                            heroVideoVisible &&
+                            !document.body.classList.contains("modal-open")
+                        ) {
+                            heroVideo.play().catch(function () {});
+                        } else {
+                            heroVideo.pause();
+                        }
+                    },
+                    { threshold: 0.05 },
+                );
+                videoObserver.observe(hero);
+            }
+
+            window.addEventListener("scroll", scheduleStory, { passive: true });
+            window.addEventListener("resize", function () {
+                storyMetrics = null;
+                layoutGenerationCarousel();
+                scheduleStory();
+            });
+            document.addEventListener("visibilitychange", scheduleStory);
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(function () {
+                    storyMetrics = null;
+                    scheduleStory();
+                });
+            }
+            measureStory();
+            scheduleStory();
         </script>
     </body>
 </html>

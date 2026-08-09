@@ -6,6 +6,7 @@
         <title>ForgeGUI</title>
         <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
         <link rel="stylesheet" href="base.css" />
+        <link rel="stylesheet" href="community.css" />
         <script src="site.js" defer></script>
         <meta name="theme-color" content="#0D0D0D" />
         <meta name="description" content="ForgeGUI - Create anything with AI" />
@@ -21,50 +22,50 @@
     </head>
 
     <body class="chat">
-        <slot template="templates/app-shell.html">
-            <mainView id="community" slot="content">
-                <sticky>
-                    <top>
+        <fg-include data-template="templates/app-shell.html">
+            <fg-mainview id="community" data-slot="content">
+                <fg-sticky>
+                    <fg-top>
                         <img src="icons/people.svg" />
                         <span>Community</span>
-                    </top>
-                    <communityTags>
-                        <communityTag class="active">
+                    </fg-top>
+                    <fg-communitytags>
+                        <fg-communitytag class="active">
                             🔥 Trending
-                        </communityTag>
-                        <communityTag> 🎸 Music </communityTag>
-                        <communityTag> 📣 Announcements </communityTag>
-                        <communityTag> 👾 Development </communityTag>
-                        <communityTag> 🕹️ Gaming </communityTag>
-                        <communityTag> ✏️ Drawing </communityTag>
-                        <communityTag> 📝 Writing </communityTag>
-                        <searchWrapper>
+                        </fg-communitytag>
+                        <fg-communitytag> 🎸 Music </fg-communitytag>
+                        <fg-communitytag> 📣 Announcements </fg-communitytag>
+                        <fg-communitytag> 👾 Development </fg-communitytag>
+                        <fg-communitytag> 🕹️ Gaming </fg-communitytag>
+                        <fg-communitytag> ✏️ Drawing </fg-communitytag>
+                        <fg-communitytag> 📝 Writing </fg-communitytag>
+                        <fg-searchwrapper>
                             <img src="icons/search.svg" />
                             <input type="text" placeholder="Search" />
-                        </searchWrapper>
-                    </communityTags>
-                    <button class="postButton">
+                        </fg-searchwrapper>
+                    </fg-communitytags>
+                    <button class="postButton" data-popup-open="new-post">
                         <img src="icons/s-add.svg" /><span>Post</span>
                     </button>
-                </sticky>
-                <timeline>
-                    <slot template="templates/post.html">
-                        <img slot="avatar" src="generic.png" />
-                        <username slot="username">generic</username>
-                        <timestamp slot="timestamp">1h ago</timestamp>
-                        <postTag slot="tag" class="ai">AI Generated</postTag>
-                        <content slot="content" class="img">
+                </fg-sticky>
+                <fg-timeline>
+                    <fg-include data-template="templates/post.html">
+                        <img data-slot="avatar" src="generic.png" />
+                        <fg-username data-slot="username">generic</fg-username>
+                        <fg-timestamp data-slot="timestamp">1h ago</fg-timestamp>
+                        <fg-posttag data-slot="tag" class="ai">AI Generated</fg-posttag>
+                        <fg-content data-slot="content" class="img">
                             <img src="generic.png" />
-                        </content>
-                        <span slot="likes">2137</span>
-                        <span slot="comments">2137</span>
-                    </slot>
-                    <slot template="templates/post.html">
-                        <img slot="avatar" src="generic.png" />
-                        <username slot="username">generic</username>
-                        <timestamp slot="timestamp">1h ago</timestamp>
-                        <postTag slot="tag" class="ai">AI Generated</postTag>
-                        <content slot="content" class="text">
+                        </fg-content>
+                        <span data-slot="likes">2137</span>
+                        <span data-slot="comments">2137</span>
+                    </fg-include>
+                    <fg-include data-template="templates/post.html">
+                        <img data-slot="avatar" src="generic.png" />
+                        <fg-username data-slot="username">generic</fg-username>
+                        <fg-timestamp data-slot="timestamp">1h ago</fg-timestamp>
+                        <fg-posttag data-slot="tag" class="ai">AI Generated</fg-posttag>
+                        <fg-content data-slot="content" class="text">
                             <h1>Post with text</h1>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur
@@ -78,16 +79,16 @@
                                 occaecat cupidatat non proident, sunt in culpa
                                 qui officia deserunt mollit anim id est laborum.
                             </p>
-                        </content>
-                        <span slot="likes">2137</span>
-                        <span slot="comments">2137</span>
-                    </slot>
-                    <slot template="templates/post.html">
-                        <img slot="avatar" src="generic.png" />
-                        <username slot="username">generic</username>
-                        <timestamp slot="timestamp">1h ago</timestamp>
-                        <postTag slot="tag" class="ai">AI Generated</postTag>
-                        <content slot="content" class="text">
+                        </fg-content>
+                        <span data-slot="likes">2137</span>
+                        <span data-slot="comments">2137</span>
+                    </fg-include>
+                    <fg-include data-template="templates/post.html">
+                        <img data-slot="avatar" src="generic.png" />
+                        <fg-username data-slot="username">generic</fg-username>
+                        <fg-timestamp data-slot="timestamp">1h ago</fg-timestamp>
+                        <fg-posttag data-slot="tag" class="ai">AI Generated</fg-posttag>
+                        <fg-content data-slot="content" class="text">
                             <h1>Post with text</h1>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur
@@ -101,126 +102,99 @@
                                 occaecat cupidatat non proident, sunt in culpa
                                 qui officia deserunt mollit anim id est laborum.
                             </p>
-                        </content>
-                        <span slot="likes">2137</span>
-                        <span slot="comments">2137</span>
-                    </slot>
-                </timeline>
-                <userCtx>
-                    <banner>
+                        </fg-content>
+                        <span data-slot="likes">2137</span>
+                        <span data-slot="comments">2137</span>
+                    </fg-include>
+                </fg-timeline>
+                <fg-userctx>
+                    <fg-banner>
                         <img src="generic.png" />
-                    </banner>
-                    <doxx>
+                    </fg-banner>
+                    <fg-doxx>
                         <b>generic</b>
                         <span>@generic</span>
-                    </doxx>
-                    <buttons>
+                    </fg-doxx>
+                    <fg-buttons>
                         <button class="profileButton active">
                             <b>Follow</b><span>2K</span>
                         </button>
-                        <button class="profileButton" onclick="openUserPopup()">
+                        <button class="profileButton" data-popup-open="user-profile">
                             <b>View Profile</b>
                         </button>
-                    </buttons>
-                </userCtx>
+                    </fg-buttons>
+                </fg-userctx>
 
-                <popupContainer class="hidden">
-                    <userPopup class="hidden">
-                        <leftSide>
-                            <banner>
+                <fg-popupcontainer class="hidden">
+                    <fg-popup id="user-profile" class="hidden" aria-label="User profile">
+                        <fg-leftside>
+                            <fg-banner>
                                 <button
                                     class="closeButton"
-                                    onclick="closeUserPopup()"
+                                    data-popup-close
                                 >
                                     <img src="icons/x.svg" />
                                 </button>
                                 <img src="generic.png" />
-                            </banner>
+                            </fg-banner>
                             <header>
-                                <doxx>
+                                <fg-doxx>
                                     <b>generic</b>
                                     <span>generic@gmail.com</span>
-                                </doxx>
-                                <bigNumber>
+                                </fg-doxx>
+                                <fg-bignumber>
                                     <b>140K</b>
                                     <span>Followers</span>
-                                </bigNumber>
-                                <bigNumber>
+                                </fg-bignumber>
+                                <fg-bignumber>
                                     <b>3K</b>
                                     <span>Likes</span>
-                                </bigNumber>
+                                </fg-bignumber>
                                 <button class="postButton follow">
                                     <b>Follow</b>
                                 </button>
                             </header>
-                            <bio>
+                            <fg-bio>
                                 <header>About Me</header>
-                                <content> here's some bio or whatever </content>
-                            </bio>
-                            <games>
+                                <fg-content> here's some bio or whatever </fg-content>
+                            </fg-bio>
+                            <fg-games>
                                 <header>Games</header>
-                                <gamesGrid>
-                                    <game>
-                                        <b>Game Title</b>
-                                        <span>By ForgeGUI</span>
-                                    </game>
-                                    <game>
-                                        <b>Game Title</b>
-                                        <span>By ForgeGUI</span>
-                                    </game>
-                                    <game>
-                                        <b>Game Title</b>
-                                        <span>By ForgeGUI</span>
-                                    </game>
-                                    <game>
-                                        <b>Game Title</b>
-                                        <span>By ForgeGUI</span>
-                                    </game>
-                                    <game>
-                                        <b>Game Title</b>
-                                        <span>By ForgeGUI</span>
-                                    </game>
-                                    <game>
-                                        <b>Game Title</b>
-                                        <span>By ForgeGUI</span>
-                                    </game>
-                                    <game>
-                                        <b>Game Title</b>
-                                        <span>By ForgeGUI</span>
-                                    </game>
-                                    <game>
-                                        <b>Game Title</b>
-                                        <span>By ForgeGUI</span>
-                                    </game>
-                                    <game>
-                                        <b>Game Title</b>
-                                        <span>By ForgeGUI</span>
-                                    </game>
-                                </gamesGrid>
-                            </games>
-                        </leftSide>
-                        <rightSide>
-                            <slot template="templates/post.html">
-                                <img slot="avatar" src="generic.png" />
-                                <username slot="username">generic</username>
-                                <timestamp slot="timestamp">1h ago</timestamp>
-                                <postTag slot="tag" class="ai"
-                                    >AI Generated</postTag
+                                <fg-gamesgrid>
+                                    <fg-include data-template="templates/community-game.html"></fg-include>
+                                    <fg-include data-template="templates/community-game.html"></fg-include>
+                                    <fg-include data-template="templates/community-game.html"></fg-include>
+                                    <fg-include data-template="templates/community-game.html"></fg-include>
+                                    <fg-include data-template="templates/community-game.html"></fg-include>
+                                    <fg-include data-template="templates/community-game.html"></fg-include>
+                                    <fg-include data-template="templates/community-game.html"></fg-include>
+                                    <fg-include data-template="templates/community-game.html"></fg-include>
+                                    <fg-include data-template="templates/community-game.html"></fg-include>
+                                </fg-gamesgrid>
+                            </fg-games>
+                        </fg-leftside>
+                        <fg-rightside>
+                            <fg-include data-template="templates/post.html">
+                                <img data-slot="avatar" src="generic.png" />
+                                <fg-username data-slot="username">generic</fg-username>
+                                <fg-timestamp data-slot="timestamp">1h ago</fg-timestamp>
+                                <fg-posttag data-slot="tag" class="ai"
+                                    >AI Generated</fg-posttag
                                 >
-                                <content slot="content" class="img">
+                                <fg-content data-slot="content" class="img">
                                     <img src="generic.png" />
-                                </content>
-                                <span slot="likes">2137</span>
-                                <span slot="comments">2137</span>
-                            </slot>
-                            <slot template="templates/post.html">
-                                <img slot="avatar" src="generic.png" />
-                                <username slot="username">generic</username>
-                                <timestamp slot="timestamp">1h ago</timestamp>
-                                <postTag slot="tag" class="ai"
-                                    >AI Generated</postTag
+                                </fg-content>
+                                <span data-slot="likes">2137</span>
+                                <span data-slot="comments">2137</span>
+                            </fg-include>
+                            <fg-include data-template="templates/post.html">
+                                <img data-slot="avatar" src="generic.png" />
+                                <fg-username data-slot="username">generic</fg-username>
+                                <fg-timestamp data-slot="timestamp">1h ago</fg-timestamp>
+                                <fg-posttag data-slot="tag" class="ai"
+                                    >AI Generated</fg-posttag
                                 >
-                                <content slot="content" class="text">
+                                <fg-content data-slot="content" class="text">
                                     <h1>Post with text</h1>
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur
@@ -236,18 +210,18 @@
                                         culpa qui officia deserunt mollit anim
                                         id est laborum.
                                     </p>
-                                </content>
-                                <span slot="likes">2137</span>
-                                <span slot="comments">2137</span>
-                            </slot>
-                            <slot template="templates/post.html">
-                                <img slot="avatar" src="generic.png" />
-                                <username slot="username">generic</username>
-                                <timestamp slot="timestamp">1h ago</timestamp>
-                                <postTag slot="tag" class="ai"
-                                    >AI Generated</postTag
+                                </fg-content>
+                                <span data-slot="likes">2137</span>
+                                <span data-slot="comments">2137</span>
+                            </fg-include>
+                            <fg-include data-template="templates/post.html">
+                                <img data-slot="avatar" src="generic.png" />
+                                <fg-username data-slot="username">generic</fg-username>
+                                <fg-timestamp data-slot="timestamp">1h ago</fg-timestamp>
+                                <fg-posttag data-slot="tag" class="ai"
+                                    >AI Generated</fg-posttag
                                 >
-                                <content slot="content" class="text">
+                                <fg-content data-slot="content" class="text">
                                     <h1>Post with text</h1>
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur
@@ -263,26 +237,26 @@
                                         culpa qui officia deserunt mollit anim
                                         id est laborum.
                                     </p>
-                                </content>
-                                <span slot="likes">2137</span>
-                                <span slot="comments">2137</span>
-                            </slot>
-                        </rightSide>
-                    </userPopup>
-                    <newPostPopup class="hidden">
-                        <top>
+                                </fg-content>
+                                <span data-slot="likes">2137</span>
+                                <span data-slot="comments">2137</span>
+                            </fg-include>
+                        </fg-rightside>
+                    </fg-popup>
+                    <fg-popup id="new-post" class="hidden" aria-label="Create post">
+                        <fg-top>
                             <img src="generic.png" />
-                            <vertical>
+                            <fg-vertical>
                                 <b>generic</b>
                                 <span>@generic</span>
-                            </vertical>
+                            </fg-vertical>
                             <button
                                 class="closeButton"
-                                onclick="closeNewPostPopup()"
+                                data-popup-close
                             >
                                 <img src="icons/x.svg" />
                             </button>
-                        </top>
+                        </fg-top>
                         <form>
                             <div class="postField">
                                 <input
@@ -300,28 +274,28 @@
                                 <span class="charCounter">0/1000</span>
                             </div>
                         </form>
-                        <mediaSlots>
+                        <fg-mediaslots>
                             <header>
                                 <img src="icons/picture.svg" />
                                 <span>Media</span>
                                 <span>Up to 4 images</span>
                             </header>
-                            <mediaCarousel>
+                            <fg-mediacarousel>
                                 <button class="addMediaButton">
                                     <img src="icons/add.svg" />
                                 </button>
-                                <mediaPlaceholder></mediaPlaceholder>
-                                <mediaPlaceholder></mediaPlaceholder>
-                            </mediaCarousel>
-                        </mediaSlots>
+                                <fg-mediaplaceholder></fg-mediaplaceholder>
+                                <fg-mediaplaceholder></fg-mediaplaceholder>
+                            </fg-mediacarousel>
+                        </fg-mediaslots>
                         <button class="postButton">
                             Upload Post
                             <img src="icons/send.svg" />
                         </button>
-                    </newPostPopup>
-                    <postPopup class="hidden">
-                        <top>
-                            <button class="backButton">
+                    </fg-popup>
+                    <fg-popup id="post-detail" class="hidden" aria-label="Community post">
+                        <fg-top>
+                            <button class="backButton" data-popup-close>
                                 <img
                                     src="icons/arrow.svg"
                                     style="rotate: 90deg"
@@ -330,139 +304,84 @@
                             <span> Community Post </span>
                             <div style="flex: 1"></div>
                             <img src="icons/3dots.svg" />
-                        </top>
+                        </fg-top>
                         <header>
                             <img src="generic.png" />
-                            <doxx>
+                            <fg-doxx>
                                 <b>generic</b>
                                 <span>@generic</span>
-                            </doxx>
+                            </fg-doxx>
                             <button class="followButton">
                                 Follow
                                 <img src="icons/follow.svg" />
                             </button>
                         </header>
-                        <postTitle>
+                        <fg-posttitle>
                             <b>Mountain retreat</b>
                             <span>lorem ipsum</span>
-                            <tags>
-                                <tag>Nature</tag>
-                                <tag>Travel</tag>
-                            </tags>
-                        </postTitle>
-                        <content class="img">
+                            <fg-tags>
+                                <fg-tag>Nature</fg-tag>
+                                <fg-tag>Travel</fg-tag>
+                            </fg-tags>
+                        </fg-posttitle>
+                        <fg-content class="img">
                             <img src="generic.png" />
-                        </content>
-                        <bottom>
+                        </fg-content>
+                        <fg-bottom>
                             <img src="icons/share.svg" />
                             <div style="flex: 1"></div>
-                            <engagement>
+                            <fg-engagement>
                                 <img src="icons/heart.svg" />
                                 <span>54</span>
-                            </engagement>
-                            <engagement>
+                            </fg-engagement>
+                            <fg-engagement>
                                 <img src="icons/message.svg" />
                                 <span>54</span>
-                            </engagement>
-                        </bottom>
-                        <commentsBox>
+                            </fg-engagement>
+                        </fg-bottom>
+                        <fg-commentsbox>
                             <header>
                                 <b>Comments</b>
                                 <span>42 Comments</span>
                             </header>
-                            <commentField>
+                            <fg-commentfield>
                                 <input
                                     type="text"
                                     placeholder="Type Comment..."
                                 />
                                 <img src="icons/send.svg" />
-                            </commentField>
-                            <slot template="templates/post.html">
-                                <img slot="avatar" src="generic.png" />
-                                <username slot="username">generic</username>
-                                <timestamp slot="timestamp">1h ago</timestamp>
+                            </fg-commentfield>
+                            <fg-include data-template="templates/post.html">
+                                <img data-slot="avatar" src="generic.png" />
+                                <fg-username data-slot="username">generic</fg-username>
+                                <fg-timestamp data-slot="timestamp">1h ago</fg-timestamp>
 
-                                <content slot="content" class="text">
+                                <fg-content data-slot="content" class="text">
                                     <h1>Comment with text</h1>
                                     <p>Comment with text</p>
-                                </content>
-                                <span slot="likes">2137</span>
-                                <span slot="comments">2137</span>
-                            </slot>
-                        </commentsBox>
-                    </postPopup>
-                </popupContainer>
-            </mainView>
-        </slot>
+                                </fg-content>
+                                <span data-slot="likes">2137</span>
+                                <span data-slot="comments">2137</span>
+                            </fg-include>
+                        </fg-commentsbox>
+                    </fg-popup>
+                </fg-popupcontainer>
+            </fg-mainview>
+        </fg-include>
         <script>
-            var popupContainer = document.querySelector("popupContainer");
-            var newPostPopup = document.querySelector("newPostPopup");
-            var userPopup = document.querySelector("userPopup");
-            var postPopup = document.querySelector("postPopup");
-
-            function openNewPostPopup() {
-                popupContainer.classList.remove("hidden");
-                newPostPopup.classList.remove("hidden");
-            }
-
-            function closeNewPostPopup() {
-                newPostPopup.classList.add("hidden");
-                popupContainer.classList.add("hidden");
-            }
-
-            function openUserPopup() {
-                popupContainer.classList.remove("hidden");
-                userPopup.classList.remove("hidden");
-            }
-
-            function closeUserPopup() {
-                userPopup.classList.add("hidden");
-                popupContainer.classList.add("hidden");
-            }
-
-            function openPostPopup() {
-                popupContainer.classList.remove("hidden");
-                postPopup.classList.remove("hidden");
-            }
-
-            function closePostPopup() {
-                postPopup.classList.add("hidden");
-                popupContainer.classList.add("hidden");
-            }
-
-            document
-                .querySelector("sticky .postButton")
-                .addEventListener("click", openNewPostPopup);
-
-            document
-                .querySelector("newPostPopup .closeButton")
-                .addEventListener("click", closeNewPostPopup);
-
-            document
-                .querySelector("postPopup .backButton")
-                .addEventListener("click", closePostPopup);
-
-            popupContainer.addEventListener("click", function (e) {
-                if (e.target === popupContainer) {
-                    closeNewPostPopup();
-                    closeUserPopup();
-                    closePostPopup();
-                }
-            });
-
             // Open the post popup when a feed post is clicked. Scoped to
-            // <timeline> so comment posts inside postPopup don't re-trigger it.
+            // <fg-timeline> so comment posts inside the detail popup do not re-trigger it.
             document.addEventListener("click", function (e) {
-                if (!e.target.closest("timeline post")) return;
+                if (!e.target.closest("fg-timeline fg-post")) return;
                 // The avatar opens userCtx; the 3dots and the action row own
                 // their own behavior — don't hijack those clicks.
-                if (e.target.closest("post > top img, post > bottom")) return;
-                openPostPopup();
+                if (e.target.closest("fg-post > fg-top img, fg-post > fg-bottom")) return;
+                openPopup("post-detail", e.target.closest("fg-timeline fg-post"));
             });
 
             // Char counters for new post form
             document
-                .querySelector("newPostPopup form")
+                .querySelector("#new-post form")
                 .addEventListener("input", function (e) {
                     var el = e.target;
                     if (!el.maxLength || el.maxLength === -1) return;
@@ -475,11 +394,11 @@
                 });
 
             document.addEventListener("click", function (e) {
-                var ctx = document.querySelector("userCtx");
+                var ctx = document.querySelector("fg-userctx");
                 if (!ctx) return;
 
                 // PFP click: the first img inside post > top
-                var postTop = e.target.closest("post > top");
+                var postTop = e.target.closest("fg-post > fg-top");
                 if (
                     postTop &&
                     e.target.tagName === "IMG" &&

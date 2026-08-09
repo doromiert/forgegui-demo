@@ -1,0 +1,114 @@
+/* Page-specific styles extracted from base.css. */
+
+fg-mainview.currentConvo {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   flex: 1 0 0;
+   align-self: stretch;
+   header {
+      display: flex;
+      padding: 20px 25px 0 25px;
+      align-items: center;
+      gap: 10px;
+      align-self: stretch;
+   }
+
+   fg-mainviewtop {
+      display: flex;
+      padding: 15px;
+      justify-content: flex-end;
+      align-items: flex-start;
+      gap: 15px;
+      flex: 1 0 0;
+      align-self: stretch;
+      color: #fff;
+      text-align: center;
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      height: 734px;
+
+      fg-chatcontainer {
+         display: flex;
+         flex: 1 0 0;
+         padding: 0 10px 10px 10px;
+         flex-direction: column;
+         align-items: flex-start;
+         align-self: stretch;
+         border-radius: 25px;
+         border: 1px solid #464646;
+         background: #0c0c0c;
+         padding-bottom: 0;
+         overflow: hidden;
+
+         fg-top {
+            display: flex;
+            padding: 15px 0;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            height: 24px !important;
+            width: 100%;
+
+            color: #fff;
+            text-align: center;
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 22px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+         }
+         .assetGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 10px;
+            padding: 2px;
+            align-content: flex-start;
+            flex: 1 0 0;
+            align-self: stretch;
+            height: 100%;
+            overflow-y: scroll;
+
+            img {
+               width: 100%;
+               aspect-ratio: 1/1;
+               border-radius: 14px;
+               opacity: 0;
+               transition: none !important;
+            }
+         }
+
+         &.convo {
+            display: flex;
+            flex: none;
+            width: 441px !important;
+            padding: 0 10px 10px 10px;
+            flex-direction: column;
+            align-items: flex-start;
+            align-self: stretch;
+         }
+      }
+   }
+}
+
+@keyframes assetFadeIn {
+   from {
+      opacity: 0;
+      transform: perspective(400px) rotateX(-14deg) rotateY(14deg) scale(0.82);
+   }
+   65% {
+      opacity: 1;
+      transform: perspective(400px) rotateX(-2deg) rotateY(2deg) scale(1.08);
+   }
+   to {
+      opacity: 1;
+      transform: perspective(400px) rotateX(0deg) rotateY(0deg) scale(1);
+   }
+}
+
+.genbox {
+   height: 400px;
+}

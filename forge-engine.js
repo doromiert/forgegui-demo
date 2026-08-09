@@ -1165,24 +1165,24 @@
         },
         render: function () {
             if (!hudEl) return;
-            let html = "<hudTitle>" + esc(hud._title) + "</hudTitle>";
+            let html = "<fg-hudtitle>" + esc(hud._title) + "</fg-hudtitle>";
             if (hud._objective)
-                html += "<hudRow>" + esc(hud._objective) + "</hudRow>";
+                html += "<fg-hudrow>" + esc(hud._objective) + "</fg-hudrow>";
             for (let i = 0; i < hud._stats.length; i++) {
                 const s = hud._stats[i];
                 html +=
-                    "<hudRow>" +
+                    "<fg-hudrow>" +
                     esc(s.label) +
                     " <b>" +
                     esc(String(s.value)) +
-                    "</b></hudRow>";
+                    "</b></fg-hudrow>";
             }
             html +=
-                "<hudKeys>" +
+                "<fg-hudkeys>" +
                 (hud._hint
                     ? esc(hud._hint)
                     : "WASD move · Space jump · Middle-drag orbit · Scroll zoom") +
-                "</hudKeys>";
+                "</fg-hudkeys>";
             hudEl.innerHTML = html;
         },
     };
@@ -1444,34 +1444,34 @@
     function slotHtml(stack, i, equipped) {
         if (!stack)
             return (
-                '<slot' +
-                ' class="empty"><key>' +
+                '<fg-itemslot' +
+                ' class="empty"><fg-itemkey>' +
                 (i + 1) +
-                "</key></slot>"
+                "</fg-itemkey></fg-itemslot>"
             );
         const def = itemDef(stack.id) || { name: stack.id };
         const face = def.icon
-            ? '<face class="emoji">' + esc(def.icon) + "</face>"
-            : '<face style="background:' +
+            ? '<fg-itemface class="emoji">' + esc(def.icon) + "</fg-itemface>"
+            : '<fg-itemface style="background:' +
               hexCss(def.color != null ? def.color : 0xffd23f) +
-              '"></face>';
+              '"></fg-itemface>';
         return (
-            '<slot data-slot="' +
+            '<fg-itemslot data-slot="' +
             i +
             '" class="' +
             (equipped ? "equipped" : "") +
             '" title="' +
             esc(def.name) +
             '">' +
-            "<key>" +
+            "<fg-itemkey>" +
             (i + 1) +
-            "</key>" +
+            "</fg-itemkey>" +
             face +
-            "<label>" +
+            "<fg-itemlabel>" +
             esc(def.name) +
-            "</label>" +
-            (stack.count > 1 ? "<count>" + stack.count + "</count>" : "") +
-            "</slot>"
+            "</fg-itemlabel>" +
+            (stack.count > 1 ? "<fg-itemcount>" + stack.count + "</fg-itemcount>" : "") +
+            "</fg-itemslot>"
         );
     }
 
@@ -1500,9 +1500,9 @@
         }
         if (inv.bag.length) {
             html +=
-                '<bagbtn title="Backpack (B)">🎒<count>' +
+                '<fg-bagbutton title="Backpack (B)">🎒<fg-itemcount>' +
                 inv.bag.length +
-                "</count></bagbtn>";
+                "</fg-itemcount></fg-bagbutton>";
         }
         hotbarEl.innerHTML = html;
 
@@ -1512,26 +1512,26 @@
                 !inv.backpackOpen || !inv.bag.length,
             );
             if (inv.backpackOpen) {
-                let bh = "<bagtitle>Backpack</bagtitle><baggrid>";
+                let bh = "<fg-bagtitle>Backpack</fg-bagtitle><fg-baggrid>";
                 for (let i = 0; i < inv.bag.length; i++) {
                     const st = inv.bag[i];
                     const def = itemDef(st.id) || { name: st.id };
                     bh +=
-                        '<slot data-bag="' +
+                        '<fg-itemslot data-bag="' +
                         i +
                         '">' +
                         (def.icon
-                            ? '<face class="emoji">' + esc(def.icon) + "</face>"
-                            : '<face style="background:' +
+                            ? '<fg-itemface class="emoji">' + esc(def.icon) + "</fg-itemface>"
+                            : '<fg-itemface style="background:' +
                               hexCss(def.color != null ? def.color : 0xffd23f) +
-                              '"></face>') +
-                        "<label>" +
+                              '"></fg-itemface>') +
+                        "<fg-itemlabel>" +
                         esc(def.name) +
-                        "</label>" +
-                        (st.count > 1 ? "<count>" + st.count + "</count>" : "") +
-                        "</slot>";
+                        "</fg-itemlabel>" +
+                        (st.count > 1 ? "<fg-itemcount>" + st.count + "</fg-itemcount>" : "") +
+                        "</fg-itemslot>";
                 }
-                backpackEl.innerHTML = bh + "</baggrid>";
+                backpackEl.innerHTML = bh + "</fg-baggrid>";
             }
         }
     }
@@ -1539,12 +1539,12 @@
     function bindInventoryUI() {
         if (hotbarEl) {
             hotbarEl.addEventListener("click", function (e) {
-                const bag = e.target.closest && e.target.closest("bagbtn");
+                const bag = e.target.closest && e.target.closest("fg-bagbutton");
                 if (bag) {
                     inventory.openBackpack();
                     return;
                 }
-                const s = e.target.closest && e.target.closest("slot[data-slot]");
+                const s = e.target.closest && e.target.closest("fg-itemslot[data-slot]");
                 if (!s) return;
                 const i = parseInt(s.getAttribute("data-slot"), 10);
                 if (inv.equipped && inv.equipped.index === i) inventory.unequip();
@@ -1553,7 +1553,7 @@
         }
         if (backpackEl) {
             backpackEl.addEventListener("click", function (e) {
-                const s = e.target.closest && e.target.closest("slot[data-bag]");
+                const s = e.target.closest && e.target.closest("fg-itemslot[data-bag]");
                 if (!s) return;
                 const i = parseInt(s.getAttribute("data-bag"), 10);
                 const st = inv.bag[i];

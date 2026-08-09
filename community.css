@@ -1,0 +1,1009 @@
+/* Page-specific styles extracted from base.css. */
+
+fg-mainview#community {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+   padding: 16px 25px;
+}
+
+.postButton {
+   display: flex;
+   width: 195px;
+   padding: 12px 0;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+   border-radius: 8px;
+   background: #07f;
+   box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.59) inset;
+   border: none;
+   span {
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      background: var(
+         --Glass-Text,
+         linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%)
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+   }
+}
+
+fg-timeline {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   border-radius: 20px;
+   border: 1px solid #454545;
+   box-sizing: border-box;
+   max-width: 770px;
+   height: max-content;
+   fg-post {
+      cursor: pointer;
+   }
+   fg-post:last-child {
+      border: none;
+   }
+}
+
+fg-sticky {
+   position: sticky;
+   display: flex;
+   flex-direction: column;
+   left: 0;
+   top: 0;
+   width: 100%;
+   align-items: center;
+
+   fg-communitytags {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      height: 48px;
+      justify-content: center;
+      fg-communitytag {
+         display: flex;
+         padding: 12px 16px;
+         align-items: center;
+         gap: 10px;
+         border-radius: 15px;
+         background: #212121;
+         &.active {
+            background: #545454;
+         }
+      }
+   }
+
+   & > fg-top {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      color: #fff;
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      img {
+         height: 32px;
+      }
+   }
+   gap: 16px;
+}
+
+fg-userctx {
+   position: fixed;
+   z-index: 9999999999999999999999999999999999999999999999999;
+   display: flex;
+   width: 280px;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   border-radius: 20px;
+   border: 1px solid rgba(255, 255, 255, 0.08);
+   background: #0a0a0a;
+   box-shadow: 0 4px 29px 0 rgba(0, 0, 0, 0.25);
+   overflow: hidden;
+   flex-shrink: 0;
+   /* hidden by default — no display:none so transitions work */
+   opacity: 0;
+   pointer-events: none;
+   transform: translateY(-12px);
+   transition:
+      opacity 0.18s ease-out,
+      transform 0.18s ease-out;
+   &.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+   }
+   fg-buttons {
+      display: flex;
+      padding: 12px 15px 15px 15px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      align-self: stretch;
+      box-sizing: border-box;
+      button {
+         display: flex;
+         padding: 12px 0;
+         justify-content: center;
+         align-items: center;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 8px;
+         border: none;
+         background: #1d1d1d;
+         box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.21) inset;
+         height: 36px;
+         &.active {
+            background: #07f;
+            box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.59) inset;
+         }
+         b {
+            color: #fff;
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+         }
+         span {
+            color: #fff;
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+         }
+      }
+   }
+   fg-doxx {
+      align-items: flex-start;
+      width: 100%;
+      padding: 0 20px;
+      box-sizing: border-box;
+      margin-top: 30px;
+      gap: 0;
+      b {
+         color: #fff;
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 20px;
+         font-style: normal;
+         font-weight: 600;
+         line-height: normal;
+      }
+      span {
+         color: rgba(255, 255, 255, 0.7);
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 18px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: normal;
+      }
+   }
+   fg-banner {
+      display: flex;
+      height: 116px;
+      padding: 10px;
+      justify-content: flex-end;
+      align-items: flex-end;
+      gap: 5px;
+      align-self: stretch;
+      background-image: url(coursePlaceholder.jpg);
+      position: relative;
+      flex-shrink: 0;
+
+      img {
+         position: absolute;
+         left: 21px;
+         bottom: -20px;
+         width: 85px;
+         height: 85px;
+         border-radius: 85px;
+         border: 5px solid #0a0a0a;
+      }
+   }
+}
+
+fg-popup#new-post {
+   width: 670px;
+   background: #0c0c0c;
+   border: 1px solid #272727;
+   border-radius: 30px;
+   overflow: hidden;
+   box-shadow: 0px 4px 250px 170px #000;
+   display: flex;
+   flex-direction: column;
+   align-items: stretch;
+
+   &.hidden {
+      display: none;
+   }
+
+   > fg-top {
+      display: flex;
+      align-items: center;
+      padding: 20px 20px 5px;
+
+      img:first-child {
+         width: 48px;
+         height: 48px;
+         border-radius: 50%;
+         flex-shrink: 0;
+      }
+
+      fg-vertical {
+         flex: 1;
+         display: flex;
+         flex-direction: column;
+         gap: 4px;
+         padding-left: 15px;
+
+         b {
+            font-size: 24px;
+            font-weight: 600;
+            color: #fff;
+         }
+
+         span {
+            font-size: 18px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+         }
+      }
+
+      .closeButton {
+         width: 40px;
+         height: 40px;
+         border-radius: 26px;
+         background: rgba(48, 48, 48, 0.45);
+         border: 1px solid rgba(255, 255, 255, 0.2);
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         cursor: pointer;
+         flex-shrink: 0;
+
+         img {
+            width: 24px;
+            height: 24px;
+         }
+      }
+   }
+
+   > form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 10px 20px 0;
+
+      .postField {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         background: #1d1d1d;
+         border: 1px solid #303030;
+         border-radius: 10px;
+         padding: 20px;
+         box-sizing: border-box;
+         width: 100%;
+
+         &:has(textarea) {
+            align-items: flex-start;
+            height: 190px;
+         }
+
+         input,
+         textarea {
+            flex: 1;
+            min-width: 0;
+            background: none;
+            border: none;
+            outline: none;
+            font-family: "Atkinson Hyperlegible Next";
+            font-weight: 400;
+            caret-color: #fff;
+
+            &::placeholder {
+               color: rgba(255, 255, 255, 0.7);
+            }
+         }
+
+         input {
+            font-size: 23px;
+         }
+
+         textarea {
+            font-size: 20px;
+            resize: none;
+            height: 100%;
+         }
+
+         .charCounter {
+            font-size: 20px;
+            font-weight: 400;
+            font-family: "Atkinson Hyperlegible Next";
+            flex-shrink: 0;
+            align-self: flex-start;
+            padding-left: 12px;
+         }
+      }
+   }
+
+   fg-mediaslots {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 10px 20px;
+
+      > header {
+         display: flex;
+         align-items: center;
+         gap: 10px;
+         padding: 5px 10px;
+
+         img {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+         }
+
+         span:first-of-type {
+            font-size: 20px;
+            font-weight: 500;
+            color: #fff;
+            flex: 1;
+         }
+
+         span:last-of-type {
+            font-size: 20px;
+            font-weight: 500;
+            color: #fff;
+         }
+      }
+
+      fg-mediacarousel {
+         display: flex;
+         gap: 10px;
+
+         .addMediaButton,
+         fg-mediaplaceholder {
+            flex: 1;
+            aspect-ratio: 16 / 9;
+            background: #1d1d1d;
+            border-radius: 10px;
+            min-width: 0;
+         }
+
+         .addMediaButton {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+
+            img {
+               width: 32px;
+               height: 32px;
+               opacity: 0.7;
+            }
+         }
+      }
+   }
+
+   > .postButton {
+      margin: 12px 15px 15px;
+      width: auto;
+      padding: 15px 16px;
+      border-radius: 15px;
+      font-size: 24px;
+      font-weight: 500;
+      gap: 10px;
+      box-shadow:
+         inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59),
+         0px 3px 10px 0px rgba(0, 0, 0, 0.65);
+
+      img {
+         width: 32px;
+         height: 32px;
+      }
+   }
+}
+
+fg-popup#user-profile {
+   display: flex;
+   flex-direction: row;
+   width: 1142px;
+   height: 871px;
+   background: #0c0c0c;
+   border: 1px solid #272727;
+   border-radius: 30px;
+   overflow: hidden;
+   box-shadow: 0px 4px 250px 170px #000;
+
+   &.hidden {
+      display: none;
+   }
+
+   fg-leftside {
+      width: 670px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+
+      > fg-banner {
+         height: 218px;
+         position: relative;
+         flex-shrink: 0;
+
+         &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 172px;
+            background: url(coursePlaceholder.jpg) center / cover no-repeat;
+         }
+
+         .closeButton {
+            position: relative;
+            z-index: 1;
+            width: 40px;
+            height: 40px;
+            margin: 20px 0 0 20px;
+            border-radius: 26px;
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+               width: 24px;
+               height: 24px;
+            }
+         }
+
+         > img {
+            position: absolute;
+            left: 33px;
+            top: 81px;
+            width: 141px;
+            height: 141px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #0c0c0c;
+         }
+      }
+
+      > header {
+         display: flex;
+         align-items: flex-end;
+         gap: 18px;
+         padding: 15px 30px 0;
+         align-items: center;
+         flex-shrink: 0;
+
+         fg-doxx {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            b {
+               font-size: 24px;
+               font-weight: 600;
+               color: #fff;
+            }
+            span {
+               font-size: 18px;
+               font-weight: 500;
+               color: #fff;
+            }
+         }
+
+         fg-bignumber {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 75px;
+            b {
+               font-size: 24px;
+               font-weight: 700;
+               color: #fff;
+            }
+            span {
+               font-size: 18px;
+               font-weight: 500;
+               color: rgba(255, 255, 255, 0.7);
+            }
+         }
+
+         .postButton {
+            width: 92px;
+            padding: 12px 0;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            background: #0077ff;
+            box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+         }
+      }
+
+      fg-bio,
+      fg-games {
+         display: flex;
+         flex-direction: column;
+         gap: 15px;
+         padding: 20px 20px 0;
+         flex-shrink: 0;
+
+         > header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            padding: 0 10px;
+         }
+      }
+
+      fg-games {
+         padding-bottom: 20px;
+      }
+
+      fg-bio fg-content {
+         display: block;
+         background: #1d1d1d;
+         border: 1px solid #303030;
+         border-radius: 10px;
+         padding: 15px;
+         font-size: 14px;
+         font-weight: 400;
+         color: #fff;
+         line-height: 1.5;
+      }
+
+      fg-gamesgrid {
+         display: grid;
+         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+         gap: 10px;
+      }
+
+      fg-game {
+         width: 100%;
+         aspect-ratio: 16 / 9;
+         border-radius: 10px;
+         overflow: hidden;
+         position: relative;
+         display: flex;
+         flex-direction: column;
+         box-sizing: border-box;
+         justify-content: flex-end;
+         padding: 0 10px 8px;
+         background: url(coursePlaceholder.jpg) center / cover no-repeat;
+
+         &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+               to bottom,
+               rgba(0, 0, 0, 0),
+               rgba(0, 0, 0, 0.75)
+            );
+         }
+
+         b,
+         span {
+            position: relative;
+            z-index: 1;
+         }
+         b {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+         }
+         span {
+            font-size: 15px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+         }
+      }
+   }
+
+   fg-doxx {
+      gap: 0 !important;
+      align-items: flex-start;
+   }
+
+   fg-rightside {
+      flex: 1;
+      background: #040404;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+
+      fg-post {
+         border-bottom: 1px solid #454545;
+         border-radius: 0;
+      }
+   }
+}
+
+/* ── Post Popup ─────────────────────────────────────────────────── */
+fg-popup#post-detail {
+   display: flex;
+   flex-direction: column;
+   align-items: stretch;
+   gap: 15px;
+   width: 925px;
+   max-height: 90vh;
+   padding: 15px 20px 20px;
+   box-sizing: border-box;
+   background: #0c0c0c;
+   border: 1px solid #272727;
+   border-radius: 30px;
+   box-shadow: 0px 4px 250px 170px #000;
+   overflow-y: auto;
+   scrollbar-width: thin;
+   scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+
+   &.hidden {
+      display: none;
+   }
+
+   > fg-top {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      height: 38px;
+      padding: 0 10px;
+      flex-shrink: 0;
+      box-sizing: border-box;
+
+      button {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         padding: 0;
+         background: none;
+         border: none;
+         cursor: pointer;
+      }
+
+      img {
+         width: 24px;
+         height: 24px;
+      }
+
+      > span {
+         color: #fff;
+
+         /* Normal Text */
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 24px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: normal;
+      }
+   }
+
+   > header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px;
+      flex-shrink: 0;
+
+      > img {
+         width: 48px;
+         height: 48px;
+         border-radius: 50%;
+         object-fit: cover;
+         flex-shrink: 0;
+      }
+
+      fg-doxx {
+         flex: 1;
+         min-width: 0;
+         display: flex;
+         flex-direction: column;
+         gap: 0px;
+         /* the global doxx rule centers and lifts — this row is left-aligned */
+         align-items: flex-start;
+         margin-top: 0;
+
+         b {
+            color: #fff;
+
+            /* Normal Text (bold) */
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+         }
+
+         span {
+            color: rgba(255, 255, 255, 0.8);
+
+            /* Small Text 20px */
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+         }
+      }
+
+      .followButton {
+         display: flex;
+         align-items: center;
+         gap: 10px;
+         padding: 10px 15px 10px 20px;
+         border: none;
+         border-radius: 50px;
+         background: #0077ff;
+         box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+         cursor: pointer;
+         flex-shrink: 0;
+
+         color: #fff;
+         text-align: center;
+
+         /* Small Text 18px */
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 18px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: normal;
+
+         img {
+            width: 24px;
+            height: 24px;
+         }
+      }
+   }
+
+   > fg-posttitle {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 0 15px 15px;
+      flex-shrink: 0;
+      filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.8));
+
+      > b {
+         color: #fff;
+
+         /* Normal Text (bold) */
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 24px;
+         font-style: normal;
+         font-weight: 700;
+         line-height: normal;
+      }
+
+      > span {
+         max-width: 100%;
+         color: rgba(255, 255, 255, 0.8);
+         overflow: hidden;
+         text-overflow: ellipsis;
+         white-space: nowrap;
+
+         /* Small Text 18px */
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 18px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: normal;
+      }
+
+      fg-tags {
+         display: flex;
+         align-items: flex-start;
+         gap: 8px;
+
+         fg-tag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            border-radius: 5px;
+            height: 24px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: #171717;
+
+            color: #fff;
+            text-align: center;
+            font-family: "Inter Tight";
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+         }
+      }
+   }
+
+   > fg-content.img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 1px solid #1a1919;
+      border-radius: 10px;
+      overflow: hidden;
+      box-sizing: border-box;
+      flex-shrink: 0;
+
+      img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         background-color: rgb(10, 10, 10);
+         display: block;
+      }
+   }
+
+   > fg-bottom {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      padding: 10px 15px;
+      flex-shrink: 0;
+
+      > img {
+         width: 32px;
+         height: 32px;
+      }
+
+      fg-engagement {
+         display: flex;
+         align-items: center;
+         gap: 5px;
+         color: rgba(255, 255, 255, 0.81);
+         text-align: center;
+
+         /* Normal Text */
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 24px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: normal;
+
+         img {
+            width: 32px;
+            height: 32px;
+         }
+      }
+   }
+
+   > fg-commentsbox {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      border-radius: 20px;
+      border: 1px solid #454545;
+      background: #040404;
+      overflow: hidden;
+      flex-shrink: 0;
+
+      > header {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         height: 68px;
+         padding: 15px 25px;
+         box-sizing: border-box;
+         flex-shrink: 0;
+
+         b {
+            color: #fff;
+
+            /* Normal Text (bold) */
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+         }
+
+         span {
+            color: rgba(255, 255, 255, 0.7);
+
+            /* Normal Text */
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+         }
+      }
+
+      fg-commentfield {
+         display: flex;
+         align-items: center;
+         gap: 15px;
+         height: 68px;
+         padding: 15px 25px;
+         box-sizing: border-box;
+         background: #1d1d1d;
+         flex-shrink: 0;
+
+         input {
+            flex: 1;
+            min-width: 0;
+            background: none;
+            border: none;
+            outline: none;
+            color: #fff;
+            caret-color: #fff;
+
+            /* Normal Text */
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+
+            &::placeholder {
+               color: rgba(255, 255, 255, 0.7);
+            }
+         }
+
+         img {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            flex-shrink: 0;
+         }
+      }
+
+      fg-post:last-child {
+         border-bottom: none;
+      }
+   }
+}
+
+@media (max-width: 720px) {
+   fg-popup#new-post,
+   fg-popup#post-detail,
+   fg-popup#user-profile {
+      width: 100%;
+      box-sizing: border-box;
+   }
+
+   fg-popup#user-profile {
+      height: auto;
+      min-height: calc(100vh - 24px);
+   }
+
+   fg-popup#user-profile fg-leftside {
+      width: 100%;
+   }
+
+   fg-popup#user-profile fg-rightside {
+      display: none;
+   }
+
+   fg-popup#new-post fg-mediacarousel fg-mediaplaceholder:last-child {
+      display: none;
+   }
+}
+
+.follow {
+   height: 36px;
+}

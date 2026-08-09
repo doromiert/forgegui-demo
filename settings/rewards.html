@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ForgeGUI — Settings</title>
         <link rel="stylesheet" href="base.css" />
+        <link rel="stylesheet" href="rewards.css" />
         <script src="site.js" defer></script>
         <meta name="theme-color" content="#0D0D0D" />
         <meta name="color-scheme" content="dark" />
@@ -12,18 +13,16 @@
     </head>
 
     <body class="chat">
-        <slot template="templates/sidebar.html" class="collapsed"></slot>
-        <mainView class="settings">
-            <slot template="templates/settings-sidebar.html"></slot>
-            <settingsView>
+        <fg-include data-template="templates/settings-shell.html">
+            <fg-settingsview data-slot="content">
                 <div style="height: 90px"></div>
 
-                <slot template="templates/listbox.html">
-                    <span slot="header">Referrals</span>
-                    <slot template="templates/listbox-row.html">
-                        <span slot="label">Your Referral Link</span>
+                <fg-include data-template="templates/listbox.html">
+                    <span data-slot="header">Referrals</span>
+                    <fg-include data-template="templates/listbox-row.html">
+                        <span data-slot="label">Your Referral Link</span>
                         <b
-                            slot="value"
+                            data-slot="value"
                             style="
                                 font-family:
                                     &quot;Atkinson Hyperlegible Mono&quot;,
@@ -32,25 +31,25 @@
                             "
                             >https://forgegui.com/referral/name</b
                         >
-                        <button slot="action" class="listboxAction">
+                        <button data-slot="action" class="listboxAction">
                             Copy
                         </button>
-                    </slot>
-                    <slot template="templates/listbox-row.html">
-                        <span slot="label">People Referred</span>
-                        <b slot="value">3 People</b>
-                        <button slot="action" class="listboxAction">
+                    </fg-include>
+                    <fg-include data-template="templates/listbox-row.html">
+                        <span data-slot="label">People Referred</span>
+                        <b data-slot="value">3 People</b>
+                        <button data-slot="action" class="listboxAction">
                             Invite More
                         </button>
-                    </slot>
-                    <slot template="templates/listbox-row.html">
-                        <span slot="label">Total Plan Credits Earned</span>
-                        <b slot="value">$0.96</b>
-                        <button slot="action" class="listboxAction">
+                    </fg-include>
+                    <fg-include data-template="templates/listbox-row.html">
+                        <span data-slot="label">Total Plan Credits Earned</span>
+                        <b data-slot="value">$0.96</b>
+                        <button data-slot="action" class="listboxAction">
                             Redeem
                         </button>
-                    </slot>
-                </slot>
+                    </fg-include>
+                </fg-include>
 
                 <div class="rewardsSection">
                     <p class="rewardsSectionLabel">
@@ -326,7 +325,7 @@
                         </div>
                     </div>
                 </div>
-            </settingsView>
-        </mainView>
+            </fg-settingsview>
+        </fg-include>
     </body>
 </html>

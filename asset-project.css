@@ -1,0 +1,346 @@
+/* Asset project styles. */
+
+fg-mainview.project {
+   fg-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 40px;
+      padding: 30px 35px 0;
+      flex-shrink: 0;
+      width: 100%;
+      box-sizing: border-box;
+   }
+
+   fg-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      span {
+         font-size: 32px;
+         font-weight: 500;
+         color: rgba(255, 255, 255, 0.8);
+      }
+
+      b {
+         font-size: 32px;
+         font-weight: 600;
+         color: #fff;
+      }
+
+      img {
+         width: 24px;
+         height: 24px;
+      }
+   }
+}
+
+/* ── Project / Assets view ──────────────────────────────────────── */
+fg-mainview.project {
+   fg-assetgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      padding: 25px 35px 35px;
+      align-content: flex-start;
+      align-self: stretch;
+      flex: 1 0 0;
+      overflow-y: auto;
+      box-sizing: border-box;
+   }
+
+   fg-asset {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      cursor: pointer;
+
+      > img {
+         width: 100%;
+         aspect-ratio: 16 / 9;
+         object-fit: cover;
+         border-radius: 14px;
+         border: 1px solid #262626;
+         background: #161616;
+         box-sizing: border-box;
+         transition: border-color 0.15s ease;
+      }
+
+      &:hover > img {
+         border-color: #3d3d3d;
+      }
+
+      > fg-bottom {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         gap: 10px;
+         padding: 0 4px;
+
+         fg-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+
+            b {
+               font-size: 18px;
+               font-weight: 600;
+               color: #fff;
+               white-space: nowrap;
+               overflow: hidden;
+               text-overflow: ellipsis;
+            }
+
+            span {
+               font-size: 14px;
+               font-weight: 400;
+               color: rgba(255, 255, 255, 0.5);
+            }
+         }
+
+         > img {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            opacity: 0.6;
+            transition: opacity 0.15s ease;
+         }
+      }
+
+      &:hover > fg-bottom > img {
+         opacity: 1;
+      }
+   }
+
+   /* ── Asset preview popup ─────────────────────────────────────── */
+   fg-popup#asset-preview {
+      width: 973px;
+      max-width: calc(100vw - 80px);
+
+      > fg-top {
+         display: flex;
+         align-items: center;
+         gap: 15px;
+         height: auto;
+         width: 100%;
+         padding: 15px 30px 0;
+         box-sizing: border-box;
+
+         > .popupBack {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            border: 0;
+            background: none;
+            color: inherit;
+            cursor: pointer;
+            opacity: 0.8;
+         }
+
+         > .popupBack img {
+            width: 24px;
+            height: 24px;
+         }
+
+         > .popupBack:hover {
+            opacity: 1;
+         }
+
+         > span {
+            font-size: 24px;
+            font-weight: 500;
+            color: #fff;
+         }
+
+         .more {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.8;
+         }
+
+         .more:hover {
+            opacity: 1;
+         }
+      }
+
+      .vicButton {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         gap: 10px;
+         padding: 7px 14px 7px 10px;
+         border: none;
+         border-radius: 50px;
+         background: #262626;
+         color: #fff;
+         font-family: inherit;
+         font-size: 18px;
+         font-weight: 500;
+         white-space: nowrap;
+         cursor: pointer;
+
+         img {
+            width: 24px;
+            height: 24px;
+         }
+
+         &:hover {
+            background: #333;
+         }
+      }
+
+      fg-preview {
+         display: block;
+         padding: 15px 20px 20px;
+
+         img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1279 / 718.44;
+            object-fit: cover;
+            border: 1px solid #333;
+            border-radius: 20px;
+            background: #161616;
+            box-sizing: border-box;
+         }
+      }
+
+      > fg-bottom {
+         gap: 20px;
+
+         .popupButton:first-child {
+            flex: 1 0 0;
+            min-width: 0;
+         }
+
+         .popupButton.active {
+            height: 64px;
+            padding: 15px 25px;
+            box-shadow:
+               inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59),
+               0px 3px 60.5px 0px rgba(0, 0, 0, 0.65);
+         }
+
+         .popupButton:last-child {
+            padding: 12px 30px;
+         }
+      }
+   }
+
+   /* ── New project popup ───────────────────────────────────────── */
+   fg-popup#new-project {
+      width: 670px;
+      max-width: calc(100vw - 80px);
+
+      > fg-top {
+         display: flex;
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 20px;
+         height: auto;
+         width: 100%;
+         padding: 35px 35px 10px;
+         box-sizing: border-box;
+
+         h1 {
+            margin: 0;
+            font-size: 40px;
+            font-weight: 600;
+            color: #fff;
+         }
+
+         span {
+            font-size: 20px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+         }
+      }
+
+      form {
+         display: flex;
+         flex-direction: column;
+         gap: 15px;
+         padding: 15px 20px 20px;
+
+         input,
+         select {
+            width: 100%;
+            height: 55px;
+            padding: 0 20px;
+            box-sizing: border-box;
+            background: #1d1d1d;
+            border: 1px solid #303030;
+            border-radius: 10px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 23px;
+            outline: none;
+         }
+
+         input {
+            font-weight: 400;
+         }
+
+         input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+         }
+
+         input:focus,
+         select:focus {
+            border-color: #07f;
+         }
+
+         select {
+            font-weight: 600;
+            appearance: none;
+            background-image: url("icons/arrow.svg");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            background-size: 24px 24px;
+            cursor: pointer;
+         }
+
+         select option {
+            background: #1d1d1d;
+            font-size: 18px;
+         }
+      }
+
+      > fg-bottom {
+         gap: 10px;
+
+         .popupButton {
+            flex: 1 0 0;
+            min-width: 0;
+            padding: 12px 16px;
+         }
+      }
+   }
+}
+
+@media (max-width: 720px) {
+   fg-mainview.project fg-assetgrid {
+      grid-template-columns: minmax(0, 1fr);
+      padding-left: 16px;
+      padding-right: 16px;
+   }
+
+   fg-mainview.project > fg-top {
+      padding-left: 16px;
+      padding-right: 16px;
+   }
+
+   fg-mainview.project fg-breadcrumb span,
+   fg-mainview.project fg-breadcrumb b {
+      font-size: 22px;
+   }
+
+   fg-mainview.project fg-popup#asset-preview > fg-top {
+      padding-left: 16px;
+      padding-right: 16px;
+   }
+}

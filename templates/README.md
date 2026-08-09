@@ -77,6 +77,29 @@ The asset bar, input, and final action can be replaced per page:
 
 Keep interactive behavior in regular `.js` files. Templates only control HTML composition.
 
+## Shared popups
+
+Use one `<popup>` element per dialog and identify it with an `id`. Triggers and
+close controls are declarative so `site.js` can provide consistent focus,
+keyboard, backdrop, and scroll-lock behavior:
+
+```html
+<button data-popup-open="new-project">New Project</button>
+<popupContainer class="hidden">
+  <popup id="new-project" class="hidden">
+    <slot template="templates/popup-frame.html">
+      <span slot="title">New Project</span>
+      <span slot="description">Create a new project.</span>
+      <form slot="content">...</form>
+    </slot>
+  </popup>
+</popupContainer>
+```
+
+Do not create page-specific popup tags or popup controllers. Use
+`data-popup-open`, `data-popup-close`, and the shared `openPopup`/`closePopup`
+API when script-driven control is required.
+
 ## Class-based component variants
 
 Keep the modifier class on a wrapper that remains after rendering, then include the shared component structure inside it:

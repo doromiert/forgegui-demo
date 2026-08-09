@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ForgeGUI</title>
         <link rel="stylesheet" href="base.css" />
+        <link rel="stylesheet" href="assets-overview.css" />
         <script src="site.js" defer></script>
         <meta name="theme-color" content="#0D0D0D" />
         <meta name="color-scheme" content="dark" />
@@ -12,299 +13,159 @@
     </head>
 
     <body class="chat">
-        <slot template="templates/sidebar.html"> </slot>
-        <mainView slot="content" class="courses">
-            <projects>
-                <top>
-                    <path>
+        <fg-include data-template="templates/sidebar.html"> </fg-include>
+        <fg-mainview data-slot="content" class="assets">
+            <fg-projects>
+                <fg-top>
+                    <fg-breadcrumb>
                         <b>Assets</b>
-                    </path>
-                    <button class="topButton active">
+                    </fg-breadcrumb>
+                    <a class="topButton active" href="assets/project.html">
                         <img src="icons/add.svg" />
                         <span> New Project </span>
-                    </button>
-                </top>
-                <projectGrid>
-                    <a class="projectEntry" href="assets/project.html">
-                        <previewGrid>
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                        </previewGrid>
-                        <bottom>
-                            <vertical>
-                                <b>Project Name</b>
-                                <span>Last edited: Yesterday</span>
-                            </vertical>
-                            <img src="icons/3dots.svg" />
-                        </bottom>
                     </a>
-                    <a class="projectEntry" href="assets/project.html">
-                        <previewGrid>
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                        </previewGrid>
-                        <bottom>
-                            <vertical>
-                                <b>Project Name</b>
-                                <span>Last edited: Yesterday</span>
-                            </vertical>
-                            <img src="icons/3dots.svg" />
-                        </bottom>
-                    </a>
-                    <a class="projectEntry" href="assets/project.html">
-                        <previewGrid>
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                        </previewGrid>
-                        <bottom>
-                            <vertical>
-                                <b>Project Name</b>
-                                <span>Last edited: Yesterday</span>
-                            </vertical>
-                            <img src="icons/3dots.svg" />
-                        </bottom>
-                    </a>
-                    <a class="projectEntry" href="assets/project.html">
-                        <previewGrid>
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                        </previewGrid>
-                        <bottom>
-                            <vertical>
-                                <b>Project Name</b>
-                                <span>Last edited: Yesterday</span>
-                            </vertical>
-                            <img src="icons/3dots.svg" />
-                        </bottom>
-                    </a>
-                    <a class="projectEntry" href="assets/project.html">
-                        <previewGrid>
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                        </previewGrid>
-                        <bottom>
-                            <vertical>
-                                <b>Project Name</b>
-                                <span>Last edited: Yesterday</span>
-                            </vertical>
-                            <img src="icons/3dots.svg" />
-                        </bottom>
-                    </a>
-                    <a class="projectEntry" href="assets/project.html">
-                        <previewGrid>
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                        </previewGrid>
-                        <bottom>
-                            <vertical>
-                                <b>Project Name</b>
-                                <span>Last edited: Yesterday</span>
-                            </vertical>
-                            <img src="icons/3dots.svg" />
-                        </bottom>
-                    </a>
-                    <a class="projectEntry" href="assets/project.html">
-                        <previewGrid>
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                        </previewGrid>
-                        <bottom>
-                            <vertical>
-                                <b>Project Name</b>
-                                <span>Last edited: Yesterday</span>
-                            </vertical>
-                            <img src="icons/3dots.svg" />
-                        </bottom>
-                    </a>
-                    <a class="projectEntry" href="assets/project.html">
-                        <previewGrid>
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                        </previewGrid>
-                        <bottom>
-                            <vertical>
-                                <b>Project Name</b>
-                                <span>Last edited: Yesterday</span>
-                            </vertical>
-                            <img src="icons/3dots.svg" />
-                        </bottom>
-                    </a>
-                    <a class="projectEntry" href="assets/project.html">
-                        <previewGrid>
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                        </previewGrid>
-                        <bottom>
-                            <vertical>
-                                <b>Project Name</b>
-                                <span>Last edited: Yesterday</span>
-                            </vertical>
-                            <img src="icons/3dots.svg" />
-                        </bottom>
-                    </a>
-                    <a class="projectEntry" href="assets/project.html">
-                        <previewGrid>
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                            <img src="coursePlaceholder.jpg" />
-                        </previewGrid>
-                        <bottom>
-                            <vertical>
-                                <b>Project Name</b>
-                                <span>Last edited: Yesterday</span>
-                            </vertical>
-                            <img src="icons/3dots.svg" />
-                        </bottom>
-                    </a>
-                </projectGrid>
-            </projects>
-            <communityAssets>
-                <top>
+                </fg-top>
+                <fg-projectgrid>
+                    <fg-include data-template="templates/project-card.html"></fg-include>
+                    <fg-include data-template="templates/project-card.html"></fg-include>
+                    <fg-include data-template="templates/project-card.html"></fg-include>
+                    <fg-include data-template="templates/project-card.html"></fg-include>
+                    <fg-include data-template="templates/project-card.html"></fg-include>
+                    <fg-include data-template="templates/project-card.html"></fg-include>
+                    <fg-include data-template="templates/project-card.html"></fg-include>
+                    <fg-include data-template="templates/project-card.html"></fg-include>
+                    <fg-include data-template="templates/project-card.html"></fg-include>
+                    <fg-include data-template="templates/project-card.html"></fg-include>
+                </fg-projectgrid>
+            </fg-projects>
+            <fg-communityassets>
+                <fg-top>
                     <span> Discover Community Assets </span>
-                    <searchWrapper>
+                    <fg-searchwrapper>
                         <img src="icons/search.svg" />
                         <input type="text" placeholder="Search" />
-                    </searchWrapper>
-                </top>
-                <communityAssetsGrid>
-                    <communityAsset class="long">
-                        <slot template="templates/community-asset.html">
-                            <img slot="image" src="generic.png" />
-                            <span slot="label">Generic</span>
-                            <span slot="title">Mountain Retreat</span>
-                            <span slot="description"
+                    </fg-searchwrapper>
+                </fg-top>
+                <fg-communityassetsgrid>
+                    <fg-communityasset class="long">
+                        <fg-include data-template="templates/community-asset.html">
+                            <img data-slot="image" src="generic.png" />
+                            <span data-slot="label">Generic</span>
+                            <span data-slot="title">Mountain Retreat</span>
+                            <span data-slot="description"
                                 >A secluded getaway nestled between alpine peaks
                                 and evergreen forests.</span
                             >
-                            <tag slot="tags">Nature</tag>
-                            <tag slot="tags">Travel</tag>
-                        </slot>
-                    </communityAsset>
-                    <communityAsset>
-                        <slot template="templates/community-asset.html">
-                            <img slot="image" src="generic.png" />
-                            <span slot="label">Generic</span>
-                            <span slot="title">Urban Skyline</span>
-                            <span slot="description"
+                            <fg-tag data-slot="tags">Nature</fg-tag>
+                            <fg-tag data-slot="tags">Travel</fg-tag>
+                        </fg-include>
+                    </fg-communityasset>
+                    <fg-communityasset>
+                        <fg-include data-template="templates/community-asset.html">
+                            <img data-slot="image" src="generic.png" />
+                            <span data-slot="label">Generic</span>
+                            <span data-slot="title">Urban Skyline</span>
+                            <span data-slot="description"
                                 >A breathtaking view of city lights after
                                 dark.</span
                             >
-                            <tag slot="tags">City</tag>
-                            <tag slot="tags">Night</tag>
-                        </slot>
-                    </communityAsset>
-                    <communityAsset>
-                        <slot template="templates/community-asset.html">
-                            <img slot="image" src="generic.png" />
-                            <span slot="label">Generic</span>
-                            <span slot="title">Desert Dunes</span>
-                            <span slot="description"
+                            <fg-tag data-slot="tags">City</fg-tag>
+                            <fg-tag data-slot="tags">Night</fg-tag>
+                        </fg-include>
+                    </fg-communityasset>
+                    <fg-communityasset>
+                        <fg-include data-template="templates/community-asset.html">
+                            <img data-slot="image" src="generic.png" />
+                            <span data-slot="label">Generic</span>
+                            <span data-slot="title">Desert Dunes</span>
+                            <span data-slot="description"
                                 >Rolling sand dunes stretching to the
                                 horizon.</span
                             >
-                            <tag slot="tags">Nature</tag>
-                            <tag slot="tags">Desert</tag>
-                        </slot>
-                    </communityAsset>
-                    <communityAsset>
-                        <slot template="templates/community-asset.html">
-                            <img slot="image" src="generic.png" />
-                            <span slot="label">Generic</span>
-                            <span slot="title">Desert Dunes</span>
-                            <span slot="description"
+                            <fg-tag data-slot="tags">Nature</fg-tag>
+                            <fg-tag data-slot="tags">Desert</fg-tag>
+                        </fg-include>
+                    </fg-communityasset>
+                    <fg-communityasset>
+                        <fg-include data-template="templates/community-asset.html">
+                            <img data-slot="image" src="generic.png" />
+                            <span data-slot="label">Generic</span>
+                            <span data-slot="title">Desert Dunes</span>
+                            <span data-slot="description"
                                 >Rolling sand dunes stretching to the
                                 horizon.</span
                             >
-                            <tag slot="tags">Nature</tag>
-                            <tag slot="tags">Desert</tag>
-                        </slot>
-                    </communityAsset>
-                    <communityAsset>
-                        <slot template="templates/community-asset.html">
-                            <img slot="image" src="generic.png" />
-                            <span slot="label">Generic</span>
-                            <span slot="title">Desert Dunes</span>
-                            <span slot="description"
+                            <fg-tag data-slot="tags">Nature</fg-tag>
+                            <fg-tag data-slot="tags">Desert</fg-tag>
+                        </fg-include>
+                    </fg-communityasset>
+                    <fg-communityasset>
+                        <fg-include data-template="templates/community-asset.html">
+                            <img data-slot="image" src="generic.png" />
+                            <span data-slot="label">Generic</span>
+                            <span data-slot="title">Desert Dunes</span>
+                            <span data-slot="description"
                                 >Rolling sand dunes stretching to the
                                 horizon.</span
                             >
-                            <tag slot="tags">Nature</tag>
-                            <tag slot="tags">Desert</tag>
-                        </slot>
-                    </communityAsset>
-                    <communityAsset>
-                        <slot template="templates/community-asset.html">
-                            <img slot="image" src="generic.png" />
-                            <span slot="label">Generic</span>
-                            <span slot="title">Desert Dunes</span>
-                            <span slot="description"
+                            <fg-tag data-slot="tags">Nature</fg-tag>
+                            <fg-tag data-slot="tags">Desert</fg-tag>
+                        </fg-include>
+                    </fg-communityasset>
+                    <fg-communityasset>
+                        <fg-include data-template="templates/community-asset.html">
+                            <img data-slot="image" src="generic.png" />
+                            <span data-slot="label">Generic</span>
+                            <span data-slot="title">Desert Dunes</span>
+                            <span data-slot="description"
                                 >Rolling sand dunes stretching to the
                                 horizon.</span
                             >
-                            <tag slot="tags">Nature</tag>
-                            <tag slot="tags">Desert</tag>
-                        </slot>
-                    </communityAsset>
-                    <communityAsset class="long">
-                        <slot template="templates/community-asset.html">
-                            <img slot="image" src="generic.png" />
-                            <span slot="label">Generic</span>
-                            <span slot="title">Mountain Retreat</span>
-                            <span slot="description"
+                            <fg-tag data-slot="tags">Nature</fg-tag>
+                            <fg-tag data-slot="tags">Desert</fg-tag>
+                        </fg-include>
+                    </fg-communityasset>
+                    <fg-communityasset class="long">
+                        <fg-include data-template="templates/community-asset.html">
+                            <img data-slot="image" src="generic.png" />
+                            <span data-slot="label">Generic</span>
+                            <span data-slot="title">Mountain Retreat</span>
+                            <span data-slot="description"
                                 >A secluded getaway nestled between alpine peaks
                                 and evergreen forests.</span
                             >
-                            <tag slot="tags">Nature</tag>
-                            <tag slot="tags">Travel</tag>
-                        </slot>
-                    </communityAsset>
-                    <communityAsset>
-                        <slot template="templates/community-asset.html">
-                            <img slot="image" src="generic.png" />
-                            <span slot="label">Generic</span>
-                            <span slot="title">Desert Dunes</span>
-                            <span slot="description"
+                            <fg-tag data-slot="tags">Nature</fg-tag>
+                            <fg-tag data-slot="tags">Travel</fg-tag>
+                        </fg-include>
+                    </fg-communityasset>
+                    <fg-communityasset>
+                        <fg-include data-template="templates/community-asset.html">
+                            <img data-slot="image" src="generic.png" />
+                            <span data-slot="label">Generic</span>
+                            <span data-slot="title">Desert Dunes</span>
+                            <span data-slot="description"
                                 >Rolling sand dunes stretching to the
                                 horizon.</span
                             >
-                            <tag slot="tags">Nature</tag>
-                            <tag slot="tags">Desert</tag>
-                        </slot>
-                    </communityAsset>
-                    <communityAsset class="long">
-                        <slot template="templates/community-asset.html">
-                            <img slot="image" src="generic.png" />
-                            <span slot="label">Generic</span>
-                            <span slot="title">Mountain Retreat</span>
-                            <span slot="description"
+                            <fg-tag data-slot="tags">Nature</fg-tag>
+                            <fg-tag data-slot="tags">Desert</fg-tag>
+                        </fg-include>
+                    </fg-communityasset>
+                    <fg-communityasset class="long">
+                        <fg-include data-template="templates/community-asset.html">
+                            <img data-slot="image" src="generic.png" />
+                            <span data-slot="label">Generic</span>
+                            <span data-slot="title">Mountain Retreat</span>
+                            <span data-slot="description"
                                 >A secluded getaway nestled between alpine peaks
                                 and evergreen forests.</span
                             >
-                            <tag slot="tags">Nature</tag>
-                            <tag slot="tags">Travel</tag>
-                        </slot>
-                    </communityAsset>
-                </communityAssetsGrid>
-            </communityAssets>
-        </mainView>
+                            <fg-tag data-slot="tags">Nature</fg-tag>
+                            <fg-tag data-slot="tags">Travel</fg-tag>
+                        </fg-include>
+                    </fg-communityasset>
+                </fg-communityassetsgrid>
+            </fg-communityassets>
+        </fg-mainview>
     </body>
 </html>

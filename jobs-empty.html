@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Available Jobs - ForgeGUI</title>
+        <meta name="description" content="Open roles at ForgeGUI." />
+        <meta name="theme-color" content="#0a0a0a" />
+        <meta name="color-scheme" content="dark" />
+        <link rel="stylesheet" href="public.css" />
+        <link rel="stylesheet" href="jobs.css" />
+        <script src="site.js" defer></script>
+    </head>
+    <body class="publicPage">
+        <fg-include data-template="templates/public-header.html"></fg-include>
+        <main class="publicSurface jobsSurface emptyJobsSurface">
+            <fg-include data-template="templates/public-hero.html">
+                <span data-slot="title">Available Jobs</span>
+                <span data-slot="description">ForgeGUI needs your talent! We’re always open to hiring new people to make<br />ForgeGUI even better.</span>
+                <img data-slot="mark" class="publicHeroMark" src="landing-assets/public-mark-jobs.svg" alt="" />
+            </fg-include>
+            <section class="jobsEmpty" aria-labelledby="no-jobs-title">
+                <h2 id="no-jobs-title">No Jobs Available.</h2>
+                <p>Check again later.</p>
+            </section>
+        </main>
+    </body>
+</html>

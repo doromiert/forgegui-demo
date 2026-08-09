@@ -595,12 +595,12 @@
     }
 
     function addMessage(who, text) {
-        const el = document.createElement("message");
+        const el = document.createElement("fg-message");
         if (who === "you") {
             el.className = "you";
             el.textContent = text;
         } else {
-            const top = document.createElement("msgTop");
+            const top = document.createElement("fg-msgtop");
             top.innerHTML = '<img src="icons/ai.svg" /><span>Smithmaster</span>';
             el.appendChild(top);
             const body = document.createElement("span");
@@ -629,13 +629,13 @@
             // No prose yet: either still reasoning, or already writing ops
             // without having spoken (rare, but don't lie about it).
             html =
-                '<thinking>' +
+                '<fg-thinking>' +
                 (/<code>/i.test(raw) ? "Writing edits" : "Thinking") +
-                '<dot>.</dot><dot>.</dot><dot>.</dot></thinking>';
+                '<fg-dot>.</fg-dot><fg-dot>.</fg-dot><fg-dot>.</fg-dot></fg-thinking>';
         }
 
         if (prose && working) {
-            html += ' <thinking><dot>.</dot><dot>.</dot><dot>.</dot></thinking>';
+            html += ' <fg-thinking><fg-dot>.</fg-dot><fg-dot>.</fg-dot><fg-dot>.</fg-dot></fg-thinking>';
         }
 
         if (/<code>/i.test(raw)) {
@@ -892,27 +892,27 @@
         });
 
         let html =
-            "<tuneHead><span>Tuning</span>" +
-            '<tuneActions>' +
+            "<fg-tunehead><span>Tuning</span>" +
+            '<fg-tuneactions>' +
             '<button data-act="copy" title="Copy as a Forge.cam.set(...) call">copy</button>' +
             '<button data-act="reset">reset</button>' +
             '<button data-act="close">✕</button>' +
-            "</tuneActions></tuneHead>";
+            "</fg-tuneactions></fg-tunehead>";
 
         groups.forEach(function (g) {
-            html += "<tuneGroup><h>" + esc(g.name) + "</h>";
+            html += "<fg-tunegroup><h>" + esc(g.name) + "</h>";
             g.items.forEach(function (t) {
                 const v = t.get();
                 if (t.type === "bool") {
                     html +=
-                        '<tuneRow><label>' + esc(t.label) + "</label>" +
+                        '<fg-tunerow><label>' + esc(t.label) + "</label>" +
                         '<input type="checkbox" data-key="' + t.key + '"' +
                         (v ? " checked" : "") + " />" +
-                        '<val data-val="' + t.key + '">' + fmt(v) + "</val></tuneRow>";
+                        '<fg-tunevalue data-val="' + t.key + '">' + fmt(v) + "</fg-tunevalue></fg-tunerow>";
                 } else {
                     const isAuto = t.type === "auto" && (v === null || v === undefined);
                     html +=
-                        '<tuneRow><label>' + esc(t.label) + "</label>" +
+                        '<fg-tunerow><label>' + esc(t.label) + "</label>" +
                         (t.type === "auto"
                             ? '<input type="checkbox" class="autoBox" data-auto="' +
                               t.key + '"' + (isAuto ? " checked" : "") +
@@ -923,10 +923,10 @@
                         '" step="' + t.step + '" value="' +
                         (isAuto ? t.min : v) + '"' +
                         (isAuto ? " disabled" : "") + " />" +
-                        '<val data-val="' + t.key + '">' + fmt(v) + "</val></tuneRow>";
+                        '<fg-tunevalue data-val="' + t.key + '">' + fmt(v) + "</fg-tunevalue></fg-tunerow>";
                 }
             });
-            html += "</tuneGroup>";
+            html += "</fg-tunegroup>";
         });
 
         tunerEl.innerHTML = html;
@@ -1035,8 +1035,8 @@
        ═══════════════════════════════════════════════════════════════════ */
 
     function wireChatbox() {
-        const ta = document.querySelector("chatBox textarea");
-        const btn = document.querySelector("chatBox .chatboxButton.send");
+        const ta = document.querySelector("fg-chatbox textarea");
+        const btn = document.querySelector("fg-chatbox .chatboxButton.send");
         if (!ta || !btn) return false;
 
         sendBtn = btn;

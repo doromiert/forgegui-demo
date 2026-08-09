@@ -1,0 +1,438 @@
+/* Page-specific styles extracted from base.css. */
+
+fg-mainview.leaderboard {
+   position: relative;
+   display: flex;
+   padding: 90px 0;
+   flex-direction: column;
+   align-items: center;
+   gap: 42px;
+   flex: 1 0 0;
+   align-self: stretch;
+   overflow-y: auto;
+
+   /* explicit order for all direct children so we can reorder in expanded */
+   > fg-fomo {
+      order: 10;
+   }
+   > h1 {
+      order: 20;
+   }
+   > fg-leaderboard {
+      order: 30;
+   }
+   > .showMoreButton {
+      order: 40;
+   }
+   > .leaderboardBottom {
+      order: 50;
+   }
+   > fg-physicalbox {
+      order: 60;
+   }
+   background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.46) 0%, #000 100%),
+      url("d2.png") lightgray 50% / cover no-repeat;
+}
+
+fg-fomo {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 6px;
+   background: #0077ff;
+   border-radius: 15px;
+   padding: 20px 25px;
+   box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+   box-sizing: border-box;
+   height: 67px;
+
+   b {
+      font-size: 40px;
+      font-weight: 800;
+      color: #fff;
+      background: var(
+         --Glass-Text,
+         linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%)
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+   }
+
+   span {
+      font-size: 40px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.8);
+      background: var(
+         --Glass-Text,
+         linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%)
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background: var(
+         --Glass-Text,
+         linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%)
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+   }
+}
+
+fg-mainview.leaderboard > h1 {
+   font-size: 40px;
+   font-weight: 600;
+   color: #fff;
+   text-align: center;
+   width: 232px;
+   padding-bottom: 22px;
+   border-bottom: 1px solid #6d6d6d;
+}
+
+fg-leaderboard {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 8px;
+}
+
+fg-leaderboardheader {
+   display: block;
+   font-size: 22px;
+   font-weight: 600;
+   color: #fff;
+   text-align: center;
+   box-sizing: border-box;
+   width: 100%;
+   padding: 8px 17px 15px;
+
+   &:not(:first-child) {
+      margin-top: 7px;
+   }
+}
+
+fg-leaderboardposition {
+   display: flex;
+   align-items: center;
+   gap: 15px;
+   width: 625px;
+   padding: 12px 20px 12px 15px;
+   border-radius: 35px;
+   box-sizing: border-box;
+   overflow: hidden;
+   flex-shrink: 0;
+   border-radius: 35px;
+   background: radial-gradient(
+      100% 49.91% at 50.09% 0%,
+      rgba(37, 37, 37, 0.75) 0%,
+      rgba(18, 18, 18, 0.75) 100%
+   );
+
+   img:first-of-type {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+   }
+
+   img:last-of-type {
+      width: 29px;
+      height: 29px;
+      flex-shrink: 0;
+   }
+
+   fg-username {
+      flex: 1;
+      font-size: 20px;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+      min-width: 0;
+   }
+
+   fg-likescount {
+      font-size: 20px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+      white-space: nowrap;
+   }
+
+   fg-playscount {
+      font-size: 20px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+      white-space: nowrap;
+      display: flex;
+      gap: 10px;
+
+      b {
+         color: #00ff80;
+         font-weight: 700;
+      }
+   }
+}
+
+fg-badge {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 60px;
+   height: 32px;
+   padding: 10px;
+   border-radius: 19px;
+   box-sizing: border-box;
+   background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.46) 0%,
+      rgba(44, 44, 44, 0.46) 100%
+   );
+   font-size: 18px;
+   font-weight: 600;
+   color: #fff;
+   text-align: center;
+   flex-shrink: 0;
+}
+
+#n1 {
+   border-color: transparent;
+   background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.53) 0%, rgba(0, 0, 0, 0.53) 100%),
+      linear-gradient(
+         90deg,
+         rgb(47, 154, 255) 0%,
+         rgb(163, 105, 255) 30%,
+         rgb(255, 75, 162) 66%,
+         rgb(255, 126, 66) 100%
+      );
+
+   fg-badge {
+      background:
+         linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.7) 0%,
+            rgba(44, 44, 44, 0.41) 100%
+         ),
+         linear-gradient(
+            90deg,
+            rgb(47, 154, 255) 0%,
+            rgb(163, 105, 255) 30%,
+            rgb(255, 75, 162) 66%,
+            rgb(255, 75, 162) 100%
+         );
+   }
+}
+
+#n2 {
+   border-radius: 35px;
+   background: radial-gradient(
+      100% 49.91% at 50.09% 0%,
+      #00204b 0%,
+      #075c73 100%
+   );
+}
+
+#n3 {
+   background: radial-gradient(ellipse at center, #7e4a00 0%, #976700 100%);
+   border-radius: 35px;
+   background:
+      radial-gradient(100% 49.91% at 50.09% 0%, #7e4a00 0%, #976700 100%),
+      radial-gradient(
+         100% 49.91% at 50.09% 0%,
+         rgba(37, 37, 37, 0.75) 0%,
+         rgba(18, 18, 18, 0.75) 100%
+      );
+}
+
+#n4,
+#n5 {
+   border-radius: 35px;
+   background: radial-gradient(
+      100% 49.91% at 50.09% 0%,
+      #00623b 0%,
+      #00402e 100%
+   );
+}
+
+#you {
+   border-radius: 35px;
+   background:
+      linear-gradient(
+         0deg,
+         rgba(0, 47, 102, 0.2) 0%,
+         rgba(0, 47, 102, 0.2) 100%
+      ),
+      radial-gradient(100% 49.91% at 50.09% 0%, #4c4c4c 0%, #262626 100%);
+   img:last-of-type {
+      display: none;
+   }
+}
+
+.showMoreButton {
+   background: #0077ff;
+   border: none;
+   border-radius: 15px;
+   padding: 9px 16px;
+   color: #fff;
+   font-size: 20px;
+   font-weight: 500;
+   cursor: pointer;
+   box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+}
+
+/* Extra rows (5–10) hidden by default */
+.extra-row {
+   display: none !important;
+}
+
+/* Bottom section: you row + button + plays text */
+.leaderboardBottom {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 15px;
+   position: relative;
+   width: 100%;
+}
+
+.leaderboardBottom > span {
+   font-size: 20px;
+   font-weight: 500;
+   color: rgba(255, 255, 255, 0.8);
+   text-align: center;
+}
+
+/* ── Expanded state ─────────────────────────────────────────────── */
+fg-mainview.leaderboard.is-expanded {
+   padding: 40px 0 0;
+   gap: 20px;
+   overflow: hidden;
+
+   /* button moves to just after the title, before the rows */
+   > .showMoreButton {
+      order: 25;
+   }
+
+   fg-leaderboard {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      /* ensure last row can scroll fully above the floating bottom */
+      padding-bottom: 220px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+   }
+
+   .more-header {
+      display: none;
+   }
+
+   .extra-row {
+      display: flex !important;
+   }
+
+   /* floating bottom: overlays the scroll area, gradient fades up into the rows */
+   .leaderboardBottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 90px 0 35px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      background: linear-gradient(to bottom, transparent 0%, #000 40%);
+      /* gradient area is click-through; children stay interactive */
+      pointer-events: none;
+
+      > * {
+         pointer-events: auto;
+      }
+   }
+}
+
+fg-physicalbox {
+   position: absolute;
+   left: calc(50% + 340px);
+   top: 50%;
+   transform: translateY(-50%);
+   width: 400px;
+   background: #161616;
+   border: 1px solid #333;
+   border-radius: 20px;
+   padding: 25px;
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   box-shadow: inset 0px 0px 71.7px 0px rgba(250, 200, 1, 0.24);
+   overflow: hidden;
+   box-sizing: border-box;
+
+   > img {
+      width: 78px;
+      height: 79px;
+   }
+
+   h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #fff;
+   }
+
+   p {
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.5;
+   }
+}
+
+fg-winners {
+   display: flex;
+   flex-direction: column;
+   gap: 1px;
+   border-radius: 10px;
+   overflow: hidden;
+   border: 1px solid #484848;
+   max-height: 195px;
+   overflow-y: auto;
+}
+
+fg-winner {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   padding: 12px 17px;
+   background: #1e1e1e;
+
+   img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+   }
+
+   span {
+      flex: 1;
+      font-size: 20px;
+      font-weight: 600;
+      color: #ffcc00;
+   }
+
+   fg-trophytype {
+      font-size: 20px;
+      font-weight: 600;
+      color: #ffcc00;
+      white-space: nowrap;
+   }
+}

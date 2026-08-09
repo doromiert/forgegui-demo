@@ -1,0 +1,377 @@
+.blogListing {
+   display: flex;
+   width: 100%;
+   padding: 30px 35px;
+   flex-direction: column;
+   gap: 20px;
+}
+
+.blogGrid {
+   display: grid;
+   width: 100%;
+   grid-template-columns: repeat(4, minmax(0, 1fr));
+   gap: 20px 18px;
+}
+
+.blogCard {
+   position: relative;
+   display: flex;
+   min-width: 0;
+   height: 264px;
+   padding: 25px;
+   flex-direction: column;
+   justify-content: space-between;
+   overflow: hidden;
+   border: 1px solid #333;
+   border-radius: 20px;
+   background: #090909;
+}
+
+.blogCard::after {
+   position: absolute;
+   z-index: 1;
+   inset: 0;
+   content: "";
+   pointer-events: none;
+   background: linear-gradient(180deg, #000 0%, transparent 50%, #000 100%);
+}
+
+.blogCardImage {
+   position: absolute;
+   inset: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+.blogCardDate,
+.blogCardCopy {
+   position: relative;
+   z-index: 2;
+}
+
+.blogCardDate {
+   align-self: flex-end;
+   padding: 8px 10px;
+   border-radius: 31px;
+   background: #1a1a1a;
+   font-size: 20px;
+   font-weight: 500;
+}
+
+.blogCardCopy {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+}
+
+.blogCardTopic {
+   color: rgba(255, 255, 255, 0.7);
+   font-size: 20px;
+}
+
+.blogCard h2 {
+   font-size: 32px;
+   font-weight: 600;
+}
+
+.blogCard p {
+   font-size: 20px;
+   font-weight: 500;
+}
+
+.blogCard:hover,
+.blogCard:focus-visible {
+   border-color: #686868;
+   transform: translateY(-2px);
+}
+
+.articlePage {
+   height: 100dvh;
+   overflow: hidden;
+}
+
+.articleLayout {
+   display: flex;
+   width: 100%;
+   height: calc(100dvh - var(--header-height));
+   gap: 10px;
+}
+
+.articleNav {
+   display: flex;
+   width: 325px;
+   padding: 10px 10px 20px;
+   flex: 0 0 325px;
+   flex-direction: column;
+   gap: 15px;
+}
+
+.articleBack {
+   display: flex;
+   padding: 10px;
+   align-items: center;
+   gap: 8px;
+   font-size: 24px;
+   font-weight: 500;
+}
+
+.articleBack img {
+   width: 24px;
+   height: 24px;
+   rotate: 90deg;
+}
+
+.articleNav nav {
+   display: flex;
+   flex-direction: column;
+}
+
+.articleNav nav a {
+   padding: 20px;
+   border: 1px solid transparent;
+   border-radius: 15px;
+   font-size: 20px;
+   font-weight: 500;
+}
+
+.articleNav nav a:hover,
+.articleNav nav a:focus-visible,
+.articleNav nav a.active {
+   border-color: rgba(255, 255, 255, 0.2);
+   background: rgba(60, 60, 60, 0.2);
+}
+
+.articleSurface {
+   min-width: 0;
+   flex: 1;
+   overflow-y: auto;
+   border-top: 1px solid #333;
+   border-left: 1px solid #333;
+   border-radius: 20px 0 0;
+   background: #161616;
+}
+
+.articleColumns {
+   display: grid;
+   width: min(1196px, calc(100% - 70px));
+   padding: 30px 0;
+   margin: 0 auto;
+   grid-template-columns: minmax(0, 816px) 345px;
+   align-items: start;
+   gap: 35px;
+}
+
+.articleContent {
+   display: flex;
+   min-width: 0;
+   flex-direction: column;
+   gap: 25px;
+}
+
+.articleCover {
+   width: 100%;
+   height: 235px;
+   border-radius: 10px;
+   object-fit: cover;
+}
+
+.articleContent section {
+   display: flex;
+   flex-direction: column;
+   gap: 18px;
+   scroll-margin-top: 30px;
+}
+
+.articleContent h1 {
+   font-size: 40px;
+   font-weight: 600;
+}
+
+.articleContent p {
+   color: rgba(255, 255, 255, 0.85);
+   font-size: 18px;
+   line-height: 1.35;
+}
+
+.articleMeta {
+   position: sticky;
+   top: 30px;
+   display: flex;
+   width: 345px;
+   flex-direction: column;
+   gap: 25px;
+}
+
+.articleMeta dl {
+   margin: 0;
+   overflow: hidden;
+   border: 1px solid #282828;
+   border-radius: 15px;
+   background: #0d0d0d;
+}
+
+.articleMeta dl div {
+   display: flex;
+   padding: 20px;
+   flex-direction: column;
+   gap: 13px;
+   border-bottom: 1px solid #282828;
+}
+
+.articleMeta dl div:last-child {
+   border-bottom: 0;
+}
+
+.articleMeta dt {
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 16px;
+}
+
+.articleMeta dd {
+   margin: 0;
+   font-size: 20px;
+   font-weight: 500;
+}
+
+.summarizeButton {
+   position: relative;
+   display: flex;
+   width: 100%;
+   min-height: 48px;
+   padding: 12px 20px;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   border: 0;
+   border-radius: 15px;
+   background: linear-gradient(104deg, #0877bb, #003972 55%, #2514ba);
+   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.21);
+   color: #fff;
+   font-size: 20px;
+   font-weight: 600;
+   cursor: pointer;
+}
+
+.aiStars {
+   position: relative;
+   width: 24px;
+   height: 24px;
+   flex: 0 0 24px;
+}
+
+.aiStarLarge {
+   position: absolute;
+   top: 5.5px;
+   left: 3.5px;
+   width: 12.9895px;
+   height: 12.9895px;
+}
+
+.aiStarSmall {
+   position: absolute;
+   left: 14px;
+   width: 6.98382px;
+   height: 7.61685px;
+}
+
+.aiStarSmall.top {
+   top: 2.2px;
+}
+
+.aiStarSmall.bottom {
+   top: 14.2px;
+}
+
+.articleSummary {
+   padding: 18px;
+   border: 1px solid #282828;
+   border-radius: 15px;
+   background: #0d0d0d;
+   color: rgba(255, 255, 255, 0.85);
+   font-size: 17px;
+   line-height: 1.4;
+}
+
+@media (max-width: 1200px) {
+   .blogGrid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+   }
+
+   .articleNav {
+      width: 245px;
+      flex-basis: 245px;
+   }
+
+   .articleColumns {
+      grid-template-columns: minmax(0, 1fr) 300px;
+   }
+
+   .articleMeta {
+      width: 300px;
+   }
+}
+
+@media (max-width: 850px) {
+   .blogGrid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+   }
+
+   .articlePage {
+      height: auto;
+      overflow: visible;
+   }
+
+   .articleLayout {
+      height: auto;
+      flex-direction: column;
+   }
+
+   .articleNav {
+      width: 100%;
+      padding: 10px 20px;
+      flex-basis: auto;
+   }
+
+   .articleNav nav {
+      overflow-x: auto;
+      flex-direction: row;
+   }
+
+   .articleNav nav a {
+      padding: 12px 16px;
+      white-space: nowrap;
+   }
+
+   .articleSurface {
+      overflow: visible;
+      border-left: 0;
+      border-radius: 0;
+   }
+
+   .articleColumns {
+      display: flex;
+      width: calc(100% - 40px);
+      flex-direction: column;
+   }
+
+   .articleMeta {
+      position: static;
+      width: 100%;
+      order: -1;
+   }
+}
+
+@media (max-width: 560px) {
+   .blogListing {
+      padding: 24px 16px;
+   }
+
+   .blogGrid {
+      grid-template-columns: 1fr;
+   }
+
+   .blogCard {
+      height: 250px;
+   }
+}

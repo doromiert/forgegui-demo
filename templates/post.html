@@ -1,24 +1,24 @@
-<post>
-    <top>
-        <slot name="avatar"><img src="generic.png" /></slot>
-        <slot name="username"><username>User</username></slot>
+<fg-post>
+    <fg-top>
+        <fg-slot data-name="avatar"><img src="generic.png" /></fg-slot>
+        <fg-slot data-name="username"><fg-username>User</fg-username></fg-slot>
         <div style="width:6px;height:6px;border-radius:50%;background:white;flex-shrink:0"></div>
-        <slot name="timestamp"><timestamp>now</timestamp></slot>
+        <fg-slot data-name="timestamp"><fg-timestamp>now</fg-timestamp></fg-slot>
         <div style="flex:1"></div>
-        <slot name="tag"></slot>
+        <fg-slot data-name="tag"></fg-slot>
         <img src="icons/3dots.svg" />
-    </top>
-    <slot name="content"></slot>
-    <bottom>
+    </fg-top>
+    <fg-slot data-name="content"></fg-slot>
+    <fg-bottom>
         <img src="icons/share.svg" />
         <div style="flex:1"></div>
-        <engagement>
+        <fg-engagement>
             <img src="icons/heart.svg" />
-            <slot name="likes"><span>0</span></slot>
-        </engagement>
-        <engagement>
+            <fg-slot data-name="likes"><span>0</span></fg-slot>
+        </fg-engagement>
+        <fg-engagement>
             <img src="icons/message.svg" />
-            <slot name="comments"><span>0</span></slot>
-        </engagement>
-    </bottom>
-</post>
+            <fg-slot data-name="comments"><span>0</span></fg-slot>
+        </fg-engagement>
+    </fg-bottom>
+</fg-post>

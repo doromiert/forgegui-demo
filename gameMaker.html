@@ -6,6 +6,7 @@
         <title>ForgeGUI</title>
         <!--<link rel="icon" type="image/svg+xml" href="fg.svg" />-->
         <link rel="stylesheet" href="base.css" />
+        <link rel="stylesheet" href="game-maker.css" />
         <script src="site.js" defer></script>
         <meta name="theme-color" content="#0D0D0D" />
         <meta name="description" content="ForgeGUI - Create anything with AI" />
@@ -19,11 +20,11 @@
 
         <style>
             /* page-local: pin the 3D viewport to the mainView box */
-            mainView#gameGenerator {
+            fg-mainview#gameGenerator {
                 position: relative;
                 overflow: hidden;
             }
-            mainView#gameGenerator > canvas {
+            fg-mainview#gameGenerator > canvas {
                 position: absolute;
                 inset: 0;
                 width: 100%;
@@ -32,21 +33,21 @@
                 cursor: default;
             }
             /* orbit is middle-drag only, so `grabbing` shows only during one */
-            mainView#gameGenerator > canvas.dragging {
+            fg-mainview#gameGenerator > canvas.dragging {
                 cursor: grabbing;
             }
             /* hovering a clickable object: reachable vs out of range */
-            mainView#gameGenerator > canvas.hover-click {
+            fg-mainview#gameGenerator > canvas.hover-click {
                 cursor: pointer;
             }
-            mainView#gameGenerator > canvas.hover-far {
+            fg-mainview#gameGenerator > canvas.hover-far {
                 cursor: not-allowed;
             }
-            mainView#gameGenerator > canvas.dragging.hover-click,
-            mainView#gameGenerator > canvas.dragging.hover-far {
+            fg-mainview#gameGenerator > canvas.dragging.hover-click,
+            fg-mainview#gameGenerator > canvas.dragging.hover-far {
                 cursor: grabbing;
             }
-            mainView#gameGenerator.dropping::after {
+            fg-mainview#gameGenerator.dropping::after {
                 content: "Drop a .forge.json to load it";
                 position: absolute;
                 inset: 12px;
@@ -62,39 +63,39 @@
                 pointer-events: none;
                 z-index: 3000;
             }
-            mainView#gameGenerator chrome {
+            fg-mainview#gameGenerator fg-chrome {
                 position: relative;
                 pointer-events: none;
             }
-            mainView#gameGenerator chrome > * {
+            fg-mainview#gameGenerator fg-chrome > * {
                 pointer-events: auto;
             }
             /* the HUD/convo row must not swallow drags meant for the canvas */
-            mainView#gameGenerator mainViewTop {
+            fg-mainview#gameGenerator fg-mainviewtop {
                 pointer-events: none;
                 justify-content: space-between;
             }
-            mainView#gameGenerator mainViewTop > * {
+            fg-mainview#gameGenerator fg-mainviewtop > * {
                 pointer-events: auto;
             }
-            mainView#gameGenerator > chrome > bottom {
+            fg-mainview#gameGenerator > fg-chrome > fg-bottom {
                 display: flex;
                 flex-direction: column;
                 align-self: stretch;
                 gap: 8px;
             }
 
-            devRow {
+            fg-devrow {
                 display: flex;
                 gap: 8px;
                 align-items: center;
                 align-self: stretch;
             }
-            devRow #token {
+            fg-devrow #token {
                 flex: 1 0 0;
                 min-width: 0;
             }
-            devRow button {
+            fg-devrow button {
                 flex: none;
                 padding: 10px 14px;
                 border-radius: 12px;
@@ -106,24 +107,24 @@
                 font-weight: 600;
                 cursor: pointer;
             }
-            devRow button:hover {
+            fg-devrow button:hover {
                 background: #262626;
             }
-            devRow button.destructive {
+            fg-devrow button.destructive {
                 border-color: rgba(255, 168, 168, 0.24);
                 color: #ff9d9d;
                 background: rgba(255, 0, 0, 0.08);
             }
-            devRow button.destructive:hover {
+            fg-devrow button.destructive:hover {
                 background: rgba(255, 0, 0, 0.16);
             }
-            devRow button.destructive.armed {
+            fg-devrow button.destructive.armed {
                 background: #e2384a;
                 border-color: #e2384a;
                 color: #fff;
             }
 
-            gameHud {
+            fg-gamehud {
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
@@ -140,22 +141,22 @@
                 min-width: 210px;
                 max-width: 320px;
             }
-            gameHud hudTitle {
+            fg-gamehud fg-hudtitle {
                 font-size: 18px;
                 font-weight: 700;
                 line-height: 1.2;
             }
-            gameHud hudRow {
+            fg-gamehud fg-hudrow {
                 font-size: 15px;
                 font-weight: 500;
                 opacity: 0.85;
                 line-height: 1.35;
             }
-            gameHud hudRow b {
+            fg-gamehud fg-hudrow b {
                 font-weight: 700;
                 opacity: 1;
             }
-            gameHud hudKeys {
+            fg-gamehud fg-hudkeys {
                 font-size: 12px;
                 opacity: 0.5;
                 margin-top: 4px;
@@ -163,9 +164,9 @@
             }
 
             /* ── Roblox-style hotbar + backpack ─────────────────────────
-               Both sit in <chrome>'s flex column between the viewport row and
+               Both sit in <fg-chrome>'s flex column between the viewport row and
                the chatbox, so they stack above it without a magic offset. */
-            gameHotbar {
+            fg-gamehotbar {
                 display: flex;
                 align-self: center;
                 margin-bottom: 10px;
@@ -178,12 +179,12 @@
                 z-index: 1500;
                 pointer-events: auto;
             }
-            gameHotbar.hidden,
-            gameBackpack.hidden {
+            fg-gamehotbar.hidden,
+            fg-gamebackpack.hidden {
                 display: none;
             }
-            gameHotbar slot,
-            gameBackpack slot {
+            fg-gamehotbar fg-itemslot,
+            fg-gamebackpack fg-itemslot {
                 position: relative;
                 display: flex;
                 flex-direction: column;
@@ -202,25 +203,25 @@
                     border-color 0.12s ease,
                     transform 0.12s ease;
             }
-            gameHotbar slot:hover,
-            gameBackpack slot:hover {
+            fg-gamehotbar fg-itemslot:hover,
+            fg-gamebackpack fg-itemslot:hover {
                 border-color: #6a6a6a;
                 transform: translateY(-2px);
             }
-            gameHotbar slot.empty {
+            fg-gamehotbar fg-itemslot.empty {
                 cursor: default;
                 opacity: 0.35;
             }
-            gameHotbar slot.empty:hover {
+            fg-gamehotbar fg-itemslot.empty:hover {
                 transform: none;
                 border-color: #3a3a3a;
             }
-            gameHotbar slot.equipped {
+            fg-gamehotbar fg-itemslot.equipped {
                 border-color: #67f5d2;
                 box-shadow: 0 0 0 2px rgba(103, 245, 210, 0.28);
                 background: #10201d;
             }
-            gameHotbar key {
+            fg-gamehotbar fg-itemkey {
                 position: absolute;
                 top: 3px;
                 left: 6px;
@@ -228,8 +229,8 @@
                 opacity: 0.45;
                 font-weight: 700;
             }
-            gameHotbar face,
-            gameBackpack face {
+            fg-gamehotbar fg-itemface,
+            fg-gamebackpack fg-itemface {
                 width: 26px;
                 height: 26px;
                 border-radius: 7px;
@@ -238,12 +239,12 @@
                 font-size: 20px;
                 line-height: 1;
             }
-            gameHotbar face.emoji,
-            gameBackpack face.emoji {
+            fg-gamehotbar fg-itemface.emoji,
+            fg-gamebackpack fg-itemface.emoji {
                 background: none;
             }
-            gameHotbar label,
-            gameBackpack label {
+            fg-gamehotbar fg-itemlabel,
+            fg-gamebackpack fg-itemlabel {
                 font-size: 10px;
                 font-weight: 600;
                 max-width: 58px;
@@ -252,8 +253,8 @@
                 white-space: nowrap;
                 opacity: 0.8;
             }
-            gameHotbar count,
-            gameBackpack count {
+            fg-gamehotbar fg-itemcount,
+            fg-gamebackpack fg-itemcount {
                 position: absolute;
                 right: 5px;
                 bottom: 4px;
@@ -261,7 +262,7 @@
                 font-weight: 700;
                 color: #ffd23f;
             }
-            gameHotbar bagbtn {
+            fg-gamehotbar fg-bagbutton {
                 position: relative;
                 display: grid;
                 place-items: center;
@@ -273,11 +274,11 @@
                 cursor: pointer;
                 font-size: 24px;
             }
-            gameHotbar bagbtn:hover {
+            fg-gamehotbar fg-bagbutton:hover {
                 border-color: #6a6a6a;
             }
 
-            gameBackpack {
+            fg-gamebackpack {
                 display: flex;
                 align-self: center;
                 margin-bottom: 10px;
@@ -292,21 +293,21 @@
                 z-index: 1500;
                 pointer-events: auto;
             }
-            gameBackpack bagtitle {
+            fg-gamebackpack fg-bagtitle {
                 font-family: "Atkinson Hyperlegible Next";
                 font-size: 15px;
                 font-weight: 700;
                 color: #fff;
                 opacity: 0.75;
             }
-            gameBackpack baggrid {
+            fg-gamebackpack fg-baggrid {
                 display: grid;
                 grid-template-columns: repeat(auto-fill, 66px);
                 gap: 8px;
             }
 
             /* ── dev tuning panel ─────────────────────────────────────── */
-            devTuner {
+            fg-devtuner {
                 position: absolute;
                 top: 16px;
                 right: 16px;
@@ -326,10 +327,10 @@
                 z-index: 2500;
                 pointer-events: auto;
             }
-            devTuner.hidden {
+            fg-devtuner.hidden {
                 display: none;
             }
-            devTuner tuneHead {
+            fg-devtuner fg-tunehead {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -339,11 +340,11 @@
                 margin-bottom: 4px;
                 border-bottom: 1px solid #2a2a2a;
             }
-            devTuner tuneActions {
+            fg-devtuner fg-tuneactions {
                 display: flex;
                 gap: 6px;
             }
-            devTuner tuneActions button {
+            fg-devtuner fg-tuneactions button {
                 padding: 3px 8px;
                 border-radius: 8px;
                 border: 1px solid #3a3a3a;
@@ -354,17 +355,17 @@
                 font-weight: 600;
                 cursor: pointer;
             }
-            devTuner tuneActions button:hover {
+            fg-devtuner fg-tuneactions button:hover {
                 background: #292929;
                 color: #fff;
             }
-            devTuner tuneGroup {
+            fg-devtuner fg-tunegroup {
                 display: flex;
                 flex-direction: column;
                 gap: 2px;
                 margin-top: 8px;
             }
-            devTuner tuneGroup h {
+            fg-devtuner fg-tunegroup h {
                 font-size: 11px;
                 font-weight: 700;
                 letter-spacing: 0.08em;
@@ -372,44 +373,44 @@
                 opacity: 0.45;
                 margin-bottom: 2px;
             }
-            devTuner tuneRow {
+            fg-devtuner fg-tunerow {
                 display: grid;
                 grid-template-columns: 1fr auto 44px;
                 align-items: center;
                 gap: 8px;
                 padding: 2px 0;
             }
-            devTuner tuneRow:has(.autoBox) {
+            fg-devtuner fg-tunerow:has(.autoBox) {
                 grid-template-columns: 1fr auto auto 44px;
             }
-            devTuner tuneRow label {
+            fg-devtuner fg-tunerow label {
                 font-size: 12px;
                 opacity: 0.8;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
-            devTuner tuneRow val {
+            fg-devtuner fg-tunerow fg-tunevalue {
                 font-size: 11px;
                 font-variant-numeric: tabular-nums;
                 text-align: right;
                 opacity: 0.65;
             }
-            devTuner input[type="range"] {
+            fg-devtuner input[type="range"] {
                 width: 96px;
                 accent-color: #67f5d2;
                 cursor: pointer;
             }
-            devTuner input[type="range"]:disabled {
+            fg-devtuner input[type="range"]:disabled {
                 opacity: 0.3;
                 cursor: default;
             }
-            devTuner input[type="checkbox"] {
+            fg-devtuner input[type="checkbox"] {
                 accent-color: #67f5d2;
                 cursor: pointer;
             }
 
-            gameToast {
+            fg-gametoast {
                 position: absolute;
                 left: 50%;
                 top: 24px;
@@ -430,15 +431,15 @@
                 max-width: 70%;
                 text-align: center;
             }
-            gameToast.show {
+            fg-gametoast.show {
                 opacity: 1;
             }
-            gameToast.error {
+            fg-gametoast.error {
                 border-color: #7a2f2f;
                 color: #ff9d9d;
             }
 
-            message code.buildChip {
+            fg-message code.buildChip {
                 display: inline-block;
                 margin-top: 6px;
                 padding: 2px 10px;
@@ -448,25 +449,25 @@
                 font-size: 13px;
                 opacity: 0.85;
             }
-            message code.buildChip.bad {
+            fg-message code.buildChip.bad {
                 background: rgba(255, 77, 94, 0.12);
                 border-color: #7a2f2f;
                 color: #ff9d9d;
             }
 
             /* "Thinking..." — shown until the first prose token arrives */
-            message thinking {
+            fg-message fg-thinking {
                 display: inline;
                 opacity: 0.6;
                 font-style: italic;
             }
-            message thinking dot {
+            fg-message fg-thinking fg-dot {
                 animation: forgeThinkingDot 1.2s infinite;
             }
-            message thinking dot:nth-child(2) {
+            fg-message fg-thinking fg-dot:nth-child(2) {
                 animation-delay: 0.2s;
             }
-            message thinking dot:nth-child(3) {
+            fg-message fg-thinking fg-dot:nth-child(3) {
                 animation-delay: 0.4s;
             }
             @keyframes forgeThinkingDot {
@@ -480,19 +481,19 @@
                 }
             }
             @media (prefers-reduced-motion: reduce) {
-                message thinking dot {
+                fg-message fg-thinking fg-dot {
                     animation: none;
                 }
             }
 
             /* the Create button becomes Cancel while a request is in flight */
-            chatBox .chatboxButton.send.busy {
+            fg-chatbox .chatboxButton.send.busy {
                 background: #e2384a;
             }
-            chatBox .chatboxButton.send.busy img {
+            fg-chatbox .chatboxButton.send.busy img {
                 display: none;
             }
-            chatBox .chatboxButton.send.busy::after {
+            fg-chatbox .chatboxButton.send.busy::after {
                 content: "";
                 width: 14px;
                 height: 14px;
@@ -503,23 +504,23 @@
     </head>
 
     <body class="chat">
-        <slot template="templates/app-shell.html">
-            <mainView slot="content" id="gameGenerator">
-                <chrome>
-                    <mainViewTop>
-                        <gameHud id="hud"></gameHud>
-                        <chatContainer class="convo">
-                            <top>
+        <fg-include data-template="templates/app-shell.html">
+            <fg-mainview data-slot="content" id="gameGenerator">
+                <fg-chrome>
+                    <fg-mainviewtop>
+                        <fg-gamehud id="hud"></fg-gamehud>
+                        <fg-chatcontainer class="convo">
+                            <fg-top>
                                 <img src="icons/message.svg" />
                                 <span>Conversation</span>
-                            </top>
-                            <bottom class="convo" id="convo"></bottom>
-                        </chatContainer>
-                    </mainViewTop>
-                    <gameBackpack id="backpack" class="hidden"></gameBackpack>
-                    <gameHotbar id="hotbar" class="hidden"></gameHotbar>
-                    <bottom>
-                        <devRow>
+                            </fg-top>
+                            <fg-bottom class="convo" id="convo"></fg-bottom>
+                        </fg-chatcontainer>
+                    </fg-mainviewtop>
+                    <fg-gamebackpack id="backpack" class="hidden"></fg-gamebackpack>
+                    <fg-gamehotbar id="hotbar" class="hidden"></fg-gamehotbar>
+                    <fg-bottom>
+                        <fg-devrow>
                             <input
                                 id="token"
                                 placeholder="DEV: openrouter API key"
@@ -536,14 +537,14 @@
                                 accept=".json,application/json"
                                 hidden
                             />
-                        </devRow>
-                        <slot template="templates/chatbox.html"></slot>
-                    </bottom>
-                </chrome>
-                <devTuner id="tuner" class="hidden"></devTuner>
-                <gameToast id="toast"></gameToast>
-            </mainView>
-        </slot>
+                        </fg-devrow>
+                        <fg-include data-template="templates/chatbox.html"></fg-include>
+                    </fg-bottom>
+                </fg-chrome>
+                <fg-devtuner id="tuner" class="hidden"></fg-devtuner>
+                <fg-gametoast id="toast"></fg-gametoast>
+            </fg-mainview>
+        </fg-include>
     </body>
 
     <script src="https://www.threejs.pro/build/three.js"></script>
