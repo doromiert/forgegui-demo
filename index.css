@@ -242,6 +242,7 @@ a {
    inset: 0;
    transform-origin: 50% 51.6%;
    animation: hero-platform-orbit 26s linear infinite;
+   animation-play-state: paused;
 }
 
 .hero-orbit,
@@ -252,6 +253,12 @@ a {
 
 .hero-platform {
    animation: hero-platform-counter-orbit 26s linear infinite;
+   animation-play-state: paused;
+}
+
+.hero.is-visible .hero-platform-orbit,
+.hero.is-visible .hero-platform {
+   animation-play-state: running;
 }
 
 .hero-orbit-outer {
@@ -651,6 +658,39 @@ a {
    transform-origin: center;
 }
 
+.feature-stack.is-in-view .feature.is-active .orbit-stage {
+   animation: feature-stage-orbit 44s linear infinite;
+}
+
+.feature-stack.is-in-view .feature.is-active .model-logo,
+.feature-stack.is-in-view .feature.is-active .collage,
+.feature-stack.is-in-view .feature.is-active .platform-logo,
+.feature-stack.is-in-view .feature.is-active .platform-question {
+   animation: feature-asset-counter-orbit 44s linear infinite;
+}
+
+body.modal-open .hero-platform-orbit,
+body.modal-open .hero-platform,
+body.modal-open .feature-stack .orbit-stage,
+body.modal-open .feature-stack .model-logo,
+body.modal-open .feature-stack .collage,
+body.modal-open .feature-stack .platform-logo,
+body.modal-open .feature-stack .platform-question {
+   animation-play-state: paused;
+}
+
+@keyframes feature-stage-orbit {
+   to {
+      rotate: 360deg;
+   }
+}
+
+@keyframes feature-asset-counter-orbit {
+   to {
+      rotate: -360deg;
+   }
+}
+
 .feature-story .feature-rail {
    top: 104px;
    height: calc(100vh - 116px);
@@ -789,11 +829,22 @@ a {
 .model-logo,
 .collage,
 .platform-logo,
-.platform-stroke {
+.platform-stroke,
+.platform-question {
    position: absolute;
    z-index: 3;
    object-fit: contain;
    opacity: 0;
+}
+
+.generations,
+.catalog,
+.community-proof,
+.builder-preview,
+.faq,
+.landing-footer {
+   content-visibility: auto;
+   contain-intrinsic-size: auto 900px;
 }
 
 .model-codex {
@@ -1021,7 +1072,7 @@ a {
    stroke-linecap: round;
    stroke-linejoin: round;
    vector-effect: non-scaling-stroke;
-   filter: blur(12px) drop-shadow(0 0 16px rgba(115, 164, 255, 0.3));
+   filter: blur(12px);
 }
 
 .generated-snakes > path:nth-of-type(1) {
@@ -1887,6 +1938,19 @@ a {
 }
 
 @media (max-width: 650px) {
+   .hero-platform-orbit,
+   .hero-platform,
+   .feature-stack .model-logo,
+   .feature-stack .collage,
+   .feature-stack .platform-logo,
+   .feature-stack .platform-question {
+      animation: none !important;
+   }
+
+   .collage {
+      filter: none;
+   }
+
    .auth-actions > :last-child {
       display: none;
    }
@@ -2178,10 +2242,11 @@ a {
    .hero-scene,
    .hero-platform-orbit,
    .hero-platform,
-   .hero-prompt,
-   .hero-cta,
-   .scroll-cue,
-   .feature.is-active .model-logo,
+    .hero-prompt,
+    .hero-cta,
+    .scroll-cue,
+    .feature-stack .orbit-stage,
+    .feature.is-active .model-logo,
    .feature.is-active .collage,
    .feature.is-active .platform-logo,
    .feature.is-active .platform-stroke,

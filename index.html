@@ -36,7 +36,11 @@
                         preload="metadata"
                         poster="landing-assets/hero-art-a.png"
                     >
-                        <source src="hero.mp4" type="video/mp4" />
+                        <source
+                            src="hero.mp4"
+                            type="video/mp4"
+                            media="(min-width: 651px)"
+                        />
                         <img src="landing-assets/hero-art-a.png" alt="" />
                     </video>
                     <div class="hero-portal-outline">
@@ -154,21 +158,6 @@
                         <div class="feature-rail"><span></span></div>
                         <div class="orbit-stage model-stage" aria-hidden="true">
                             <img
-                                class="orbit outer"
-                                src="landing-assets/model-orbit-outer.svg"
-                                alt=""
-                            />
-                            <img
-                                class="orbit inner"
-                                src="landing-assets/model-orbit-inner.svg"
-                                alt=""
-                            />
-                            <img
-                                class="orbit-center"
-                                src="landing-assets/forge-symbol.svg"
-                                alt=""
-                            />
-                            <img
                                 class="model-logo model-codex"
                                 src="landing-assets/codex.svg"
                                 alt=""
@@ -223,99 +212,116 @@
                             aria-hidden="true"
                         >
                             <img
-                                class="orbit outer"
-                                src="landing-assets/model-orbit-outer.svg"
-                                alt=""
-                            />
-                            <img
-                                class="orbit inner"
-                                src="landing-assets/model-orbit-inner.svg"
-                                alt=""
-                            />
-                            <img
-                                class="orbit-center"
-                                src="landing-assets/forge-symbol.svg"
-                                alt=""
-                            />
-                            <img
                                 class="collage collage-01"
                                 src="landing-assets/collage-01.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="collage collage-02"
                                 src="landing-assets/collage-02.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="collage collage-03"
                                 src="landing-assets/collage-03.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="collage collage-04"
                                 src="landing-assets/collage-04.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="collage collage-05"
                                 src="landing-assets/collage-05.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="collage collage-06"
                                 src="landing-assets/collage-06.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="collage collage-07"
                                 src="landing-assets/collage-07.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="collage collage-08"
                                 src="landing-assets/collage-08.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="collage collage-09"
                                 src="landing-assets/collage-09.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="collage collage-10"
                                 src="landing-assets/collage-10.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="collage collage-11"
                                 src="landing-assets/collage-11.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="collage collage-12"
                                 src="landing-assets/collage-12.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="collage collage-13"
                                 src="landing-assets/collage-13.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="collage collage-14"
                                 src="landing-assets/collage-14.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="collage collage-15"
                                 src="landing-assets/collage-15.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="collage collage-16"
                                 src="landing-assets/collage-16.png"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                         </div>
                     </section>
@@ -334,34 +340,25 @@
                             aria-hidden="true"
                         >
                             <img
-                                class="orbit outer"
-                                src="landing-assets/platform-orbit-outer.svg"
-                                alt=""
-                            />
-                            <img
-                                class="orbit inner"
-                                src="landing-assets/platform-orbit-inner.svg"
-                                alt=""
-                            />
-                            <img
-                                class="orbit-center"
-                                src="landing-assets/forge-symbol.svg"
-                                alt=""
-                            />
-                            <img
                                 class="platform-logo platform-roblox"
                                 src="landing-assets/roblox-large.svg"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="platform-logo platform-unity"
                                 src="landing-assets/unity-large.svg"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <img
                                 class="platform-logo platform-unreal"
                                 src="landing-assets/unreal-large.svg"
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                             />
                             <svg
                                 class="generated-snakes"
@@ -440,7 +437,7 @@
                                     d="M815 505 C785 606 891 654 925 747 C958 838 866 895 744 848"
                                 />
                             </svg>
-                            <span id="questionMark">?</span>
+                            <span id="questionMark" class="platform-question">?</span>
                         </div>
                     </section>
                 </div>
@@ -453,6 +450,8 @@
                         class="generation-glow"
                         src="landing-assets/carousel-glow.svg"
                         alt=""
+                        loading="lazy"
+                        decoding="async"
                     />
                     <div class="generation-track">
                         <article
@@ -523,6 +522,8 @@
                             <img
                                 src="landing-assets/catalog-card.png"
                                 alt="Generated 3D asset catalog"
+                                loading="lazy"
+                                decoding="async"
                             />
                             <span>3D Generation</span><strong>3D assets</strong>
                         </a>
@@ -538,6 +539,8 @@
                             <img
                                 src="landing-assets/hero-art-a.png"
                                 alt="Generated interface catalog"
+                                loading="lazy"
+                                decoding="async"
                             />
                             <span>GUI Generations</span><strong>GUI</strong>
                         </a>
@@ -553,6 +556,8 @@
                             <img
                                 src="landing-assets/generation-card.png"
                                 alt="Generated audio catalog"
+                                loading="lazy"
+                                decoding="async"
                             />
                             <span>Audio Generations</span
                             ><strong>Music &amp; SFX</strong>
@@ -569,6 +574,8 @@
                             <img
                                 src="landing-assets/collage-10.png"
                                 alt="Game templates catalog"
+                                loading="lazy"
+                                decoding="async"
                             />
                             <span>Game Templates</span
                             ><strong>Templates</strong>
@@ -593,6 +600,8 @@
                     src="landing-assets/community-glow.png"
                     alt=""
                     style="height: 400px"
+                    loading="lazy"
+                    decoding="async"
                 />
                 <h2 id="community-title">
                     <strong>400K+</strong> Game Devs<br />choose ForgeGUI
@@ -964,6 +973,8 @@
                     <img
                         src="plugin-banner.png"
                         alt="ForgeGUI platform artwork"
+                        loading="lazy"
+                        decoding="async"
                     />
                 </aside>
             </div>
@@ -1107,14 +1118,49 @@
                 });
             layoutGenerationCarousel();
 
+            const collageImages = Array.from(
+                document.querySelectorAll(".collage-stage .collage"),
+            );
+
+            function scheduleIdleWork(callback) {
+                if ("requestIdleCallback" in window) {
+                    window.requestIdleCallback(callback, { timeout: 500 });
+                } else {
+                    window.setTimeout(callback, 32);
+                }
+            }
+
+            function decodeCollageImage(index) {
+                if (index >= collageImages.length) return;
+                const image = collageImages[index];
+                const decoded = image.decode
+                    ? image.decode()
+                    : Promise.resolve();
+                decoded.catch(function () {}).finally(function () {
+                    scheduleIdleWork(function () {
+                        decodeCollageImage(index + 1);
+                    });
+                });
+            }
+
+            window.addEventListener(
+                "load",
+                function () {
+                    collageImages.forEach(function (image) {
+                        image.loading = "eager";
+                    });
+                    scheduleIdleWork(function () {
+                        decodeCollageImage(0);
+                    });
+                },
+                { once: true },
+            );
+
             const hero = document.querySelector(".hero");
             const story = document.querySelector(".feature-story");
             const featureStack = document.querySelector(".feature-stack");
             const sharedCounter = document.querySelector(
                 ".shared-feature-count strong",
-            );
-            const sharedLogo = document.querySelector(
-                ".shared-feature-logo-layer img",
             );
             const sharedRail = document.querySelector(".shared-feature-rail");
             const sharedThumb = sharedRail.querySelector("span");
@@ -1139,14 +1185,10 @@
                 document.querySelectorAll(".generated-snakes linearGradient"),
             );
             const snakeCanvas = document.querySelector(".generated-snakes");
-            const reducedMotion = window.matchMedia(
-                "(prefers-reduced-motion: reduce)",
-            ).matches;
             let storyFrame = 0;
             let storyVisible = true;
-            let storyInView = false;
-            let lastStoryUpdate = 0;
             let storyMetrics;
+            let featureLayouts = [];
 
             snakePaths.forEach(function (path) {
                 path.setAttribute("pathLength", "1");
@@ -1169,51 +1211,27 @@
             }
 
             function orbitFeatureAssets(
-                step,
                 assets,
                 revealProgress,
-                orbitPhase,
+                layout,
             ) {
-                const stage = step.querySelector(".orbit-stage");
-                const stageRect = stage.getBoundingClientRect();
-                const logoRect = sharedLogo.getBoundingClientRect();
-                const renderedScaleX = stageRect.width / stage.clientWidth;
-                const renderedScaleY = stageRect.height / stage.clientHeight;
-                const centerX =
-                    (logoRect.left + logoRect.width / 2 - stageRect.left) /
-                    renderedScaleX;
-                const centerY =
-                    (logoRect.top + logoRect.height / 2 - stageRect.top) /
-                    renderedScaleY;
                 const radiusProgress = smoothStep(revealProgress);
                 const positions = [];
-                const ambientAngle = orbitPhase * 0.72;
 
                 assets.forEach(function (asset, assetIndex) {
-                    const finalX = asset.offsetLeft + asset.offsetWidth / 2;
-                    const finalY = asset.offsetTop + asset.offsetHeight / 2;
-                    const radiusX = finalX - centerX;
-                    const radiusY = finalY - centerY;
-                    const orbitDirection = assetIndex % 2 === 0 ? -1 : 1;
-                    const orbitAngle =
-                        ambientAngle +
-                        (1 - revealProgress) *
-                            orbitDirection *
-                            (0.9 + assetIndex * 0.08);
-                    const cosine = Math.cos(orbitAngle);
-                    const sine = Math.sin(orbitAngle);
-                    const curvedX =
-                        (radiusX * cosine - radiusY * sine) * radiusProgress;
-                    const curvedY =
-                        (radiusX * sine + radiusY * cosine) * radiusProgress;
-                    const displayedX = centerX + curvedX;
-                    const displayedY = centerY + curvedY;
+                    const finalPosition = layout.finalPositions[assetIndex];
+                    const displayedX =
+                        layout.centerX +
+                        (finalPosition.x - layout.centerX) * radiusProgress;
+                    const displayedY =
+                        layout.centerY +
+                        (finalPosition.y - layout.centerY) * radiusProgress;
 
                     asset.style.translate =
                         displayedX -
-                        finalX +
+                        finalPosition.x +
                         "px " +
-                        (displayedY - finalY) +
+                        (displayedY - finalPosition.y) +
                         "px";
                     asset.style.scale = String(radiusProgress);
                     asset.style.opacity = String(
@@ -1223,20 +1241,16 @@
                 });
 
                 return {
-                    centerX: centerX,
-                    centerY: centerY,
-                    height: stage.clientHeight,
+                    centerX: layout.centerX,
+                    centerY: layout.centerY,
+                    height: layout.height,
                     positions: positions,
-                    width: stage.clientWidth,
+                    width: layout.width,
                 };
             }
 
-            function updateSnakePaths(layout, revealProgress, ambientPhase) {
+            function updateSnakePaths(layout, revealProgress) {
                 if (!layout) return;
-                snakeCanvas.setAttribute(
-                    "viewBox",
-                    "0 0 " + layout.width + " " + layout.height,
-                );
 
                 snakePaths.forEach(function (path, index) {
                     const target = layout.positions[index];
@@ -1253,11 +1267,9 @@
                     const distance = Math.max(Math.hypot(dx, dy), 1);
                     const normalX = -dy / distance;
                     const normalY = dx / distance;
-                    const bendPulse =
-                        0.8 + Math.sin(ambientPhase * 12 + index * 1.7) * 0.35;
                     const bend =
                         Math.min(105, distance * 0.25) *
-                        bendPulse *
+                        0.8 *
                         (index % 2 ? -1 : 1);
                     const firstX = layout.centerX + dx * 0.32 + normalX * bend;
                     const firstY = layout.centerY + dy * 0.32 + normalY * bend;
@@ -1296,6 +1308,29 @@
 
             function measureStory() {
                 const viewportHeight = window.innerHeight;
+                featureLayouts = featureSteps.map(function (step, index) {
+                    const stage = step.querySelector(".orbit-stage");
+                    const width = stage.clientWidth;
+                    const height = stage.clientHeight;
+                    const layout = {
+                        centerX: width / 2,
+                        centerY: height / 2,
+                        finalPositions: featureAssets[index].map(function (asset) {
+                            return {
+                                x: asset.offsetLeft + asset.offsetWidth / 2,
+                                y: asset.offsetTop + asset.offsetHeight / 2,
+                            };
+                        }),
+                        height: height,
+                        width: width,
+                    };
+                    return layout;
+                });
+                const platformLayout = featureLayouts[2];
+                snakeCanvas.setAttribute(
+                    "viewBox",
+                    "0 0 " + platformLayout.width + " " + platformLayout.height,
+                );
                 storyMetrics = {
                     copyRailTop: sharedCounter.parentElement.offsetTop,
                     heroHeight: Math.max(hero.offsetHeight, 1),
@@ -1316,18 +1351,9 @@
                 };
             }
 
-            function updateStory(frameTime) {
+            function updateStory() {
                 storyFrame = 0;
                 if (!storyVisible || document.hidden) return;
-                if (
-                    storyInView &&
-                    !reducedMotion &&
-                    frameTime - lastStoryUpdate < 1000 / 30
-                ) {
-                    storyFrame = requestAnimationFrame(updateStory);
-                    return;
-                }
-                lastStoryUpdate = frameTime;
                 if (!storyMetrics) measureStory();
                 const viewportHeight = window.innerHeight;
                 const heroProgress = Math.min(
@@ -1361,7 +1387,6 @@
                     ),
                 );
                 const scenePosition = bufferedScenePosition(progress);
-                const ambientOrbit = reducedMotion ? 0 : frameTime * 0.0002;
                 const viewportFit = Math.min(
                     1,
                     Math.max(0.58, (viewportHeight - 220) / 1010),
@@ -1460,10 +1485,9 @@
                     let layout;
                     if (visibility > 0 || wasVisible) {
                         layout = orbitFeatureAssets(
-                            step,
                             featureAssets[index],
                             visibility,
-                            ambientOrbit,
+                            featureLayouts[index],
                         );
                     }
                     step.dataset.orbitVisible = String(visibility > 0);
@@ -1474,10 +1498,7 @@
                 });
 
                 snakeCanvas.style.opacity = String(platformReveal);
-                updateSnakePaths(platformLayout, platformReveal, ambientOrbit);
-                if (storyInView && !reducedMotion && !document.hidden) {
-                    storyFrame = requestAnimationFrame(updateStory);
-                }
+                updateSnakePaths(platformLayout, platformReveal);
             }
 
             function scheduleStory() {
@@ -1490,7 +1511,10 @@
             const storyObserver = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
                     if (entry.target === story) {
-                        storyInView = entry.isIntersecting;
+                        featureStack.classList.toggle(
+                            "is-in-view",
+                            entry.isIntersecting,
+                        );
                     }
                     if (entry.isIntersecting) {
                         visibleStorySections.add(entry.target);
@@ -1508,6 +1532,10 @@
                 const videoObserver = new IntersectionObserver(
                     function (entries) {
                         heroVideoVisible = entries[0].isIntersecting;
+                        hero.classList.toggle(
+                            "is-visible",
+                            heroVideoVisible,
+                        );
                         if (
                             heroVideoVisible &&
                             !document.body.classList.contains("modal-open")

@@ -314,9 +314,11 @@
     var context = canvas.getContext("2d");
     var points = [];
     var frameId = 0;
-    var fadeDuration = 460;
-    var maximumPoints = 64;
+    var resizeFrame = 0;
+    var fadeDuration = 360;
+    var maximumPoints = 32;
     var pixelRatio = 1;
+    var previousBounds = null;
 
     canvas.setAttribute("aria-hidden", "true");
     canvas.style.position = "fixed";
@@ -329,11 +331,20 @@
     document.body.appendChild(canvas);
 
     function resizeCanvas() {
-      pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      pixelRatio = 1;
       canvas.width = Math.round(window.innerWidth * pixelRatio);
       canvas.height = Math.round(window.innerHeight * pixelRatio);
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
       points = [];
+      previousBounds = null;
+    }
+
+    function scheduleResize() {
+      if (resizeFrame) return;
+      resizeFrame = requestAnimationFrame(function () {
+        resizeFrame = 0;
+        resizeCanvas();
+      });
     }
 
     function scheduleFrame() {
@@ -359,7 +370,7 @@
           return;
         }
 
-        if (now - previous.time < 12 && distance < 12) return;
+        if (now - previous.time < 16 && distance < 16) return;
       }
 
       points.push({ x: x, y: y, time: now });
@@ -367,70 +378,82 @@
       scheduleFrame();
     }
 
-    function pointAlpha(point, now, index) {
-      var ageProgress = (now - point.time) / fadeDuration;
-      var alpha = Math.max(0, 1 - ageProgress);
-      var edgeFade = Math.min(1, index / 3, (points.length - 1 - index) / 2);
-      return alpha * edgeFade;
+    function trailBounds() {
+      if (!points.length) return null;
+      var minX = points[0].x;
+      var minY = points[0].y;
+      var maxX = minX;
+      var maxY = minY;
+      points.forEach(function (point) {
+        minX = Math.min(minX, point.x);
+        minY = Math.min(minY, point.y);
+        maxX = Math.max(maxX, point.x);
+        maxY = Math.max(maxY, point.y);
+      });
+      var padding = 20;
+      return {
+        x: minX - padding,
+        y: minY - padding,
+        width: maxX - minX + padding * 2,
+        height: maxY - minY + padding * 2,
+      };
     }
 
     function drawTail(now) {
       frameId = 0;
+      if (previousBounds) {
+        context.clearRect(
+          previousBounds.x,
+          previousBounds.y,
+          previousBounds.width,
+          previousBounds.height,
+        );
+      }
       points = points.filter(function (point) {
         return now - point.time < fadeDuration;
       });
-      context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      previousBounds = trailBounds();
 
       if (points.length > 1) {
+        var first = points[0];
+        var last = points[points.length - 1];
+        var idleFade = Math.max(0, 1 - (now - last.time) / fadeDuration);
+        var gradient = context.createLinearGradient(
+          first.x,
+          first.y,
+          last.x,
+          last.y,
+        );
+        gradient.addColorStop(0, "rgba(0, 89, 255, 0)");
+        gradient.addColorStop(0.35, "rgba(0, 89, 255, 0.5)");
+        gradient.addColorStop(1, "rgba(89, 167, 255, 0.92)");
+
         context.lineCap = "round";
         context.lineJoin = "round";
         context.globalCompositeOperation = "lighter";
-        context.shadowBlur = 12;
+        context.globalAlpha = idleFade;
+        context.shadowBlur = 10;
         context.shadowColor = "rgba(0, 119, 255, 0.7)";
 
-        for (var index = 1; index < points.length; index += 1) {
-          var previous = points[index - 1];
+        context.beginPath();
+        context.moveTo(first.x, first.y);
+        for (var index = 1; index < points.length - 1; index += 1) {
           var current = points[index];
-          var next = points[index + 1] || current;
-          var startX =
-            index === 1 ? previous.x : (previous.x + current.x) / 2;
-          var startY =
-            index === 1 ? previous.y : (previous.y + current.y) / 2;
-          var endX =
-            index === points.length - 1
-              ? current.x
-              : (current.x + next.x) / 2;
-          var endY =
-            index === points.length - 1
-              ? current.y
-              : (current.y + next.y) / 2;
-          var startAlpha = pointAlpha(previous, now, index - 1);
-          var endAlpha = pointAlpha(current, now, index);
-          var gradient = context.createLinearGradient(
-            startX,
-            startY,
-            endX,
-            endY,
+          var next = points[index + 1];
+          context.quadraticCurveTo(
+            current.x,
+            current.y,
+            (current.x + next.x) / 2,
+            (current.y + next.y) / 2,
           );
-
-          gradient.addColorStop(
-            0,
-            "rgba(0, 89, 255, " + (startAlpha * 0.72).toFixed(3) + ")",
-          );
-          gradient.addColorStop(
-            1,
-            "rgba(89, 167, 255, " + (endAlpha * 0.92).toFixed(3) + ")",
-          );
-
-          context.beginPath();
-          context.moveTo(startX, startY);
-          context.quadraticCurveTo(current.x, current.y, endX, endY);
-          context.lineWidth = 2.5 + Math.max(startAlpha, endAlpha) * 3.5;
-          context.strokeStyle = gradient;
-          context.stroke();
         }
+        context.lineTo(last.x, last.y);
+        context.lineWidth = 5;
+        context.strokeStyle = gradient;
+        context.stroke();
 
         context.globalCompositeOperation = "source-over";
+        context.globalAlpha = 1;
         context.shadowBlur = 0;
       }
 
@@ -438,15 +461,16 @@
     }
 
     document.addEventListener("pointermove", function (event) {
+      if (document.body.classList.contains("modal-open")) return;
       var samples = event.getCoalescedEvents
         ? event.getCoalescedEvents()
         : [event];
-      samples.forEach(addPoint);
+      addPoint(samples[samples.length - 1]);
     });
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) points = [];
     });
-    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("resize", scheduleResize);
     resizeCanvas();
   })();
 })();
