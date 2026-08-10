@@ -16,6 +16,9 @@
   var renderedConversationCount = 0;
   var pendingClarification = null;
   var selectedAttachments = new WeakMap();
+  var MAX_ATTACHMENTS = 9;
+  var MAX_ATTACHMENT_SIZE = 8 * 1024 * 1024;
+  var ALLOWED_ATTACHMENT_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
   var taskColumns = [
     "id",
     "message_id",
@@ -43,10 +46,24 @@
     return url;
   }
 
-  function queuePendingTurn(message) {
+  function normalizeReferences(references) {
+    return (Array.isArray(references) ? references : []).filter(function (reference) {
+      return reference && typeof reference.url === "string" && reference.url;
+    }).slice(0, MAX_ATTACHMENTS).map(function (reference, index) {
+      return {
+        index: index,
+        label: "reference " + (index + 1),
+        name: reference.name || "Reference " + (index + 1),
+        url: reference.url,
+      };
+    });
+  }
+
+  function queuePendingTurn(message, references) {
     var pending = {
       id: api.uuid(),
       message: message,
+      references: normalizeReferences(references),
       createdAt: Date.now(),
     };
     try {
@@ -69,6 +86,7 @@
         typeof pending.message !== "string" ||
         Date.now() - pending.createdAt > 5 * 60 * 1000
       ) return null;
+      pending.references = normalizeReferences(pending.references);
       return pending;
     } catch (_) {
       return null;
@@ -427,7 +445,7 @@
   }
 
   function setChatBusy(busy) {
-    document.querySelectorAll("[data-chat-input], [data-chat-submit]").forEach(function (control) {
+    document.querySelectorAll("[data-chat-input], [data-chat-submit], [data-chat-attachment], [data-chat-attachment-remove]").forEach(function (control) {
       control.disabled = busy;
     });
     document.querySelectorAll("[data-chat-form]").forEach(function (form) {
@@ -449,17 +467,19 @@
     });
   }
 
-  async function uploadAttachments(files) {
+  async function uploadAttachments(files, startIndex) {
     if (!files || !files.length) return [];
+    files.forEach(function (file) {
+      if (!ALLOWED_ATTACHMENT_TYPES.includes(file.type) || file.size > MAX_ATTACHMENT_SIZE) {
+        throw new Error("Reference images must be JPEG, PNG, WebP, or GIF files under 8 MB.");
+      }
+    });
     var current = await api.auth.session();
     if (!current) throw new Error("Your session has expired.");
     var storage = client.storage.from("asset-images");
     var uploaded = [];
     for (var index = 0; index < files.length; index += 1) {
       var file = files[index];
-      if (!file.type.startsWith("image/") || file.size > 8 * 1024 * 1024) {
-        throw new Error("Reference images must be image files under 8 MB.");
-      }
       var extension = (file.name.split(".").pop() || "png").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 5) || "png";
       var path = current.user.id + "/chat/" + api.uuid() + "." + extension;
       var result = await storage.upload(path, file, {
@@ -468,8 +488,8 @@
       });
       if (result.error) throw result.error;
       uploaded.push({
-        index: index,
-        label: file.name,
+        index: (startIndex || 0) + index,
+        label: "reference " + ((startIndex || 0) + index + 1),
         name: file.name,
         url: storage.getPublicUrl(path).data.publicUrl,
       });
@@ -477,11 +497,13 @@
     return uploaded;
   }
 
-  async function submitMessage(message, clarificationAnswer, attachmentFiles) {
+  async function submitMessage(message, clarificationAnswer, availableReferences) {
     var prompt = String(message || "").trim();
-    if (!prompt || prompt.length > 4000) return;
+    if (!prompt) throw new Error("Describe what you want ForgeGUI to create.");
+    if (prompt.length > 4000) throw new Error("Messages must be 4,000 characters or fewer.");
+    var references = normalizeReferences(availableReferences);
     if (!document.querySelector("[data-chat-messages]")) {
-      var pending = queuePendingTurn(prompt);
+      var pending = queuePendingTurn(prompt, references);
       if (!pending) throw new Error("Unable to open a temporary conversation.");
       var temporaryUrl = conversationUrl(null);
       temporaryUrl.searchParams.set("temporary", pending.id);
@@ -500,7 +522,6 @@
     clearWorkspaceError();
     setChatBusy(true);
     try {
-      var references = await uploadAttachments(attachmentFiles || []);
       var requestBody = {
         conversation_id: activeConversationId,
         message: prompt,
@@ -540,20 +561,70 @@
       var submit = form.querySelector("[data-chat-submit]");
       var attachmentButton = form.querySelector("[data-chat-attachment]");
       var attachmentInput = form.querySelector("[data-chat-attachment-input]");
+      var attachmentPreview = form.querySelector("[data-chat-attachment-preview]");
       if (!input || !submit) return;
-      async function send() {
-        var value = input.value;
-        var attachments = selectedAttachments.get(form) || [];
-        input.value = "";
-        try {
-          await submitMessage(value, null, attachments);
-          selectedAttachments.delete(form);
-          if (attachmentInput) attachmentInput.value = "";
-          if (attachmentButton) {
-            attachmentButton.classList.remove("hasAttachments");
+      function renderSelectedAttachments() {
+        var references = normalizeReferences(selectedAttachments.get(form));
+        if (references.length) selectedAttachments.set(form, references);
+        else selectedAttachments.delete(form);
+        if (attachmentPreview) {
+          attachmentPreview.querySelectorAll("[data-chat-attachment-item]").forEach(function (item) {
+            item.remove();
+          });
+          references.forEach(function (reference, index) {
+            var item = document.createElement("fg-chatattachment");
+            item.dataset.chatAttachmentItem = "";
+            var image = document.createElement("img");
+            image.className = "chatboxAttachmentThumbnail";
+            image.src = reference.url;
+            image.alt = reference.name;
+            var remove = document.createElement("button");
+            remove.className = "chatboxAttachmentRemove";
+            remove.type = "button";
+            remove.dataset.chatAttachmentRemove = String(index);
+            remove.setAttribute("aria-label", "Remove " + reference.name);
+            var removeIcon = document.createElement("img");
+            removeIcon.src = new URL("icons/x.svg", api.root()).href;
+            removeIcon.alt = "";
+            remove.appendChild(removeIcon);
+            remove.addEventListener("click", function () {
+              var next = references.filter(function (_, referenceIndex) {
+                return referenceIndex !== index;
+              });
+              selectedAttachments.set(form, next);
+              renderSelectedAttachments();
+              attachmentButton.focus();
+            });
+            item.append(image, remove);
+            attachmentPreview.appendChild(item);
+          });
+        }
+        if (attachmentButton) {
+          attachmentButton.classList.toggle("hasAttachments", references.length > 0);
+          if (references.length) {
+            attachmentButton.dataset.attachmentCount = String(references.length);
+            attachmentButton.title = references.map(function (reference) { return reference.name; }).join(", ");
+          } else {
             attachmentButton.removeAttribute("data-attachment-count");
             attachmentButton.title = "";
           }
+        }
+      }
+      function clearSelectedAttachments() {
+        selectedAttachments.delete(form);
+        if (attachmentInput) attachmentInput.value = "";
+        renderSelectedAttachments();
+      }
+      async function send() {
+        if (attachmentButton && attachmentButton.disabled) {
+          throw new Error("Wait for reference images to finish uploading.");
+        }
+        var value = input.value;
+        var references = selectedAttachments.get(form) || [];
+        input.value = "";
+        try {
+          await submitMessage(value, null, references);
+          clearSelectedAttachments();
         } catch (error) {
           input.value = value;
           throw error;
@@ -569,13 +640,25 @@
       if (attachmentButton && attachmentInput) {
         attachmentButton.addEventListener("click", function () { attachmentInput.click(); });
         attachmentInput.addEventListener("change", function () {
-          var files = Array.from(attachmentInput.files || []).slice(0, 4);
-          selectedAttachments.set(form, files);
-          attachmentButton.classList.toggle("hasAttachments", files.length > 0);
-          if (files.length) {
-            attachmentButton.dataset.attachmentCount = String(files.length);
-            attachmentButton.title = files.map(function (file) { return file.name; }).join(", ");
+          var currentReferences = selectedAttachments.get(form) || [];
+          var availableSlots = MAX_ATTACHMENTS - currentReferences.length;
+          var files = Array.from(attachmentInput.files || []);
+          attachmentInput.value = "";
+          if (!files.length) return;
+          if (availableSlots <= 0 || files.length > availableSlots) {
+            showWorkspaceError(new Error("You can attach up to " + MAX_ATTACHMENTS + " reference images."));
+            return;
           }
+          clearWorkspaceError();
+          attachmentButton.disabled = true;
+          submit.disabled = true;
+          uploadAttachments(files, currentReferences.length).then(function (uploaded) {
+            selectedAttachments.set(form, currentReferences.concat(uploaded));
+            renderSelectedAttachments();
+          }).catch(showWorkspaceError).finally(function () {
+            attachmentButton.disabled = false;
+            submit.disabled = false;
+          });
         });
       }
     });
@@ -646,14 +729,14 @@
           role: "user",
           content: pendingTurn.message,
           created_at: new Date(pendingTurn.createdAt).toISOString(),
-          reference_image_urls: [],
+          reference_image_urls: pendingTurn.references.map(function (reference) { return reference.url; }),
         }],
         tasks: [],
       });
       renderAssets([]);
       requestAnimationFrame(function () {
         requestAnimationFrame(function () {
-          submitMessage(pendingTurn.message).catch(function (error) {
+          submitMessage(pendingTurn.message, null, pendingTurn.references).catch(function (error) {
             var input = document.querySelector("[data-chat-input]");
             if (input) input.value = pendingTurn.message;
             showWorkspaceError(error);

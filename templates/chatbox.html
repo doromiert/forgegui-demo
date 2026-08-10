@@ -1,4 +1,10 @@
 <fg-chatbox data-chat-form>
+  <fg-assetbar data-chat-attachment-preview role="group" aria-label="Reference images">
+    <button class="chatboxAttachmentButton" type="button" aria-label="Add reference images" data-chat-attachment>
+      <img src="icons/add.svg" alt="" />
+    </button>
+    <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple hidden data-chat-attachment-input />
+  </fg-assetbar>
   <textarea
     data-chat-input
     maxlength="4000"
@@ -9,10 +15,6 @@
     <button class="chatboxButton mobileChatboxControl" type="button" aria-label="More options">
       <img src="icons/3dots.svg" alt="" />
     </button>
-    <button class="chatboxButton mobileChatboxControl" type="button" aria-label="Add attachment" data-chat-attachment>
-      <img src="icons/add.svg" alt="" />
-    </button>
-    <input type="file" accept="image/*" multiple hidden data-chat-attachment-input />
     <button class="chatboxButton" type="button" data-context-target="chatboxGamePicker">
       <img src="icons/roblox.svg" alt="" />
       <span>Roblox</span>

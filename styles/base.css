@@ -445,6 +445,7 @@ fg-chatbox {
       align-items: center;
       gap: 10px;
       align-self: stretch;
+      overflow-x: auto;
       border-bottom: 1px solid #1f1f1f;
       background:
          linear-gradient(0deg, #101010 0%, #101010 100%),
@@ -459,6 +460,60 @@ fg-chatbox {
          background: #212121;
          border: none;
          box-sizing: border-box;
+      }
+
+      .chatboxAttachmentButton {
+         position: relative;
+         width: 48px;
+         height: 48px;
+         flex: 0 0 48px;
+         justify-content: center;
+         cursor: pointer;
+      }
+
+      .chatboxAttachmentButton img {
+         width: 24px;
+         height: 24px;
+      }
+
+      fg-chatattachment {
+         position: relative;
+         width: 48px;
+         height: 48px;
+         flex: 0 0 48px;
+         overflow: hidden;
+         border: 1px solid rgba(255, 255, 255, 0.16);
+         border-radius: 10px;
+         background: #212121;
+      }
+
+      .chatboxAttachmentThumbnail {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
+
+      button.chatboxAttachmentRemove {
+         position: absolute;
+         inset: 0;
+         display: grid;
+         padding: 12px;
+         place-items: center;
+         border-radius: 9px;
+         background: rgba(0, 0, 0, 0.68);
+         opacity: 0;
+         cursor: pointer;
+         transition: opacity 150ms ease;
+      }
+
+      .chatboxAttachmentRemove img {
+         width: 24px;
+         height: 24px;
+      }
+
+      fg-chatattachment:hover .chatboxAttachmentRemove,
+      .chatboxAttachmentRemove:focus-visible {
+         opacity: 1;
       }
    }
 }
