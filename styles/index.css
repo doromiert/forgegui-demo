@@ -2397,6 +2397,11 @@ body.modal-open {
    outline-offset: 2px;
 }
 
+.login-button:disabled {
+   cursor: not-allowed;
+   opacity: 0.48;
+}
+
 .login-button-create {
    font-weight: 600;
 }
@@ -2528,6 +2533,106 @@ body.modal-open {
    flex-direction: column;
    align-items: stretch;
    gap: 15px;
+}
+
+.login-status {
+   min-height: 20px;
+   margin: -4px 4px 0;
+   color: #ff8f8f;
+   font-size: 14px;
+   line-height: 1.35;
+   text-align: center;
+}
+
+.login-status.success {
+   color: #86efac;
+}
+
+.forge-captcha[hidden] {
+   display: none;
+}
+
+.forge-captcha {
+   position: fixed;
+   z-index: 2147483647;
+   inset: 0;
+   display: grid;
+   padding: 20px;
+   place-items: center;
+   background: rgba(0, 0, 0, 0.72);
+   backdrop-filter: blur(8px);
+}
+
+.forge-captcha-panel {
+   width: min(390px, 100%);
+   padding: 24px;
+   border: 1px solid rgba(255, 255, 255, 0.14);
+   border-radius: 22px;
+   background: #0c0c0c;
+   box-shadow: 0 30px 100px rgba(0, 0, 0, 0.65);
+}
+
+.forge-captcha-header {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 16px;
+}
+
+.forge-captcha-header h3,
+.forge-captcha-prompt,
+.forge-captcha-error {
+   margin: 0;
+}
+
+.forge-captcha-close,
+.forge-captcha-refresh {
+   border: 0;
+   background: transparent;
+   color: #fff;
+   cursor: pointer;
+   font: inherit;
+}
+
+.forge-captcha-prompt {
+   margin-top: 16px;
+   color: rgba(255, 255, 255, 0.78);
+   text-transform: capitalize;
+}
+
+.forge-captcha-grid {
+   display: grid;
+   margin-top: 16px;
+   grid-template-columns: repeat(3, minmax(0, 1fr));
+   gap: 8px;
+}
+
+.forge-captcha-tile {
+   aspect-ratio: 1;
+   border: 1px solid rgba(255, 255, 255, 0.1);
+   border-radius: 14px;
+   background: rgba(255, 255, 255, 0.05);
+   color: #fff;
+   cursor: pointer;
+   font: 600 13px/1 "Inter Tight", sans-serif;
+   text-transform: capitalize;
+}
+
+.forge-captcha-tile:hover {
+   border-color: rgba(104, 168, 255, 0.7);
+   background: rgba(104, 168, 255, 0.14);
+}
+
+.forge-captcha-tile:disabled {
+   cursor: wait;
+   opacity: 0.6;
+}
+
+.forge-captcha-error {
+   min-height: 20px;
+   margin-top: 12px;
+   color: #ff8f8f;
+   font-size: 14px;
 }
 
 .login-field {

@@ -11,54 +11,19 @@
             <img src="icons/home.svg" alt="" />
             <span>Home</span>
         </a>
-        <a
-            href="library/overview.html"
-            class="sidebarElem"
-            data-route="library/overview.html"
-        >
+        <a href="library/overview.html" class="sidebarElem" data-route="library/overview.html">
             <img src="icons/file.svg" alt="" />
             <span>Assets</span>
         </a>
-        <a
-            href="community.html"
-            class="sidebarElem"
-            data-route="community.html"
-        >
+        <a href="community.html" class="sidebarElem" data-route="community.html">
             <img src="icons/people.svg" alt="" />
             <span>Community</span>
         </a>
     </fg-specialtabs>
 
-    <fg-projects>
-        <fg-toplabel>Game Projects</fg-toplabel>
-        <a href="oldChat.html" class="sidebarElem" data-route="oldChat.html">
-            <img src="icons/s-3d.svg" alt="" />
-            <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-            <img src="icons/s-3d.svg" alt="" />
-            <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-            <img src="icons/s-3d.svg" alt="" />
-            <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-            <img src="icons/s-3d.svg" alt="" />
-            <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-            <img src="icons/s-3d.svg" alt="" />
-            <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-            <img src="icons/s-3d.svg" alt="" />
-            <span>Message 1</span>
-        </a>
-        <a href="oldChat.html" class="sidebarElem">
-            <img src="icons/s-3d.svg" alt="" />
-            <span>Message 1</span>
-        </a>
+    <fg-projects data-conversation-list hidden>
+        <fg-toplabel>Games</fg-toplabel>
+        <span class="conversationListStatus" data-conversation-status>Loading chats...</span>
     </fg-projects>
 
     <fg-contextmenu
@@ -66,66 +31,44 @@
         class="hidden user"
         style="width: 282px"
     >
-        <button><img src="icons/Exclamation.svg" alt="" /> Help</button>
-        <a href="settings/overview.html"
-            ><img src="icons/Settings.svg" alt="" /> Settings</a
-        >
+        <a href="mailto:support@forgegui.com"><img src="icons/Exclamation.svg" alt="" /> Help</a>
+        <a href="settings/overview.html"><img src="icons/Settings.svg" alt="" /> Settings</a>
 
-        <button class="destructive">
+        <button class="destructive" data-auth-signout>
             <img src="icons/SignOut.svg" alt="" /> Logout
         </button>
     </fg-contextmenu>
 
     <fg-bottom class="sb">
-        <a
-            href="plans.html"
-            class="sidebarElem upgradeButton"
-            data-route="plans.html"
-        >
-            <img
-                src="icons/crown.svg"
-                alt=""
-                style="image-rendering: optimizeQuality"
-            />
+        <a href="plans.html" class="sidebarElem upgradeButton" data-route="plans.html">
+            <img src="icons/crown.svg" alt="" style="image-rendering: optimizeQuality" />
             <span>Upgrade to Pro</span>
         </a>
 
         <fg-actions>
-            <a
-                href="courses.html"
-                class="sidebarElem"
-                data-route="courses.html,course/"
-            >
+            <a href="courses.html" class="sidebarElem" data-route="courses.html,course/">
                 <img src="icons/book.svg" alt="" />
                 <span>Courses</span>
             </a>
-            <a
-                href="plugins.html"
-                class="sidebarElem"
-                data-route="plugins.html"
-            >
+            <a href="plugins.html" class="sidebarElem" data-route="plugins.html">
                 <img src="icons/plugin.svg" alt="" />
                 <span>Plugins</span>
             </a>
-            <a href="leaderboard.html" class="sidebarElem">
+            <a href="leaderboard.html" class="sidebarElem" data-route="leaderboard.html">
                 <img src="icons/Trophy.svg" alt="" />
                 <span>Leaderboard</span>
             </a>
-            <a href="placeholder.html" class="sidebarElem">
+            <a href="notifications.html" class="sidebarElem" data-route="notifications.html">
                 <img src="icons/bell.svg" alt="" />
                 <span>Notifications</span>
-            </a>
-            <a href="gameMaker.html" class="sidebarElem">
-                <img src="icons/bell.svg" alt="" />
-                <span>[dev] game maker</span>
             </a>
         </fg-actions>
 
         <fg-sidebaruserbutton data-context-target="userMenu">
-            <img src="assets/generic.png" alt="" />
+            <img src="assets/generic.png" alt="" data-user-avatar />
             <fg-vertical>
-                <b>generic</b>
-                <span>generic@gmail.com</span>
+                <b data-user-name>Creator</b>
+                <span data-user-email></span>
             </fg-vertical>
             <img src="icons/selection.svg" alt="" />
         </fg-sidebaruserbutton>

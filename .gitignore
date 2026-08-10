@@ -1,2 +1,5 @@
 dist
+node_modules
+.env
+.env.local
 /Firefox * profile.json.gz

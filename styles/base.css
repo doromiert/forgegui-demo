@@ -148,6 +148,20 @@ fg-sidebar {
       }
    }
 
+   .conversationListStatus {
+      padding: 8px 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      line-height: 1.35;
+   }
+
+   .conversationEntry span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
+
    .sidebarElem {
       text-decoration: none;
       display: flex;
@@ -447,6 +461,35 @@ fg-chatbox {
          box-sizing: border-box;
       }
    }
+}
+
+.mobileChatboxControl {
+   display: none;
+}
+
+.chatboxStatus {
+   width: 100%;
+   margin: 0;
+   padding: 0 16px 12px;
+   color: #ff9b9b;
+   font-size: 14px;
+   text-align: left;
+}
+
+.productionEmptyState {
+   display: grid;
+   place-content: center;
+   gap: 12px;
+   text-align: center;
+}
+
+.productionEmptyState > img {
+   width: 48px;
+   margin: 0 auto;
+}
+
+.productionEmptyState > p {
+   color: rgba(255, 255, 255, 0.55);
 }
 
 fg-contextmenu {

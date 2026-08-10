@@ -192,6 +192,13 @@ fg-doxx {
    }
 }
 
+.editProfileButton:disabled,
+.listboxAction:disabled,
+fg-verifiedcta[aria-disabled="true"] {
+   cursor: not-allowed;
+   opacity: 0.55;
+}
+
 /* ── Settings account popups ────────────────────────────────────── */
 fg-popupcontainer > fg-popup.settingsPopup {
    width: 670px;

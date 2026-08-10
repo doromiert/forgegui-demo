@@ -165,8 +165,15 @@ body.mobile-home {
 }
 
 .mobile-create-actions > div {
+   align-items: center;
+   color: rgba(255, 255, 255, 0.72);
    display: flex;
    gap: 10px;
+}
+
+.mobile-create-actions > div img {
+   width: 24px;
+   height: 24px;
 }
 
 .mobile-create-actions button {

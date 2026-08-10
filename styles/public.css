@@ -269,6 +269,24 @@ a {
    text-align: center;
 }
 
+.publicProductionEmpty {
+    display: grid;
+    min-height: 360px;
+    padding: 80px 24px;
+    place-content: center;
+    gap: 12px;
+    text-align: center;
+}
+
+.publicProductionEmpty h2,
+.publicProductionEmpty p {
+    margin: 0;
+}
+
+.publicProductionEmpty p {
+    color: rgba(255, 255, 255, 0.62);
+}
+
 fg-popupcontainer {
    position: fixed;
    z-index: 1000;

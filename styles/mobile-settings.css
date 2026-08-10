@@ -140,7 +140,7 @@ body.mobile-settings {
    object-fit: cover;
    width: 100%;
 }
-.mobile-account-hero > img:last-child {
+.mobile-account-hero > img[data-user-avatar] {
    border: 3px solid #161616;
    background-color: #161616;
    border-radius: 50%;
@@ -210,6 +210,10 @@ body.mobile-settings {
 }
 .mobile-settings-list article button.is-destructive {
    background: #593232;
+}
+.mobile-settings-list article button:disabled {
+   cursor: not-allowed;
+   opacity: 0.55;
 }
 .mobile-billing-list {
    margin-top: 2px;

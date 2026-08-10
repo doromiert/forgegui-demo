@@ -50,6 +50,14 @@ fg-mainview.project {
       box-sizing: border-box;
    }
 
+   .assetBackendStatus {
+      grid-column: 1 / -1;
+      margin: 0;
+      padding: 48px 20px;
+      color: rgba(255, 255, 255, 0.55);
+      text-align: center;
+   }
+
    fg-asset {
       display: flex;
       flex-direction: column;

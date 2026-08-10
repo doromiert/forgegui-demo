@@ -42,7 +42,8 @@ fg-timeline {
    border-radius: 20px;
    border: 1px solid #454545;
    box-sizing: border-box;
-   max-width: 770px;
+   width: 770px;
+   max-width: 100%;
    height: max-content;
    fg-post {
       cursor: pointer;
@@ -50,6 +51,56 @@ fg-timeline {
    fg-post:last-child {
       border: none;
    }
+}
+
+.communityStatus {
+   width: 100%;
+   margin: 0;
+   padding: 36px 24px;
+   box-sizing: border-box;
+   color: rgba(255, 255, 255, 0.6);
+   text-align: center;
+}
+
+.communityStatus.is-error {
+   color: #ff9b9b;
+}
+
+fg-engagement[data-community-like],
+[data-community-share],
+[data-community-comments] {
+   cursor: pointer;
+}
+
+fg-engagement[data-community-like].is-liked img,
+fg-popup#post-detail [data-community-like].is-liked img {
+   filter: sepia(1) saturate(8) hue-rotate(305deg);
+}
+
+[data-community-follow].is-following {
+   background: #292929 !important;
+   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.2) !important;
+}
+
+fg-mediaplaceholder[data-community-media-preview] {
+   display: flex;
+   overflow-x: auto;
+   gap: 6px;
+}
+
+fg-mediaplaceholder[data-community-media-preview] img {
+   width: 100%;
+   min-width: 100%;
+   height: 100%;
+   object-fit: cover;
+   border-radius: 10px;
+}
+
+.communityCommentEmpty {
+   margin: 0;
+   padding: 24px;
+   color: rgba(255, 255, 255, 0.6);
+   text-align: center;
 }
 
 fg-sticky {
@@ -933,7 +984,8 @@ fg-popup#post-detail {
          }
       }
 
-      fg-commentfield {
+      fg-commentfield,
+      > form > fg-commentfield {
          display: flex;
          align-items: center;
          gap: 15px;
@@ -969,6 +1021,13 @@ fg-popup#post-detail {
             height: 32px;
             cursor: pointer;
             flex-shrink: 0;
+         }
+
+         button {
+            display: flex;
+            padding: 0;
+            border: 0;
+            background: transparent;
          }
       }
 

@@ -27,7 +27,35 @@ const DESKTOP_DIRECTORY = join(ROOT, "desktop");
 const MOBILE_DIRECTORY = join(ROOT, "mobile");
 const DEFAULT_PORT = 8080;
 const MOBILE_QUERY = "(max-width: 700px)";
+const CRITICAL_CSS_BUDGET = 18 * 1024;
+const CRITICAL_CSS_PER_FILE_BUDGET = 8 * 1024;
+const DEFAULT_DEV_HOST = "192.168.1.100";
 const VARIANTS = ["desktop", "mobile"];
+const RETIRED_PAGE_ROUTES = new Set([
+  "gameMaker.html",
+  "placeholder.html",
+  "blog/article.html",
+]);
+const RETIRED_BUILD_FILES = new Set([
+  "scripts/forge-editor.js",
+  "scripts/forge-engine.js",
+  "scripts/genbox.js",
+  "styles/genbox.css",
+]);
+const SUPABASE_VENDOR_FILE = join(
+  ROOT,
+  "node_modules",
+  "@supabase",
+  "supabase-js",
+  "dist",
+  "umd",
+  "supabase.js",
+);
+const DEFAULT_SUPABASE_URL = "https://azyjlkhpdgafuobyxoax.supabase.co";
+// Supabase anon keys are public browser credentials. Authorization remains in RLS
+// and Edge Function checks; deployments can override this for staging.
+const DEFAULT_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF6eWpsa2hwZGdhZnVvYnl4b2F4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4NTEzODAsImV4cCI6MjA4ODQyNzM4MH0.LVUhnEvW7fTJTrWQbggBNMXSA0-7hoAss-f7ITVAOVs";
+const LOCAL_SUPABASE_ANON_KEY = "sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH";
 
 const MIME_TYPES = {
   ".css": "text/css; charset=utf-8",
@@ -79,6 +107,18 @@ function escapeHtml(value) {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
+}
+
+function runtimeConfigSource(localDevelopment = false) {
+  const devHost = process.env.FORGE_DEV_HOST || DEFAULT_DEV_HOST;
+  const config = {
+    supabaseUrl: process.env.FORGE_SUPABASE_URL ||
+      (localDevelopment ? `http://${devHost}:54321` : DEFAULT_SUPABASE_URL),
+    supabaseAnonKey:
+      process.env.FORGE_SUPABASE_ANON_KEY ||
+      (localDevelopment ? LOCAL_SUPABASE_ANON_KEY : DEFAULT_SUPABASE_ANON_KEY),
+  };
+  return `window.__FORGE_CONFIG__ = Object.freeze(${JSON.stringify(config)});\n`;
 }
 
 function slugify(value) {
@@ -304,7 +344,9 @@ async function collectFiles(directory, extension) {
 
 async function collectPageRoutes() {
   const files = await collectFiles(DESKTOP_DIRECTORY, ".html");
-  return files.map((file) => relative(DESKTOP_DIRECTORY, file).replaceAll(sep, "/"));
+  return files
+    .map((file) => relative(DESKTOP_DIRECTORY, file).replaceAll(sep, "/"))
+    .filter((route) => !RETIRED_PAGE_ROUTES.has(route));
 }
 
 function pageVariant(pagePath) {
@@ -460,7 +502,8 @@ async function renderDocPage(file, variant = "desktop") {
 </html>`;
   const forgePath = `${variant}/${currentRoute}`;
   const expanded = await expandTemplates(shell);
-  const withMeta = injectForgeMetadata(expanded, forgePath, currentRoute, variant);
+  const withCriticalCss = await embedCriticalCss(expanded);
+  const withMeta = injectForgeMetadata(withCriticalCss, forgePath, currentRoute, variant);
   const marked = markActiveRoute(withMeta, currentRoute);
   return rewritePaths(marked, forgePath.split("/").length - 1);
 }
@@ -477,6 +520,104 @@ function parseAttributes(tag) {
   }
 
   return attributes;
+}
+
+function criticalCssPrefix(source, budget) {
+  const output = [];
+  let outputLength = 0;
+  let start = 0;
+  let depth = 0;
+  let quote = null;
+  let inComment = false;
+
+  function append(end) {
+    const rule = source.slice(start, end).trim();
+    start = end;
+    if (!rule || /^@(import|charset)\b/i.test(rule)) return true;
+    if (outputLength + rule.length + 1 > budget) return false;
+    output.push(rule);
+    outputLength += rule.length + 1;
+    return true;
+  }
+
+  for (let index = 0; index < source.length; index += 1) {
+    const character = source[index];
+    const next = source[index + 1];
+    if (inComment) {
+      if (character === "*" && next === "/") {
+        inComment = false;
+        index += 1;
+      }
+      continue;
+    }
+    if (quote) {
+      if (character === "\\") index += 1;
+      else if (character === quote) quote = null;
+      continue;
+    }
+    if (character === "/" && next === "*") {
+      inComment = true;
+      index += 1;
+      continue;
+    }
+    if (character === '"' || character === "'") {
+      quote = character;
+      continue;
+    }
+    if (character === "{") {
+      depth += 1;
+      continue;
+    }
+    if (character === "}") {
+      depth -= 1;
+      if (depth === 0 && !append(index + 1)) break;
+      continue;
+    }
+    if (character === ";" && depth === 0 && !append(index + 1)) break;
+  }
+
+  return output.join("\n");
+}
+
+async function embedCriticalCss(html) {
+  const stylesheetTags = html.match(/<link\b[^>]*>/gi) || [];
+  const stylesheets = stylesheetTags.map(function (tag) {
+    const attributes = parseAttributes(tag);
+    const rel = (attributes.rel || "").toLowerCase().split(/\s+/);
+    return rel.includes("stylesheet") ? attributes.href : null;
+  }).filter(function (href) {
+    return href && !isExternalPath(href);
+  });
+  if (!stylesheets.length) return html;
+
+  const chunks = [];
+  let remaining = CRITICAL_CSS_BUDGET;
+  for (const href of stylesheets) {
+    if (remaining <= 0) break;
+    const cleanHref = href.split(/[?#]/)[0];
+    const file = resolve(ROOT, cleanHref);
+    if (
+      extname(file).toLowerCase() !== ".css" ||
+      (file !== ROOT && !file.startsWith(`${ROOT}${sep}`))
+    ) continue;
+    const chunk = criticalCssPrefix(
+      await readFile(file, "utf8"),
+      Math.min(remaining, CRITICAL_CSS_PER_FILE_BUDGET),
+    );
+    if (!chunk) continue;
+    chunks.push(`/* ${cleanHref} */\n${chunk}`);
+    remaining -= chunk.length;
+  }
+  if (!chunks.length) return html;
+
+  const critical = `<style data-forge-critical>\n${chunks.join("\n")}\n</style>\n    `;
+  const firstStylesheet = stylesheetTags.find(function (tag) {
+    const attributes = parseAttributes(tag);
+    return (attributes.rel || "").toLowerCase().split(/\s+/).includes("stylesheet");
+  });
+  return firstStylesheet
+    ? html.replace(firstStylesheet, critical + firstStylesheet)
+    : html.replace(/<\/head>/i, `${critical}</head>`);
 }
 
 function findSlotBlock(html, predicate, start = 0) {
@@ -678,6 +819,20 @@ function injectForgeMetadata(html, forgePath, route, variant) {
     `<meta name="forge-route" content="${escapeHtml(route)}">`,
     `<meta name="forge-variant" content="${escapeHtml(variant)}">`,
     "<style>html:not(.forge-motion-ready),html:not(.forge-motion-ready) *,html:not(.forge-motion-ready) *::before,html:not(.forge-motion-ready) *::after{animation:none!important;transition:none!important}fg-client-include{display:none}</style>",
+    '<script src="scripts/vendor/supabase.js" defer></script>',
+    '<script src="scripts/forge-config.js" defer></script>',
+    '<script src="scripts/forge-api.js" defer></script>',
+    '<script src="scripts/auth-shell.js" defer></script>',
+    ...(route.startsWith("settings/")
+      ? ['<script src="scripts/settings.js" defer></script>']
+      : []),
+    ...(route === "community.html"
+      ? ['<script src="scripts/community.js" defer></script>']
+      : []),
+    ...(route.startsWith("library/")
+      ? ['<script src="scripts/assets.js" defer></script>']
+      : []),
+    '<script src="scripts/workspace.js" defer></script>',
     '<script src="scripts/forge-loader.js"></script>',
     '<script src="scripts/forge-runtime.js" defer></script>',
   ].join("\n    ");
@@ -695,7 +850,10 @@ function renderRouteBootstrap(route) {
     <meta name="theme-color" content="#0a0a0a">
     <meta name="forge-bootstrap" content="${escapeHtml(route)}">
     <title>ForgeGUI</title>
-    <style>html,body{min-height:100%;margin:0;background:#0a0a0a;color:#fff}</style>
+    <style data-forge-critical>html,body{min-height:100%;margin:0;background:#0a0a0a;color:#fff;color-scheme:dark}</style>
+    <script src="${prefix}scripts/vendor/supabase.js"></script>
+    <script src="${prefix}scripts/forge-config.js"></script>
+    <script src="${prefix}scripts/forge-api.js"></script>
     <script src="${prefix}scripts/forge-loader.js"></script>
   </head>
   <body>
@@ -803,8 +961,9 @@ async function renderPage(file) {
   const forgePath = relative(ROOT, file).replaceAll(sep, "/");
   const variant = pageVariant(forgePath);
   if (!variant) throw new Error(`Page must be inside desktop/ or mobile/: ${forgePath}`);
+  const withCriticalCss = await embedCriticalCss(rendered);
   const withMeta = injectForgeMetadata(
-    rendered,
+    withCriticalCss,
     forgePath,
     variant.route,
     variant.name,
@@ -883,6 +1042,8 @@ async function buildDirectory(sourceDir, destinationDir, ignoredNames = new Set(
 
     const source = join(sourceDir, entry.name);
     const target = join(destinationDir, entry.name);
+    const sourceRoute = relative(ROOT, source).replaceAll(sep, "/");
+    if (RETIRED_BUILD_FILES.has(sourceRoute)) continue;
 
     if (entry.isDirectory()) {
       await buildDirectory(source, target);
@@ -892,6 +1053,8 @@ async function buildDirectory(sourceDir, destinationDir, ignoredNames = new Set(
     if (entry.name === "opencode.json") continue;
 
     if (entry.name.endsWith(".html")) {
+      const variant = pageVariant(sourceRoute);
+      if (variant && RETIRED_PAGE_ROUTES.has(variant.route)) continue;
       await writeFile(target, await renderPage(source));
       continue;
     }
@@ -964,6 +1127,9 @@ async function build(destinationArgument = "dist") {
   const pageRoutes = await collectPageRoutes();
   await assertVariantParity(pageRoutes);
   await buildDirectory(ROOT, destination, ignoredAtRoot);
+  await mkdir(join(destination, "scripts", "vendor"), { recursive: true });
+  await copyFile(SUPABASE_VENDOR_FILE, join(destination, "scripts", "vendor", "supabase.js"));
+  await writeFile(join(destination, "scripts", "forge-config.js"), runtimeConfigSource());
   const docRoutes = await buildDocs(destination);
   await copyClientTemplates(TEMPLATE_DIRECTORY, join(destination, "templates"));
   await buildRouteBootstraps(destination, pageRoutes.concat(docRoutes));
@@ -1009,6 +1175,24 @@ async function serve(argumentsList) {
         return;
       }
 
+      if (url.pathname === "/scripts/forge-config.js") {
+        response.writeHead(200, {
+          "Cache-Control": "no-store",
+          "Content-Type": MIME_TYPES[".js"],
+        });
+        response.end(request.method === "HEAD" ? undefined : runtimeConfigSource(true));
+        return;
+      }
+
+      if (url.pathname === "/scripts/vendor/supabase.js") {
+        response.writeHead(200, {
+          "Cache-Control": "no-store",
+          "Content-Type": MIME_TYPES[".js"],
+        });
+        response.end(request.method === "HEAD" ? undefined : await readFile(SUPABASE_VENDOR_FILE));
+        return;
+      }
+
       let requestPath = decodeURIComponent(
         url.pathname === "/" ? "/index.html" : url.pathname,
       );
@@ -1031,6 +1215,12 @@ async function serve(argumentsList) {
 
       if (file !== ROOT && !file.startsWith(`${ROOT}${sep}`)) {
         response.writeHead(403).end("Forbidden");
+        return;
+      }
+
+      const requestedVariant = pageVariant(route);
+      if (requestedVariant && RETIRED_PAGE_ROUTES.has(requestedVariant.route)) {
+        response.writeHead(404).end("Not found");
         return;
       }
 
@@ -1066,8 +1256,9 @@ async function serve(argumentsList) {
     }
   });
 
-  server.listen(port, function () {
-    console.log(`ForgeGUI dev server: http://localhost:${port}`);
+  server.listen(port, "0.0.0.0", function () {
+    const devHost = process.env.FORGE_DEV_HOST || DEFAULT_DEV_HOST;
+    console.log(`ForgeGUI dev server: http://${devHost}:${port}`);
     console.log("Watching files; changes trigger a full browser reload.");
   });
 

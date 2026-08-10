@@ -18,25 +18,6 @@
             <img src="icons/Play.svg" alt="" />
             <span>Part 1</span>
         </a>
-        <a href="placeholder.html" class="sidebarElem">
-            <img src="icons/Play.svg" alt="" />
-            <span>Part 2</span>
-        </a>
-        <a href="placeholder.html" class="sidebarElem">
-            <img src="icons/Play.svg" alt="" />
-            <span>Part 3</span>
-        </a>
-        <a href="placeholder.html" class="sidebarElem">
-            <img src="icons/Play.svg" alt="" />
-            <span>Part 4</span> </a
-        ><a href="placeholder.html" class="sidebarElem">
-            <img src="icons/Play.svg" alt="" />
-            <span>Part 5</span>
-        </a>
-        <a href="placeholder.html" class="sidebarElem">
-            <img src="icons/Play.svg" alt="" />
-            <span>Part 6</span>
-        </a>
     </fg-projects>
 
     <fg-contextmenu
@@ -49,7 +30,7 @@
             ><img src="icons/Settings.svg" alt="" /> Settings</a
         >
 
-        <button class="destructive">
+        <button class="destructive" data-auth-signout>
             <img src="icons/SignOut.svg" alt="" /> Logout
         </button>
     </fg-contextmenu>
@@ -69,10 +50,10 @@
         </a>
 
         <fg-sidebaruserbutton data-context-target="userMenu">
-            <img src="assets/generic.png" alt="" />
+            <img src="assets/generic.png" alt="" data-user-avatar />
             <fg-vertical>
-                <b>generic</b>
-                <span>generic@gmail.com</span>
+                <b data-user-name>Creator</b>
+                <span data-user-email></span>
             </fg-vertical>
             <img src="icons/selection.svg" alt="" />
         </fg-sidebaruserbutton>

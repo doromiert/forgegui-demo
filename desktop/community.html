@@ -30,94 +30,38 @@
                         <span>Community</span>
                     </fg-top>
                     <fg-communitytags>
-                        <fg-communitytag class="active">
+                        <fg-communitytag class="active" role="button" tabindex="0" data-community-category="">
                             🔥 Trending
                         </fg-communitytag>
-                        <fg-communitytag> 🎸 Music </fg-communitytag>
-                        <fg-communitytag> 📣 Announcements </fg-communitytag>
-                        <fg-communitytag> 👾 Development </fg-communitytag>
-                        <fg-communitytag> 🕹️ Gaming </fg-communitytag>
-                        <fg-communitytag> ✏️ Drawing </fg-communitytag>
-                        <fg-communitytag> 📝 Writing </fg-communitytag>
+                        <fg-communitytag role="button" tabindex="0" data-community-category="Music"> 🎸 Music </fg-communitytag>
+                        <fg-communitytag role="button" tabindex="0" data-community-category="Announcements"> 📣 Announcements </fg-communitytag>
+                        <fg-communitytag role="button" tabindex="0" data-community-category="Development"> 👾 Development </fg-communitytag>
+                        <fg-communitytag role="button" tabindex="0" data-community-category="Gaming"> 🕹️ Gaming </fg-communitytag>
+                        <fg-communitytag role="button" tabindex="0" data-community-category="Drawing"> ✏️ Drawing </fg-communitytag>
+                        <fg-communitytag role="button" tabindex="0" data-community-category="Writing"> 📝 Writing </fg-communitytag>
                         <fg-searchwrapper>
                             <img src="icons/search.svg" />
-                            <input type="text" placeholder="Search" />
+                            <input type="search" placeholder="Search" aria-label="Search Community" data-community-search />
                         </fg-searchwrapper>
                     </fg-communitytags>
                     <button class="postButton" data-popup-open="new-post">
                         <img src="icons/s-add.svg" /><span>Post</span>
                     </button>
                 </fg-sticky>
-                <fg-timeline>
-                    <fg-include data-template="templates/post.html">
-                        <img data-slot="avatar" src="assets/generic.png" />
-                        <fg-username data-slot="username">generic</fg-username>
-                        <fg-timestamp data-slot="timestamp">1h ago</fg-timestamp>
-                        <fg-posttag data-slot="tag" class="ai">AI Generated</fg-posttag>
-                        <fg-content data-slot="content" class="img">
-                            <img src="assets/generic.png" />
-                        </fg-content>
-                        <span data-slot="likes">2137</span>
-                        <span data-slot="comments">2137</span>
-                    </fg-include>
-                    <fg-include data-template="templates/post.html">
-                        <img data-slot="avatar" src="assets/generic.png" />
-                        <fg-username data-slot="username">generic</fg-username>
-                        <fg-timestamp data-slot="timestamp">1h ago</fg-timestamp>
-                        <fg-posttag data-slot="tag" class="ai">AI Generated</fg-posttag>
-                        <fg-content data-slot="content" class="text">
-                            <h1>Post with text</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut
-                                enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate velit esse cillum
-                                dolore eu fugiat nulla pariatur. Excepteur sint
-                                occaecat cupidatat non proident, sunt in culpa
-                                qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </fg-content>
-                        <span data-slot="likes">2137</span>
-                        <span data-slot="comments">2137</span>
-                    </fg-include>
-                    <fg-include data-template="templates/post.html">
-                        <img data-slot="avatar" src="assets/generic.png" />
-                        <fg-username data-slot="username">generic</fg-username>
-                        <fg-timestamp data-slot="timestamp">1h ago</fg-timestamp>
-                        <fg-posttag data-slot="tag" class="ai">AI Generated</fg-posttag>
-                        <fg-content data-slot="content" class="text">
-                            <h1>Post with text</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut
-                                enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate velit esse cillum
-                                dolore eu fugiat nulla pariatur. Excepteur sint
-                                occaecat cupidatat non proident, sunt in culpa
-                                qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </fg-content>
-                        <span data-slot="likes">2137</span>
-                        <span data-slot="comments">2137</span>
-                    </fg-include>
+                <fg-timeline data-community-feed aria-live="polite">
+                    <p class="communityStatus" data-community-status>Loading Community...</p>
                 </fg-timeline>
-                <fg-userctx>
+                <fg-userctx data-community-user-context>
                     <fg-banner>
-                        <img src="assets/generic.png" />
+                        <img src="assets/generic.png" data-community-context-avatar />
                     </fg-banner>
                     <fg-doxx>
-                        <b>generic</b>
-                        <span>@generic</span>
+                        <b data-community-context-name>User</b>
+                        <span data-community-context-handle>@user</span>
                     </fg-doxx>
                     <fg-buttons>
-                        <button class="profileButton active">
-                            <b>Follow</b><span>2K</span>
+                        <button class="profileButton active" type="button" data-community-follow>
+                            <b>Follow</b><span data-community-context-followers>0</span>
                         </button>
                         <button class="profileButton" data-popup-open="user-profile">
                             <b>View Profile</b>
@@ -135,30 +79,30 @@
                                 >
                                     <img src="icons/x.svg" />
                                 </button>
-                                <img src="assets/generic.png" />
+                                <img src="assets/generic.png" data-community-profile-avatar />
                             </fg-banner>
                             <header>
                                 <fg-doxx>
-                                    <b>generic</b>
-                                    <span>generic@gmail.com</span>
+                                    <b data-community-profile-name>User</b>
+                                    <span data-community-profile-handle>@user</span>
                                 </fg-doxx>
                                 <fg-bignumber>
-                                    <b>140K</b>
+                                    <b data-community-profile-followers>0</b>
                                     <span>Followers</span>
                                 </fg-bignumber>
                                 <fg-bignumber>
-                                    <b>3K</b>
+                                    <b data-community-profile-likes>0</b>
                                     <span>Likes</span>
                                 </fg-bignumber>
-                                <button class="postButton follow">
+                                <button class="postButton follow" type="button" data-community-follow>
                                     <b>Follow</b>
                                 </button>
                             </header>
                             <fg-bio>
                                 <header>About Me</header>
-                                <fg-content> here's some bio or whatever </fg-content>
+                                <fg-content data-community-profile-bio>No biography yet.</fg-content>
                             </fg-bio>
-                            <fg-games>
+                            <fg-games hidden>
                                 <header>Games</header>
                                 <fg-gamesgrid>
                                     <fg-include data-template="templates/community-game.html"></fg-include>
@@ -173,82 +117,15 @@
                                 </fg-gamesgrid>
                             </fg-games>
                         </fg-leftside>
-                        <fg-rightside>
-                            <fg-include data-template="templates/post.html">
-                                <img data-slot="avatar" src="assets/generic.png" />
-                                <fg-username data-slot="username">generic</fg-username>
-                                <fg-timestamp data-slot="timestamp">1h ago</fg-timestamp>
-                                <fg-posttag data-slot="tag" class="ai"
-                                    >AI Generated</fg-posttag
-                                >
-                                <fg-content data-slot="content" class="img">
-                                    <img src="assets/generic.png" />
-                                </fg-content>
-                                <span data-slot="likes">2137</span>
-                                <span data-slot="comments">2137</span>
-                            </fg-include>
-                            <fg-include data-template="templates/post.html">
-                                <img data-slot="avatar" src="assets/generic.png" />
-                                <fg-username data-slot="username">generic</fg-username>
-                                <fg-timestamp data-slot="timestamp">1h ago</fg-timestamp>
-                                <fg-posttag data-slot="tag" class="ai"
-                                    >AI Generated</fg-posttag
-                                >
-                                <fg-content data-slot="content" class="text">
-                                    <h1>Post with text</h1>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur
-                                        adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna
-                                        aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris
-                                        nisi ut aliquip ex ea commodo consequat.
-                                        Duis aute irure dolor in reprehenderit
-                                        in voluptate velit esse cillum dolore eu
-                                        fugiat nulla pariatur. Excepteur sint
-                                        occaecat cupidatat non proident, sunt in
-                                        culpa qui officia deserunt mollit anim
-                                        id est laborum.
-                                    </p>
-                                </fg-content>
-                                <span data-slot="likes">2137</span>
-                                <span data-slot="comments">2137</span>
-                            </fg-include>
-                            <fg-include data-template="templates/post.html">
-                                <img data-slot="avatar" src="assets/generic.png" />
-                                <fg-username data-slot="username">generic</fg-username>
-                                <fg-timestamp data-slot="timestamp">1h ago</fg-timestamp>
-                                <fg-posttag data-slot="tag" class="ai"
-                                    >AI Generated</fg-posttag
-                                >
-                                <fg-content data-slot="content" class="text">
-                                    <h1>Post with text</h1>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur
-                                        adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna
-                                        aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris
-                                        nisi ut aliquip ex ea commodo consequat.
-                                        Duis aute irure dolor in reprehenderit
-                                        in voluptate velit esse cillum dolore eu
-                                        fugiat nulla pariatur. Excepteur sint
-                                        occaecat cupidatat non proident, sunt in
-                                        culpa qui officia deserunt mollit anim
-                                        id est laborum.
-                                    </p>
-                                </fg-content>
-                                <span data-slot="likes">2137</span>
-                                <span data-slot="comments">2137</span>
-                            </fg-include>
+                        <fg-rightside data-community-profile-posts>
                         </fg-rightside>
                     </fg-popup>
                     <fg-popup id="new-post" class="hidden" aria-label="Create post">
                         <fg-top>
-                            <img src="assets/generic.png" />
+                            <img src="assets/generic.png" data-user-avatar />
                             <fg-vertical>
-                                <b>generic</b>
-                                <span>@generic</span>
+                                <b data-user-name>Creator</b>
+                                <span data-user-handle>@creator</span>
                             </fg-vertical>
                             <button
                                 class="closeButton"
@@ -257,9 +134,10 @@
                                 <img src="icons/x.svg" />
                             </button>
                         </fg-top>
-                        <form>
+                        <form id="community-create-form" data-community-create-form>
                             <div class="postField">
                                 <input
+                                    name="title"
                                     type="text"
                                     placeholder="Title"
                                     maxlength="50"
@@ -268,6 +146,7 @@
                             </div>
                             <div class="postField">
                                 <textarea
+                                    name="description"
                                     placeholder="Text"
                                     maxlength="1000"
                                 ></textarea>
@@ -281,14 +160,14 @@
                                 <span>Up to 4 images</span>
                             </header>
                             <fg-mediacarousel>
-                                <button class="addMediaButton">
+                                <button class="addMediaButton" type="button" data-community-add-media>
                                     <img src="icons/add.svg" />
                                 </button>
-                                <fg-mediaplaceholder></fg-mediaplaceholder>
-                                <fg-mediaplaceholder></fg-mediaplaceholder>
+                                <fg-mediaplaceholder data-community-media-preview></fg-mediaplaceholder>
+                                <input type="file" accept="image/*" multiple hidden data-community-media-input />
                             </fg-mediacarousel>
                         </fg-mediaslots>
-                        <button class="postButton">
+                        <button class="postButton" type="submit" form="community-create-form" data-community-create-submit>
                             Upload Post
                             <img src="icons/send.svg" />
                         </button>
@@ -306,118 +185,56 @@
                             <img src="icons/3dots.svg" />
                         </fg-top>
                         <header>
-                            <img src="assets/generic.png" />
+                             <img src="assets/generic.png" data-community-detail-avatar />
                             <fg-doxx>
-                                <b>generic</b>
-                                <span>@generic</span>
+                                 <b data-community-detail-name>User</b>
+                                 <span data-community-detail-handle>@user</span>
                             </fg-doxx>
-                            <button class="followButton">
+                             <button class="followButton" type="button" data-community-follow>
                                 Follow
                                 <img src="icons/follow.svg" />
                             </button>
                         </header>
                         <fg-posttitle>
-                            <b>Mountain retreat</b>
-                            <span>lorem ipsum</span>
-                            <fg-tags>
-                                <fg-tag>Nature</fg-tag>
-                                <fg-tag>Travel</fg-tag>
+                             <b data-community-detail-title>Community post</b>
+                             <span data-community-detail-description></span>
+                             <fg-tags data-community-detail-tags>
                             </fg-tags>
                         </fg-posttitle>
-                        <fg-content class="img">
-                            <img src="assets/generic.png" />
+                         <fg-content class="img" data-community-detail-media>
+                             <img src="assets/generic.png" alt="" />
                         </fg-content>
                         <fg-bottom>
-                            <img src="icons/share.svg" />
+                             <img src="icons/share.svg" role="button" tabindex="0" data-community-share />
                             <div style="flex: 1"></div>
-                            <fg-engagement>
+                             <fg-engagement role="button" tabindex="0" data-community-like>
                                 <img src="icons/heart.svg" />
-                                <span>54</span>
+                                 <span data-community-detail-likes>0</span>
                             </fg-engagement>
                             <fg-engagement>
                                 <img src="icons/message.svg" />
-                                <span>54</span>
+                                 <span data-community-detail-comments>0</span>
                             </fg-engagement>
                         </fg-bottom>
                         <fg-commentsbox>
                             <header>
                                 <b>Comments</b>
-                                <span>42 Comments</span>
+                                 <span><b data-community-comment-count>0</b> Comments</span>
                             </header>
-                            <fg-commentfield>
+                             <form data-community-comment-form>
+                             <fg-commentfield>
                                 <input
                                     type="text"
                                     placeholder="Type Comment..."
                                 />
-                                <img src="icons/send.svg" />
-                            </fg-commentfield>
-                            <fg-include data-template="templates/post.html">
-                                <img data-slot="avatar" src="assets/generic.png" />
-                                <fg-username data-slot="username">generic</fg-username>
-                                <fg-timestamp data-slot="timestamp">1h ago</fg-timestamp>
-
-                                <fg-content data-slot="content" class="text">
-                                    <h1>Comment with text</h1>
-                                    <p>Comment with text</p>
-                                </fg-content>
-                                <span data-slot="likes">2137</span>
-                                <span data-slot="comments">2137</span>
-                            </fg-include>
+                                 <button type="submit" aria-label="Send comment"><img src="icons/send.svg" /></button>
+                             </fg-commentfield>
+                             </form>
+                             <div data-community-comments-list></div>
                         </fg-commentsbox>
                     </fg-popup>
                 </fg-popupcontainer>
             </fg-mainview>
         </fg-include>
-        <script>
-            // Open the post popup when a feed post is clicked. Scoped to
-            // <fg-timeline> so comment posts inside the detail popup do not re-trigger it.
-            document.addEventListener("click", function (e) {
-                if (!e.target.closest("fg-timeline fg-post")) return;
-                // The avatar opens userCtx; the 3dots and the action row own
-                // their own behavior — don't hijack those clicks.
-                if (e.target.closest("fg-post > fg-top img, fg-post > fg-bottom")) return;
-                openPopup("post-detail", e.target.closest("fg-timeline fg-post"));
-            });
-
-            // Char counters for new post form
-            document
-                .querySelector("#new-post form")
-                .addEventListener("input", function (e) {
-                    var el = e.target;
-                    if (!el.maxLength || el.maxLength === -1) return;
-                    var counter = el
-                        .closest(".postField")
-                        .querySelector(".charCounter");
-                    if (counter)
-                        counter.textContent =
-                            el.value.length + "/" + el.maxLength;
-                });
-
-            document.addEventListener("click", function (e) {
-                var ctx = document.querySelector("fg-userctx");
-                if (!ctx) return;
-
-                // PFP click: the first img inside post > top
-                var postTop = e.target.closest("fg-post > fg-top");
-                if (
-                    postTop &&
-                    e.target.tagName === "IMG" &&
-                    e.target === postTop.querySelector("img")
-                ) {
-                    e.stopPropagation();
-                    var rect = e.target.getBoundingClientRect();
-                    // Align top of menu with the PFP, 10px gap to its left
-                    ctx.style.top = rect.top + "px";
-                    ctx.style.left = rect.left - 280 - 10 + "px";
-                    ctx.classList.add("visible");
-                    return;
-                }
-
-                // Close when clicking outside the menu
-                if (!ctx.contains(e.target)) {
-                    ctx.classList.remove("visible");
-                }
-            });
-        </script>
     </body>
 </html>

@@ -6,6 +6,7 @@
         <title>ForgeGUI</title>
         <link rel="stylesheet" href="styles/base.css" />
         <link rel="stylesheet" href="styles/assets-overview.css" />
+        <link rel="stylesheet" href="styles/community-asset-popup.css" />
         <script src="scripts/site.js" defer></script>
         <meta name="theme-color" content="#0D0D0D" />
         <meta name="color-scheme" content="dark" />
@@ -43,10 +44,10 @@
                     <span> Discover Community Assets </span>
                     <fg-searchwrapper>
                         <img src="icons/search.svg" />
-                        <input type="text" placeholder="Search" />
+                        <input type="search" placeholder="Search" aria-label="Search community assets" data-catalog-search />
                     </fg-searchwrapper>
                 </fg-top>
-                <fg-communityassetsgrid>
+                <fg-communityassetsgrid data-catalog-grid>
                     <fg-communityasset class="long">
                         <fg-include data-template="templates/community-asset.html">
                             <img data-slot="image" src="assets/generic.png" />
@@ -167,5 +168,6 @@
                 </fg-communityassetsgrid>
             </fg-communityassets>
         </fg-mainview>
+        <fg-include data-template="templates/community-asset-popup.html"></fg-include>
     </body>
 </html>

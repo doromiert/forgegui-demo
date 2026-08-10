@@ -29,24 +29,25 @@
                                     monospace;
                                 font-size: 18px;
                             "
-                            >https://forgegui.com/referral/name</b
+                            data-settings-referral-link
+                            >Loading...</b
                         >
-                        <button data-slot="action" class="listboxAction">
+                        <button data-slot="action" class="listboxAction" type="button" data-copy-referral>
                             Copy
                         </button>
                     </fg-include>
                     <fg-include data-template="templates/listbox-row.html">
                         <span data-slot="label">People Referred</span>
-                        <b data-slot="value">3 People</b>
-                        <button data-slot="action" class="listboxAction">
+                        <b data-slot="value" data-settings-referral-count>Loading...</b>
+                        <button data-slot="action" class="listboxAction" type="button" data-settings-invite>
                             Invite More
                         </button>
                     </fg-include>
                     <fg-include data-template="templates/listbox-row.html">
-                        <span data-slot="label">Total Plan Credits Earned</span>
-                        <b data-slot="value">$0.96</b>
-                        <button data-slot="action" class="listboxAction">
-                            Redeem
+                        <span data-slot="label">Total Credits Earned</span>
+                        <b data-slot="value" data-settings-referral-credits>Loading...</b>
+                        <button data-slot="action" class="listboxAction" type="button" disabled title="Referral credits are added automatically.">
+                            Auto-applied
                         </button>
                     </fg-include>
                 </fg-include>

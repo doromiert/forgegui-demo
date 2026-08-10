@@ -1,81 +1,57 @@
-<fg-chatbox>
-  <fg-slot data-name="asset-bar">
-    <fg-assetbar>
-      <button type="button" aria-label="Add asset">
-        <img src="icons/add.svg" alt="" />
-      </button>
-    </fg-assetbar>
-  </fg-slot>
-
-  <fg-slot data-name="input">
-    <textarea placeholder="Describe what you want..."></textarea>
-  </fg-slot>
-
+<fg-chatbox data-chat-form>
+  <textarea
+    data-chat-input
+    maxlength="4000"
+    aria-label="Describe what you want ForgeGUI to create"
+    placeholder="Describe what you want to create..."
+  ></textarea>
   <fg-bottom>
-    <button
-      class="chatboxButton"
-      type="button"
-      data-context-target="chatboxGamePicker"
-    >
+    <button class="chatboxButton mobileChatboxControl" type="button" aria-label="More options">
+      <img src="icons/3dots.svg" alt="" />
+    </button>
+    <button class="chatboxButton mobileChatboxControl" type="button" aria-label="Add attachment" data-chat-attachment>
+      <img src="icons/add.svg" alt="" />
+    </button>
+    <input type="file" accept="image/*" multiple hidden data-chat-attachment-input />
+    <button class="chatboxButton" type="button" data-context-target="chatboxGamePicker">
       <img src="icons/roblox.svg" alt="" />
       <span>Roblox</span>
       <img src="icons/arrow.svg" alt="" />
     </button>
-    <fg-contextmenu
-      id="chatboxGamePicker"
-      class="hidden"
-    >
-      <button><img src="icons/roblox.svg" alt="" />Roblox</button>
-      <button><img src="icons/ue.svg" alt="" />Unreal Engine</button>
-      <button><img src="icons/unity.svg" alt="" />Unity</button>
+    <fg-contextmenu id="chatboxGamePicker" class="hidden">
+      <button type="button"><img src="icons/roblox.svg" alt="" />Roblox</button>
+      <button type="button"><img src="icons/ue.svg" alt="" />Unreal Engine</button>
+      <button type="button"><img src="icons/unity.svg" alt="" />Unity</button>
     </fg-contextmenu>
 
-    <button
-      class="chatboxButton"
-      type="button"
-      data-context-target="chatboxStyle"
-    >
+    <button class="chatboxButton" type="button" data-context-target="chatboxStyle">
       <img src="icons/pencil.svg" alt="" />
       <span>Auto-Detect</span>
       <img src="icons/arrow.svg" alt="" />
     </button>
-    <fg-contextmenu
-      id="chatboxStyle"
-      class="hidden"
-      style="left: 120px"
-    >
-      <button>Auto-Detect</button>
-      <button>Realistic</button>
-      <button>Cartoon</button>
-      <button>Pixel Art</button>
+    <fg-contextmenu id="chatboxStyle" class="hidden" style="left: 120px">
+      <button type="button">Auto-Detect</button>
+      <button type="button">Realistic</button>
+      <button type="button">Cartoon</button>
+      <button type="button">Pixel Art</button>
     </fg-contextmenu>
 
-    <button
-      class="chatboxButton"
-      type="button"
-      data-context-target="chatboxModel"
-    >
+    <button class="chatboxButton" type="button" data-context-target="chatboxModel">
       <img src="icons/ai.svg" alt="" />
       <span>Yunes Pro</span>
       <img src="icons/arrow.svg" alt="" />
     </button>
-    <fg-contextmenu
-      id="chatboxModel"
-      class="hidden"
-      style="left: 328px"
-    >
-      <button>Yunes Pro</button>
-      <button>GoyAI</button>
-      <button>SahurML</button>
+    <fg-contextmenu id="chatboxModel" class="hidden" style="left: 328px">
+      <button type="button">Yunes Pro</button>
+      <button type="button">GoyAI</button>
+      <button type="button">SahurML</button>
     </fg-contextmenu>
 
     <span style="flex: 1"></span>
-
-    <fg-slot data-name="actions">
-      <button class="chatboxButton send" type="button">
-        <span>Create</span>
-        <img src="icons/send.svg" alt="" />
-      </button>
-    </fg-slot>
+    <button class="chatboxButton send" type="button" data-chat-submit>
+      <span>Create</span>
+      <img src="icons/send.svg" alt="" />
+    </button>
   </fg-bottom>
+  <p class="chatboxStatus" data-chat-status role="status" hidden></p>
 </fg-chatbox>

@@ -54,11 +54,4 @@
             });
         });
     });
-
-    var createButton = document.querySelector("[data-create-game]");
-    if (createButton) {
-        createButton.addEventListener("click", function () {
-            window.location.href = "oldChat.html";
-        });
-    }
 })();

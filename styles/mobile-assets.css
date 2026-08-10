@@ -166,6 +166,7 @@
    height: 203px;
    overflow: hidden;
    position: relative;
+   cursor: pointer;
 }
 
 .mobile-community-card.is-wide {

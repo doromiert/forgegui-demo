@@ -1,61 +1,40 @@
 ---
-title: Part 1
-description: A visual reference for the headings, copy, quotes, disclosures, tables, callouts, code, images, and links used throughout ForgeGUI documentation.
-section: Section Name
-sectionId: section-one
+title: Getting Started
+description: Sign in, start a conversation, and generate your first game asset with ForgeGUI.
+section: ForgeGUI Basics
+sectionId: basics
 sectionOrder: 1
 order: 1
 ---
-# Heading 1
+# Getting Started
 
-## Heading 2
+ForgeGUI turns a natural-language request into game-ready images, interfaces, 3D models, sound effects, music, and code. Every request lives in a conversation so you can return to previous work and continue iterating.
 
-### Heading 3
+## Create your first asset
 
-#### Heading 4
+1. Open **Home** and describe what you want to create.
+2. Add useful context such as the target engine, visual style, and intended use.
+3. Send the request. ForgeGUI selects the appropriate generation workflow.
+4. Keep the conversation open while tasks run. Completed assets appear in the conversation and asset grid.
 
-##### Heading 5
+> [!TIP] Write specific prompts
+> Include the asset type, game genre, composition, colors, and constraints. For example: `Create a dark fantasy inventory panel with nine item slots, worn silver borders, and transparent background.`
 
-###### Heading 6
+## Continue earlier work
 
-BIG PARAGRAPH Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Previous conversations appear under **Games** in the sidebar. Select one to restore its messages, generated assets, and any tasks that are still running.
 
-Word **Bold Word** *Italics* ***Bold Italic***
+## Generation states
 
-> Block Quote
+| State | Meaning |
+| --- | --- |
+| Queued | The request is ready to be assigned to a generator. |
+| Running | ForgeGUI is generating or processing the asset. |
+| Complete | The result is ready to open or download. |
+| Failed | The task could not finish; the conversation shows the reason. |
 
-> ## Block Quote with normal stuff
-> Block Quote with normal stuff
+## Account sessions
 
-> > Inner Block Quote
+ForgeGUI securely stores your Supabase session in browser storage and refreshes it automatically. Use **Log out** from the account menu when you want to clear the session on the current device.
 
-:::details open Collapsable (Opened)
-Text Object / Text Object
-:::
-
-:::details Collapsable (Closed)
-Text Object
-:::
-
-| Table Name | Table Name | Table Name | Table Name |
-| --- | --- | --- | --- |
-| Table Content | Table Content | Table Content | Table Content |
-
-> [!TIP] Tip Name
-> Text Object
-
-```html codename.extension
-<html>
-   <head>
-      <title>Text</title>
-   </head>
-</html>
-```
-
-![Water rushing through a dark forest](assets/coursePlaceholder.jpg "Documentation image example")
-
-[Link with fancy name](https://forgegui.com)
-
-[Links can be treated like text too in terms of formatting.](https://forgegui.com)
-
-[https://linkwithoutname.com](https://linkwithoutname.com)
+[Return to ForgeGUI](home.html)

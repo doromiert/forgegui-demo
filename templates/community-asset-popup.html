@@ -1,0 +1,62 @@
+<fg-popupcontainer class="hidden">
+    <fg-popup id="community-asset-preview" class="communityAssetPopup hidden" aria-label="Community asset view">
+        <section class="communityAssetViewport">
+            <header class="communityAssetToolbar">
+                <button type="button" data-popup-close aria-label="Close community asset view">
+                    <img src="icons/arrow.svg" alt="" />
+                </button>
+                <span>Asset View</span>
+                <button type="button" class="communityAssetMore" aria-label="More options" disabled>
+                    <img src="icons/3dots.svg" alt="" />
+                </button>
+            </header>
+            <div class="communityAssetPreview">
+                <img src="assets/generic.png" alt="" data-community-preview-image />
+                <div class="communityAssetPreviewFallback" data-community-preview-fallback hidden>
+                    <img src="icons/file.svg" alt="" data-community-preview-icon />
+                    <span data-community-preview-message>Preview unavailable</span>
+                </div>
+            </div>
+        </section>
+        <aside class="communityAssetDetails">
+            <header class="communityAssetAuthor">
+                <img class="communityAssetAvatar" src="assets/community-avatar.png" alt="" data-community-avatar />
+                <span class="communityAssetAuthorCopy">
+                    <strong data-community-creator>ForgeGUI Creator</strong>
+                    <span data-community-handle>@forgegui</span>
+                </span>
+                <button type="button" class="communityAssetFollow" disabled title="Following is not available in this preview">
+                    <span>Follow</span>
+                    <img src="icons/follow-person.svg" alt="" />
+                </button>
+            </header>
+            <div class="communityAssetMetadata">
+                <span class="communityAssetType">
+                    <img src="icons/3d.svg" alt="" data-community-type-icon />
+                    <span data-community-type>3D Object</span>
+                </span>
+                <span class="communityAssetLikes" data-community-likes hidden>
+                    <img src="icons/heart.svg" alt="" />
+                    <span data-community-like-count></span>
+                </span>
+                <h1 data-community-title>Community asset</h1>
+                <p data-community-description></p>
+                <button type="button" class="communityAssetDescriptionToggle" data-community-description-toggle aria-expanded="false">
+                    View Full Description
+                </button>
+            </div>
+            <footer class="communityAssetActions">
+                <button type="button" class="communityAssetDownload" data-community-download>
+                    <img src="icons/download.svg" alt="" />
+                    <span>Download <strong>Free</strong></span>
+                </button>
+                <button type="button" class="communityAssetAction" data-community-share aria-label="Share asset">
+                    <img src="icons/share.svg" alt="" />
+                </button>
+                <button type="button" class="communityAssetAction" aria-label="Favorite unavailable" disabled title="Favorites are not available in this preview">
+                    <img src="icons/heart.svg" alt="" />
+                </button>
+            </footer>
+        </aside>
+    </fg-popup>
+</fg-popupcontainer>

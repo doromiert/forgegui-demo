@@ -26,7 +26,7 @@
                     <span> Create Asset </span>
                 </button>
             </fg-top>
-            <fg-assetgrid>
+            <fg-assetgrid data-personal-assets aria-live="polite">
                 <fg-include data-template="templates/asset-card.html">
                     <img data-slot="image" src="assets/coursePlaceholder.jpg" alt="" />
                     <span data-slot="title">Asset Name</span>
@@ -119,27 +119,27 @@
                         <button class="popupBack" type="button" data-popup-close aria-label="Close asset preview">
                             <img src="icons/arrow.svg" alt="" style="rotate: 90deg" />
                         </button>
-                        <span>Asset Name</span>
+                        <span data-asset-preview-title>Asset Name</span>
                         <div style="flex: 1"></div>
-                        <button class="vicButton">
+                        <button class="vicButton" type="button" data-asset-view-chat>
                             <img src="icons/message.svg" />
                             <span> View in Chat </span>
                         </button>
                         <img class="more" src="icons/3dots.svg" />
                     </fg-top>
                     <fg-preview>
-                        <img src="assets/coursePlaceholder.jpg" />
+                        <img src="assets/coursePlaceholder.jpg" alt="" data-asset-preview-image />
                     </fg-preview>
                     <fg-bottom>
                         <button class="popupButton">
                             <img src="icons/fg.svg" />
                             <span>Send to ForgeGUI Connect</span>
                         </button>
-                        <button class="popupButton active">
+                        <button class="popupButton active" type="button" data-asset-download>
                             <img src="icons/download.svg" />
                             <span>Download</span>
                         </button>
-                        <button class="popupButton">
+                        <button class="popupButton" type="button" data-asset-share>
                             <img src="icons/share.svg" />
                         </button>
                     </fg-bottom>
@@ -152,7 +152,7 @@
                             <input class="projectName" placeholder="Project Name" />
                             <select>
                                 <option>Game Project</option>
-                                <option>idk placeholder</option>
+                                <option>Newest first</option>
                             </select>
                         </form>
                     </fg-include>

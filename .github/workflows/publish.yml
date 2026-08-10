@@ -25,9 +25,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Build static artifact
         run: node tools/site.mjs build dist
+        env:
+          FORGE_SUPABASE_URL: ${{ vars.FORGE_SUPABASE_URL }}
+          FORGE_SUPABASE_ANON_KEY: ${{ vars.FORGE_SUPABASE_ANON_KEY }}
 
       - name: Publish public branch
         uses: peaceiris/actions-gh-pages@v4
@@ -36,3 +43,4 @@ jobs:
           publish_branch: public
           publish_dir: ./dist
           force_orphan: true
+          cname: forgegui.com

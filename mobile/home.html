@@ -1,136 +1,91 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ForgeGUI</title>
-        <meta name="theme-color" content="#0a0a0a" />
-        <meta name="description" content="Create games and assets with ForgeGUI" />
-        <meta name="color-scheme" content="dark" />
-        <link rel="stylesheet" href="styles/base.css" />
-        <link rel="stylesheet" href="styles/mobile-home.css" />
-        <script src="scripts/mobile-home.js" defer></script>
-    </head>
-    <body class="mobile-home mobile-home-page">
-        <main class="mobile-home-shell">
-            <header class="mobile-home-topbar">
-                <div class="mobile-home-brand">
-                    <button
-                        class="mobile-hamburger"
-                        type="button"
-                        aria-label="Open game projects"
-                        aria-controls="mobile-home-drawer"
-                        aria-expanded="false"
-                        data-open-drawer
-                    >
-                        <span></span><span></span><span></span>
-                    </button>
-                    <img src="icons/fg.svg" alt="ForgeGUI" />
-                </div>
-            </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ForgeGUI</title>
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="description" content="Create games and assets with ForgeGUI" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/mobile-home.css" />
+    <script src="scripts/mobile-home.js" defer></script>
+  </head>
+  <body class="mobile-home mobile-home-page">
+    <main class="mobile-home-shell">
+      <header class="mobile-home-topbar">
+        <div class="mobile-home-brand">
+          <button class="mobile-hamburger" type="button" aria-label="Open recent chats" aria-controls="mobile-home-drawer" aria-expanded="false" data-open-drawer>
+            <span></span><span></span><span></span>
+          </button>
+          <img src="icons/fg.svg" alt="ForgeGUI" />
+        </div>
+      </header>
 
-            <div class="mobile-home-scroll" data-home-scroll>
-                <section class="mobile-create-hero">
-                    <div class="mobile-create-content">
-                        <h1>Let&rsquo;s create a game,<br />Johny Blessings</h1>
-                        <div class="mobile-create-box">
-                            <textarea aria-label="Game description" placeholder="Describe what you want..."></textarea>
-                            <div class="mobile-create-actions">
-                                <div>
-                                    <button type="button" aria-label="More creation options">
-                                        <img src="icons/3dots.svg" alt="" />
-                                    </button>
-                                    <button type="button" aria-label="Add an attachment">
-                                        <img src="icons/add.svg" alt="" />
-                                    </button>
-                                </div>
-                                <button class="mobile-send" type="button" aria-label="Create game" data-create-game>
-                                    <img src="icons/send.svg" alt="" />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="mobile-scroll-cue" type="button" data-scroll-tools>
-                        <img src="icons/arrow.svg" alt="" />
-                        <span>Scroll down for <strong>Quick Tools</strong></span>
-                    </button>
-                </section>
-
-                <section class="mobile-forge" id="mobile-quick-tools">
-                    <h2><span>THE</span> FORGE</h2>
-                    <section class="mobile-tool-section">
-                        <header>
-                            <div><img src="icons/3d.svg" alt="" /><h3>Quick Tools</h3></div>
-                            <div class="mobile-tool-arrows">
-                                <button type="button" aria-label="Previous quick tool" data-gallery-direction="-1">
-                                    <img src="icons/arrow.svg" alt="" />
-                                </button>
-                                <button type="button" aria-label="Next quick tool" data-gallery-direction="1">
-                                    <img src="icons/arrow.svg" alt="" />
-                                </button>
-                            </div>
-                        </header>
-                        <div class="mobile-tool-track">
-                            <article class="mobile-tool-card">
-                                <img src="assets/d2.png" alt="" />
-                                <strong>Placeholder Title</strong>
-                                <span>Placeholder subtext cuz why not</span>
-                            </article>
-                            <article class="mobile-tool-card">
-                                <img src="assets/d2.png" alt="" />
-                                <strong>Placeholder Title</strong>
-                                <span>Placeholder subtext cuz why not</span>
-                            </article>
-                            <article class="mobile-tool-card">
-                                <img src="assets/d2.png" alt="" />
-                                <strong>Placeholder Title</strong>
-                                <span>Placeholder subtext cuz why not</span>
-                            </article>
-                        </div>
-                    </section>
-
-                    <article class="mobile-featured-tool">
-                        <img src="assets/d2.png" alt="" />
-                        <strong>Placeholder Title</strong>
-                        <span>Placeholder subtext cuz why not</span>
-                        <button type="button">Try Now</button>
-                    </article>
-
-                    <section class="mobile-tool-section">
-                        <header>
-                            <div><img src="icons/picture.svg" alt="" /><h3>Other Tools</h3></div>
-                            <div class="mobile-tool-arrows">
-                                <button type="button" aria-label="Previous tool" data-gallery-direction="-1">
-                                    <img src="icons/arrow.svg" alt="" />
-                                </button>
-                                <button type="button" aria-label="Next tool" data-gallery-direction="1">
-                                    <img src="icons/arrow.svg" alt="" />
-                                </button>
-                            </div>
-                        </header>
-                        <div class="mobile-tool-track">
-                            <article class="mobile-tool-card">
-                                <img src="assets/d2.png" alt="" />
-                                <strong>Placeholder Title</strong>
-                                <span>Placeholder subtext cuz why not</span>
-                            </article>
-                            <article class="mobile-tool-card">
-                                <img src="assets/d2.png" alt="" />
-                                <strong>Placeholder Title</strong>
-                                <span>Placeholder subtext cuz why not</span>
-                            </article>
-                            <article class="mobile-tool-card">
-                                <img src="assets/d2.png" alt="" />
-                                <strong>Placeholder Title</strong>
-                                <span>Placeholder subtext cuz why not</span>
-                            </article>
-                        </div>
-                    </section>
-                </section>
+      <div class="mobile-home-scroll" data-home-scroll>
+        <section class="mobile-create-hero">
+          <div class="mobile-create-content">
+            <h1>Let&rsquo;s create a game,<br /><span data-user-name>Creator</span></h1>
+            <div class="mobile-create-box" data-chat-form>
+              <textarea data-chat-input maxlength="4000" aria-label="Game description" placeholder="Describe what you want..."></textarea>
+              <div class="mobile-create-actions">
+                <div><img src="icons/roblox.svg" alt="" /><span>Auto-detect</span></div>
+                <button class="mobile-send" type="button" aria-label="Create game" data-chat-submit>
+                  <img src="icons/send.svg" alt="" />
+                </button>
+              </div>
+              <p class="chatboxStatus" data-chat-status role="status" hidden></p>
             </div>
+          </div>
+          <button class="mobile-scroll-cue" type="button" data-scroll-tools>
+            <img src="icons/arrow.svg" alt="" />
+            <span>Scroll down for <strong>Quick Tools</strong></span>
+          </button>
+        </section>
 
-            <fg-include data-template="templates/mobile-app-drawer.html"></fg-include>
-            <fg-include data-template="templates/mobile-bottom-nav.html"></fg-include>
-        </main>
-    </body>
+        <section class="mobile-forge" id="mobile-quick-tools">
+          <h2><span>THE</span> FORGE</h2>
+          <section class="mobile-tool-section">
+            <header>
+              <div><img src="icons/3d.svg" alt="" /><h3>Quick Tools</h3></div>
+              <div class="mobile-tool-arrows">
+                <button type="button" aria-label="Previous quick tool" data-gallery-direction="-1"><img src="icons/arrow.svg" alt="" /></button>
+                <button type="button" aria-label="Next quick tool" data-gallery-direction="1"><img src="icons/arrow.svg" alt="" /></button>
+              </div>
+            </header>
+            <div class="mobile-tool-track">
+              <article class="mobile-tool-card" data-prompt-suggestion="Create a stylized low-poly environment prop in 3D"><img src="assets/landing/collage-01.png" alt="Generated 3D game asset" /><strong>3D Asset Generator</strong><span>Create production-ready game props.</span></article>
+              <article class="mobile-tool-card" data-prompt-suggestion="Create a complete game inventory interface"><img src="assets/landing/hero-art-a.png" alt="Generated game interface" /><strong>Game UI Generator</strong><span>Build cohesive HUDs and menus.</span></article>
+              <article class="mobile-tool-card" data-prompt-suggestion="Generate a high-impact game thumbnail"><img src="assets/landing/catalog-card.png" alt="Generated game thumbnail" /><strong>Thumbnail Generator</strong><span>Create polished promotional art.</span></article>
+            </div>
+          </section>
+
+          <article class="mobile-featured-tool" data-prompt-suggestion="Create a complete fantasy RPG interface set with inventory, HUD, and ability icons">
+            <img src="assets/plugin-banner.png" alt="ForgeGUI complete game asset workflow" />
+            <strong>Complete visual systems</strong>
+            <span>Generate coordinated interfaces and assets in one chat.</span>
+            <button type="button" data-prompt-suggestion="Create a complete fantasy RPG interface set with inventory, HUD, and ability icons">Try Now</button>
+          </article>
+
+          <section class="mobile-tool-section">
+            <header>
+              <div><img src="icons/picture.svg" alt="" /><h3>Other Tools</h3></div>
+              <div class="mobile-tool-arrows">
+                <button type="button" aria-label="Previous tool" data-gallery-direction="-1"><img src="icons/arrow.svg" alt="" /></button>
+                <button type="button" aria-label="Next tool" data-gallery-direction="1"><img src="icons/arrow.svg" alt="" /></button>
+              </div>
+            </header>
+            <div class="mobile-tool-track">
+              <article class="mobile-tool-card" data-prompt-suggestion="Generate a dramatic sound effect for opening a magical portal"><img src="assets/landing/generation-card.png" alt="Audio generation" /><strong>Sound Effects</strong><span>Create game-ready audio.</span></article>
+              <article class="mobile-tool-card" data-prompt-suggestion="Compose an atmospheric exploration theme for a fantasy game"><img src="assets/landing/collage-06.png" alt="Game music generation" /><strong>Game Music</strong><span>Compose themes and loops.</span></article>
+              <article class="mobile-tool-card" data-prompt-suggestion="Create a seamless pixel-art stone floor texture"><img src="assets/landing/collage-12.png" alt="Pixel texture generation" /><strong>Pixel Textures</strong><span>Create seamless textures and sprites.</span></article>
+            </div>
+          </section>
+        </section>
+      </div>
+
+      <fg-include data-template="templates/mobile-app-drawer.html"></fg-include>
+      <fg-include data-template="templates/mobile-bottom-nav.html"></fg-include>
+    </main>
+  </body>
 </html>

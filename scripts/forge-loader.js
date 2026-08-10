@@ -61,6 +61,13 @@
 
   async function load(variant, route) {
     var root = logicalRoot(route);
+    if (window.ForgeAPI) {
+      var allowed = await window.ForgeAPI.auth.requireSession(
+        route + location.search + location.hash,
+        new URL(root, location.origin),
+      );
+      if (!allowed) return;
+    }
     var target = new URL(root + variant + "/" + route, location.origin);
     var response = await fetch(target.href, { cache: "no-store" });
     if (!response.ok) {

@@ -17,26 +17,27 @@
                 <a class="mobile-settings-back" href="settings/overview.html"><img src="icons/arrow.svg" alt="" />Account Overview</a>
                 <section class="mobile-account-hero">
                     <img src="assets/landing/blog-article.jpg" alt="" />
-                    <img src="assets/generic.png" alt="Johny Blessings" />
+                    <img src="assets/generic.png" alt="Your profile" data-user-avatar data-avatar-upload role="button" tabindex="0" />
+                    <input data-avatar-input type="file" accept="image/*" hidden />
                 </section>
                 <section class="mobile-settings-group">
                     <h2>My Account</h2>
                     <div class="mobile-settings-list">
-                        <article><div><span>Name</span><strong>Johnny Blessings</strong></div><button type="button" data-settings-open="change-name">Edit</button></article>
-                        <article><div><span>Username</span><strong>@therealblessings</strong></div><button type="button" data-settings-open="change-username">Edit</button></article>
-                        <article><div><span>Email Address</span><strong>email@email.com</strong></div><button type="button" data-settings-open="change-email">Edit</button></article>
-                        <article><div><span>Security</span><strong>Password &amp; Email Verification</strong></div><button type="button" data-settings-open="change-password">Edit</button></article>
+                        <article><div><span>Name</span><strong data-user-name>Creator</strong></div><button type="button" data-settings-open="change-name">Edit</button></article>
+                        <article><div><span>Username</span><strong data-user-handle>@creator</strong></div><button type="button" disabled title="Your username is generated from your account name.">Generated</button></article>
+                        <article><div><span>Email Address</span><strong data-user-email></strong></div><button type="button" data-settings-open="change-email">Edit</button></article>
+                        <article><div><span>Security</span><strong>Password &amp; Email</strong></div><button type="button" data-settings-open="change-password">Edit</button></article>
                     </div>
                 </section>
                 <section class="mobile-settings-group">
                     <h2>Connections</h2>
-                    <div class="mobile-settings-list"><article><div><span>Roblox Account</span><strong>Not Linked</strong></div><button type="button">Link Account</button></article></div>
+                    <div class="mobile-settings-list"><article><div><span>Roblox Account</span><strong data-settings-roblox-status>Not Linked</strong></div><button type="button" data-settings-roblox>Link Account</button></article></div>
                 </section>
                 <section class="mobile-settings-group">
                     <h2>Account Management</h2>
                     <div class="mobile-settings-list">
-                        <article><div><strong>Log Out</strong><span>Log out of all devices</span></div><button type="button">Log Out Now</button></article>
-                        <article><div><strong>Delete my Account</strong><span>This action is permanent.</span></div><button class="is-destructive" type="button">Delete Account</button></article>
+                        <article><div><strong>Log Out</strong><span>Log out of this device</span></div><button type="button" data-auth-signout>Log Out Now</button></article>
+                        <article><div><strong>Delete my Account</strong><span>This action is permanent.</span></div><button class="is-destructive" type="button" data-settings-delete>Delete Account</button></article>
                     </div>
                 </section>
             </div>
@@ -44,19 +45,15 @@
 
             <section class="mobile-settings-editor" data-settings-editor="change-name" hidden>
                 <header><button type="button" data-settings-close><img src="icons/arrow.svg" alt="" /></button><h2>Change Name</h2></header>
-                <form><p>This only applies to your account name, not your username.</p><label>Name<input required type="text" placeholder="Name" /></label><label>Last Name <span>Optional</span><input type="text" placeholder="Last Name" /></label><small>Names must follow our content guidelines.</small><button class="mobile-settings-save" type="submit">Save Name</button></form>
-            </section>
-            <section class="mobile-settings-editor" data-settings-editor="change-username" hidden>
-                <header><button type="button" data-settings-close><img src="icons/arrow.svg" alt="" /></button><h2>Change Username</h2></header>
-                <form><p>Your username can only be changed once every 30 days.</p><label>Password<input required type="password" placeholder="Password" /></label><label>New Username<input required type="text" placeholder="New Username" /></label><small>Usernames must follow our content guidelines.</small><button class="mobile-settings-save" type="submit">Save Username</button></form>
+                <form data-settings-action="name"><p>This only applies to your account name, not your username.</p><label>Name<input required name="firstName" type="text" maxlength="50" placeholder="Name" /></label><label>Last Name <span>Optional</span><input name="lastName" type="text" maxlength="50" placeholder="Last Name" /></label><small>Names must follow our content guidelines.</small><button class="mobile-settings-save" type="submit">Save Name</button></form>
             </section>
             <section class="mobile-settings-editor" data-settings-editor="change-email" hidden>
                 <header><button type="button" data-settings-close><img src="icons/arrow.svg" alt="" /></button><h2>Change Email</h2></header>
-                <form><label>Password<input required type="password" placeholder="Password" /></label><label>2FA Code<input required type="text" inputmode="numeric" placeholder="2FA Code" /></label><label>Previous Email<input required type="email" placeholder="Enter Previous Email" /></label><label>New Email<input required type="email" placeholder="New Email" /></label><small>You can revert this change from your previous email for 30 days.</small><button class="mobile-settings-save" type="submit">Save Email</button></form>
+                <form data-settings-action="email"><label>Current Password<input required name="currentPassword" type="password" autocomplete="current-password" placeholder="Current Password" /></label><label>New Email<input required name="email" type="email" autocomplete="email" placeholder="New Email" /></label><small>Confirmation links may be sent before the change is applied.</small><button class="mobile-settings-save" type="submit">Save Email</button></form>
             </section>
             <section class="mobile-settings-editor" data-settings-editor="change-password" hidden>
                 <header><button type="button" data-settings-close><img src="icons/arrow.svg" alt="" /></button><h2>Change Password</h2></header>
-                <form><label>Old Password<input required type="password" placeholder="Old Password" /></label><label>2FA Code<input required type="text" inputmode="numeric" placeholder="2FA Code" /></label><label>New Password<input required minlength="8" type="password" placeholder="New Password" data-new-password /></label><label>Confirm Password<input required minlength="8" type="password" placeholder="Confirm Password" data-confirm-password /></label><a href="placeholder.html">Forgot Password?</a><button class="mobile-settings-save" type="submit">Save Password</button></form>
+                <form data-settings-action="password"><label>Current Password<input required name="currentPassword" type="password" autocomplete="current-password" placeholder="Current Password" /></label><label>New Password<input required name="password" minlength="8" type="password" autocomplete="new-password" placeholder="New Password" data-new-password /></label><label>Confirm Password<input required name="passwordConfirmation" minlength="8" type="password" autocomplete="new-password" placeholder="Confirm Password" data-confirm-password /></label><a href="auth/reset-password.html">Forgot Password?</a><button class="mobile-settings-save" type="submit">Save Password</button></form>
             </section>
         </main>
     </body>

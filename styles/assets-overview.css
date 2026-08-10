@@ -177,6 +177,7 @@ fg-communityasset {
    display: flex;
    flex-direction: column;
    justify-content: space-between;
+   cursor: pointer;
 
    &.long {
       grid-column: span 2;

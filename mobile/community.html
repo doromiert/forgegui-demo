@@ -10,7 +10,6 @@
         <link rel="stylesheet" href="styles/mobile-home.css" />
         <link rel="stylesheet" href="styles/mobile-community.css" />
         <script src="scripts/mobile-home.js" defer></script>
-        <script src="scripts/mobile-community.js" defer></script>
     </head>
     <body class="mobile-home mobile-community">
         <main class="mobile-home-shell">
@@ -50,18 +49,18 @@
                         role="tablist"
                         aria-label="Community categories"
                     >
-                        <button class="is-active" type="button">
+                        <button class="is-active" type="button" data-community-category="">
                             🔥 <span>Trending</span>
                         </button>
-                        <button type="button">🎸 <span>Music</span></button>
-                        <button type="button">
+                        <button type="button" data-community-category="Music">🎸 <span>Music</span></button>
+                        <button type="button" data-community-category="Announcements">
                             📣 <span>Announcements</span>
                         </button>
-                        <button type="button">
+                        <button type="button" data-community-category="Development">
                             👾 <span>Development</span>
                         </button>
-                        <button type="button">🕹️ <span>Gaming</span></button>
-                        <button type="button">✏️ <span>Drawing</span></button>
+                        <button type="button" data-community-category="Gaming">🕹️ <span>Gaming</span></button>
+                        <button type="button" data-community-category="Drawing">✏️ <span>Drawing</span></button>
                     </div>
                     <button
                         class="mobile-community-post-button"
@@ -71,116 +70,8 @@
                         <img src="icons/add.svg" alt="" />Post
                     </button>
 
-                    <div class="mobile-community-posts">
-                        <article
-                            class="mobile-feed-post"
-                            data-community-item="username ai generated sky image trending"
-                            data-community-open="detail"
-                            tabindex="0"
-                        >
-                            <header>
-                                <img src="assets/generic.png" alt="" /><strong
-                                    >Username</strong
-                                ><i></i><span>1h ago</span><b>AI</b
-                                ><button
-                                    type="button"
-                                    aria-label="Post options"
-                                >
-                                    <img src="icons/3dots.svg" alt="" />
-                                </button>
-                            </header>
-                            <img
-                                class="mobile-feed-media"
-                                src="assets/landing/blog-article.jpg"
-                                alt="Cloudy sky above a neighborhood"
-                            />
-                            <footer>
-                                <button type="button" aria-label="Share">
-                                    <img src="icons/share.svg" alt="" /></button
-                                ><span></span
-                                ><button type="button" data-like>
-                                    <img src="icons/heart.svg" alt="" /><em
-                                        >54</em
-                                    ></button
-                                ><button type="button">
-                                    <img src="icons/message.svg" alt="" /><em
-                                        >54</em
-                                    >
-                                </button>
-                            </footer>
-                        </article>
-                        <article
-                            class="mobile-feed-post"
-                            data-community-item="username text trending"
-                            data-community-open="detail"
-                            tabindex="0"
-                        >
-                            <header>
-                                <img src="assets/generic.png" alt="" /><strong
-                                    >Username</strong
-                                ><i></i><span>1h ago</span
-                                ><button
-                                    type="button"
-                                    aria-label="Post options"
-                                >
-                                    <img src="icons/3dots.svg" alt="" />
-                                </button>
-                            </header>
-                            <div class="mobile-feed-text">
-                                <h2>Post with text</h2>
-                                <p>Post with text</p>
-                            </div>
-                            <footer>
-                                <button type="button" aria-label="Share">
-                                    <img src="icons/share.svg" alt="" /></button
-                                ><span></span
-                                ><button type="button" data-like>
-                                    <img src="icons/heart.svg" alt="" /><em
-                                        >54</em
-                                    ></button
-                                ><button type="button">
-                                    <img src="icons/message.svg" alt="" /><em
-                                        >54</em
-                                    >
-                                </button>
-                            </footer>
-                        </article>
-                        <article
-                            class="mobile-feed-post"
-                            data-community-item="username development game"
-                            data-community-open="detail"
-                            tabindex="0"
-                        >
-                            <header>
-                                <img src="assets/generic.png" alt="" /><strong
-                                    >Username</strong
-                                ><i></i><span>1h ago</span
-                                ><button
-                                    type="button"
-                                    aria-label="Post options"
-                                >
-                                    <img src="icons/3dots.svg" alt="" />
-                                </button>
-                            </header>
-                            <div class="mobile-feed-text">
-                                <h2>Building something new</h2>
-                                <p>Sharing an early look at this project.</p>
-                            </div>
-                            <footer>
-                                <button type="button" aria-label="Share">
-                                    <img src="icons/share.svg" alt="" /></button
-                                ><span></span
-                                ><button type="button" data-like>
-                                    <img src="icons/heart.svg" alt="" /><em
-                                        >54</em
-                                    ></button
-                                ><button type="button">
-                                    <img src="icons/message.svg" alt="" /><em
-                                        >54</em
-                                    >
-                                </button>
-                            </footer>
-                        </article>
+                    <div class="mobile-community-posts" data-community-feed aria-live="polite">
+                        <p class="communityStatus" data-community-status>Loading Community...</p>
                     </div>
                 </section>
             </div>
@@ -202,43 +93,41 @@
                     <img src="icons/3dots.svg" alt="" />
                 </header>
                 <div class="mobile-community-author">
-                    <img src="assets/generic.png" alt="" />
+                    <img src="assets/generic.png" alt="" data-community-detail-avatar />
                     <div>
-                        <strong>Alex Chen</strong><span>@AlexRocks33</span>
+                        <strong data-community-detail-name>User</strong><span data-community-detail-handle>@user</span>
                     </div>
                     <button type="button" data-follow-community>
                         Follow <img src="icons/follow.svg" alt="" />
                     </button>
                 </div>
                 <div class="mobile-community-detail-copy">
-                    <h2>Mountain Retreat</h2>
-                    <p>
-                        A secluded getaway nestled between alpine peaks and
-                        evergreen forests.
-                    </p>
-                    <div><b>Nature</b><b>Travel</b></div>
+                    <h2 data-community-detail-title>Community post</h2>
+                    <p data-community-detail-description></p>
+                    <div data-community-detail-tags></div>
                 </div>
                 <img
                     class="mobile-community-detail-media"
-                    src="assets/roblox-connect-bg.jpg"
-                    alt="Mountain retreat"
+                    src="assets/generic.png"
+                    alt=""
+                    data-community-detail-media
                 />
                 <div class="mobile-community-detail-actions">
-                    <button type="button">
+                    <button type="button" data-community-share>
                         <img src="icons/share.svg" alt="" /></button
                     ><span></span
-                    ><button type="button" data-like>
-                        <img src="icons/heart.svg" alt="" /><em>54</em></button
+                    ><button type="button" data-community-like>
+                        <img src="icons/heart.svg" alt="" /><em data-community-detail-likes>0</em></button
                     ><button type="button">
-                        <img src="icons/message.svg" alt="" /><em>54</em>
+                        <img src="icons/message.svg" alt="" /><em data-community-detail-comments>0</em>
                     </button>
                 </div>
                 <section class="mobile-comments">
                     <header>
                         <h2>Comments</h2>
-                        <span><b data-comment-count>43</b> Comments</span>
+                        <span><b data-community-comment-count>0</b> Comments</span>
                     </header>
-                    <form data-comment-form>
+                    <form data-comment-form data-community-comment-form>
                         <input
                             type="text"
                             placeholder="Type Comment..."
@@ -247,17 +136,7 @@
                             <img src="icons/send.svg" alt="Send" />
                         </button>
                     </form>
-                    <div data-comments-list>
-                        <article>
-                            <header>
-                                <img src="assets/generic.png" alt="" /><strong
-                                    >Username</strong
-                                ><span>1h ago</span>
-                            </header>
-                            <h3>Post with text</h3>
-                            <p>Post with text</p>
-                        </article>
-                    </div>
+                    <div data-community-comments-list></div>
                 </section>
             </section>
 
@@ -276,13 +155,14 @@
                     </button>
                     <h1>Create Post</h1>
                 </header>
-                <form data-create-post-form>
+                <form data-create-post-form data-community-create-form>
                     <label class="mobile-post-field"
                         ><input
                             type="text"
                             maxlength="50"
                             placeholder="Title"
                             aria-label="Post title"
+                            name="title"
                         /><span>0/50</span></label
                     >
                     <label class="mobile-post-field is-body">
@@ -290,6 +170,7 @@
                             maxlength="1000"
                             placeholder="Text"
                             aria-label="Post text"
+                            name="description"
                         ></textarea
                         ><span>0/1000</span></label
                     >
@@ -303,9 +184,10 @@
                             <span>Up to 4 Images</span>
                         </header>
                         <div>
-                            <button type="button" aria-label="Add image">
+                            <button type="button" aria-label="Add image" data-community-add-media>
                                 <img src="icons/add.svg" alt="" /></button
-                            ><i></i><i></i>
+                            ><i data-community-media-preview></i>
+                            <input type="file" accept="image/*" multiple hidden data-community-media-input />
                         </div>
                     </section>
                     <button class="mobile-upload-post" type="submit">

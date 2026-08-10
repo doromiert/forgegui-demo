@@ -10,6 +10,8 @@
         <link rel="stylesheet" href="styles/base.css" />
         <link rel="stylesheet" href="styles/mobile-home.css" />
         <link rel="stylesheet" href="styles/mobile-assets.css" />
+        <link rel="stylesheet" href="styles/community-asset-popup.css" />
+        <script src="scripts/site.js" defer></script>
         <script src="scripts/mobile-home.js" defer></script>
         <script src="scripts/mobile-assets.js" defer></script>
     </head>
@@ -86,9 +88,9 @@
                     <h1>Discover Community Assets</h1>
                     <label class="mobile-assets-search">
                         <img src="icons/search.svg" alt="" />
-                        <input type="search" placeholder="Search" aria-label="Search community assets" data-community-search />
+                        <input type="search" placeholder="Search" aria-label="Search community assets" data-community-search data-catalog-search />
                     </label>
-                    <div class="mobile-community-grid">
+                    <div class="mobile-community-grid" data-catalog-grid>
                         <article class="mobile-community-card is-wide" data-search-item="alex chen mountain retreat nature travel">
                             <img src="assets/roblox-connect-bg.jpg" alt="" />
                             <div><p><img src="assets/generic.png" alt="" /><strong>Alex Chen</strong></p><h2>Mountain Retreat</h2><span>A secluded getaway nestled between alpine peaks...</span><footer><b>Nature</b><b>Travel</b></footer></div>
@@ -109,5 +111,6 @@
             <fg-include data-template="templates/mobile-app-drawer.html"></fg-include>
             <fg-include data-template="templates/mobile-bottom-nav.html"></fg-include>
         </main>
+        <fg-include data-template="templates/community-asset-popup.html"></fg-include>
     </body>
 </html>

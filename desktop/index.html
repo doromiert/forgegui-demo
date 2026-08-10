@@ -11,6 +11,7 @@
         />
         <link rel="stylesheet" href="styles/index.css" />
         <script src="scripts/site.js" defer></script>
+        <script src="scripts/auth-ui.js" defer></script>
     </head>
     <body class="landing-page">
         <fg-include data-template="templates/public-header.html"></fg-include>
@@ -651,7 +652,7 @@
                 <div class="accordion">
                     <article>
                         <button type="button" aria-expanded="false">
-                            <span>Question 1</span
+                            <span>What can ForgeGUI create?</span
                             ><img
                                 src="icons/arrow.svg"
                                 alt=""
@@ -659,13 +660,14 @@
                             />
                         </button>
                         <p>
-                            ForgeGUI combines leading AI tools in one workspace
-                            built specifically for game creation.
+                            ForgeGUI creates game interfaces, images, 3D assets,
+                            music, sound effects, clothing, and production code
+                            from a single conversational workspace.
                         </p>
                     </article>
                     <article>
                         <button type="button" aria-expanded="false">
-                            <span>Question 2</span
+                            <span>Can I use generated assets commercially?</span
                             ><img
                                 src="icons/arrow.svg"
                                 alt=""
@@ -673,13 +675,13 @@
                             />
                         </button>
                         <p>
-                            Generate games, interfaces, 3D assets, music, sound
-                            effects, and production-ready templates.
+                            Yes. Assets you generate are licensed for use in your
+                            own games, including commercial projects.
                         </p>
                     </article>
                     <article class="expanded">
                         <button type="button" aria-expanded="true">
-                            <span>Question 3 (Expanded</span
+                            <span>Which game engines are supported?</span
                             ><img
                                 src="icons/arrow.svg"
                                 alt=""
@@ -687,11 +689,9 @@
                             />
                         </button>
                         <p>
-                            Word Word Word Word Word Word Word Word Word Word
-                            Word Word Word Word Word Word Word Word Word Word
-                            Word Word Word Word Word Word Word Word Word Word
-                            Word Word Word Word Word Word Word Word Word Word
-                            Word Word Word vWord
+                            Generated assets can be exported for Roblox, Unity,
+                            Unreal Engine, UEFN, Blender, and other standard game
+                            development workflows.
                         </p>
                     </article>
                 </div>
@@ -704,34 +704,27 @@
                     <a class="landing-footer-brand" href="#top">
                         <img src="assets/footerLogo.svg" alt="ForgeGUI" />
                     </a>
-                    <a href="#">Careers</a>
+                    <a href="jobs.html">Careers</a>
                     <a href="#community">Company</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
+                    <a href="https://forgegui.com/privacy">Privacy Policy</a>
+                    <a href="https://forgegui.com/terms">Terms of Service</a>
                     <a href="blog.html">Blog</a>
                 </nav>
 
                 <div class="landing-footer-meta">
                     <p>© 2026 ForgeGUI. All rights reserved.</p>
                     <div class="landing-footer-socials">
-                        <a href="#" aria-label="ForgeGUI on Discord">
+                        <a href="https://discord.gg/R6k7xSKG3V" aria-label="ForgeGUI on Discord" target="_blank" rel="noopener">
                             <img
                                 class="footer-discord-icon"
                                 src="assets/landing/footer-discord.svg"
                                 alt=""
                             />
                         </a>
-                        <a href="#" aria-label="ForgeGUI on X">
+                        <a href="https://x.com/forgeguiai" aria-label="ForgeGUI on X" target="_blank" rel="noopener">
                             <img
                                 class="footer-x-icon"
                                 src="assets/landing/footer-x.svg"
-                                alt=""
-                            />
-                        </a>
-                        <a href="#" aria-label="ForgeGUI on Reddit">
-                            <img
-                                class="footer-reddit-icon"
-                                src="assets/landing/footer-reddit.svg"
                                 alt=""
                             />
                         </a>
@@ -765,22 +758,31 @@
                             >
                                 Create an Account
                             </button>
-                            <a class="login-button" href="onboarding.html">
+                            <button
+                                class="login-button"
+                                type="button"
+                                data-auth-google
+                            >
                                 <img
                                     class="provider-icon"
                                     src="assets/landing/login-google.svg"
                                     alt=""
                                 />
                                 Continue with Google
-                            </a>
-                            <a class="login-button" href="onboarding.html">
+                            </button>
+                            <button
+                                class="login-button"
+                                type="button"
+                                disabled
+                                title="Roblox sign-in is not available yet"
+                            >
                                 <img
                                     class="provider-icon provider-icon-roblox"
                                     src="assets/landing/login-roblox.png"
                                     alt=""
                                 />
                                 Continue with Roblox
-                            </a>
+                            </button>
 
                             <div class="login-divider" aria-hidden="true">
                                 <span></span><b>or...</b><span></span>
@@ -822,7 +824,7 @@
                             </div>
                         </header>
 
-                        <form class="login-form" data-auth-form>
+                        <form class="login-form" data-auth-form data-auth-mode="signin">
                             <label class="login-field">
                                 <input
                                     type="email"
@@ -858,6 +860,7 @@
                             >
                                 Sign In
                             </button>
+                            <p class="login-status" data-auth-status role="status" hidden></p>
 
                             <div class="login-divider" aria-hidden="true">
                                 <span></span><b>Other Options...</b
@@ -872,7 +875,7 @@
                                 >
                                     Sign Up
                                 </button>
-                                <button class="login-button" type="button">
+                                <button class="login-button" type="button" data-auth-forgot>
                                     I Forgot
                                 </button>
                             </div>
@@ -899,7 +902,7 @@
                             </div>
                         </header>
 
-                        <form class="login-form" data-auth-form>
+                        <form class="login-form" data-auth-form data-auth-mode="signup">
                             <label class="login-field">
                                 <input
                                     type="text"
@@ -943,12 +946,29 @@
                                     />
                                 </span>
                             </label>
+                            <label class="login-field">
+                                <input
+                                    type="password"
+                                    name="confirmPassword"
+                                    placeholder="Confirm Password"
+                                    minlength="8"
+                                    required
+                                />
+                                <span class="login-field-icon login-lock">
+                                    <i></i>
+                                    <img
+                                        src="assets/landing/login-lock-arc.svg"
+                                        alt=""
+                                    />
+                                </span>
+                            </label>
                             <button
                                 class="login-button login-button-email"
                                 type="submit"
                             >
                                 Sign Up
                             </button>
+                            <p class="login-status" data-auth-status role="status" hidden></p>
 
                             <div class="login-divider" aria-hidden="true">
                                 <span></span><b>Other Options...</b
@@ -1013,9 +1033,9 @@
                 });
             }
 
-            function openLogin() {
+            function openLogin(stepName) {
                 loginReturnFocus = document.activeElement;
-                showLoginStep("options");
+                showLoginStep(stepName || "options");
                 loginModal.hidden = false;
                 document.body.classList.add("modal-open");
                 if (heroVideo) heroVideo.pause();
@@ -1033,7 +1053,7 @@
             loginTriggers.forEach(function (trigger) {
                 trigger.addEventListener("click", function (event) {
                     event.preventDefault();
-                    openLogin();
+                    openLogin(trigger.dataset.loginStart);
                 });
             });
             loginModal.addEventListener("click", function (event) {
@@ -1041,14 +1061,6 @@
                 if (!stepTrigger) return;
                 showLoginStep(stepTrigger.dataset.loginGo);
             });
-            loginModal
-                .querySelectorAll("[data-auth-form]")
-                .forEach(function (form) {
-                    form.addEventListener("submit", function (event) {
-                        event.preventDefault();
-                        window.location.href = "onboarding.html";
-                    });
-                });
             loginModal.addEventListener("click", function (event) {
                 if (event.target === loginModal) closeLogin();
             });

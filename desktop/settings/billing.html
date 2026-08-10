@@ -19,23 +19,23 @@
                     <span data-slot="header">Plan Overview</span>
                     <fg-include data-template="templates/listbox-row.html">
                         <span data-slot="label">Selected Plan</span>
-                        <b data-slot="value">ForgeGUI Pro</b>
-                        <button data-slot="action" class="listboxAction">
+                        <b data-slot="value" data-settings-plan>Loading...</b>
+                        <button data-slot="action" class="listboxAction" type="button" data-settings-plans>
                             Change Plan
                         </button>
                     </fg-include>
                     <fg-include data-template="templates/listbox-row.html">
-                        <span data-slot="label">Daily Rate Limit</span>
-                        <b data-slot="value">30% Used</b>
-                        <button data-slot="action" class="listboxAction">
-                            Upgrade to Max
+                        <span data-slot="label">Credits Available</span>
+                        <b data-slot="value" data-settings-credits>Loading...</b>
+                        <button data-slot="action" class="listboxAction" type="button" data-settings-plans>
+                            Add Credits
                         </button>
                     </fg-include>
                     <fg-include data-template="templates/listbox-row.html">
-                        <span data-slot="label">Billed to</span>
-                        <b data-slot="value">VISA-0094</b>
-                        <button data-slot="action" class="listboxAction">
-                            Edit Billing Info
+                        <span data-slot="label">Billing Status</span>
+                        <b data-slot="value" data-settings-subscription>Loading...</b>
+                        <button data-slot="action" class="listboxAction" type="button" data-settings-billing-portal>
+                            Manage Billing
                         </button>
                     </fg-include>
                 </fg-include>

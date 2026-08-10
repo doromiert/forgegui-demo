@@ -1,1 +1,27 @@
-<fg-page data-source="desktop/oldChat.html"></fg-page>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat - ForgeGUI</title>
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/old-chat.css" />
+  </head>
+  <body class="mobileConversationPage">
+    <main class="mobileConversationShell">
+      <header class="mobileConversationHeader">
+        <a href="home.html" aria-label="Back to home"><img src="icons/arrow.svg" alt="" /></a>
+        <strong data-chat-title>Conversation</strong>
+        <a href="home.html">New</a>
+      </header>
+      <section class="workspaceMessages" data-chat-messages aria-live="polite">
+        <p class="workspaceEmpty">Loading conversation...</p>
+      </section>
+      <section class="mobileConversationComposer">
+        <fg-include data-template="templates/chatbox.html"></fg-include>
+      </section>
+    </main>
+  </body>
+</html>
