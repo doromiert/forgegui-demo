@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta name="forge-path" content="desktop/settings/account.html">
+    <meta name="forge-route" content="settings/account.html">
+    <meta name="forge-variant" content="desktop">
+    <style>html:not(.forge-motion-ready),html:not(.forge-motion-ready) *,html:not(.forge-motion-ready) *::before,html:not(.forge-motion-ready) *::after{animation:none!important;transition:none!important}fg-client-include{display:none}</style>
+    <script src="../../scripts/vendor/supabase.js" defer></script>
+    <script src="../../scripts/forge-config.js" defer></script>
+    <script src="../../scripts/forge-api.js" defer></script>
+    <script src="../../scripts/forge-cache.js" defer></script>
+    <script src="../../scripts/auth-shell.js" defer></script>
+    <script src="../../scripts/settings.js" defer></script>
+    <script src="../../scripts/workspace.js" defer></script>
+    <script src="../../scripts/forge-loader.js"></script>
+    <script src="../../scripts/forge-runtime.js" defer></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI — Settings</title>
+        <style data-forge-critical>
+/* styles/base.css */
+html:not(.forge-motion-ready),
+html:not(.forge-motion-ready) *,
+html:not(.forge-motion-ready) *::before,
+html:not(.forge-motion-ready) *::after {
+   animation: none !important;
+   transition: none !important;
+}
+* {
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+   font-optical-sizing: auto;
+   transition-property:
+      color,
+      background-color,
+      border-color,
+      outline-color,
+      opacity,
+      transform,
+      translate,
+      scale,
+      box-shadow,
+      width,
+      height,
+      max-height,
+      padding,
+      margin,
+      gap;
+   transition-duration: 0.25s;
+   transition-timing-function: ease;
+}
+body {
+   background: #0a0a0a;
+   --Glass-Text: linear-gradient(
+      180deg,
+      #fff 0%,
+      rgba(255, 255, 255, 0.5) 100%
+   );
+
+   &.chat {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      padding: 10px 0 0 10px;
+      margin: 0;
+      box-sizing: border-box;
+      align-items: flex-start;
+      gap: 10px;
+   }
+}
+fg-sidebar {
+   user-select: none;
+   -webkit-user-drag: none;
+   overflow-y: scroll;
+   display: flex;
+   width: 305px;
+   padding: calc(10px + 62px + 15px) 10px 440px 10px;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 15px;
+   flex-shrink: 0;
+   align-self: stretch;
+   position: relative;
+
+   &.collapsed {
+      width: 60px;
+      padding-bottom: 20px;
+      fg-top.sb {
+         width: 60px;
+         .fgLogo {
+            display: none;
+         }
+      }
+      .sidebarElem {
+         color: #ffffff00;
+         width: 60px;
+         height: 60px;
+      }
+      fg-toplabel {
+         display: none;
+      }
+      fg-bottom {
+         display: none !important;
+      }
+   }
+
+   fg-top.sb {
+      display: flex;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      right: 10px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      box-sizing: border-box;
+      width: 305px;
+
+      .fgLogo {
+         height: 24px;
+      }
+      button {
+         border: none;
+         background: none;
+         width: 38px;
+         height: 38px;
+         border-radius: 1293px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            outline: solid 10px rgba(255, 255, 255, 0.05);
+         }
+         &:active {
+            transform: scale(0.9);
+         }
+      }
+   }
+
+   fg-specialtabs {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+   }
+
+   fg-projects {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1 0 0;
+      align-self: stretch;
+
+      fg-toplabel {
+         display: flex;
+         margin: 14px 15px;
+         align-items: center;
+         gap: 8px;
+         align-self: stretch;
+         color: #fff;
+         font-size: 20px;
+         font-weight: 500;
+      }
+   }
+
+   .conversationListStatus {
+      padding: 8px 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      line-height: 1.35;
+   }
+
+   .conversationEntry span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
+
+   .sidebarElem {
+      text-decoration: none;
+      display: flex;
+      padding: 8px 10px;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+      border-radius: 15px;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      width: 100%;
+      box-sizing: border-box;
+
+      &.selected {
+         border: 1px solid rgba(255, 255, 255, 0.2);
+         background: rgba(60, 60, 60, 0.2);
+      }
+      &:hover {
+         background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      img {
+         width: 28px;
+         height: 28px;
+         margin: 5px;
+      }
+   }
+
+   fg-bottom.sb {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      align-self: stretch;
+      box-sizing: border-box;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 12931823;
+      backdrop-filter: blur(20px);
+      border-radius: 15px;
+      width: 305px;
+      fg-actions {
+         width: 100%;
+      }
+      creditCounter {
+         box-sizing: border-box;
+         display: flex;
+         padding: 10px;
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         width: 100%;
+
+         fg-top {
+            display: flex;
+            padding: 5px 8px;
+            justify-content: space-between;
+            align-items: center;
+            align-self: stretch;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 18px;
+            font-weight: 400;
+            gap: 8px;
+
+            a {
+               color: #fff;
+               text-decoration: none;
+               font-size: 18px;
+               font-weight: 600;
+            }
+         }
+         fg-bottom {
+            display: flex;
+            flex-direction: row;
+            padding: 8px;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            align-self: stretch;
+         }
+         creditSlider {
+            height: 9px;
+            flex: 1 0 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            &::before {
+               content: "";
+               width: 100px;
+               display: flex;
+               height: 9px;
+               background: linear-gradient(0deg, #0084ff 0%, #0084ff 100%);
+            }
+         }
+      }
+
+      fg-sidebaruserbutton {
+         display: flex;
+         padding: 15px;
+         align-items: center;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         user-select: none;
+
+         fg-vertical {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 34px;
+            width: 100%;
+
+            b {
+               color: #fff;
+               font-size: 20px;
+               font-weight: 600;
+               line-height: 20px;
+            }
+
+            span {
+               color: rgba(255, 255, 255, 0.8);
+               font-size: 16px;
+               font-weight: 400;
+               line-height: normal;
+            }
+         }
+
+         img {
+            width: 38px;
+            height: 38px;
+            border-radius: 38px;
+         }
+
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+         }
+      }
+   }
+}
+.upgradeButton {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   padding: 12px 20px;
+   background: #0077ff;
+   border: none;
+   border-radius: 15px;
+   cursor: pointer;
+   position: relative;
+
+   &:hover {
+      background-color: #32a3ff !important;
+   }
+
+   &.selected {
+      background-color: #32a3ff !important;
+   }
+
+   &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+      pointer-events: none;
+   }
+
+   span {
+      font-weight: bold;
+      font-size: 20px;
+      white-space: nowrap;
+      background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0px 1px 1.4px rgba(0, 0, 0, 0.25));
+   }
+}
+fg-mainview {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-sizing: border-box;
+   flex: 1 0 0;
+   height: 100%;
+   overflow-y: scroll;
+   border-radius: 20px 0 0 0;
+   border-top: 1px solid #333;
+   border-left: 1px solid #333;
+   background: #161616;
+   h1 {
+      margin: 0;
+   }
+}
+/* styles/settings-overview.css */
+/* Account overview and account popup styles. */
+
+fg-mainview.settings {
+   fg-banner {
+      position: relative;
+      width: 100%;
+      height: 201px;
+      flex-shrink: 0;
+      cursor: pointer;
+      background: linear-gradient(135deg, #111827 0%, #1e3a5f 100%);
+      background-size: cover;
+      background-position: center;
+      overflow: visible;
+      align-items: center;
+      display: flex;
+      flex-direction: row-reverse;
+
+      &::after {
+         content: "";
+         position: absolute;
+         inset: 0;
+         background: rgba(0, 0, 0, 0.45);
+         opacity: 0;
+         transition: opacity 0.2s;
+         pointer-events: none;
+      }
+
+      &:hover::after {
+         opacity: 1;
+      }
+      &:has(fg-userpfp:hover)::after {
+         opacity: 0;
+      }
+
+      .bannerEditHint {
+         position: absolute;
+         top: 50%;
+         right: 80px;
+         transform: translateY(-50%);
+         width: 52px;
+         height: 52px;
+         opacity: 0;
+         transition: opacity 0.2s;
+         z-index: 2;
+         pointer-events: none;
+
+         img {
+            width: 100%;
+            height: 100%;
+         }
+      }
+
+      &:hover .bannerEditHint {
+         opacity: 1;
+      }
+      &:has(fg-userpfp:hover) .bannerEditHint {
+         opacity: 0;
+      }
+   }
+}
+/* ── Banner + PFP ── */
+
+fg-userpfp {
+   position: absolute;
+   left: 50%;
+   top: 133px;
+   transform: translateX(-50%);
+   width: 131px;
+   height: 131px;
+   border-radius: 50%;
+   overflow: hidden;
+   border: 4px solid #0a0a0a;
+   cursor: pointer;
+   z-index: 1;
+
+   img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+   }
+
+   .pfpEditHint img {
+      width: 52px;
+      height: 52px;
+      object-fit: initial;
+      display: initial;
+   }
+
+   &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+   }
+
+   &:hover::after {
+      opacity: 1;
+   }
+
+   .pfpEditHint {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 2;
+      pointer-events: none;
+
+      img {
+         width: 52px;
+         height: 52px;
+      }
+   }
+
+   &:hover .pfpEditHint {
+      opacity: 1;
+   }
+}
+/* ── Profile info ── */
+fg-verifiedcta {
+   display: flex;
+   align-items: center;
+   gap: 5px;
+   background: #292929;
+   border-radius: 25px;
+   padding: 4px 10px;
+   font-size: 18px;
+   font-weight: 500;
+   color: white;
+   cursor: pointer;
+   margin-top: 60px; /* clear PFP overlap */
+
+   img {
+      width: 26px;
+      height: 26px;
+   }
+}
+fg-doxx {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 6px;
+   margin-top: -6px;
+
+   b {
+      font-size: 24px;
+      font-weight: 600;
+      color: white;
+   }
+
+   span {
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+   }
+}
+.editProfileButton {
+   display: flex;
+   align-items: center;
+   background: #292929;
+   border: none;
+   border-radius: 8px;
+   padding: 15px;
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 18px;
+   font-weight: 500;
+   cursor: pointer;
+   white-space: nowrap;
+   box-sizing: border-box;
+   height: 42px;
+   color: rgba(255, 255, 255, 0.8);
+   text-align: center;
+   font-family: "Atkinson Hyperlegible Next";
+   font-size: 18px;
+   font-style: normal;
+   font-weight: 500;
+   line-height: normal;
+
+   &:hover {
+      background: #333;
+   }
+}
+.editProfileButton:disabled,
+.listboxAction:disabled,
+fg-verifiedcta[aria-disabled="true"] {
+   cursor: not-allowed;
+   opacity: 0.55;
+}
+/* ── Settings account popups ────────────────────────────────────── */
+fg-popupcontainer > fg-popup.settingsPopup {
+   width: 670px;
+   max-width: calc(100vw - 80px);
+
+   > fg-top {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 35px 35px 10px;
+
+      h1 {
+         margin: 0;
+         font-size: 40px;
+         font-weight: 600;
+         color: #fff;
+      }
+
+      span {
+         font-size: 20px;
+         font-weight: 400;
+         color: rgba(255, 255, 255, 0.8);
+      }
+   }
+
+   form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 15px 20px 20px;
+
+      fg-fieldgroup {
+         display: flex;
+         flex-direction: column;
+         gap: 8px;
+      }
+
+      input {
+         width: 100%;
+         height: 55px;
+         padding: 0 20px;
+         box-sizing: border-box;
+         background: #1d1d1d;
+         border: 1px solid #303030;
+         border-radius: 10px;
+         color: #fff;
+         font-family: inherit;
+         font-size: 23px;
+         font-weight: 400;
+         outline: none;
+
+         &::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+         }
+
+         &:focus {
+            border-color: #07f;
+         }
+
+         &.error {
+            border-color: rgba(255, 100, 100, 0.6);
+         }
+      }
+
+      fg-fielderror {
+         display: none;
+         padding: 0 10px;
+         font-size: 18px;
+         font-weight: 400;
+         color: rgba(255, 153, 153, 0.8);
+      }
+
+      fg-fieldgroup.hasError input {
+         border-color: rgba(255, 100, 100, 0.6);
+      }
+
+      fg-fieldgroup.hasError fg-fielderror {
+         display: block;
+      }
+
+      fg-hint {
+         display: block;
+         padding: 0 10px;
+         font-size: 18px;
+         font-weight: 400;
+         color: rgba(255, 255, 255, 0.8);
+      }
+
+      .forgotLink {
+         display: block;
+         padding: 0 10px;
+         font-size: 18px;
+         font-weight: 400;
+         color: #fff;
+         text-decoration: underline;
+
+         &:hover {
+            color: rgba(255, 255, 255, 0.7);
+         }
+      }
+   }
+
+   > fg-bottom {
+      gap: 10px;
+
+      .popupButton {
+         flex: 1 0 0;
+         min-width: 0;
+         padding: 12px 16px;
+      }
+   }
+}
+@media (max-width: 720px) {
+   fg-popup.settingsPopup > fg-top {
+      gap: 12px;
+      padding: 24px 20px 8px;
+   }
+
+   fg-popup.settingsPopup > fg-top h1 {
+      font-size: 32px;
+   }
+
+   fg-popup.settingsPopup form {
+      padding-left: 12px;
+      padding-right: 12px;
+   }
+}
+</style>
+    <link rel="stylesheet" href="../../styles/base.css" />
+        <link rel="stylesheet" href="../../styles/settings-overview.css" />
+        <script src="../../scripts/site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="color-scheme" content="dark" />
+        <style></style>
+    </head>
+
+    <body class="chat">
+        <fg-sidebar class="collapsed">
+    <fg-top class="sb">
+        <img src="../../assets/footerLogo.svg" class="fgLogo" alt="ForgeGUI" />
+        <button type="button" data-toggle-sidebar aria-label="Toggle sidebar">
+            <img src="../../icons/sidebar.svg" alt="" />
+        </button>
+    </fg-top>
+
+    <fg-specialtabs>
+        <a href="../../home.html" class="sidebarElem">
+            <img src="../../icons/home.svg" alt="" />
+            <span>Home</span>
+        </a>
+        <a href="../../library/overview.html" class="sidebarElem">
+            <img src="../../icons/file.svg" alt="" />
+            <span>Assets</span>
+        </a>
+        <a href="../../community.html" class="sidebarElem">
+            <img src="../../icons/people.svg" alt="" />
+            <span>Community</span>
+        </a>
+    </fg-specialtabs>
+
+    <fg-projects data-conversation-list hidden>
+        <fg-toplabel>Games</fg-toplabel>
+        <span class="conversationListStatus" data-conversation-status>Loading chats...</span>
+    </fg-projects>
+
+    <fg-contextmenu
+        id="userMenu"
+        class="hidden user"
+        style="width: 282px"
+    >
+        <a href="mailto:support@forgegui.com"><img src="../../icons/Exclamation.svg" alt="" /> Help</a>
+        <a href="../../settings/overview.html"><img src="../../icons/Settings.svg" alt="" /> Settings</a>
+
+        <button class="destructive" data-auth-signout>
+            <img src="../../icons/SignOut.svg" alt="" /> Logout
+        </button>
+    </fg-contextmenu>
+
+    <fg-bottom class="sb">
+        <a href="../../plans.html" class="sidebarElem upgradeButton">
+            <img src="../../icons/crown.svg" alt="" style="image-rendering: optimizeQuality" />
+            <span>Upgrade to Pro</span>
+        </a>
+
+        <fg-actions>
+            <a href="../../courses.html" class="sidebarElem">
+                <img src="../../icons/book.svg" alt="" />
+                <span>Courses</span>
+            </a>
+            <a href="../../plugins.html" class="sidebarElem">
+                <img src="../../icons/plugin.svg" alt="" />
+                <span>Plugins</span>
+            </a>
+            <a href="../../leaderboard.html" class="sidebarElem">
+                <img src="../../icons/Trophy.svg" alt="" />
+                <span>Leaderboard</span>
+            </a>
+            <a href="../../notifications.html" class="sidebarElem">
+                <img src="../../icons/bell.svg" alt="" />
+                <span>Notifications</span>
+            </a>
+        </fg-actions>
+
+        <fg-sidebaruserbutton data-context-target="userMenu">
+            <img src="../../assets/generic.png" alt="" data-user-avatar />
+            <fg-vertical>
+                <b data-user-name>Creator</b>
+                <span data-user-email></span>
+            </fg-vertical>
+            <img src="../../icons/selection.svg" alt="" />
+        </fg-sidebaruserbutton>
+    </fg-bottom>
+</fg-sidebar>
+
+<fg-mainview class="settings">
+    <fg-sidebar class="settingsSidebar">
+    <fg-top> Settings </fg-top>
+
+    <fg-specialtabs>
+        <a href="../../settings/overview.html" class="sidebarElem">
+            <img src="../../icons/home.svg" alt="" />
+            <span>Account Overview</span>
+        </a>
+        <a
+            href="../../settings/billing.html"
+            class="sidebarElem"
+        >
+            <img src="../../icons/card.svg" alt="" />
+            <span>Plan & Billing</span>
+        </a>
+        <a href="../../settings/rewards.html" class="sidebarElem">
+            <img src="../../icons/Rewards.svg" alt="" />
+            <span>Referrals & Rewards</span>
+        </a>
+    </fg-specialtabs>
+</fg-sidebar>
+
+    <fg-settingsview>
+                <fg-banner>
+                    <span class="bannerEditHint"
+                        ><img src="../../icons/pencil.svg" alt=""
+                    /></span>
+                    <fg-userpfp data-avatar-upload role="button" tabindex="0" aria-label="Upload profile image">
+                        <img src="../../assets/generic.png" alt="" data-user-avatar />
+                        <span class="pfpEditHint"
+                            ><img src="../../icons/pencil.svg" alt=""
+                        /></span>
+                    </fg-userpfp>
+                    <input data-avatar-input type="file" accept="image/*" hidden />
+                </fg-banner>
+
+                <fg-verifiedcta aria-disabled="true" title="Verification enrollment is not available yet.">
+                    <img src="../../icons/user-mark.svg" alt="" />
+                    Get Verified
+                </fg-verifiedcta>
+                <fg-doxx>
+                    <b data-user-name>Creator</b>
+                    <span data-user-email></span>
+                </fg-doxx>
+                <button class="editProfileButton" type="button" disabled title="Public profile editing is not available yet.">Edit Public Profile</button>
+
+                <fg-listbox>
+    <header><span>My Account</span></header>
+    <fg-group><fg-line>
+    <fg-vertical>
+        <span><span>Name</span></span>
+        <b><b data-user-name>Creator</b></b>
+    </fg-vertical>
+    <button class="listboxAction" data-popup-open="change-name">Edit</button>
+</fg-line>
+
+                    <fg-line>
+    <fg-vertical>
+        <span><span>Username</span></span>
+        <b><b data-user-handle>@creator</b></b>
+    </fg-vertical>
+    <button class="listboxAction" type="button" disabled title="Your username is generated from your account name.">Generated</button>
+</fg-line>
+
+                    <fg-line>
+    <fg-vertical>
+        <span><span>Email Address</span></span>
+        <b><b data-user-email></b></b>
+    </fg-vertical>
+    <button class="listboxAction" data-popup-open="change-email">Edit</button>
+</fg-line>
+
+                    <fg-line>
+    <fg-vertical>
+        <span><span>Security</span></span>
+        <b><b>Password &amp; Email</b></b>
+    </fg-vertical>
+    <button class="listboxAction" data-popup-open="change-password">Edit</button>
+</fg-line></fg-group>
+</fg-listbox>
+
+
+                <fg-listbox>
+    <header><span>Connections</span></header>
+    <fg-group><fg-line>
+    <fg-vertical>
+        <span><span>Roblox Account</span></span>
+        <b><b data-settings-roblox-status>Not Linked</b></b>
+    </fg-vertical>
+    <button class="listboxAction" type="button" data-settings-roblox>
+                            Link Roblox Account
+                        </button>
+</fg-line></fg-group>
+</fg-listbox>
+
+
+                <fg-listbox>
+    <header><span>Account Management</span></header>
+    <fg-group><fg-line class="reversed">
+    <fg-vertical>
+        <span><span>Log out of this device</span></span>
+        <b><b>Log Out</b></b>
+    </fg-vertical>
+    <button class="listboxAction" type="button" data-auth-signout>
+                            Log Out Now
+                        </button>
+</fg-line>
+
+                    <fg-line class="reversed">
+    <fg-vertical>
+        <span><span>This action is permanent.</span></span>
+        <b><b>Delete my Account</b></b>
+    </fg-vertical>
+    <button class="listboxAction destructive" type="button" data-settings-delete>
+                            Delete my Account
+                        </button>
+</fg-line></fg-group>
+</fg-listbox>
+
+            </fg-settingsview>
+</fg-mainview>
+
+        <fg-popupcontainer class="hidden">
+            <fg-popup id="change-name" class="settingsPopup hidden">
+                <fg-top class="popupHeading">
+    <h1><span>Change Name</span></h1>
+    <span><span>This only applies to your account name, not your username.</span></span>
+</fg-top>
+<form data-settings-action="name">
+                        <fg-fieldgroup>
+    <input name="firstName" type="text" placeholder="Name" required maxlength="50" />
+    <fg-fielderror><span>Name is required.</span></fg-fielderror>
+</fg-fieldgroup>
+
+                        <fg-fieldgroup data-optional>
+                            <input name="lastName" type="text" placeholder="Last Name (Optional)" maxlength="50" />
+                        </fg-fieldgroup>
+                        <fg-hint>Make sure your name does not violate our content guidelines.</fg-hint>
+                    </form>
+<fg-bottom class="popupActions">
+    <button class="popupButton" type="button" data-popup-close>Cancel</button>
+<button class="popupButton active" type="button" data-settings-submit="name">Confirm</button>
+</fg-bottom>
+
+            </fg-popup>
+
+            <fg-popup id="change-email" class="settingsPopup hidden">
+                <fg-top class="popupHeading">
+    <h1><span>Change Email</span></h1>
+    <span><span>Change your account email.</span></span>
+</fg-top>
+<form data-settings-action="email">
+                        <fg-fieldgroup>
+    <input name="currentPassword" type="password" placeholder="Current Password" required autocomplete="current-password" />
+    <fg-fielderror><span>Incorrect password, try again.</span></fg-fielderror>
+</fg-fieldgroup>
+
+                        <fg-fieldgroup>
+    <input name="email" type="email" placeholder="New Email" required autocomplete="email" />
+    <fg-fielderror><span>Please enter a valid email address.</span></fg-fielderror>
+</fg-fieldgroup>
+
+                        <fg-hint>Depending on your account security settings, confirmation links may be sent before the change is applied.</fg-hint>
+                    </form>
+<fg-bottom class="popupActions">
+    <button class="popupButton" type="button" data-popup-close>Cancel</button>
+<button class="popupButton active" type="button" data-settings-submit="email">Confirm</button>
+</fg-bottom>
+
+            </fg-popup>
+
+            <fg-popup id="change-password" class="settingsPopup hidden">
+                <fg-top class="popupHeading">
+    <h1><span>Change Password</span></h1>
+    <span><span>Enter your current password before choosing a new one.</span></span>
+</fg-top>
+<form data-settings-action="password">
+                        <fg-fieldgroup>
+    <input name="currentPassword" type="password" placeholder="Current Password" required autocomplete="current-password" />
+    <fg-fielderror><span>Incorrect password, try again.</span></fg-fielderror>
+</fg-fieldgroup>
+
+                        <fg-fieldgroup>
+    <input name="password" type="password" placeholder="New Password" minlength="8" required autocomplete="new-password" data-match-target />
+    <fg-fielderror><span>Password must be at least 8 characters.</span></fg-fielderror>
+</fg-fieldgroup>
+
+                        <fg-fieldgroup>
+    <input name="passwordConfirmation" type="password" placeholder="Confirm Password" minlength="8" required autocomplete="new-password" data-match-source />
+    <fg-fielderror><span>Passwords do not match.</span></fg-fielderror>
+</fg-fieldgroup>
+
+                        <a href="../../auth/reset-password.html" class="forgotLink">I Forgot My Password...</a>
+                    </form>
+<fg-bottom class="popupActions">
+    <button class="popupButton" type="button" data-popup-close>Cancel</button>
+<button class="popupButton active" type="button" data-settings-submit="password">Confirm</button>
+</fg-bottom>
+
+            </fg-popup>
+        </fg-popupcontainer>
+    </body>
+</html>

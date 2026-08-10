@@ -1,0 +1,13 @@
+<fg-top class="popupHeading">
+    <h1><fg-slot data-name="title"></fg-slot></h1>
+    <span><fg-slot data-name="description"></fg-slot></span>
+</fg-top>
+<fg-slot data-name="content"></fg-slot>
+<fg-bottom class="popupActions">
+    <fg-slot data-name="actions">
+        <button class="popupButton" type="button" data-popup-close>Cancel</button>
+        <button class="popupButton active" type="button" data-popup-close>
+            Confirm
+        </button>
+    </fg-slot>
+</fg-bottom>

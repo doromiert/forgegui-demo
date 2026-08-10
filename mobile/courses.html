@@ -1,0 +1,1056 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta name="forge-path" content="mobile/courses.html">
+    <meta name="forge-route" content="courses.html">
+    <meta name="forge-variant" content="mobile">
+    <style>html:not(.forge-motion-ready),html:not(.forge-motion-ready) *,html:not(.forge-motion-ready) *::before,html:not(.forge-motion-ready) *::after{animation:none!important;transition:none!important}fg-client-include{display:none}</style>
+    <script src="../scripts/vendor/supabase.js" defer></script>
+    <script src="../scripts/forge-config.js" defer></script>
+    <script src="../scripts/forge-api.js" defer></script>
+    <script src="../scripts/forge-cache.js" defer></script>
+    <script src="../scripts/auth-shell.js" defer></script>
+    <script src="../scripts/workspace.js" defer></script>
+    <script src="../scripts/forge-loader.js"></script>
+    <script src="../scripts/forge-runtime.js" defer></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="../fg.svg" />-->
+        <style data-forge-critical>
+/* styles/base.css */
+html:not(.forge-motion-ready),
+html:not(.forge-motion-ready) *,
+html:not(.forge-motion-ready) *::before,
+html:not(.forge-motion-ready) *::after {
+   animation: none !important;
+   transition: none !important;
+}
+* {
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+   font-optical-sizing: auto;
+   transition-property:
+      color,
+      background-color,
+      border-color,
+      outline-color,
+      opacity,
+      transform,
+      translate,
+      scale,
+      box-shadow,
+      width,
+      height,
+      max-height,
+      padding,
+      margin,
+      gap;
+   transition-duration: 0.25s;
+   transition-timing-function: ease;
+}
+body {
+   background: #0a0a0a;
+   --Glass-Text: linear-gradient(
+      180deg,
+      #fff 0%,
+      rgba(255, 255, 255, 0.5) 100%
+   );
+
+   &.chat {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      padding: 10px 0 0 10px;
+      margin: 0;
+      box-sizing: border-box;
+      align-items: flex-start;
+      gap: 10px;
+   }
+}
+fg-sidebar {
+   user-select: none;
+   -webkit-user-drag: none;
+   overflow-y: scroll;
+   display: flex;
+   width: 305px;
+   padding: calc(10px + 62px + 15px) 10px 440px 10px;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 15px;
+   flex-shrink: 0;
+   align-self: stretch;
+   position: relative;
+
+   &.collapsed {
+      width: 60px;
+      padding-bottom: 20px;
+      fg-top.sb {
+         width: 60px;
+         .fgLogo {
+            display: none;
+         }
+      }
+      .sidebarElem {
+         color: #ffffff00;
+         width: 60px;
+         height: 60px;
+      }
+      fg-toplabel {
+         display: none;
+      }
+      fg-bottom {
+         display: none !important;
+      }
+   }
+
+   fg-top.sb {
+      display: flex;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      right: 10px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      box-sizing: border-box;
+      width: 305px;
+
+      .fgLogo {
+         height: 24px;
+      }
+      button {
+         border: none;
+         background: none;
+         width: 38px;
+         height: 38px;
+         border-radius: 1293px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            outline: solid 10px rgba(255, 255, 255, 0.05);
+         }
+         &:active {
+            transform: scale(0.9);
+         }
+      }
+   }
+
+   fg-specialtabs {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+   }
+
+   fg-projects {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1 0 0;
+      align-self: stretch;
+
+      fg-toplabel {
+         display: flex;
+         margin: 14px 15px;
+         align-items: center;
+         gap: 8px;
+         align-self: stretch;
+         color: #fff;
+         font-size: 20px;
+         font-weight: 500;
+      }
+   }
+
+   .conversationListStatus {
+      padding: 8px 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      line-height: 1.35;
+   }
+
+   .conversationEntry span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
+
+   .sidebarElem {
+      text-decoration: none;
+      display: flex;
+      padding: 8px 10px;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+      border-radius: 15px;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      width: 100%;
+      box-sizing: border-box;
+
+      &.selected {
+         border: 1px solid rgba(255, 255, 255, 0.2);
+         background: rgba(60, 60, 60, 0.2);
+      }
+      &:hover {
+         background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      img {
+         width: 28px;
+         height: 28px;
+         margin: 5px;
+      }
+   }
+
+   fg-bottom.sb {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      align-self: stretch;
+      box-sizing: border-box;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 12931823;
+      backdrop-filter: blur(20px);
+      border-radius: 15px;
+      width: 305px;
+      fg-actions {
+         width: 100%;
+      }
+      creditCounter {
+         box-sizing: border-box;
+         display: flex;
+         padding: 10px;
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         width: 100%;
+
+         fg-top {
+            display: flex;
+            padding: 5px 8px;
+            justify-content: space-between;
+            align-items: center;
+            align-self: stretch;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 18px;
+            font-weight: 400;
+            gap: 8px;
+
+            a {
+               color: #fff;
+               text-decoration: none;
+               font-size: 18px;
+               font-weight: 600;
+            }
+         }
+         fg-bottom {
+            display: flex;
+            flex-direction: row;
+            padding: 8px;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            align-self: stretch;
+         }
+         creditSlider {
+            height: 9px;
+            flex: 1 0 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            &::before {
+               content: "";
+               width: 100px;
+               display: flex;
+               height: 9px;
+               background: linear-gradient(0deg, #0084ff 0%, #0084ff 100%);
+            }
+         }
+      }
+
+      fg-sidebaruserbutton {
+         display: flex;
+         padding: 15px;
+         align-items: center;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         user-select: none;
+
+         fg-vertical {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 34px;
+            width: 100%;
+
+            b {
+               color: #fff;
+               font-size: 20px;
+               font-weight: 600;
+               line-height: 20px;
+            }
+
+            span {
+               color: rgba(255, 255, 255, 0.8);
+               font-size: 16px;
+               font-weight: 400;
+               line-height: normal;
+            }
+         }
+
+         img {
+            width: 38px;
+            height: 38px;
+            border-radius: 38px;
+         }
+
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+         }
+      }
+   }
+}
+.upgradeButton {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   padding: 12px 20px;
+   background: #0077ff;
+   border: none;
+   border-radius: 15px;
+   cursor: pointer;
+   position: relative;
+
+   &:hover {
+      background-color: #32a3ff !important;
+   }
+
+   &.selected {
+      background-color: #32a3ff !important;
+   }
+
+   &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+      pointer-events: none;
+   }
+
+   span {
+      font-weight: bold;
+      font-size: 20px;
+      white-space: nowrap;
+      background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0px 1px 1.4px rgba(0, 0, 0, 0.25));
+   }
+}
+fg-mainview {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-sizing: border-box;
+   flex: 1 0 0;
+   height: 100%;
+   overflow-y: scroll;
+   border-radius: 20px 0 0 0;
+   border-top: 1px solid #333;
+   border-left: 1px solid #333;
+   background: #161616;
+   h1 {
+      margin: 0;
+   }
+}
+/* styles/courses.css */
+/* Page-specific styles extracted from base.css. */
+
+fg-mainview.courses {
+   align-items: flex-start;
+
+   fg-banner {
+      width: 100%;
+      height: 421px;
+      flex-shrink: 0;
+      border-bottom: 1px solid #3f3f3f;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.46) 0%, #000 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 40px;
+      padding: 40px 50px 45px 100px;
+      box-sizing: border-box;
+
+      img {
+         position: absolute;
+         right: 49px;
+         top: 50%;
+         transform: translateY(-50%);
+         height: 309px;
+         width: auto;
+         max-width: none;
+         max-height: none;
+      }
+
+      h1 {
+         margin: 0;
+         font-size: 90px;
+         font-weight: 600;
+         line-height: 1;
+         background: linear-gradient(
+            180deg,
+            #fff 0%,
+            rgba(255, 255, 255, 0.5) 100%
+         );
+         background-clip: text;
+         -webkit-background-clip: text;
+         -webkit-text-fill-color: transparent;
+      }
+
+      > span {
+         color: rgba(255, 255, 255, 0.8);
+         font-size: 24px;
+         font-weight: 500;
+         line-height: 1.45;
+         max-width: 572px;
+      }
+
+      .goat {
+         font-style: italic;
+         font-weight: 800;
+         color: rgba(0, 255, 144, 0.8);
+         -webkit-text-fill-color: rgba(0, 255, 144, 0.8);
+      }
+   }
+
+   fg-courseheader {
+      display: flex;
+      height: 40px;
+      align-items: center;
+      padding: 30px 35px 0 35px;
+      color: #fff;
+      font-size: 32px;
+      font-weight: 600;
+      flex-shrink: 0;
+   }
+
+   fg-coursegrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      padding: 20px 35px 30px 35px;
+      width: 100%;
+      box-sizing: border-box;
+   }
+
+   fg-coursethumbnail {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 290px;
+      border: 1px solid #333;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      padding: 20px;
+      box-sizing: border-box;
+      background: url("../assets/generic.png") center / cover no-repeat;
+
+      &::before {
+         content: "";
+         position: absolute;
+         inset: 0;
+         background: linear-gradient(
+            180deg,
+            #000 0%,
+            rgba(0, 0, 0, 0) 50%,
+            #000 100%
+         );
+         pointer-events: none;
+      }
+
+      fg-top,
+      fg-bottom {
+         position: relative;
+         z-index: 1;
+      }
+
+      fg-top {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+
+         font-size: 24px;
+         font-weight: 500;
+         color: #fff;
+
+         fg-timebadge {
+            background: #07f;
+            border-radius: 31px;
+            padding: 8px 10px;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 500;
+            white-space: nowrap;
+         }
+      }
+
+      fg-bottom {
+         display: flex;
+         flex-direction: column;
+         gap: 21px;
+
+         h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 500;
+            color: #fff;
+         }
+      }
+
+      .coursePlaytime {
+         display: flex;
+         align-items: center;
+         gap: 10px;
+         width: 100%;
+
+         .startBtn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 50px;
+            border: none;
+            background: #07f;
+            box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            flex-shrink: 0;
+            font-family: "Atkinson Hyperlegible Next";
+            text-decoration: none;
+
+            svg {
+               display: block;
+               flex-shrink: 0;
+            }
+         }
+
+         .progressTrack {
+            flex: 1;
+            height: 38px;
+            border-radius: 50px;
+            background: rgba(84, 84, 84, 0.21);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            overflow: hidden;
+            position: relative;
+            min-width: 0;
+
+            .progressFill {
+               position: absolute;
+               left: 0;
+               top: 0;
+               height: 100%;
+               width: 25%;
+               background: #00d77a;
+               display: flex;
+               align-items: center;
+               padding-left: 13px;
+               color: #fff;
+               font-size: 18px;
+               font-weight: 500;
+               white-space: nowrap;
+            }
+         }
+      }
+   }
+
+   fg-completionbarbg {
+      width: 100%;
+      height: 109px;
+      flex-shrink: 0;
+      position: sticky;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      box-sizing: border-box;
+      background: linear-gradient(180deg, rgba(22, 22, 22, 0) 0%, #161616 100%);
+      margin-top: auto;
+   }
+}
+</style>
+    <link rel="stylesheet" href="../styles/base.css" />
+        <link rel="stylesheet" href="../styles/courses.css" />
+        <script src="../scripts/site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
+
+        <style></style>
+    </head>
+
+    <body class="chat">
+        <fg-sidebar>
+    <fg-top class="sb">
+        <img src="../assets/footerLogo.svg" class="fgLogo" alt="ForgeGUI" />
+        <button type="button" data-toggle-sidebar aria-label="Toggle sidebar">
+            <img src="../icons/sidebar.svg" alt="" />
+        </button>
+    </fg-top>
+
+    <fg-specialtabs>
+        <a href="../home.html" class="sidebarElem">
+            <img src="../icons/home.svg" alt="" />
+            <span>Home</span>
+        </a>
+        <a href="../library/overview.html" class="sidebarElem">
+            <img src="../icons/file.svg" alt="" />
+            <span>Assets</span>
+        </a>
+        <a href="../community.html" class="sidebarElem">
+            <img src="../icons/people.svg" alt="" />
+            <span>Community</span>
+        </a>
+    </fg-specialtabs>
+
+    <fg-projects data-conversation-list hidden>
+        <fg-toplabel>Games</fg-toplabel>
+        <span class="conversationListStatus" data-conversation-status>Loading chats...</span>
+    </fg-projects>
+
+    <fg-contextmenu
+        id="userMenu"
+        class="hidden user"
+        style="width: 282px"
+    >
+        <a href="mailto:support@forgegui.com"><img src="../icons/Exclamation.svg" alt="" /> Help</a>
+        <a href="../settings/overview.html"><img src="../icons/Settings.svg" alt="" /> Settings</a>
+
+        <button class="destructive" data-auth-signout>
+            <img src="../icons/SignOut.svg" alt="" /> Logout
+        </button>
+    </fg-contextmenu>
+
+    <fg-bottom class="sb">
+        <a href="../plans.html" class="sidebarElem upgradeButton">
+            <img src="../icons/crown.svg" alt="" style="image-rendering: optimizeQuality" />
+            <span>Upgrade to Pro</span>
+        </a>
+
+        <fg-actions>
+            <a href="../courses.html" class="sidebarElem selected">
+                <img src="../icons/book.svg" alt="" />
+                <span>Courses</span>
+            </a>
+            <a href="../plugins.html" class="sidebarElem">
+                <img src="../icons/plugin.svg" alt="" />
+                <span>Plugins</span>
+            </a>
+            <a href="../leaderboard.html" class="sidebarElem">
+                <img src="../icons/Trophy.svg" alt="" />
+                <span>Leaderboard</span>
+            </a>
+            <a href="../notifications.html" class="sidebarElem">
+                <img src="../icons/bell.svg" alt="" />
+                <span>Notifications</span>
+            </a>
+        </fg-actions>
+
+        <fg-sidebaruserbutton data-context-target="userMenu">
+            <img src="../assets/generic.png" alt="" data-user-avatar />
+            <fg-vertical>
+                <b data-user-name>Creator</b>
+                <span data-user-email></span>
+            </fg-vertical>
+            <img src="../icons/selection.svg" alt="" />
+        </fg-sidebaruserbutton>
+    </fg-bottom>
+</fg-sidebar>
+
+<fg-mainview class="courses">
+                <fg-banner>
+                    <h1>Courses</h1>
+                    <span
+                        >Learn how to build popular games using ForgeGUI.<br />
+                        Exclusively taught by the <em class="goat">GOAT</em>, Guilio Greco.</span
+                    >
+
+                    <img src="../assets/course-graph.svg" />
+                </fg-banner>
+                <fg-courseheader> Available Courses </fg-courseheader>
+                <fg-coursegrid>
+                    <fg-coursethumbnail>
+    <fg-top>
+        Free Course
+        <fg-timebadge>
+            2 Mins
+        </fg-timebadge>
+    </fg-top>
+    <fg-bottom>
+        <h1>
+            Course Title
+        </h1>
+        <div class="coursePlaytime">
+            <a href="../course/randomCourse/part1.html" class="startBtn">
+                Start
+                <svg
+                    width="15"
+                    height="17"
+                    viewBox="0 0 15 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M1 1L14 8.5L1 16V1Z"
+                        fill="white"
+                        stroke="white"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </a>
+            <div class="progressTrack">
+                <div class="progressFill">25%</div>
+            </div>
+        </div>
+    </fg-bottom>
+</fg-coursethumbnail>
+
+                    <fg-coursethumbnail>
+    <fg-top>
+        Free Course
+        <fg-timebadge>
+            2 Mins
+        </fg-timebadge>
+    </fg-top>
+    <fg-bottom>
+        <h1>
+            Course Title
+        </h1>
+        <div class="coursePlaytime">
+            <a href="../course/randomCourse/part1.html" class="startBtn">
+                Start
+                <svg
+                    width="15"
+                    height="17"
+                    viewBox="0 0 15 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M1 1L14 8.5L1 16V1Z"
+                        fill="white"
+                        stroke="white"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </a>
+            <div class="progressTrack">
+                <div class="progressFill">25%</div>
+            </div>
+        </div>
+    </fg-bottom>
+</fg-coursethumbnail>
+
+                    <fg-coursethumbnail>
+    <fg-top>
+        Free Course
+        <fg-timebadge>
+            2 Mins
+        </fg-timebadge>
+    </fg-top>
+    <fg-bottom>
+        <h1>
+            Course Title
+        </h1>
+        <div class="coursePlaytime">
+            <a href="../course/randomCourse/part1.html" class="startBtn">
+                Start
+                <svg
+                    width="15"
+                    height="17"
+                    viewBox="0 0 15 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M1 1L14 8.5L1 16V1Z"
+                        fill="white"
+                        stroke="white"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </a>
+            <div class="progressTrack">
+                <div class="progressFill">25%</div>
+            </div>
+        </div>
+    </fg-bottom>
+</fg-coursethumbnail>
+
+                    <fg-coursethumbnail>
+    <fg-top>
+        Free Course
+        <fg-timebadge>
+            2 Mins
+        </fg-timebadge>
+    </fg-top>
+    <fg-bottom>
+        <h1>
+            Course Title
+        </h1>
+        <div class="coursePlaytime">
+            <a href="../course/randomCourse/part1.html" class="startBtn">
+                Start
+                <svg
+                    width="15"
+                    height="17"
+                    viewBox="0 0 15 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M1 1L14 8.5L1 16V1Z"
+                        fill="white"
+                        stroke="white"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </a>
+            <div class="progressTrack">
+                <div class="progressFill">25%</div>
+            </div>
+        </div>
+    </fg-bottom>
+</fg-coursethumbnail>
+
+                    <fg-coursethumbnail>
+    <fg-top>
+        Free Course
+        <fg-timebadge>
+            2 Mins
+        </fg-timebadge>
+    </fg-top>
+    <fg-bottom>
+        <h1>
+            Course Title
+        </h1>
+        <div class="coursePlaytime">
+            <a href="../course/randomCourse/part1.html" class="startBtn">
+                Start
+                <svg
+                    width="15"
+                    height="17"
+                    viewBox="0 0 15 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M1 1L14 8.5L1 16V1Z"
+                        fill="white"
+                        stroke="white"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </a>
+            <div class="progressTrack">
+                <div class="progressFill">25%</div>
+            </div>
+        </div>
+    </fg-bottom>
+</fg-coursethumbnail>
+
+                    <fg-coursethumbnail>
+    <fg-top>
+        Free Course
+        <fg-timebadge>
+            2 Mins
+        </fg-timebadge>
+    </fg-top>
+    <fg-bottom>
+        <h1>
+            Course Title
+        </h1>
+        <div class="coursePlaytime">
+            <a href="../course/randomCourse/part1.html" class="startBtn">
+                Start
+                <svg
+                    width="15"
+                    height="17"
+                    viewBox="0 0 15 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M1 1L14 8.5L1 16V1Z"
+                        fill="white"
+                        stroke="white"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </a>
+            <div class="progressTrack">
+                <div class="progressFill">25%</div>
+            </div>
+        </div>
+    </fg-bottom>
+</fg-coursethumbnail>
+
+                    <fg-coursethumbnail>
+    <fg-top>
+        Free Course
+        <fg-timebadge>
+            2 Mins
+        </fg-timebadge>
+    </fg-top>
+    <fg-bottom>
+        <h1>
+            Course Title
+        </h1>
+        <div class="coursePlaytime">
+            <a href="../course/randomCourse/part1.html" class="startBtn">
+                Start
+                <svg
+                    width="15"
+                    height="17"
+                    viewBox="0 0 15 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M1 1L14 8.5L1 16V1Z"
+                        fill="white"
+                        stroke="white"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </a>
+            <div class="progressTrack">
+                <div class="progressFill">25%</div>
+            </div>
+        </div>
+    </fg-bottom>
+</fg-coursethumbnail>
+
+                    <fg-coursethumbnail>
+    <fg-top>
+        Free Course
+        <fg-timebadge>
+            2 Mins
+        </fg-timebadge>
+    </fg-top>
+    <fg-bottom>
+        <h1>
+            Course Title
+        </h1>
+        <div class="coursePlaytime">
+            <a href="../course/randomCourse/part1.html" class="startBtn">
+                Start
+                <svg
+                    width="15"
+                    height="17"
+                    viewBox="0 0 15 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M1 1L14 8.5L1 16V1Z"
+                        fill="white"
+                        stroke="white"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </a>
+            <div class="progressTrack">
+                <div class="progressFill">25%</div>
+            </div>
+        </div>
+    </fg-bottom>
+</fg-coursethumbnail>
+
+                    <fg-coursethumbnail>
+    <fg-top>
+        Free Course
+        <fg-timebadge>
+            2 Mins
+        </fg-timebadge>
+    </fg-top>
+    <fg-bottom>
+        <h1>
+            Course Title
+        </h1>
+        <div class="coursePlaytime">
+            <a href="../course/randomCourse/part1.html" class="startBtn">
+                Start
+                <svg
+                    width="15"
+                    height="17"
+                    viewBox="0 0 15 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M1 1L14 8.5L1 16V1Z"
+                        fill="white"
+                        stroke="white"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </a>
+            <div class="progressTrack">
+                <div class="progressFill">25%</div>
+            </div>
+        </div>
+    </fg-bottom>
+</fg-coursethumbnail>
+
+                </fg-coursegrid>
+                <fg-completionbarbg>
+                    <fg-completionbar>
+                        <fg-meat> <b>25%</b><span>Complete</span> </fg-meat>
+                    </fg-completionbar>
+                </fg-completionbarbg>
+            </fg-mainview>
+
+    </body>
+</html>

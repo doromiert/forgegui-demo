@@ -1,0 +1,420 @@
+* {
+   box-sizing: border-box;
+}
+
+html,
+body.mobile-settings {
+   background: #161616;
+   height: 100%;
+   margin: 0;
+   overflow: hidden;
+}
+
+body.mobile-settings {
+   color: #fff;
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+}
+
+.mobile-settings button,
+.mobile-settings input {
+   font: inherit;
+}
+
+.mobile-settings-shell {
+   display: flex;
+   flex-direction: column;
+   height: 100dvh;
+   overflow: hidden;
+   position: relative;
+}
+
+.mobile-settings-header {
+   align-items: center;
+   display: flex;
+   flex: 0 0 72px;
+   justify-content: space-between;
+   padding: 15px 25px;
+}
+.mobile-settings-header > img:first-child {
+   width: 120px;
+}
+.mobile-settings-header > img:last-child {
+   border-radius: 50%;
+   height: 42px;
+   object-fit: cover;
+   width: 42px;
+}
+
+.mobile-settings-content {
+   display: flex;
+   flex: 1;
+   flex-direction: column;
+   gap: 20px;
+   min-height: 0;
+   overflow-y: auto;
+   padding: 10px 20px 30px;
+}
+.mobile-settings-menu h1 {
+   font-size: 32px;
+   margin: 4px 10px 0;
+}
+
+.mobile-settings-user {
+   align-items: center;
+   background: #0d0d0d;
+   border: 1px solid #282828;
+   border-radius: 15px;
+   display: flex;
+   gap: 12px;
+   padding: 10px;
+}
+.mobile-settings-user img {
+   border-radius: 50%;
+   height: 48px;
+   width: 48px;
+}
+.mobile-settings-user div {
+   display: flex;
+   flex-direction: column;
+}
+.mobile-settings-user strong {
+   font-size: 20px;
+}
+.mobile-settings-user span {
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 16px;
+}
+
+.mobile-settings-nav {
+   background: #0d0d0d;
+   border: 1px solid #282828;
+   border-radius: 15px;
+   overflow: hidden;
+}
+.mobile-settings-nav a {
+   align-items: center;
+   border-bottom: 1px solid #282828;
+   color: #fff;
+   display: flex;
+   font-size: 20px;
+   gap: 8px;
+   height: 54px;
+   padding: 8px 10px;
+   text-decoration: none;
+}
+.mobile-settings-nav a:last-child {
+   border-bottom: 0;
+}
+.mobile-settings-nav a img {
+   height: 28px;
+   width: 28px;
+}
+.mobile-settings-nav a img:last-child {
+   margin-left: auto;
+   transform: rotate(270deg);
+}
+
+.mobile-settings-back {
+   align-items: center;
+   color: #fff;
+   display: flex;
+   font-size: 20px;
+   gap: 8px;
+   min-height: 38px;
+   text-decoration: none;
+}
+.mobile-settings-back img {
+   height: 28px;
+   transform: rotate(90deg);
+   width: 28px;
+}
+
+.mobile-account-hero {
+   height: 269px;
+   margin-bottom: 10px;
+   position: relative;
+}
+.mobile-account-hero > img:first-child {
+   border-radius: 15px;
+   height: 200px;
+   object-fit: cover;
+   width: 100%;
+}
+.mobile-account-hero > img[data-user-avatar] {
+   border: 3px solid #161616;
+   background-color: #161616;
+   border-radius: 50%;
+   bottom: -30px;
+   height: 136px;
+   left: 50%;
+   object-fit: cover;
+   position: absolute;
+   transform: translateX(-50%);
+   width: 136px;
+}
+
+.mobile-settings-group {
+   display: flex;
+   flex-direction: column;
+   gap: 14px;
+}
+.mobile-settings-group h2 {
+   font-size: 18px;
+   font-weight: 500;
+   margin: 0 20px;
+}
+.mobile-settings-list {
+   background: #0d0d0d;
+   border: 1px solid #282828;
+   border-radius: 15px;
+   overflow: hidden;
+}
+.mobile-settings-list article {
+   align-items: center;
+   border-bottom: 1px solid #282828;
+   display: flex;
+   gap: 13px;
+   min-height: 81px;
+   padding: 14px 20px;
+}
+.mobile-settings-list article:last-child {
+   border-bottom: 0;
+}
+.mobile-settings-list article > div {
+   display: flex;
+   flex: 1;
+   flex-direction: column;
+   gap: 5px;
+   min-width: 0;
+}
+.mobile-settings-list article span {
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 16px;
+}
+.mobile-settings-list article strong {
+   font-size: 20px;
+   font-weight: 500;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+.mobile-settings-list article button,
+.mobile-settings-list article > a {
+   background: #292929;
+   border: 0;
+   border-radius: 8px;
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 18px;
+   padding: 10px 15px;
+   text-align: center;
+   text-decoration: none;
+}
+.mobile-settings-list article button.is-destructive {
+   background: #593232;
+}
+.mobile-settings-list article button:disabled {
+   cursor: not-allowed;
+   opacity: 0.55;
+}
+.mobile-billing-list {
+   margin-top: 2px;
+}
+
+.mobile-settings-footer {
+   align-items: center;
+   background: #0a0a0a;
+   border-top: 1px solid #303030;
+   display: flex;
+   flex: 0 0 99px;
+   padding: 20px;
+}
+.mobile-settings-footer a {
+   background: #1d1d1d;
+   border-radius: 15px;
+   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.21);
+   color: #fff;
+   font-size: 20px;
+   padding: 13px 30px;
+   text-decoration: none;
+}
+
+.mobile-settings-editor {
+   background: #161616;
+   display: flex;
+   flex-direction: column;
+   inset: 0;
+   position: absolute;
+   z-index: 20;
+}
+.mobile-settings-editor[hidden] {
+   display: none;
+}
+.mobile-settings-editor > header {
+   align-items: center;
+   border-bottom: 1px solid #303030;
+   display: flex;
+   gap: 12px;
+   min-height: 72px;
+   padding: 15px 20px;
+}
+.mobile-settings-editor > header button {
+   background: transparent;
+   border: 0;
+   height: 32px;
+   padding: 2px;
+   width: 32px;
+}
+.mobile-settings-editor > header img {
+   height: 28px;
+   transform: rotate(90deg);
+   width: 28px;
+}
+.mobile-settings-editor > header h2 {
+   font-size: 24px;
+   margin: 0;
+}
+.mobile-settings-editor form {
+   display: flex;
+   flex: 1;
+   flex-direction: column;
+   gap: 18px;
+   min-height: 0;
+   overflow-y: auto;
+   padding: 20px;
+}
+.mobile-settings-editor form > p {
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 18px;
+   margin: 0 0 4px;
+}
+.mobile-settings-editor label {
+   display: flex;
+   flex-direction: column;
+   font-size: 18px;
+   gap: 8px;
+}
+.mobile-settings-editor label span,
+.mobile-settings-editor small {
+   color: rgba(255, 255, 255, 0.6);
+}
+.mobile-settings-editor input {
+   background: #1d1d1d;
+   border: 1px solid #303030;
+   border-radius: 10px;
+   color: #fff;
+   font-size: 20px;
+   outline: 0;
+   padding: 16px;
+}
+.mobile-settings-editor form > a {
+   color: #80b9ff;
+}
+.mobile-settings-save {
+   background: #07f;
+   border: 0;
+   border-radius: 15px;
+   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.59);
+   color: #fff;
+   font-size: 20px;
+   margin-top: auto;
+   min-height: 52px;
+   position: sticky;
+   bottom: 0;
+}
+
+.mobile-referral-link {
+   font-family: "Atkinson Hyperlegible Mono", monospace;
+}
+.mobile-reward-timeline {
+   display: flex;
+   gap: 139px;
+   overflow-x: auto;
+   padding: 46px 20px 0;
+   scroll-padding-inline: 20px;
+}
+.mobile-reward-timeline article {
+   align-items: center;
+   background: #212121;
+   border-radius: 18px;
+   display: flex;
+   flex: 0 0 216px;
+   flex-direction: column;
+   min-height: 184px;
+   padding: 60px 15px 15px;
+   position: relative;
+}
+.mobile-reward-timeline article > div {
+   align-items: center;
+   background: #2e2e2e;
+   border: 1px solid rgba(145, 145, 145, 0.25);
+   border-radius: 50%;
+   display: flex;
+   height: 65px;
+   justify-content: center;
+   left: 50%;
+   position: absolute;
+   top: -29px;
+   transform: translateX(-50%);
+   width: 65px;
+}
+.mobile-reward-timeline article > div img {
+   height: 42px;
+   width: 42px;
+}
+.mobile-reward-timeline article strong {
+   font-size: 20px;
+}
+.mobile-reward-timeline article span {
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 18px;
+}
+.mobile-reward-timeline article button {
+   background: #0680ff;
+   border: 0;
+   border-radius: 8px;
+   color: #fff;
+   font-size: 18px;
+   margin-top: auto;
+   padding: 10px;
+   width: 100%;
+}
+.mobile-reward-timeline article button.is-claimed {
+   background: #15599d;
+}
+.mobile-reward-timeline article.is-upgrade {
+   border: 1px solid #db8300;
+}
+.mobile-reward-timeline article.is-upgrade button {
+   background: #db8300;
+}
+.mobile-reward-progress {
+   background: linear-gradient(90deg, #3e88ff, #0080ff);
+   border-radius: 36px;
+   display: flex;
+   justify-content: space-around;
+   padding: 8px;
+}
+.mobile-reward-progress span {
+   background: #fff;
+   border-radius: 30px;
+   color: #07f;
+   font-size: 18px;
+   font-weight: 600;
+   padding: 4px 11px;
+}
+
+@media (max-width: 390px) {
+   .mobile-settings-content {
+      padding-inline: 14px;
+   }
+   .mobile-settings-list article {
+      padding-inline: 14px;
+   }
+   .mobile-settings-list article strong {
+      font-size: 18px;
+   }
+   .mobile-settings-list article button,
+   .mobile-settings-list article > a {
+      font-size: 16px;
+      padding-inline: 10px;
+   }
+}

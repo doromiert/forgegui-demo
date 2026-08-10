@@ -1,0 +1,1 @@
+window.__FORGE_CONFIG__ = Object.freeze({"supabaseUrl":"https://azyjlkhpdgafuobyxoax.supabase.co","supabaseAnonKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF6eWpsa2hwZGdhZnVvYnl4b2F4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4NTEzODAsImV4cCI6MjA4ODQyNzM4MH0.LVUhnEvW7fTJTrWQbggBNMXSA0-7hoAss-f7ITVAOVs"});

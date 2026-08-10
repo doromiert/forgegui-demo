@@ -1,0 +1,1408 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta name="forge-path" content="desktop/library/overview.html">
+    <meta name="forge-route" content="library/overview.html">
+    <meta name="forge-variant" content="desktop">
+    <style>html:not(.forge-motion-ready),html:not(.forge-motion-ready) *,html:not(.forge-motion-ready) *::before,html:not(.forge-motion-ready) *::after{animation:none!important;transition:none!important}fg-client-include{display:none}</style>
+    <script src="../../scripts/vendor/supabase.js" defer></script>
+    <script src="../../scripts/forge-config.js" defer></script>
+    <script src="../../scripts/forge-api.js" defer></script>
+    <script src="../../scripts/forge-cache.js" defer></script>
+    <script src="../../scripts/auth-shell.js" defer></script>
+    <script src="../../scripts/assets.js" defer></script>
+    <script src="../../scripts/workspace.js" defer></script>
+    <script src="../../scripts/forge-loader.js"></script>
+    <script src="../../scripts/forge-runtime.js" defer></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <style data-forge-critical>
+/* styles/base.css */
+html:not(.forge-motion-ready),
+html:not(.forge-motion-ready) *,
+html:not(.forge-motion-ready) *::before,
+html:not(.forge-motion-ready) *::after {
+   animation: none !important;
+   transition: none !important;
+}
+* {
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+   font-optical-sizing: auto;
+   transition-property:
+      color,
+      background-color,
+      border-color,
+      outline-color,
+      opacity,
+      transform,
+      translate,
+      scale,
+      box-shadow,
+      width,
+      height,
+      max-height,
+      padding,
+      margin,
+      gap;
+   transition-duration: 0.25s;
+   transition-timing-function: ease;
+}
+body {
+   background: #0a0a0a;
+   --Glass-Text: linear-gradient(
+      180deg,
+      #fff 0%,
+      rgba(255, 255, 255, 0.5) 100%
+   );
+
+   &.chat {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      padding: 10px 0 0 10px;
+      margin: 0;
+      box-sizing: border-box;
+      align-items: flex-start;
+      gap: 10px;
+   }
+}
+fg-sidebar {
+   user-select: none;
+   -webkit-user-drag: none;
+   overflow-y: scroll;
+   display: flex;
+   width: 305px;
+   padding: calc(10px + 62px + 15px) 10px 440px 10px;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 15px;
+   flex-shrink: 0;
+   align-self: stretch;
+   position: relative;
+
+   &.collapsed {
+      width: 60px;
+      padding-bottom: 20px;
+      fg-top.sb {
+         width: 60px;
+         .fgLogo {
+            display: none;
+         }
+      }
+      .sidebarElem {
+         color: #ffffff00;
+         width: 60px;
+         height: 60px;
+      }
+      fg-toplabel {
+         display: none;
+      }
+      fg-bottom {
+         display: none !important;
+      }
+   }
+
+   fg-top.sb {
+      display: flex;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      right: 10px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      box-sizing: border-box;
+      width: 305px;
+
+      .fgLogo {
+         height: 24px;
+      }
+      button {
+         border: none;
+         background: none;
+         width: 38px;
+         height: 38px;
+         border-radius: 1293px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            outline: solid 10px rgba(255, 255, 255, 0.05);
+         }
+         &:active {
+            transform: scale(0.9);
+         }
+      }
+   }
+
+   fg-specialtabs {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+   }
+
+   fg-projects {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1 0 0;
+      align-self: stretch;
+
+      fg-toplabel {
+         display: flex;
+         margin: 14px 15px;
+         align-items: center;
+         gap: 8px;
+         align-self: stretch;
+         color: #fff;
+         font-size: 20px;
+         font-weight: 500;
+      }
+   }
+
+   .conversationListStatus {
+      padding: 8px 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      line-height: 1.35;
+   }
+
+   .conversationEntry span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
+
+   .sidebarElem {
+      text-decoration: none;
+      display: flex;
+      padding: 8px 10px;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+      border-radius: 15px;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      width: 100%;
+      box-sizing: border-box;
+
+      &.selected {
+         border: 1px solid rgba(255, 255, 255, 0.2);
+         background: rgba(60, 60, 60, 0.2);
+      }
+      &:hover {
+         background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      img {
+         width: 28px;
+         height: 28px;
+         margin: 5px;
+      }
+   }
+
+   fg-bottom.sb {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      align-self: stretch;
+      box-sizing: border-box;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 12931823;
+      backdrop-filter: blur(20px);
+      border-radius: 15px;
+      width: 305px;
+      fg-actions {
+         width: 100%;
+      }
+      creditCounter {
+         box-sizing: border-box;
+         display: flex;
+         padding: 10px;
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         width: 100%;
+
+         fg-top {
+            display: flex;
+            padding: 5px 8px;
+            justify-content: space-between;
+            align-items: center;
+            align-self: stretch;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 18px;
+            font-weight: 400;
+            gap: 8px;
+
+            a {
+               color: #fff;
+               text-decoration: none;
+               font-size: 18px;
+               font-weight: 600;
+            }
+         }
+         fg-bottom {
+            display: flex;
+            flex-direction: row;
+            padding: 8px;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            align-self: stretch;
+         }
+         creditSlider {
+            height: 9px;
+            flex: 1 0 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            &::before {
+               content: "";
+               width: 100px;
+               display: flex;
+               height: 9px;
+               background: linear-gradient(0deg, #0084ff 0%, #0084ff 100%);
+            }
+         }
+      }
+
+      fg-sidebaruserbutton {
+         display: flex;
+         padding: 15px;
+         align-items: center;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         user-select: none;
+
+         fg-vertical {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 34px;
+            width: 100%;
+
+            b {
+               color: #fff;
+               font-size: 20px;
+               font-weight: 600;
+               line-height: 20px;
+            }
+
+            span {
+               color: rgba(255, 255, 255, 0.8);
+               font-size: 16px;
+               font-weight: 400;
+               line-height: normal;
+            }
+         }
+
+         img {
+            width: 38px;
+            height: 38px;
+            border-radius: 38px;
+         }
+
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+         }
+      }
+   }
+}
+.upgradeButton {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   padding: 12px 20px;
+   background: #0077ff;
+   border: none;
+   border-radius: 15px;
+   cursor: pointer;
+   position: relative;
+
+   &:hover {
+      background-color: #32a3ff !important;
+   }
+
+   &.selected {
+      background-color: #32a3ff !important;
+   }
+
+   &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+      pointer-events: none;
+   }
+
+   span {
+      font-weight: bold;
+      font-size: 20px;
+      white-space: nowrap;
+      background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0px 1px 1.4px rgba(0, 0, 0, 0.25));
+   }
+}
+fg-mainview {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-sizing: border-box;
+   flex: 1 0 0;
+   height: 100%;
+   overflow-y: scroll;
+   border-radius: 20px 0 0 0;
+   border-top: 1px solid #333;
+   border-left: 1px solid #333;
+   background: #161616;
+   h1 {
+      margin: 0;
+   }
+}
+/* styles/assets-overview.css */
+/* Assets overview styles. */
+
+/* ── Assets overview ────────────────────────────────────────── */
+fg-mainview.assets {
+   fg-projects {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #0b0b0b;
+      padding: 15px 35px 35px;
+      width: 100%;
+      box-sizing: border-box;
+      flex-shrink: 0;
+
+      > fg-top {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         height: 58px;
+         flex-shrink: 0;
+      }
+   }
+
+   fg-breadcrumb {
+      color: #fff;
+      font-size: 32px;
+      font-weight: 600;
+
+      b {
+         font-weight: 600;
+      }
+   }
+
+   fg-projectgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+      width: 100%;
+   }
+
+   .projectEntry {
+      display: flex;
+      text-decoration: none;
+      flex-direction: column;
+      gap: 15px;
+      flex-shrink: 0;
+
+      fg-previewgrid {
+         background: #161616;
+         border: 1px solid #333;
+         border-radius: 20px;
+         width: 100%;
+         height: 206px;
+         padding: 10px;
+         box-sizing: border-box;
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         grid-template-rows: 1fr 1fr;
+         gap: 10px;
+         overflow: hidden;
+         flex-shrink: 0;
+
+         img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+         }
+      }
+
+      fg-bottom {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         padding: 0 12px;
+
+         fg-vertical {
+            display: flex;
+            flex-direction: column;
+
+            b {
+               color: #fff;
+               font-size: 18px;
+               font-weight: 500;
+            }
+
+            span {
+               color: rgba(255, 255, 255, 0.48);
+               font-size: 18px;
+               font-weight: 400;
+            }
+         }
+
+         > img {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+         }
+      }
+   }
+
+}
+/* ── Community Assets ─────────────────────────────────────────── */
+fg-communityassets {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+
+   > fg-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 25px 35px 15px;
+
+      > span {
+         color: #fff;
+         font-size: 32px;
+         font-weight: 600;
+      }
+   }
+}
+fg-searchwrapper {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   height: 48px;
+   padding: 10px 18px;
+   border-radius: 47px;
+   border: 1px solid #373636;
+   background: #121212;
+   overflow: hidden;
+   flex-shrink: 0;
+   width: 430px;
+   box-sizing: border-box;
+
+   img {
+      width: 24px;
+      height: 24px;
+      opacity: 0.5;
+      flex-shrink: 0;
+   }
+
+   input {
+      background: none;
+      border: none;
+      outline: none;
+      color: rgba(255, 255, 255, 0.5);
+      font-family: "Atkinson Hyperlegible Next", sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+      flex: 1;
+      min-width: 0;
+   }
+}
+fg-communityassetsgrid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+   gap: 10px;
+   padding: 0 35px 15px;
+   width: 100%;
+   box-sizing: border-box;
+}
+fg-communityasset {
+   position: relative;
+   overflow: hidden;
+   height: 293px;
+   border: 1px solid rgba(255, 255, 255, 0.1);
+   border-radius: 20px;
+   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
+   padding: 25px;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   cursor: pointer;
+
+   &.long {
+      grid-column: span 2;
+   }
+
+   /* Full-bleed background image — direct child of the card,
+      absolutely positioned so it covers the entire card. */
+   > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+   }
+
+   fg-top {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.8));
+
+      span {
+         color: #fff;
+         font-size: 20px;
+         font-weight: 600;
+      }
+   }
+
+   fg-bottom {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.8));
+
+      b {
+         color: #fff;
+         font-size: 24px;
+         font-weight: 700;
+      }
+
+      > span {
+         color: rgba(255, 255, 255, 0.8);
+         font-size: 18px;
+         font-weight: 500;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         white-space: nowrap;
+      }
+   }
+}
+@media (max-width: 720px) {
+   fg-mainview.assets fg-projectgrid {
+      grid-template-columns: minmax(0, 1fr);
+      padding-left: 16px;
+      padding-right: 16px;
+   }
+
+   fg-mainview.assets fg-projects > fg-top,
+   fg-communityassets > fg-top {
+      padding-left: 16px;
+      padding-right: 16px;
+   }
+
+   fg-communityassets > fg-top {
+      align-items: stretch;
+      flex-direction: column;
+      gap: 12px;
+   }
+
+   fg-communityassets fg-searchwrapper {
+      width: 100%;
+   }
+}
+/* styles/community-asset-popup.css */
+.communityAssetPopup {
+   display: flex;
+   flex-direction: row;
+   height: min(700px, calc(100vh - 40px));
+   width: 1315px;
+}
+.communityAssetViewport {
+   box-sizing: border-box;
+   display: flex;
+   flex: 1 1 auto;
+   flex-direction: column;
+   gap: 15px;
+   min-width: 0;
+   padding: 15px 20px 20px;
+}
+.communityAssetToolbar {
+   align-items: center;
+   display: flex;
+   flex: 0 0 38px;
+   gap: 15px;
+   padding: 0 10px;
+}
+.communityAssetToolbar button,
+.communityAssetMore {
+   align-items: center;
+   background: transparent;
+   border: 0;
+   display: flex;
+   height: 38px;
+   justify-content: center;
+   padding: 7px;
+   width: 38px;
+}
+.communityAssetToolbar button:first-child {
+   cursor: pointer;
+}
+.communityAssetToolbar button:first-child img {
+   transform: rotate(90deg);
+}
+.communityAssetToolbar img {
+   height: 24px;
+   width: 24px;
+}
+.communityAssetToolbar > span {
+   color: #fff;
+   font-size: 24px;
+   font-weight: 500;
+}
+.communityAssetMore {
+   margin-left: auto;
+}
+.communityAssetMore:disabled,
+.communityAssetFollow:disabled,
+.communityAssetAction:disabled {
+   opacity: 1;
+}
+.communityAssetPreview {
+   align-items: center;
+   background: #444;
+   border: 1px solid #1a1919;
+   border-radius: 10px;
+   box-sizing: border-box;
+   display: flex;
+   flex: 1 1 auto;
+   justify-content: center;
+   min-height: 0;
+   overflow: hidden;
+   padding: 10px;
+}
+.communityAssetPreview > img {
+   border-radius: 6px;
+   display: block;
+   height: 100%;
+   object-fit: contain;
+   width: 100%;
+}
+.communityAssetPreviewFallback {
+   align-items: center;
+   color: #fff;
+   display: flex;
+   flex-direction: column;
+   font-size: 24px;
+   font-weight: 500;
+   gap: 14px;
+   justify-content: center;
+   text-align: center;
+}
+.communityAssetPreviewFallback[hidden],
+.communityAssetPreview > img[hidden] {
+   display: none;
+}
+.communityAssetPreviewFallback img {
+   height: 48px;
+   width: 48px;
+}
+.communityAssetDetails {
+   background: #040404;
+   display: flex;
+   flex: 0 0 441px;
+   flex-direction: column;
+   min-width: 0;
+}
+.communityAssetAuthor {
+   align-items: center;
+   display: flex;
+   flex: 0 0 auto;
+   gap: 15px;
+   padding: 20px;
+}
+.communityAssetAvatar {
+   border-radius: 50%;
+   display: block;
+   flex: 0 0 48px;
+   height: 48px;
+   object-fit: cover;
+   width: 48px;
+}
+.communityAssetAuthorCopy {
+   display: flex;
+   flex: 1 1 auto;
+   flex-direction: column;
+   gap: 8px;
+   min-width: 0;
+}
+.communityAssetAuthorCopy strong,
+.communityAssetAuthorCopy > span {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}
+.communityAssetAuthorCopy strong {
+   color: #fff;
+   font-size: 24px;
+   font-weight: 600;
+}
+.communityAssetAuthorCopy > span {
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 20px;
+}
+.communityAssetFollow,
+.communityAssetDownload,
+.communityAssetAction {
+   align-items: center;
+   border: 0;
+   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.21);
+   color: #fff;
+   display: flex;
+   height: 44px;
+   justify-content: center;
+}
+.communityAssetFollow {
+   background: #07f;
+   border-radius: 50px;
+   flex: 0 0 auto;
+   font-size: 18px;
+   font-weight: 500;
+   gap: 10px;
+   padding: 10px 15px 10px 20px;
+}
+.communityAssetFollow img {
+   height: 24px;
+   width: 24px;
+}
+.communityAssetMetadata {
+   align-items: flex-start;
+   display: flex;
+   filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.8));
+   flex: 1 1 auto;
+   flex-direction: column;
+   gap: 20px;
+   min-height: 0;
+   padding: 10px 20px;
+}
+.communityAssetType {
+   align-items: center;
+   background: #171717;
+   border: 1px solid rgba(255, 255, 255, 0.25);
+   border-radius: 48px;
+   color: #fff;
+   display: flex;
+   font-family: "Inter Tight", sans-serif;
+   font-size: 16px;
+   font-weight: 600;
+   gap: 10px;
+   padding: 6px 12px;
+}
+.communityAssetType img,
+.communityAssetLikes img,
+.communityAssetActions img {
+   height: 24px;
+   width: 24px;
+}
+.communityAssetLikes {
+   align-items: center;
+   color: rgba(255, 255, 255, 0.81);
+   display: flex;
+   font-size: 20px;
+   font-weight: 500;
+   gap: 5px;
+}
+.communityAssetLikes[hidden] {
+   display: none;
+}
+.communityAssetMetadata h1 {
+   color: #fff;
+   font-size: 24px;
+   font-weight: 700;
+   margin: 0;
+   max-width: 100%;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}
+.communityAssetMetadata p {
+   color: rgba(255, 255, 255, 0.7);
+   display: -webkit-box;
+   font-size: 18px;
+   font-weight: 400;
+   line-height: normal;
+   margin: 0;
+   max-height: 183px;
+   overflow: hidden;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 8;
+}
+.communityAssetMetadata p.isExpanded {
+   display: block;
+   max-height: none;
+   overflow: auto;
+}
+.communityAssetDescriptionToggle {
+   background: transparent;
+   border: 0;
+   color: #fff;
+   cursor: pointer;
+   font-size: 18px;
+   font-weight: 500;
+   padding: 0;
+   text-decoration: underline;
+}
+.communityAssetActions {
+   align-items: center;
+   display: flex;
+   flex: 0 0 auto;
+   gap: 10px;
+   justify-content: center;
+   padding: 20px;
+}
+</style>
+    <link rel="stylesheet" href="../../styles/base.css" />
+        <link rel="stylesheet" href="../../styles/assets-overview.css" />
+        <link rel="stylesheet" href="../../styles/community-asset-popup.css" />
+        <script src="../../scripts/site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="color-scheme" content="dark" />
+        <style></style>
+    </head>
+
+    <body class="chat">
+        <fg-sidebar>
+    <fg-top class="sb">
+        <img src="../../assets/footerLogo.svg" class="fgLogo" alt="ForgeGUI" />
+        <button type="button" data-toggle-sidebar aria-label="Toggle sidebar">
+            <img src="../../icons/sidebar.svg" alt="" />
+        </button>
+    </fg-top>
+
+    <fg-specialtabs>
+        <a href="../../home.html" class="sidebarElem">
+            <img src="../../icons/home.svg" alt="" />
+            <span>Home</span>
+        </a>
+        <a href="../../library/overview.html" class="sidebarElem selected">
+            <img src="../../icons/file.svg" alt="" />
+            <span>Assets</span>
+        </a>
+        <a href="../../community.html" class="sidebarElem">
+            <img src="../../icons/people.svg" alt="" />
+            <span>Community</span>
+        </a>
+    </fg-specialtabs>
+
+    <fg-projects data-conversation-list hidden>
+        <fg-toplabel>Games</fg-toplabel>
+        <span class="conversationListStatus" data-conversation-status>Loading chats...</span>
+    </fg-projects>
+
+    <fg-contextmenu
+        id="userMenu"
+        class="hidden user"
+        style="width: 282px"
+    >
+        <a href="mailto:support@forgegui.com"><img src="../../icons/Exclamation.svg" alt="" /> Help</a>
+        <a href="../../settings/overview.html"><img src="../../icons/Settings.svg" alt="" /> Settings</a>
+
+        <button class="destructive" data-auth-signout>
+            <img src="../../icons/SignOut.svg" alt="" /> Logout
+        </button>
+    </fg-contextmenu>
+
+    <fg-bottom class="sb">
+        <a href="../../plans.html" class="sidebarElem upgradeButton">
+            <img src="../../icons/crown.svg" alt="" style="image-rendering: optimizeQuality" />
+            <span>Upgrade to Pro</span>
+        </a>
+
+        <fg-actions>
+            <a href="../../courses.html" class="sidebarElem">
+                <img src="../../icons/book.svg" alt="" />
+                <span>Courses</span>
+            </a>
+            <a href="../../plugins.html" class="sidebarElem">
+                <img src="../../icons/plugin.svg" alt="" />
+                <span>Plugins</span>
+            </a>
+            <a href="../../leaderboard.html" class="sidebarElem">
+                <img src="../../icons/Trophy.svg" alt="" />
+                <span>Leaderboard</span>
+            </a>
+            <a href="../../notifications.html" class="sidebarElem">
+                <img src="../../icons/bell.svg" alt="" />
+                <span>Notifications</span>
+            </a>
+        </fg-actions>
+
+        <fg-sidebaruserbutton data-context-target="userMenu">
+            <img src="../../assets/generic.png" alt="" data-user-avatar />
+            <fg-vertical>
+                <b data-user-name>Creator</b>
+                <span data-user-email></span>
+            </fg-vertical>
+            <img src="../../icons/selection.svg" alt="" />
+        </fg-sidebaruserbutton>
+    </fg-bottom>
+</fg-sidebar>
+
+        <fg-mainview data-slot="content" class="assets">
+            <fg-projects>
+                <fg-top>
+                    <fg-breadcrumb>
+                        <b>Assets</b>
+                    </fg-breadcrumb>
+                    <a class="topButton active" href="../../library/project.html">
+                        <img src="../../icons/add.svg" />
+                        <span> New Project </span>
+                    </a>
+                </fg-top>
+                <fg-projectgrid>
+                    <a class="projectEntry" href="../../library/project.html">
+    <fg-previewgrid>
+        
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+        
+    </fg-previewgrid>
+    <fg-bottom>
+        <fg-vertical>
+            <b>Project Name</b>
+            <span>Last edited: Yesterday</span>
+        </fg-vertical>
+        <img src="../../icons/3dots.svg" alt="" />
+    </fg-bottom>
+</a>
+
+                    <a class="projectEntry" href="../../library/project.html">
+    <fg-previewgrid>
+        
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+        
+    </fg-previewgrid>
+    <fg-bottom>
+        <fg-vertical>
+            <b>Project Name</b>
+            <span>Last edited: Yesterday</span>
+        </fg-vertical>
+        <img src="../../icons/3dots.svg" alt="" />
+    </fg-bottom>
+</a>
+
+                    <a class="projectEntry" href="../../library/project.html">
+    <fg-previewgrid>
+        
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+        
+    </fg-previewgrid>
+    <fg-bottom>
+        <fg-vertical>
+            <b>Project Name</b>
+            <span>Last edited: Yesterday</span>
+        </fg-vertical>
+        <img src="../../icons/3dots.svg" alt="" />
+    </fg-bottom>
+</a>
+
+                    <a class="projectEntry" href="../../library/project.html">
+    <fg-previewgrid>
+        
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+        
+    </fg-previewgrid>
+    <fg-bottom>
+        <fg-vertical>
+            <b>Project Name</b>
+            <span>Last edited: Yesterday</span>
+        </fg-vertical>
+        <img src="../../icons/3dots.svg" alt="" />
+    </fg-bottom>
+</a>
+
+                    <a class="projectEntry" href="../../library/project.html">
+    <fg-previewgrid>
+        
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+        
+    </fg-previewgrid>
+    <fg-bottom>
+        <fg-vertical>
+            <b>Project Name</b>
+            <span>Last edited: Yesterday</span>
+        </fg-vertical>
+        <img src="../../icons/3dots.svg" alt="" />
+    </fg-bottom>
+</a>
+
+                    <a class="projectEntry" href="../../library/project.html">
+    <fg-previewgrid>
+        
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+        
+    </fg-previewgrid>
+    <fg-bottom>
+        <fg-vertical>
+            <b>Project Name</b>
+            <span>Last edited: Yesterday</span>
+        </fg-vertical>
+        <img src="../../icons/3dots.svg" alt="" />
+    </fg-bottom>
+</a>
+
+                    <a class="projectEntry" href="../../library/project.html">
+    <fg-previewgrid>
+        
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+        
+    </fg-previewgrid>
+    <fg-bottom>
+        <fg-vertical>
+            <b>Project Name</b>
+            <span>Last edited: Yesterday</span>
+        </fg-vertical>
+        <img src="../../icons/3dots.svg" alt="" />
+    </fg-bottom>
+</a>
+
+                    <a class="projectEntry" href="../../library/project.html">
+    <fg-previewgrid>
+        
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+        
+    </fg-previewgrid>
+    <fg-bottom>
+        <fg-vertical>
+            <b>Project Name</b>
+            <span>Last edited: Yesterday</span>
+        </fg-vertical>
+        <img src="../../icons/3dots.svg" alt="" />
+    </fg-bottom>
+</a>
+
+                    <a class="projectEntry" href="../../library/project.html">
+    <fg-previewgrid>
+        
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+        
+    </fg-previewgrid>
+    <fg-bottom>
+        <fg-vertical>
+            <b>Project Name</b>
+            <span>Last edited: Yesterday</span>
+        </fg-vertical>
+        <img src="../../icons/3dots.svg" alt="" />
+    </fg-bottom>
+</a>
+
+                    <a class="projectEntry" href="../../library/project.html">
+    <fg-previewgrid>
+        
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+            <img src="../../assets/coursePlaceholder.jpg" alt="" />
+        
+    </fg-previewgrid>
+    <fg-bottom>
+        <fg-vertical>
+            <b>Project Name</b>
+            <span>Last edited: Yesterday</span>
+        </fg-vertical>
+        <img src="../../icons/3dots.svg" alt="" />
+    </fg-bottom>
+</a>
+
+                </fg-projectgrid>
+            </fg-projects>
+            <fg-communityassets>
+                <fg-top>
+                    <span> Discover Community Assets </span>
+                    <fg-searchwrapper>
+                        <img src="../../icons/search.svg" />
+                        <input type="search" placeholder="Search" aria-label="Search community assets" data-catalog-search />
+                    </fg-searchwrapper>
+                </fg-top>
+                <fg-communityassetsgrid data-catalog-grid>
+                    <fg-communityasset class="long">
+                        <img src="../../assets/generic.png" />
+<fg-top>
+    <span><span>Generic</span></span>
+</fg-top>
+<fg-bottom>
+    <b><span>Mountain Retreat</span></b>
+    <span><span
+                                >A secluded getaway nestled between alpine peaks
+                                and evergreen forests.</span
+                            ></span>
+    <fg-tags>
+        <fg-tag>Nature</fg-tag>
+<fg-tag>Travel</fg-tag>
+    </fg-tags>
+</fg-bottom>
+
+                    </fg-communityasset>
+                    <fg-communityasset>
+                        <img src="../../assets/generic.png" />
+<fg-top>
+    <span><span>Generic</span></span>
+</fg-top>
+<fg-bottom>
+    <b><span>Urban Skyline</span></b>
+    <span><span
+                                >A breathtaking view of city lights after
+                                dark.</span
+                            ></span>
+    <fg-tags>
+        <fg-tag>City</fg-tag>
+<fg-tag>Night</fg-tag>
+    </fg-tags>
+</fg-bottom>
+
+                    </fg-communityasset>
+                    <fg-communityasset>
+                        <img src="../../assets/generic.png" />
+<fg-top>
+    <span><span>Generic</span></span>
+</fg-top>
+<fg-bottom>
+    <b><span>Desert Dunes</span></b>
+    <span><span
+                                >Rolling sand dunes stretching to the
+                                horizon.</span
+                            ></span>
+    <fg-tags>
+        <fg-tag>Nature</fg-tag>
+<fg-tag>Desert</fg-tag>
+    </fg-tags>
+</fg-bottom>
+
+                    </fg-communityasset>
+                    <fg-communityasset>
+                        <img src="../../assets/generic.png" />
+<fg-top>
+    <span><span>Generic</span></span>
+</fg-top>
+<fg-bottom>
+    <b><span>Desert Dunes</span></b>
+    <span><span
+                                >Rolling sand dunes stretching to the
+                                horizon.</span
+                            ></span>
+    <fg-tags>
+        <fg-tag>Nature</fg-tag>
+<fg-tag>Desert</fg-tag>
+    </fg-tags>
+</fg-bottom>
+
+                    </fg-communityasset>
+                    <fg-communityasset>
+                        <img src="../../assets/generic.png" />
+<fg-top>
+    <span><span>Generic</span></span>
+</fg-top>
+<fg-bottom>
+    <b><span>Desert Dunes</span></b>
+    <span><span
+                                >Rolling sand dunes stretching to the
+                                horizon.</span
+                            ></span>
+    <fg-tags>
+        <fg-tag>Nature</fg-tag>
+<fg-tag>Desert</fg-tag>
+    </fg-tags>
+</fg-bottom>
+
+                    </fg-communityasset>
+                    <fg-communityasset>
+                        <img src="../../assets/generic.png" />
+<fg-top>
+    <span><span>Generic</span></span>
+</fg-top>
+<fg-bottom>
+    <b><span>Desert Dunes</span></b>
+    <span><span
+                                >Rolling sand dunes stretching to the
+                                horizon.</span
+                            ></span>
+    <fg-tags>
+        <fg-tag>Nature</fg-tag>
+<fg-tag>Desert</fg-tag>
+    </fg-tags>
+</fg-bottom>
+
+                    </fg-communityasset>
+                    <fg-communityasset class="long">
+                        <img src="../../assets/generic.png" />
+<fg-top>
+    <span><span>Generic</span></span>
+</fg-top>
+<fg-bottom>
+    <b><span>Mountain Retreat</span></b>
+    <span><span
+                                >A secluded getaway nestled between alpine peaks
+                                and evergreen forests.</span
+                            ></span>
+    <fg-tags>
+        <fg-tag>Nature</fg-tag>
+<fg-tag>Travel</fg-tag>
+    </fg-tags>
+</fg-bottom>
+
+                    </fg-communityasset>
+                    <fg-communityasset>
+                        <img src="../../assets/generic.png" />
+<fg-top>
+    <span><span>Generic</span></span>
+</fg-top>
+<fg-bottom>
+    <b><span>Desert Dunes</span></b>
+    <span><span
+                                >Rolling sand dunes stretching to the
+                                horizon.</span
+                            ></span>
+    <fg-tags>
+        <fg-tag>Nature</fg-tag>
+<fg-tag>Desert</fg-tag>
+    </fg-tags>
+</fg-bottom>
+
+                    </fg-communityasset>
+                    <fg-communityasset class="long">
+                        <img src="../../assets/generic.png" />
+<fg-top>
+    <span><span>Generic</span></span>
+</fg-top>
+<fg-bottom>
+    <b><span>Mountain Retreat</span></b>
+    <span><span
+                                >A secluded getaway nestled between alpine peaks
+                                and evergreen forests.</span
+                            ></span>
+    <fg-tags>
+        <fg-tag>Nature</fg-tag>
+<fg-tag>Travel</fg-tag>
+    </fg-tags>
+</fg-bottom>
+
+                    </fg-communityasset>
+                </fg-communityassetsgrid>
+            </fg-communityassets>
+        </fg-mainview>
+        <fg-popupcontainer class="hidden">
+    <fg-popup id="community-asset-preview" class="communityAssetPopup hidden" aria-label="Community asset view">
+        <section class="communityAssetViewport">
+            <header class="communityAssetToolbar">
+                <button type="button" data-popup-close aria-label="Close community asset view">
+                    <img src="../../icons/arrow.svg" alt="" />
+                </button>
+                <span>Asset View</span>
+                <button type="button" class="communityAssetMore" aria-label="More options" disabled>
+                    <img src="../../icons/3dots.svg" alt="" />
+                </button>
+            </header>
+            <div class="communityAssetPreview">
+                <img src="../../assets/generic.png" alt="" data-community-preview-image />
+                <div class="communityAssetPreviewFallback" data-community-preview-fallback hidden>
+                    <img src="../../icons/file.svg" alt="" data-community-preview-icon />
+                    <span data-community-preview-message>Preview unavailable</span>
+                </div>
+            </div>
+        </section>
+        <aside class="communityAssetDetails">
+            <header class="communityAssetAuthor">
+                <img class="communityAssetAvatar" src="../../assets/community-avatar.png" alt="" data-community-avatar />
+                <span class="communityAssetAuthorCopy">
+                    <strong data-community-creator>ForgeGUI Creator</strong>
+                    <span data-community-handle>@forgegui</span>
+                </span>
+                <button type="button" class="communityAssetFollow" disabled title="Following is not available in this preview">
+                    <span>Follow</span>
+                    <img src="../../icons/follow-person.svg" alt="" />
+                </button>
+            </header>
+            <div class="communityAssetMetadata">
+                <span class="communityAssetType">
+                    <img src="../../icons/3d.svg" alt="" data-community-type-icon />
+                    <span data-community-type>3D Object</span>
+                </span>
+                <span class="communityAssetLikes" data-community-likes hidden>
+                    <img src="../../icons/heart.svg" alt="" />
+                    <span data-community-like-count></span>
+                </span>
+                <h1 data-community-title>Community asset</h1>
+                <p data-community-description></p>
+                <button type="button" class="communityAssetDescriptionToggle" data-community-description-toggle aria-expanded="false">
+                    View Full Description
+                </button>
+            </div>
+            <footer class="communityAssetActions">
+                <button type="button" class="communityAssetDownload" data-community-download>
+                    <img src="../../icons/download.svg" alt="" />
+                    <span>Download <strong>Free</strong></span>
+                </button>
+                <button type="button" class="communityAssetAction" data-community-share aria-label="Share asset">
+                    <img src="../../icons/share.svg" alt="" />
+                </button>
+                <button type="button" class="communityAssetAction" aria-label="Favorite unavailable" disabled title="Favorites are not available in this preview">
+                    <img src="../../icons/heart.svg" alt="" />
+                </button>
+            </footer>
+        </aside>
+    </fg-popup>
+</fg-popupcontainer>
+
+    </body>
+</html>

@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="forge-path" content="desktop/home.html">
+    <meta name="forge-route" content="home.html">
+    <meta name="forge-variant" content="desktop">
+    <style>html:not(.forge-motion-ready),html:not(.forge-motion-ready) *,html:not(.forge-motion-ready) *::before,html:not(.forge-motion-ready) *::after{animation:none!important;transition:none!important}fg-client-include{display:none}</style>
+    <script src="../scripts/vendor/supabase.js" defer></script>
+    <script src="../scripts/forge-config.js" defer></script>
+    <script src="../scripts/forge-api.js" defer></script>
+    <script src="../scripts/forge-cache.js" defer></script>
+    <script src="../scripts/auth-shell.js" defer></script>
+    <script src="../scripts/workspace.js" defer></script>
+    <script src="../scripts/forge-loader.js"></script>
+    <script src="../scripts/forge-runtime.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ForgeGUI</title>
+    <style data-forge-critical>
+/* styles/base.css */
+html:not(.forge-motion-ready),
+html:not(.forge-motion-ready) *,
+html:not(.forge-motion-ready) *::before,
+html:not(.forge-motion-ready) *::after {
+   animation: none !important;
+   transition: none !important;
+}
+* {
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+   font-optical-sizing: auto;
+   transition-property:
+      color,
+      background-color,
+      border-color,
+      outline-color,
+      opacity,
+      transform,
+      translate,
+      scale,
+      box-shadow,
+      width,
+      height,
+      max-height,
+      padding,
+      margin,
+      gap;
+   transition-duration: 0.25s;
+   transition-timing-function: ease;
+}
+body {
+   background: #0a0a0a;
+   --Glass-Text: linear-gradient(
+      180deg,
+      #fff 0%,
+      rgba(255, 255, 255, 0.5) 100%
+   );
+
+   &.chat {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      padding: 10px 0 0 10px;
+      margin: 0;
+      box-sizing: border-box;
+      align-items: flex-start;
+      gap: 10px;
+   }
+}
+fg-sidebar {
+   user-select: none;
+   -webkit-user-drag: none;
+   overflow-y: scroll;
+   display: flex;
+   width: 305px;
+   padding: calc(10px + 62px + 15px) 10px 440px 10px;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 15px;
+   flex-shrink: 0;
+   align-self: stretch;
+   position: relative;
+
+   &.collapsed {
+      width: 60px;
+      padding-bottom: 20px;
+      fg-top.sb {
+         width: 60px;
+         .fgLogo {
+            display: none;
+         }
+      }
+      .sidebarElem {
+         color: #ffffff00;
+         width: 60px;
+         height: 60px;
+      }
+      fg-toplabel {
+         display: none;
+      }
+      fg-bottom {
+         display: none !important;
+      }
+   }
+
+   fg-top.sb {
+      display: flex;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      right: 10px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      box-sizing: border-box;
+      width: 305px;
+
+      .fgLogo {
+         height: 24px;
+      }
+      button {
+         border: none;
+         background: none;
+         width: 38px;
+         height: 38px;
+         border-radius: 1293px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            outline: solid 10px rgba(255, 255, 255, 0.05);
+         }
+         &:active {
+            transform: scale(0.9);
+         }
+      }
+   }
+
+   fg-specialtabs {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+   }
+
+   fg-projects {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1 0 0;
+      align-self: stretch;
+
+      fg-toplabel {
+         display: flex;
+         margin: 14px 15px;
+         align-items: center;
+         gap: 8px;
+         align-self: stretch;
+         color: #fff;
+         font-size: 20px;
+         font-weight: 500;
+      }
+   }
+
+   .conversationListStatus {
+      padding: 8px 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      line-height: 1.35;
+   }
+
+   .conversationEntry span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
+
+   .sidebarElem {
+      text-decoration: none;
+      display: flex;
+      padding: 8px 10px;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+      border-radius: 15px;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      width: 100%;
+      box-sizing: border-box;
+
+      &.selected {
+         border: 1px solid rgba(255, 255, 255, 0.2);
+         background: rgba(60, 60, 60, 0.2);
+      }
+      &:hover {
+         background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      img {
+         width: 28px;
+         height: 28px;
+         margin: 5px;
+      }
+   }
+
+   fg-bottom.sb {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      align-self: stretch;
+      box-sizing: border-box;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 12931823;
+      backdrop-filter: blur(20px);
+      border-radius: 15px;
+      width: 305px;
+      fg-actions {
+         width: 100%;
+      }
+      creditCounter {
+         box-sizing: border-box;
+         display: flex;
+         padding: 10px;
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         width: 100%;
+
+         fg-top {
+            display: flex;
+            padding: 5px 8px;
+            justify-content: space-between;
+            align-items: center;
+            align-self: stretch;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 18px;
+            font-weight: 400;
+            gap: 8px;
+
+            a {
+               color: #fff;
+               text-decoration: none;
+               font-size: 18px;
+               font-weight: 600;
+            }
+         }
+         fg-bottom {
+            display: flex;
+            flex-direction: row;
+            padding: 8px;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            align-self: stretch;
+         }
+         creditSlider {
+            height: 9px;
+            flex: 1 0 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            &::before {
+               content: "";
+               width: 100px;
+               display: flex;
+               height: 9px;
+               background: linear-gradient(0deg, #0084ff 0%, #0084ff 100%);
+            }
+         }
+      }
+
+      fg-sidebaruserbutton {
+         display: flex;
+         padding: 15px;
+         align-items: center;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         user-select: none;
+
+         fg-vertical {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 34px;
+            width: 100%;
+
+            b {
+               color: #fff;
+               font-size: 20px;
+               font-weight: 600;
+               line-height: 20px;
+            }
+
+            span {
+               color: rgba(255, 255, 255, 0.8);
+               font-size: 16px;
+               font-weight: 400;
+               line-height: normal;
+            }
+         }
+
+         img {
+            width: 38px;
+            height: 38px;
+            border-radius: 38px;
+         }
+
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+         }
+      }
+   }
+}
+.upgradeButton {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   padding: 12px 20px;
+   background: #0077ff;
+   border: none;
+   border-radius: 15px;
+   cursor: pointer;
+   position: relative;
+
+   &:hover {
+      background-color: #32a3ff !important;
+   }
+
+   &.selected {
+      background-color: #32a3ff !important;
+   }
+
+   &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+      pointer-events: none;
+   }
+
+   span {
+      font-weight: bold;
+      font-size: 20px;
+      white-space: nowrap;
+      background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0px 1px 1.4px rgba(0, 0, 0, 0.25));
+   }
+}
+fg-mainview {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-sizing: border-box;
+   flex: 1 0 0;
+   height: 100%;
+   overflow-y: scroll;
+   border-radius: 20px 0 0 0;
+   border-top: 1px solid #333;
+   border-left: 1px solid #333;
+   background: #161616;
+   h1 {
+      margin: 0;
+   }
+}
+/* styles/home.css */
+/* Page-specific styles extracted from base.css. */
+
+fg-chatwindow {
+   border-radius: 15px 0 0 0;
+   display: flex;
+   height: calc(100vh - 100px);
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap: 30px;
+   align-self: stretch;
+   background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%),
+      url("../assets/d2.png") lightgray 50% / cover no-repeat;
+   flex-shrink: 0;
+}
+fg-suggestionbar {
+   display: flex;
+   gap: 10px;
+   flex-wrap: wrap;
+   width: 985px;
+}
+fg-suggestionbar fg-suggestion {
+   display: flex;
+   padding: 10px 12px;
+   align-items: center;
+   gap: 10px;
+   width: calc(985px / 3 - 33px);
+   border-radius: 12px;
+   border: 1px solid rgba(255, 255, 255, 0.2);
+   background: radial-gradient(100% 50.05% at 50.05% 1.09%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%);
+   backdrop-filter: blur(25px);
+   cursor: pointer;
+}
+fg-suggestion img {
+   width: 24px;
+   height: 24px;
+}
+fg-gallery {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   width: 100%;
+   background: #0f0f0f;
+   border-top: 1px solid #303030;
+   padding-bottom: 10px;
+}
+fg-gallery > fg-gallerytop {
+   display: flex;
+   padding: 30px 30px 10px;
+   justify-content: center;
+   align-items: flex-end;
+   gap: 8px;
+   align-self: stretch;
+   color: white;
+   font-style: italic;
+   text-transform: uppercase;
+}
+fg-gallery > fg-gallerytop span { font-size: 24px; font-weight: 500; }
+fg-gallery > fg-gallerytop b { font-size: 33px; font-weight: 800; text-shadow: 0 4px 20.4px rgba(255, 255, 255, 0.25); }
+fg-galleryline {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   padding: 20px 30px;
+   width: 100%;
+   box-sizing: border-box;
+}
+fg-galleryline > fg-gallerytop {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+fg-galleryline > fg-gallerytop > div { display: flex; align-items: center; gap: 10px; }
+fg-galleryline > fg-gallerytop img { width: 24px; height: 24px; }
+fg-galleryline > fg-gallerytop span { color: #fff; font-size: 20px; font-weight: 500; }
+fg-gallerycarousel {
+   display: flex;
+   gap: 15px;
+   overflow-x: scroll;
+   scroll-snap-type: x mandatory;
+   scrollbar-width: none;
+}
+fg-gallerycarousel::-webkit-scrollbar { display: none; }
+fg-horizbuttons { display: flex; gap: 20px; align-items: center; }
+fg-horizbuttons button { display: flex; width: 24px; height: 24px; padding: 0; align-items: center; justify-content: center; border: 0; background: none; cursor: pointer; opacity: 0.7; }
+fg-horizbuttons button:hover { opacity: 1; }
+fg-gallerycard {
+   display: flex;
+   width: 403px;
+   flex-shrink: 0;
+   flex-direction: column;
+   gap: 15px;
+   scroll-snap-align: start;
+   cursor: pointer;
+}
+fg-gallerycard > img { display: block; width: 100%; height: 225px; object-fit: cover; border-radius: 12px; }
+fg-cardinfo { display: flex; padding: 0 8px; flex-direction: column; gap: 14px; }
+fg-cardinfo b { color: #fff; font-size: 22px; font-weight: 600; }
+fg-cardinfo span { color: rgba(255, 255, 255, 0.8); font-size: 18px; }
+fg-galleryfeatured {
+   display: flex;
+   width: 100%;
+   padding: 0 30px 20px;
+   box-sizing: border-box;
+   flex-direction: column;
+   gap: 15px;
+}
+fg-galleryfeatured > img { display: block; width: 100%; height: 378px; object-fit: cover; border-radius: 12px; }
+fg-featuredinfo { display: flex; padding: 0 8px; justify-content: space-between; align-items: center; }
+</style>
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="../styles/home.css" />
+    <script src="../scripts/site.js" defer></script>
+    <meta name="theme-color" content="#0D0D0D" />
+    <meta name="description" content="ForgeGUI - Create anything with AI" />
+    <meta name="color-scheme" content="dark" />
+  </head>
+  <body class="chat">
+    <fg-sidebar>
+    <fg-top class="sb">
+        <img src="../assets/footerLogo.svg" class="fgLogo" alt="ForgeGUI" />
+        <button type="button" data-toggle-sidebar aria-label="Toggle sidebar">
+            <img src="../icons/sidebar.svg" alt="" />
+        </button>
+    </fg-top>
+
+    <fg-specialtabs>
+        <a href="../home.html" class="sidebarElem selected">
+            <img src="../icons/home.svg" alt="" />
+            <span>Home</span>
+        </a>
+        <a href="../library/overview.html" class="sidebarElem">
+            <img src="../icons/file.svg" alt="" />
+            <span>Assets</span>
+        </a>
+        <a href="../community.html" class="sidebarElem">
+            <img src="../icons/people.svg" alt="" />
+            <span>Community</span>
+        </a>
+    </fg-specialtabs>
+
+    <fg-projects data-conversation-list hidden>
+        <fg-toplabel>Games</fg-toplabel>
+        <span class="conversationListStatus" data-conversation-status>Loading chats...</span>
+    </fg-projects>
+
+    <fg-contextmenu
+        id="userMenu"
+        class="hidden user"
+        style="width: 282px"
+    >
+        <a href="mailto:support@forgegui.com"><img src="../icons/Exclamation.svg" alt="" /> Help</a>
+        <a href="../settings/overview.html"><img src="../icons/Settings.svg" alt="" /> Settings</a>
+
+        <button class="destructive" data-auth-signout>
+            <img src="../icons/SignOut.svg" alt="" /> Logout
+        </button>
+    </fg-contextmenu>
+
+    <fg-bottom class="sb">
+        <a href="../plans.html" class="sidebarElem upgradeButton">
+            <img src="../icons/crown.svg" alt="" style="image-rendering: optimizeQuality" />
+            <span>Upgrade to Pro</span>
+        </a>
+
+        <fg-actions>
+            <a href="../courses.html" class="sidebarElem">
+                <img src="../icons/book.svg" alt="" />
+                <span>Courses</span>
+            </a>
+            <a href="../plugins.html" class="sidebarElem">
+                <img src="../icons/plugin.svg" alt="" />
+                <span>Plugins</span>
+            </a>
+            <a href="../leaderboard.html" class="sidebarElem">
+                <img src="../icons/Trophy.svg" alt="" />
+                <span>Leaderboard</span>
+            </a>
+            <a href="../notifications.html" class="sidebarElem">
+                <img src="../icons/bell.svg" alt="" />
+                <span>Notifications</span>
+            </a>
+        </fg-actions>
+
+        <fg-sidebaruserbutton data-context-target="userMenu">
+            <img src="../assets/generic.png" alt="" data-user-avatar />
+            <fg-vertical>
+                <b data-user-name>Creator</b>
+                <span data-user-email></span>
+            </fg-vertical>
+            <img src="../icons/selection.svg" alt="" />
+        </fg-sidebaruserbutton>
+    </fg-bottom>
+</fg-sidebar>
+
+<fg-mainview>
+        <fg-chatwindow>
+          <span>Your creative workspace is ready.</span>
+          <h1>Let's create a game, <span data-user-name>Creator</span></h1>
+          <fg-chatbox data-chat-form>
+  <fg-assetbar data-chat-attachment-preview role="group" aria-label="Reference images">
+    <button class="chatboxAttachmentButton" type="button" aria-label="Add reference images" data-chat-attachment>
+      <img src="../icons/add.svg" alt="" />
+    </button>
+    <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple hidden data-chat-attachment-input />
+  </fg-assetbar>
+  <textarea
+    data-chat-input
+    maxlength="4000"
+    aria-label="Describe what you want ForgeGUI to create"
+    placeholder="Describe what you want to create..."
+  ></textarea>
+  <fg-bottom>
+    <button class="chatboxButton mobileChatboxControl" type="button" aria-label="More options">
+      <img src="../icons/3dots.svg" alt="" />
+    </button>
+    <button class="chatboxButton" type="button" data-context-target="chatboxGamePicker">
+      <img src="../icons/roblox.svg" alt="" />
+      <span>Roblox</span>
+      <img src="../icons/arrow.svg" alt="" />
+    </button>
+    <fg-contextmenu id="chatboxGamePicker" class="hidden">
+      <button type="button"><img src="../icons/roblox.svg" alt="" />Roblox</button>
+      <button type="button"><img src="../icons/ue.svg" alt="" />Unreal Engine</button>
+      <button type="button"><img src="../icons/unity.svg" alt="" />Unity</button>
+    </fg-contextmenu>
+
+    <button class="chatboxButton" type="button" data-context-target="chatboxStyle">
+      <img src="../icons/pencil.svg" alt="" />
+      <span>Auto-Detect</span>
+      <img src="../icons/arrow.svg" alt="" />
+    </button>
+    <fg-contextmenu id="chatboxStyle" class="hidden" style="left: 120px">
+      <button type="button">Auto-Detect</button>
+      <button type="button">Realistic</button>
+      <button type="button">Cartoon</button>
+      <button type="button">Pixel Art</button>
+    </fg-contextmenu>
+
+    <button class="chatboxButton" type="button" data-context-target="chatboxModel">
+      <img src="../icons/ai.svg" alt="" />
+      <span>Yunes Pro</span>
+      <img src="../icons/arrow.svg" alt="" />
+    </button>
+    <fg-contextmenu id="chatboxModel" class="hidden" style="left: 328px">
+      <button type="button">Yunes Pro</button>
+      <button type="button">GoyAI</button>
+      <button type="button">SahurML</button>
+    </fg-contextmenu>
+
+    <span style="flex: 1"></span>
+    <button class="chatboxButton send" type="button" data-chat-submit>
+      <span>Create</span>
+      <img src="../icons/send.svg" alt="" />
+    </button>
+  </fg-bottom>
+  <p class="chatboxStatus" data-chat-status role="status" hidden></p>
+</fg-chatbox>
+
+          <fg-suggestionbar>
+            <fg-suggestion data-prompt-suggestion="Create a polished inventory interface for a fantasy RPG"><img src="../icons/picture.svg" alt="" />Fantasy inventory UI</fg-suggestion>
+            <fg-suggestion data-prompt-suggestion="Generate a cinematic thumbnail for a futuristic racing game"><img src="../icons/picture.svg" alt="" />Racing thumbnail</fg-suggestion>
+            <fg-suggestion data-prompt-suggestion="Create a stylized low-poly treasure chest 3D model"><img src="../icons/s-3d.svg" alt="" />Treasure chest model</fg-suggestion>
+            <fg-suggestion data-prompt-suggestion="Generate an energetic menu theme for an adventure game"><img src="../icons/ai.svg" alt="" />Adventure menu music</fg-suggestion>
+            <fg-suggestion data-prompt-suggestion="Create a responsive health and stamina HUD for a survival game"><img src="../icons/assets.svg" alt="" />Survival game HUD</fg-suggestion>
+            <fg-suggestion data-prompt-suggestion="Generate a magical ability icon set with a cohesive visual style"><img src="../icons/picture.svg" alt="" />Ability icon set</fg-suggestion>
+          </fg-suggestionbar>
+        </fg-chatwindow>
+
+        <fg-gallery>
+          <fg-gallerytop><span>THE</span><b>FORGE</b></fg-gallerytop>
+          <fg-galleryline>
+            <fg-gallerytop>
+              <div><img src="../icons/s-3d.svg" alt="" /><span>Quick Tools</span></div>
+              <fg-horizbuttons>
+                <button onclick="scrollGallery(this, -1)" aria-label="Previous quick tool"><img src="../icons/arrow.svg" alt="" style="rotate: 90deg" /></button>
+                <button onclick="scrollGallery(this, 1)" aria-label="Next quick tool"><img src="../icons/arrow.svg" alt="" style="rotate: 270deg" /></button>
+              </fg-horizbuttons>
+            </fg-gallerytop>
+            <fg-gallerycarousel>
+              <fg-gallerycard data-prompt-suggestion="Create a stylized low-poly environment prop in 3D"><img src="../assets/landing/collage-01.png" alt="Generated 3D game asset" /><fg-cardinfo><b>3D Asset Generator</b><span>Create production-ready game props from a description.</span></fg-cardinfo></fg-gallerycard>
+              <fg-gallerycard data-prompt-suggestion="Create a complete game inventory interface"><img src="../assets/landing/hero-art-a.png" alt="Generated game interface" /><fg-cardinfo><b>Game UI Generator</b><span>Build cohesive HUDs, menus, and interface sets.</span></fg-cardinfo></fg-gallerycard>
+              <fg-gallerycard data-prompt-suggestion="Generate a high-impact game thumbnail"><img src="../assets/landing/catalog-card.png" alt="Generated game thumbnail" /><fg-cardinfo><b>Thumbnail Generator</b><span>Create polished promotional art for your game.</span></fg-cardinfo></fg-gallerycard>
+              <fg-gallerycard data-prompt-suggestion="Create a cohesive set of fantasy ability icons"><img src="../assets/landing/collage-10.png" alt="Generated game icons" /><fg-cardinfo><b>Icon Set Generator</b><span>Generate consistent icons for items and abilities.</span></fg-cardinfo></fg-gallerycard>
+            </fg-gallerycarousel>
+          </fg-galleryline>
+
+          <fg-galleryfeatured data-prompt-suggestion="Create a complete fantasy RPG interface set with inventory, HUD, and ability icons">
+            <img src="../assets/plugin-banner.png" alt="ForgeGUI complete game asset workflow" />
+            <fg-featuredinfo>
+              <fg-cardinfo><b>Build a complete visual system</b><span>Generate coordinated interfaces and assets in one conversation.</span></fg-cardinfo>
+              <button class="upgradeButton" type="button" style="width: auto; padding: 12px 20px" data-prompt-suggestion="Create a complete fantasy RPG interface set with inventory, HUD, and ability icons"><span style="font-size: 18px">Try Now</span></button>
+            </fg-featuredinfo>
+          </fg-galleryfeatured>
+
+          <fg-galleryline>
+            <fg-gallerytop>
+              <div><img src="../icons/picture.svg" alt="" /><span>Other Tools</span></div>
+              <fg-horizbuttons>
+                <button onclick="scrollGallery(this, -1)" aria-label="Previous tool"><img src="../icons/arrow.svg" alt="" style="rotate: 90deg" /></button>
+                <button onclick="scrollGallery(this, 1)" aria-label="Next tool"><img src="../icons/arrow.svg" alt="" style="rotate: 270deg" /></button>
+              </fg-horizbuttons>
+            </fg-gallerytop>
+            <fg-gallerycarousel>
+              <fg-gallerycard data-prompt-suggestion="Generate a dramatic sound effect for opening a magical portal"><img src="../assets/landing/generation-card.png" alt="Audio generation" /><fg-cardinfo><b>Sound Effects</b><span>Create game-ready audio from a short prompt.</span></fg-cardinfo></fg-gallerycard>
+              <fg-gallerycard data-prompt-suggestion="Compose an atmospheric exploration theme for a fantasy game"><img src="../assets/landing/collage-06.png" alt="Game music generation" /><fg-cardinfo><b>Game Music</b><span>Compose themes and loops for every game state.</span></fg-cardinfo></fg-gallerycard>
+              <fg-gallerycard data-prompt-suggestion="Create a stylized character profile icon for a sci-fi game"><img src="../assets/landing/collage-08.png" alt="Profile icon generation" /><fg-cardinfo><b>Profile Icons</b><span>Generate distinctive avatars and character portraits.</span></fg-cardinfo></fg-gallerycard>
+              <fg-gallerycard data-prompt-suggestion="Create a seamless pixel-art stone floor texture"><img src="../assets/landing/collage-12.png" alt="Pixel texture generation" /><fg-cardinfo><b>Pixel Textures</b><span>Create seamless game textures and item sprites.</span></fg-cardinfo></fg-gallerycard>
+            </fg-gallerycarousel>
+          </fg-galleryline>
+        </fg-gallery>
+      </fg-mainview>
+
+    <script>
+      function scrollGallery(btn, dir) {
+        const carousel = btn.closest("fg-galleryline").querySelector("fg-gallerycarousel");
+        carousel.scrollBy({ left: dir * 440, behavior: "smooth" });
+      }
+    </script>
+  </body>
+</html>

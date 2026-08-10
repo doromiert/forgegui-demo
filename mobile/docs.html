@@ -1,0 +1,1352 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta name="forge-path" content="mobile/docs.html">
+    <meta name="forge-route" content="docs.html">
+    <meta name="forge-variant" content="mobile">
+    <style>html:not(.forge-motion-ready),html:not(.forge-motion-ready) *,html:not(.forge-motion-ready) *::before,html:not(.forge-motion-ready) *::after{animation:none!important;transition:none!important}fg-client-include{display:none}</style>
+    <script src="../scripts/vendor/supabase.js" defer></script>
+    <script src="../scripts/forge-config.js" defer></script>
+    <script src="../scripts/forge-api.js" defer></script>
+    <script src="../scripts/forge-cache.js" defer></script>
+    <script src="../scripts/auth-shell.js" defer></script>
+    <script src="../scripts/workspace.js" defer></script>
+    <script src="../scripts/forge-loader.js"></script>
+    <script src="../scripts/forge-runtime.js" defer></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI Documentation</title>
+        <meta name="description" content="Guides and references for building with ForgeGUI." />
+        <meta name="theme-color" content="#0a0a0a" />
+        <meta name="color-scheme" content="dark" />
+        <style data-forge-critical>
+/* styles/public.css */
+:root {
+   --white: #fff;
+   --cool-white: #e5eeff;
+   --blue: #0077ff;
+   --page: #0a0a0a;
+   --surface: #161616;
+   --line: #333;
+   --header-height: 84px;
+}
+* {
+   box-sizing: border-box;
+}
+html {
+   background: var(--page);
+   color-scheme: dark;
+   scroll-behavior: smooth;
+}
+body {
+   margin: 0;
+   background: var(--page);
+   color: var(--white);
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+}
+button,
+input,
+select {
+   font: inherit;
+}
+a {
+   color: inherit;
+   text-decoration: none;
+}
+img {
+   display: block;
+}
+fg-client-include {
+   display: none;
+}
+h1,
+h2,
+h3,
+p {
+   margin: 0;
+}
+button,
+a {
+   -webkit-tap-highlight-color: transparent;
+   transition:
+      color 0.25s ease,
+      background-color 0.25s ease,
+      border-color 0.25s ease,
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+}
+.visually-hidden {
+   position: absolute;
+   width: 1px;
+   height: 1px;
+   padding: 0;
+   margin: -1px;
+   overflow: hidden;
+   clip: rect(0, 0, 0, 0);
+   white-space: nowrap;
+   border: 0;
+}
+.site-header {
+   position: relative;
+   z-index: 20;
+   display: grid;
+   grid-template-columns: 1fr auto 1fr;
+   align-items: center;
+   width: 100%;
+   height: var(--header-height);
+   min-height: var(--header-height);
+   padding: 10px 15px 10px 20px;
+   background: var(--page);
+}
+.brand img {
+   width: 128px;
+   height: 28px;
+   object-fit: contain;
+   object-position: left center;
+}
+.main-nav {
+   display: flex;
+   align-items: center;
+}
+.main-nav a {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+   padding: 15px 10px 15px 20px;
+   border-radius: 30px;
+   color: var(--cool-white);
+   font-family: "Inter Tight", sans-serif;
+   font-size: 22px;
+   font-weight: 500;
+   white-space: nowrap;
+}
+.main-nav a:hover,
+.main-nav a:focus-visible {
+   background: rgba(255, 255, 255, 0.06);
+}
+.main-nav img {
+   width: 24px;
+   height: 24px;
+}
+.auth-actions {
+   display: flex;
+   justify-content: flex-end;
+   gap: 10px;
+}
+.auth-actions a,
+.auth-actions button {
+   padding: 12px 24px;
+   border: 0;
+   border-radius: 50px;
+   background:
+      linear-gradient(rgba(0, 89, 255, 0.42), rgba(0, 89, 255, 0.42)),
+      #323232;
+   color: var(--cool-white);
+   font-size: 20px;
+   font-weight: 600;
+   cursor: pointer;
+}
+.menu-button {
+   display: none;
+}
+.publicPage {
+   min-width: 320px;
+   padding-left: 10px;
+   overflow-x: hidden;
+}
+.publicPage .site-header {
+   width: calc(100% - 10px);
+}
+.publicSurface {
+   width: 100%;
+   min-height: calc(100dvh - var(--header-height));
+   overflow: hidden;
+   border-top: 1px solid var(--line);
+   border-left: 1px solid var(--line);
+   border-radius: 20px 0 0;
+   background: var(--surface);
+}
+.publicHero {
+   display: flex;
+   width: 100%;
+   height: 345px;
+   padding: 40px 10% 45px 100px;
+   align-items: center;
+   justify-content: space-between;
+   overflow: hidden;
+   border-bottom: 1px solid #3f3f3f;
+   background: linear-gradient(180deg, rgba(0, 0, 0, 0.46), #000);
+}
+.publicHeroCopy {
+   display: flex;
+   min-width: 0;
+   flex-direction: column;
+   gap: 40px;
+}
+.publicHero h1 {
+   font-size: clamp(56px, 4.7vw, 90px);
+   font-weight: 600;
+   line-height: 1;
+   background: linear-gradient(180deg, #fff, rgba(255, 255, 255, 0.5));
+   background-clip: text;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+}
+.publicHeroDescription {
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 24px;
+   font-weight: 500;
+   line-height: 1.35;
+}
+.publicHeroMark {
+   width: 197px;
+   height: 171px;
+   flex: 0 0 197px;
+}
+.publicSectionHeader {
+   display: flex;
+   width: 100%;
+   min-height: 48px;
+   padding: 0 15px;
+   align-items: center;
+   justify-content: space-between;
+   gap: 24px;
+}
+.publicSectionHeader h2,
+.jobsToolbar h2 {
+   font-size: 32px;
+   font-weight: 600;
+}
+.publicSearch {
+   display: flex;
+   width: 430px;
+   height: 48px;
+   padding: 10px 18px;
+   align-items: center;
+   gap: 10px;
+   border: 1px solid #373636;
+   border-radius: 47px;
+   background: #121212;
+}
+.publicSearch img {
+   width: 24px;
+   height: 24px;
+   flex: 0 0 24px;
+   opacity: 0.72;
+}
+.publicSearch input {
+   width: 100%;
+   min-width: 0;
+   border: 0;
+   outline: 0;
+   background: none;
+   color: #fff;
+   font-size: 20px;
+   font-weight: 500;
+}
+.publicSearch input::placeholder {
+   color: rgba(255, 255, 255, 0.5);
+}
+.publicEmptyFilter {
+   width: 100%;
+   padding: 60px 20px;
+   color: rgba(255, 255, 255, 0.75);
+   font-size: 24px;
+   text-align: center;
+}
+.publicProductionEmpty {
+    display: grid;
+    min-height: 360px;
+    padding: 80px 24px;
+    place-content: center;
+    gap: 12px;
+    text-align: center;
+}
+.publicProductionEmpty h2,
+.publicProductionEmpty p {
+    margin: 0;
+}
+.publicProductionEmpty p {
+    color: rgba(255, 255, 255, 0.62);
+}
+fg-popupcontainer {
+   position: fixed;
+   z-index: 1000;
+   inset: 0;
+   display: flex;
+   padding: 20px;
+   align-items: center;
+   justify-content: center;
+   backdrop-filter: blur(2.5px);
+   background: rgba(0, 0, 0, 0.3);
+}
+fg-popupcontainer.hidden,
+fg-popup.hidden {
+   display: none;
+}
+fg-popupcontainer > fg-popup {
+   display: flex;
+   max-width: calc(100vw - 40px);
+   max-height: calc(100vh - 40px);
+   flex-direction: column;
+   overflow: auto;
+   border: 1px solid #272727;
+   border-radius: 30px;
+   background: #0c0c0c;
+   box-shadow: 0 4px 250px 170px #000;
+}
+body.popupOpen {
+   overflow: hidden;
+}
+@media (max-width: 1500px) {
+   .main-nav a {
+      gap: 6px;
+      padding-left: 12px;
+      font-size: 18px;
+   }
+
+   .auth-actions a,
+   .auth-actions button {
+      padding: 10px 18px;
+      font-size: 18px;
+   }
+}
+@media (max-width: 1050px) {
+   .site-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 20px;
+   }
+
+   .main-nav {
+      position: absolute;
+      top: 70px;
+      right: 15px;
+      display: none;
+      width: 260px;
+      padding: 10px;
+      flex-direction: column;
+      align-items: stretch;
+      border: 1px solid #303030;
+      border-radius: 18px;
+      background: rgba(15, 15, 15, 0.98);
+   }
+
+   .main-nav.is-open {
+      display: flex;
+   }
+
+   .main-nav a {
+      justify-content: space-between;
+   }
+
+   .auth-actions {
+      margin-right: 12px;
+      margin-left: auto;
+   }
+
+   .menu-button {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      padding: 12px;
+      cursor: pointer;
+      place-content: center;
+      gap: 5px;
+      border: 0;
+      border-radius: 50%;
+      background: #202020;
+   }
+
+   .menu-button span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: white;
+   }
+
+   .publicHero {
+      height: 300px;
+      padding-right: 60px;
+      padding-left: 60px;
+   }
+}
+@media (max-width: 650px) {
+   .publicPage {
+      padding-left: 0;
+   }
+
+   .publicPage .site-header {
+      width: 100%;
+   }
+
+   .auth-actions > :last-child {
+      display: none;
+   }
+
+   .auth-actions a,
+   .auth-actions button {
+      padding: 9px 15px;
+      font-size: 15px;
+   }
+
+   .brand img {
+      width: 112px;
+      height: 25px;
+   }
+
+   .publicSurface {
+      border-left: 0;
+      border-radius: 0;
+   }
+
+   .publicHero {
+      height: auto;
+      min-height: 250px;
+      padding: 44px 24px;
+   }
+
+   .publicHeroCopy {
+      gap: 24px;
+   }
+
+   .publicHero h1 {
+      font-size: 48px;
+   }
+
+   .publicHeroDescription {
+      font-size: 19px;
+   }
+
+   .publicHeroMark {
+      width: 110px;
+      height: 96px;
+      flex-basis: 110px;
+   }
+
+   .publicSectionHeader {
+      align-items: stretch;
+      flex-direction: column;
+   }
+
+   .publicSearch {
+      width: 100%;
+   }
+
+   fg-popupcontainer {
+      align-items: flex-start;
+      padding: 12px;
+      overflow-y: auto;
+   }
+}
+@media (prefers-reduced-motion: reduce) {
+   *,
+   *::before,
+   *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+   }
+}
+/* styles/blog.css */
+.blogListing {
+   display: flex;
+   width: 100%;
+   padding: 30px 35px;
+   flex-direction: column;
+   gap: 20px;
+}
+.blogGrid {
+   display: grid;
+   width: 100%;
+   grid-template-columns: repeat(4, minmax(0, 1fr));
+   gap: 20px 18px;
+}
+.blogCard {
+   position: relative;
+   display: flex;
+   min-width: 0;
+   height: 264px;
+   padding: 25px;
+   flex-direction: column;
+   justify-content: space-between;
+   overflow: hidden;
+   border: 1px solid #333;
+   border-radius: 20px;
+   background: #090909;
+}
+.blogCard::after {
+   position: absolute;
+   z-index: 1;
+   inset: 0;
+   content: "";
+   pointer-events: none;
+   background: linear-gradient(180deg, #000 0%, transparent 50%, #000 100%);
+}
+.blogCardImage {
+   position: absolute;
+   inset: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+.blogCardDate,
+.blogCardCopy {
+   position: relative;
+   z-index: 2;
+}
+.blogCardDate {
+   align-self: flex-end;
+   padding: 8px 10px;
+   border-radius: 31px;
+   background: #1a1a1a;
+   font-size: 20px;
+   font-weight: 500;
+}
+.blogCardCopy {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+}
+.blogCardTopic {
+   color: rgba(255, 255, 255, 0.7);
+   font-size: 20px;
+}
+.blogCard h2 {
+   font-size: 32px;
+   font-weight: 600;
+}
+.blogCard p {
+   font-size: 20px;
+   font-weight: 500;
+}
+.blogCard:hover,
+.blogCard:focus-visible {
+   border-color: #686868;
+   transform: translateY(-2px);
+}
+.articlePage {
+   height: 100dvh;
+   overflow: hidden;
+}
+.articleLayout {
+   display: flex;
+   width: 100%;
+   height: calc(100dvh - var(--header-height));
+   gap: 10px;
+}
+.articleNav {
+   display: flex;
+   width: 325px;
+   padding: 10px 10px 20px;
+   flex: 0 0 325px;
+   flex-direction: column;
+   gap: 15px;
+}
+.articleBack {
+   display: flex;
+   padding: 10px;
+   align-items: center;
+   gap: 8px;
+   font-size: 24px;
+   font-weight: 500;
+}
+.articleBack img {
+   width: 24px;
+   height: 24px;
+   rotate: 90deg;
+}
+.articleNav nav {
+   display: flex;
+   flex-direction: column;
+}
+.articleNav nav a {
+   padding: 20px;
+   border: 1px solid transparent;
+   border-radius: 15px;
+   font-size: 20px;
+   font-weight: 500;
+}
+.articleNav nav a:hover,
+.articleNav nav a:focus-visible,
+.articleNav nav a.active {
+   border-color: rgba(255, 255, 255, 0.2);
+   background: rgba(60, 60, 60, 0.2);
+}
+.articleSurface {
+   min-width: 0;
+   flex: 1;
+   overflow-y: auto;
+   border-top: 1px solid #333;
+   border-left: 1px solid #333;
+   border-radius: 20px 0 0;
+   background: #161616;
+}
+.articleColumns {
+   display: grid;
+   width: min(1196px, calc(100% - 70px));
+   padding: 30px 0;
+   margin: 0 auto;
+   grid-template-columns: minmax(0, 816px) 345px;
+   align-items: start;
+   gap: 35px;
+}
+.articleContent {
+   display: flex;
+   min-width: 0;
+   flex-direction: column;
+   gap: 25px;
+}
+.articleCover {
+   width: 100%;
+   height: 235px;
+   border-radius: 10px;
+   object-fit: cover;
+}
+.articleContent section {
+   display: flex;
+   flex-direction: column;
+   gap: 18px;
+   scroll-margin-top: 30px;
+}
+.articleContent h1 {
+   font-size: 40px;
+   font-weight: 600;
+}
+.articleContent p {
+   color: rgba(255, 255, 255, 0.85);
+   font-size: 18px;
+   line-height: 1.35;
+}
+.articleMeta {
+   position: sticky;
+   top: 30px;
+   display: flex;
+   width: 345px;
+   flex-direction: column;
+   gap: 25px;
+}
+.articleMeta dl {
+   margin: 0;
+   overflow: hidden;
+   border: 1px solid #282828;
+   border-radius: 15px;
+   background: #0d0d0d;
+}
+.articleMeta dl div {
+   display: flex;
+   padding: 20px;
+   flex-direction: column;
+   gap: 13px;
+   border-bottom: 1px solid #282828;
+}
+.articleMeta dl div:last-child {
+   border-bottom: 0;
+}
+.articleMeta dt {
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 16px;
+}
+.articleMeta dd {
+   margin: 0;
+   font-size: 20px;
+   font-weight: 500;
+}
+.summarizeButton {
+   position: relative;
+   display: flex;
+   width: 100%;
+   min-height: 48px;
+   padding: 12px 20px;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   border: 0;
+   border-radius: 15px;
+   background: linear-gradient(104deg, #0877bb, #003972 55%, #2514ba);
+   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.21);
+   color: #fff;
+   font-size: 20px;
+   font-weight: 600;
+   cursor: pointer;
+}
+.aiStars {
+   position: relative;
+   width: 24px;
+   height: 24px;
+   flex: 0 0 24px;
+}
+.aiStarLarge {
+   position: absolute;
+   top: 5.5px;
+   left: 3.5px;
+   width: 12.9895px;
+   height: 12.9895px;
+}
+.aiStarSmall {
+   position: absolute;
+   left: 14px;
+   width: 6.98382px;
+   height: 7.61685px;
+}
+.aiStarSmall.top {
+   top: 2.2px;
+}
+.aiStarSmall.bottom {
+   top: 14.2px;
+}
+.articleSummary {
+   padding: 18px;
+   border: 1px solid #282828;
+   border-radius: 15px;
+   background: #0d0d0d;
+   color: rgba(255, 255, 255, 0.85);
+   font-size: 17px;
+   line-height: 1.4;
+}
+@media (max-width: 1200px) {
+   .blogGrid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+   }
+
+   .articleNav {
+      width: 245px;
+      flex-basis: 245px;
+   }
+
+   .articleColumns {
+      grid-template-columns: minmax(0, 1fr) 300px;
+   }
+
+   .articleMeta {
+      width: 300px;
+   }
+}
+@media (max-width: 850px) {
+   .blogGrid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+   }
+
+   .articlePage {
+      height: auto;
+      overflow: visible;
+   }
+
+   .articleLayout {
+      height: auto;
+      flex-direction: column;
+   }
+
+   .articleNav {
+      width: 100%;
+      padding: 10px 20px;
+      flex-basis: auto;
+   }
+
+   .articleNav nav {
+      overflow-x: auto;
+      flex-direction: row;
+   }
+
+   .articleNav nav a {
+      padding: 12px 16px;
+      white-space: nowrap;
+   }
+
+   .articleSurface {
+      overflow: visible;
+      border-left: 0;
+      border-radius: 0;
+   }
+
+   .articleColumns {
+      display: flex;
+      width: calc(100% - 40px);
+      flex-direction: column;
+   }
+
+   .articleMeta {
+      position: static;
+      width: 100%;
+      order: -1;
+   }
+}
+@media (max-width: 560px) {
+   .blogListing {
+      padding: 24px 16px;
+   }
+
+   .blogGrid {
+      grid-template-columns: 1fr;
+   }
+
+   .blogCard {
+      height: 250px;
+   }
+}
+/* styles/docs-landing.css */
+.docsBrand {
+   display: flex;
+   min-width: 0;
+   align-items: center;
+   gap: 15px;
+   font-size: 24px;
+   font-weight: 500;
+   white-space: nowrap;
+}
+.docsBrand img {
+   width: 120px;
+   height: 26px;
+   object-fit: contain;
+}
+.helpHero {
+   display: flex;
+   width: 100%;
+   height: 330px;
+   padding: 40px 190px 45px 100px;
+   align-items: center;
+   justify-content: space-between;
+   overflow: hidden;
+   border-bottom: 1px solid #3f3f3f;
+   background: linear-gradient(180deg, rgba(0, 0, 0, 0.46), #000);
+}
+.helpHeroCopy {
+   display: flex;
+   flex-direction: column;
+   gap: 40px;
+}
+.helpHero h1 {
+   margin: 0;
+   font-size: 90px;
+   font-weight: 600;
+   line-height: 1;
+   background: linear-gradient(180deg, #fff, rgba(255, 255, 255, 0.5));
+   background-clip: text;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+}
+.helpHero p {
+   margin: 0;
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 24px;
+   font-weight: 500;
+}
+.helpHeroBook {
+   width: 170px;
+   height: 170px;
+   flex: 0 0 170px;
+}
+.helpEmpty {
+   display: flex;
+   width: 100%;
+   min-height: 500px;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 36px;
+   color: #fff;
+   text-align: center;
+}
+.helpEmpty[hidden] {
+   display: none;
+}
+.helpEmpty h2,
+.helpEmpty p {
+   margin: 0;
+}
+.helpEmpty h2 {
+   font-size: 48px;
+   font-weight: 600;
+}
+.helpEmpty p {
+   font-size: 32px;
+}
+.docsCard {
+   isolation: isolate;
+}
+.docsCardBackdrop {
+   background:
+      radial-gradient(circle at 76% 20%, var(--docs-card-glow), transparent 36%),
+      linear-gradient(140deg, #111 10%, var(--docs-card-color) 160%);
+}
+.docsCardBackdrop::before,
+.docsCardBackdrop::after {
+   position: absolute;
+   border: 1px solid rgba(255, 255, 255, 0.12);
+   border-radius: 50%;
+   content: "";
+}
+.docsCardBackdrop::before {
+   top: -112px;
+   right: -58px;
+   width: 280px;
+   height: 280px;
+}
+.docsCardBackdrop::after {
+   top: -65px;
+   right: -10px;
+   width: 180px;
+   height: 180px;
+}
+.docsCardBackdrop--blue { --docs-card-color: #004e9d; --docs-card-glow: rgba(0, 119, 255, 0.65); }
+.docsCardBackdrop--violet { --docs-card-color: #44218c; --docs-card-glow: rgba(132, 76, 255, 0.58); }
+.docsCardBackdrop--cyan { --docs-card-color: #00596b; --docs-card-glow: rgba(0, 211, 255, 0.48); }
+.docsCardBackdrop--green { --docs-card-color: #005e36; --docs-card-glow: rgba(0, 255, 135, 0.4); }
+.docsCardBackdrop--orange { --docs-card-color: #713100; --docs-card-glow: rgba(255, 127, 0, 0.5); }
+.docsCardBackdrop--pink { --docs-card-color: #741c55; --docs-card-glow: rgba(255, 72, 177, 0.46); }
+.docsCardBackdrop--indigo { --docs-card-color: #282e91; --docs-card-glow: rgba(84, 97, 255, 0.5); }
+.docsCardBackdrop--red { --docs-card-color: #741e25; --docs-card-glow: rgba(255, 64, 80, 0.46); }
+.docsCardBackdrop--gold { --docs-card-color: #695100; --docs-card-glow: rgba(255, 205, 43, 0.44); }
+.docsCardNumber {
+   position: absolute;
+   z-index: 1;
+   top: -20px;
+   right: 18px;
+   color: rgba(255, 255, 255, 0.1);
+   font-size: 126px;
+   font-weight: 700;
+   line-height: 1;
+   letter-spacing: -10px;
+}
+.docsCard .blogCardDate {
+   z-index: 3;
+   border: 1px solid rgba(255, 255, 255, 0.12);
+   background: rgba(10, 10, 10, 0.58);
+   backdrop-filter: blur(8px);
+}
+.docsCard .blogCardCopy {
+   max-width: 92%;
+}
+.docsCard .blogCardTopic {
+   color: rgba(255, 255, 255, 0.66);
+}
+@media (max-width: 1050px) {
+   .helpHero {
+      padding-right: 60px;
+      padding-left: 60px;
+   }
+}
+@media (max-width: 650px) {
+   .docsBrand span {
+      display: none;
+   }
+
+   .docsBrand img {
+      width: 112px;
+      height: 25px;
+   }
+
+   .helpHero {
+      height: auto;
+      min-height: 250px;
+      padding: 44px 24px;
+   }
+
+   .helpHero h1 {
+      font-size: 48px;
+   }
+
+   .helpHero p {
+      font-size: 19px;
+   }
+
+   .helpHeroBook {
+      width: 110px;
+      height: 110px;
+      flex-basis: 110px;
+   }
+
+   .helpEmpty {
+      min-height: 360px;
+      gap: 20px;
+   }
+
+   .helpEmpty h2 {
+      font-size: 34px;
+   }
+
+   .helpEmpty p {
+      font-size: 24px;
+   }
+}
+/* styles/landing-header.css */
+.site-header {
+   position: sticky;
+   z-index: 20000;
+   top: 0;
+   display: grid;
+   grid-template-columns: 1fr auto 1fr;
+   align-items: center;
+   width: 100%;
+   height: var(--header-height);
+   min-height: var(--header-height);
+   padding: 15px 15px 15px 20px;
+   margin: 0;
+}
+</style>
+    <link rel="stylesheet" href="../styles/public.css" />
+        <link rel="stylesheet" href="../styles/blog.css" />
+        <link rel="stylesheet" href="../styles/docs-landing.css" />
+        <link rel="stylesheet" href="../styles/landing-header.css" />
+        <script src="../scripts/site.js" defer></script>
+        <script src="../scripts/public-pages.js" defer></script>
+    </head>
+    <body class="publicPage docsLandingPage">
+        <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="ForgeGUI home">
+        <img src="../assets/footerLogo.svg" alt="ForgeGUI" />
+    </a>
+
+    <nav class="main-nav" aria-label="Primary navigation">
+        <div class="nav-menu" data-nav-menu>
+            <button
+                class="nav-trigger"
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded="false"
+                aria-controls="nav-ai-tools"
+            >
+                <span>AI Tools</span>
+                <img src="../assets/landing/chevron-down.svg" alt="" />
+            </button>
+            <div class="nav-dropdown" id="nav-ai-tools" role="menu" hidden>
+                <span
+                    class="nav-dropdown-item"
+                    role="menuitem"
+                    aria-disabled="true"
+                >
+                    <span class="nav-dropdown-copy"
+                        ><strong>Item Title</strong
+                        ><span>Item subtext.</span></span
+                    >
+                    <img src="../icons/arrow.svg" alt="" />
+                </span>
+                <span
+                    class="nav-dropdown-item"
+                    role="menuitem"
+                    aria-disabled="true"
+                >
+                    <span class="nav-dropdown-copy"
+                        ><strong>Item Title</strong
+                        ><span>Item subtext.</span></span
+                    >
+                    <img src="../icons/arrow.svg" alt="" />
+                </span>
+                <span
+                    class="nav-dropdown-item"
+                    role="menuitem"
+                    aria-disabled="true"
+                >
+                    <span class="nav-dropdown-copy"
+                        ><strong>Item Title</strong
+                        ><span>Item subtext.</span></span
+                    >
+                    <img src="../icons/arrow.svg" alt="" />
+                </span>
+            </div>
+        </div>
+
+        <div class="nav-menu" data-nav-menu>
+            <button
+                class="nav-trigger"
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded="false"
+                aria-controls="nav-plans"
+            >
+                <span>Plans</span>
+                <img src="../assets/landing/chevron-down.svg" alt="" />
+            </button>
+            <div class="nav-dropdown" id="nav-plans" role="menu" hidden>
+                <span
+                    class="nav-dropdown-item"
+                    role="menuitem"
+                    aria-disabled="true"
+                >
+                    <span class="nav-dropdown-copy"
+                        ><strong>Item Title</strong
+                        ><span>Item subtext.</span></span
+                    >
+                    <img src="../icons/arrow.svg" alt="" />
+                </span>
+                <span
+                    class="nav-dropdown-item"
+                    role="menuitem"
+                    aria-disabled="true"
+                >
+                    <span class="nav-dropdown-copy"
+                        ><strong>Item Title</strong
+                        ><span>Item subtext.</span></span
+                    >
+                    <img src="../icons/arrow.svg" alt="" />
+                </span>
+                <span
+                    class="nav-dropdown-item"
+                    role="menuitem"
+                    aria-disabled="true"
+                >
+                    <span class="nav-dropdown-copy"
+                        ><strong>Item Title</strong
+                        ><span>Item subtext.</span></span
+                    >
+                    <img src="../icons/arrow.svg" alt="" />
+                </span>
+            </div>
+        </div>
+
+        <div class="nav-menu" data-nav-menu>
+            <button
+                class="nav-trigger"
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded="false"
+                aria-controls="nav-community"
+            >
+                <span>Community</span>
+                <img src="../assets/landing/chevron-down.svg" alt="" />
+            </button>
+            <div class="nav-dropdown" id="nav-community" role="menu" hidden>
+                <span
+                    class="nav-dropdown-item"
+                    role="menuitem"
+                    aria-disabled="true"
+                >
+                    <span class="nav-dropdown-copy"
+                        ><strong>Item Title</strong
+                        ><span>Item subtext.</span></span
+                    >
+                    <img src="../icons/arrow.svg" alt="" />
+                </span>
+                <span
+                    class="nav-dropdown-item"
+                    role="menuitem"
+                    aria-disabled="true"
+                >
+                    <span class="nav-dropdown-copy"
+                        ><strong>Item Title</strong
+                        ><span>Item subtext.</span></span
+                    >
+                    <img src="../icons/arrow.svg" alt="" />
+                </span>
+                <span
+                    class="nav-dropdown-item"
+                    role="menuitem"
+                    aria-disabled="true"
+                >
+                    <span class="nav-dropdown-copy"
+                        ><strong>Item Title</strong
+                        ><span>Item subtext.</span></span
+                    >
+                    <img src="../icons/arrow.svg" alt="" />
+                </span>
+            </div>
+        </div>
+
+        <div class="nav-menu" data-nav-menu>
+            <button
+                class="nav-trigger"
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded="false"
+                aria-controls="nav-support"
+            >
+                <span>Support</span>
+                <img src="../assets/landing/chevron-down.svg" alt="" />
+            </button>
+            <div class="nav-dropdown" id="nav-support" role="menu" hidden>
+                <a class="nav-dropdown-item" href="../docs.html" role="menuitem">
+                    <span class="nav-dropdown-copy"
+                        ><strong>Documentation</strong
+                        ><span>Learn how to use ForgeGUI.</span></span
+                    >
+                    <img src="../icons/arrow.svg" alt="" />
+                </a>
+            </div>
+        </div>
+
+        <div class="nav-menu" data-nav-menu>
+            <button
+                class="nav-trigger"
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded="false"
+                aria-controls="nav-company"
+            >
+                <span>Company</span>
+                <img src="../assets/landing/chevron-down.svg" alt="" />
+            </button>
+            <div
+                class="nav-dropdown nav-dropdown-company"
+                id="nav-company"
+                role="menu"
+                hidden
+            >
+                <a class="nav-dropdown-item" href="../jobs.html" role="menuitem">
+                    <span class="nav-dropdown-copy"
+                        ><strong>Jobs</strong
+                        ><span>Join the ForgeGUI team.</span></span
+                    >
+                    <img src="../icons/arrow.svg" alt="" />
+                </a>
+                <a class="nav-dropdown-item" href="../blog.html" role="menuitem">
+                    <span class="nav-dropdown-copy"
+                        ><strong>Blog</strong
+                        ><span>News from ForgeGUI.</span></span
+                    >
+                    <img src="../icons/arrow.svg" alt="" />
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="auth-actions" data-auth-actions>
+        <a
+            href="../index.html?auth=signin"
+            data-open-login
+            data-login-start="signin"
+            >Sign In</a
+        >
+        <a
+            href="../index.html?auth=signup"
+            data-open-login
+            data-login-start="signup"
+            >Sign Up</a
+        >
+    </div>
+
+    <button
+        class="menu-button"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+    >
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+        <main class="publicSurface">
+            <fg-client-include data-template="../templates/help-hero.html">
+                <span data-slot="title">Help</span>
+                <span data-slot="description">Learn how to use ForgeGUI.</span>
+            </fg-client-include>
+
+            <section class="blogListing docsListing" aria-labelledby="docs-guides-title">
+                <div class="publicSectionHeader">
+                    <h2 id="docs-guides-title">Support Topics</h2>
+                    <label class="publicSearch">
+                        <img src="../icons/search.svg" alt="" />
+                        <span class="visually-hidden">Search documentation</span>
+                        <input type="search" placeholder="Search" data-list-search data-list-target="docs-grid" />
+                    </label>
+                </div>
+
+                <div class="blogGrid docsGrid" id="docs-grid">
+                    <a class="blogCard docsCard" href="../docs/index.html" data-search-item="markdown reference typography components documentation basics">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--blue"></span>
+                        <span class="docsCardNumber">01</span>
+                        <span class="blogCardDate">Reference</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Documentation Basics</span>
+                            <h2>Markdown Reference</h2>
+                            <p>See every supported content style in one place.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="../docs/part-2.html" data-search-item="core concepts projects assets workspace">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--violet"></span>
+                        <span class="docsCardNumber">02</span>
+                        <span class="blogCardDate">Start Here</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Getting Started</span>
+                            <h2>Core Concepts</h2>
+                            <p>Understand projects, assets, and connected workflows.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="../docs/part-3.html" data-search-item="create workspace project team invite setup">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--cyan"></span>
+                        <span class="docsCardNumber">03</span>
+                        <span class="blogCardDate">Setup</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Getting Started</span>
+                            <h2>Create a Workspace</h2>
+                            <p>Start a project and bring your collaborators in.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="../docs/part-4.html" data-search-item="generate assets prompt models ai create">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--green"></span>
+                        <span class="docsCardNumber">04</span>
+                        <span class="blogCardDate">Workflow</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Creation</span>
+                            <h2>Generate Assets</h2>
+                            <p>Write better prompts and refine model output.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="../docs/part-5.html" data-search-item="manage assets organize review share versions">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--orange"></span>
+                        <span class="docsCardNumber">05</span>
+                        <span class="blogCardDate">Workflow</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Asset Library</span>
+                            <h2>Manage Assets</h2>
+                            <p>Organize versions, review work, and share safely.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="../docs/part-6.html" data-search-item="integrations plugins engine creative tools install">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--pink"></span>
+                        <span class="docsCardNumber">06</span>
+                        <span class="blogCardDate">Connect</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Plugins</span>
+                            <h2>Integrations</h2>
+                            <p>Connect ForgeGUI to your engine and creative tools.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="../docs/part-7.html" data-search-item="collaboration team comments feedback share">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--indigo"></span>
+                        <span class="docsCardNumber">07</span>
+                        <span class="blogCardDate">Teams</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Collaboration</span>
+                            <h2>Work Together</h2>
+                            <p>Keep project context and feedback visible.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="../docs/part-8.html" data-search-item="troubleshooting connection upload problems help">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--red"></span>
+                        <span class="docsCardNumber">08</span>
+                        <span class="blogCardDate">Help</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Troubleshooting</span>
+                            <h2>Fix Common Issues</h2>
+                            <p>Resolve connection, permission, and upload problems.</p>
+                        </div>
+                    </a>
+
+                    <a class="blogCard docsCard" href="../docs/part-9.html" data-search-item="contact support diagnostics report issue help">
+                        <span class="blogCardImage docsCardBackdrop docsCardBackdrop--gold"></span>
+                        <span class="docsCardNumber">09</span>
+                        <span class="blogCardDate">Support</span>
+                        <div class="blogCardCopy">
+                            <span class="blogCardTopic">Need More Help?</span>
+                            <h2>Contact Support</h2>
+                            <p>Send the details our support team needs.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="helpEmpty" data-list-empty hidden>
+                    <h2>No Support Topics Available.</h2>
+                    <p>Check again later.</p>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,24 @@
+<fg-pluginbox
+    data-popup-open="plugin-detail"
+    role="button"
+    tabindex="0"
+    aria-haspopup="dialog"
+>
+    <fg-top>
+        <fg-slot data-name="icon"></fg-slot>
+        <div>
+            <fg-slot data-name="badges"></fg-slot>
+            <fg-pluginchip class="active">Beta</fg-pluginchip>
+            <fg-pluginchip>1.4</fg-pluginchip>
+        </div>
+    </fg-top>
+    <fg-bottom>
+        <fg-vertical>
+            <b><fg-slot data-name="title">ForgeGUI Connect</fg-slot></b>
+            <span><fg-slot data-name="subtitle"></fg-slot></span>
+        </fg-vertical>
+        <button type="button">
+            Install <img src="icons/download.svg" alt="" />
+        </button>
+    </fg-bottom>
+</fg-pluginbox>

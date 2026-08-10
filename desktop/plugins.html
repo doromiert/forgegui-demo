@@ -1,0 +1,1051 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta name="forge-path" content="desktop/plugins.html">
+    <meta name="forge-route" content="plugins.html">
+    <meta name="forge-variant" content="desktop">
+    <style>html:not(.forge-motion-ready),html:not(.forge-motion-ready) *,html:not(.forge-motion-ready) *::before,html:not(.forge-motion-ready) *::after{animation:none!important;transition:none!important}fg-client-include{display:none}</style>
+    <script src="../scripts/vendor/supabase.js" defer></script>
+    <script src="../scripts/forge-config.js" defer></script>
+    <script src="../scripts/forge-api.js" defer></script>
+    <script src="../scripts/forge-cache.js" defer></script>
+    <script src="../scripts/auth-shell.js" defer></script>
+    <script src="../scripts/workspace.js" defer></script>
+    <script src="../scripts/forge-loader.js"></script>
+    <script src="../scripts/forge-runtime.js" defer></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="../fg.svg" />-->
+        <style data-forge-critical>
+/* styles/base.css */
+html:not(.forge-motion-ready),
+html:not(.forge-motion-ready) *,
+html:not(.forge-motion-ready) *::before,
+html:not(.forge-motion-ready) *::after {
+   animation: none !important;
+   transition: none !important;
+}
+* {
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+   font-optical-sizing: auto;
+   transition-property:
+      color,
+      background-color,
+      border-color,
+      outline-color,
+      opacity,
+      transform,
+      translate,
+      scale,
+      box-shadow,
+      width,
+      height,
+      max-height,
+      padding,
+      margin,
+      gap;
+   transition-duration: 0.25s;
+   transition-timing-function: ease;
+}
+body {
+   background: #0a0a0a;
+   --Glass-Text: linear-gradient(
+      180deg,
+      #fff 0%,
+      rgba(255, 255, 255, 0.5) 100%
+   );
+
+   &.chat {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      padding: 10px 0 0 10px;
+      margin: 0;
+      box-sizing: border-box;
+      align-items: flex-start;
+      gap: 10px;
+   }
+}
+fg-sidebar {
+   user-select: none;
+   -webkit-user-drag: none;
+   overflow-y: scroll;
+   display: flex;
+   width: 305px;
+   padding: calc(10px + 62px + 15px) 10px 440px 10px;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 15px;
+   flex-shrink: 0;
+   align-self: stretch;
+   position: relative;
+
+   &.collapsed {
+      width: 60px;
+      padding-bottom: 20px;
+      fg-top.sb {
+         width: 60px;
+         .fgLogo {
+            display: none;
+         }
+      }
+      .sidebarElem {
+         color: #ffffff00;
+         width: 60px;
+         height: 60px;
+      }
+      fg-toplabel {
+         display: none;
+      }
+      fg-bottom {
+         display: none !important;
+      }
+   }
+
+   fg-top.sb {
+      display: flex;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      right: 10px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      box-sizing: border-box;
+      width: 305px;
+
+      .fgLogo {
+         height: 24px;
+      }
+      button {
+         border: none;
+         background: none;
+         width: 38px;
+         height: 38px;
+         border-radius: 1293px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            outline: solid 10px rgba(255, 255, 255, 0.05);
+         }
+         &:active {
+            transform: scale(0.9);
+         }
+      }
+   }
+
+   fg-specialtabs {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+   }
+
+   fg-projects {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1 0 0;
+      align-self: stretch;
+
+      fg-toplabel {
+         display: flex;
+         margin: 14px 15px;
+         align-items: center;
+         gap: 8px;
+         align-self: stretch;
+         color: #fff;
+         font-size: 20px;
+         font-weight: 500;
+      }
+   }
+
+   .conversationListStatus {
+      padding: 8px 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      line-height: 1.35;
+   }
+
+   .conversationEntry span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
+
+   .sidebarElem {
+      text-decoration: none;
+      display: flex;
+      padding: 8px 10px;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+      border-radius: 15px;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      width: 100%;
+      box-sizing: border-box;
+
+      &.selected {
+         border: 1px solid rgba(255, 255, 255, 0.2);
+         background: rgba(60, 60, 60, 0.2);
+      }
+      &:hover {
+         background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      img {
+         width: 28px;
+         height: 28px;
+         margin: 5px;
+      }
+   }
+
+   fg-bottom.sb {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      align-self: stretch;
+      box-sizing: border-box;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 12931823;
+      backdrop-filter: blur(20px);
+      border-radius: 15px;
+      width: 305px;
+      fg-actions {
+         width: 100%;
+      }
+      creditCounter {
+         box-sizing: border-box;
+         display: flex;
+         padding: 10px;
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         width: 100%;
+
+         fg-top {
+            display: flex;
+            padding: 5px 8px;
+            justify-content: space-between;
+            align-items: center;
+            align-self: stretch;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 18px;
+            font-weight: 400;
+            gap: 8px;
+
+            a {
+               color: #fff;
+               text-decoration: none;
+               font-size: 18px;
+               font-weight: 600;
+            }
+         }
+         fg-bottom {
+            display: flex;
+            flex-direction: row;
+            padding: 8px;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            align-self: stretch;
+         }
+         creditSlider {
+            height: 9px;
+            flex: 1 0 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            &::before {
+               content: "";
+               width: 100px;
+               display: flex;
+               height: 9px;
+               background: linear-gradient(0deg, #0084ff 0%, #0084ff 100%);
+            }
+         }
+      }
+
+      fg-sidebaruserbutton {
+         display: flex;
+         padding: 15px;
+         align-items: center;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         user-select: none;
+
+         fg-vertical {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 34px;
+            width: 100%;
+
+            b {
+               color: #fff;
+               font-size: 20px;
+               font-weight: 600;
+               line-height: 20px;
+            }
+
+            span {
+               color: rgba(255, 255, 255, 0.8);
+               font-size: 16px;
+               font-weight: 400;
+               line-height: normal;
+            }
+         }
+
+         img {
+            width: 38px;
+            height: 38px;
+            border-radius: 38px;
+         }
+
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+         }
+      }
+   }
+}
+.upgradeButton {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   padding: 12px 20px;
+   background: #0077ff;
+   border: none;
+   border-radius: 15px;
+   cursor: pointer;
+   position: relative;
+
+   &:hover {
+      background-color: #32a3ff !important;
+   }
+
+   &.selected {
+      background-color: #32a3ff !important;
+   }
+
+   &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+      pointer-events: none;
+   }
+
+   span {
+      font-weight: bold;
+      font-size: 20px;
+      white-space: nowrap;
+      background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0px 1px 1.4px rgba(0, 0, 0, 0.25));
+   }
+}
+fg-mainview {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-sizing: border-box;
+   flex: 1 0 0;
+   height: 100%;
+   overflow-y: scroll;
+   border-radius: 20px 0 0 0;
+   border-top: 1px solid #333;
+   border-left: 1px solid #333;
+   background: #161616;
+   h1 {
+      margin: 0;
+   }
+}
+/* styles/plugins.css */
+/* Page-specific styles extracted from base.css. */
+
+fg-mainview#plugins {
+   display: flex;
+   flex-direction: column;
+   gap: 40px;
+   fg-selectwrapper {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      position: relative;
+      width: fit-content;
+      background: #212121;
+      border-radius: 15px;
+      padding: 12px 40px 12px 16px;
+      cursor: pointer;
+      height: 26px;
+
+      span {
+         color: rgba(255, 255, 255, 0.8);
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 20px;
+         font-weight: 500;
+         white-space: nowrap;
+         pointer-events: none;
+      }
+
+      select {
+         appearance: none;
+         -webkit-appearance: none;
+         position: absolute;
+         inset: 0;
+         width: 100%;
+         height: 100%;
+         opacity: 0;
+         cursor: pointer;
+      }
+
+      .selectArrow {
+         position: absolute;
+         right: 12px;
+         width: 18px;
+         height: 18px;
+         pointer-events: none;
+      }
+   }
+   fg-banner {
+      width: 100%;
+      height: 430px;
+      background-image: url("../assets/plugin-banner.png");
+      background-size: cover;
+      background-position: right;
+      padding: 40px 95px 45px 100px;
+      box-sizing: border-box;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      h1 {
+         margin: 0;
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 90px;
+         font-style: normal;
+         font-weight: 600;
+         line-height: normal;
+         background: var(
+            --Glass-Text,
+            linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%)
+         );
+         background-clip: text;
+         -webkit-background-clip: text;
+         -webkit-text-fill-color: transparent;
+      }
+      span {
+         color: rgba(255, 255, 255, 0.8);
+
+         /* Display Text */
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 24px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: normal;
+         max-width: 572px;
+      }
+   }
+   fg-pluginheader {
+      display: flex;
+      width: 100%;
+      padding: 0px 40px;
+      box-sizing: border-box;
+      fg-vertical {
+         display: flex;
+         flex-direction: column;
+         width: 100%;
+         height: 50px;
+         justify-content: center;
+         b {
+            color: #fff;
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+         }
+         span {
+            color: rgba(255, 255, 255, 0.8);
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+         }
+      }
+   }
+   fg-plugingrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 10px;
+      padding: 0 40px 40px 40px;
+      width: 100%;
+      box-sizing: border-box;
+      fg-pluginbox {
+         display: flex;
+         height: 195px;
+         padding: 20px;
+         flex-direction: column;
+         justify-content: space-between;
+         border-radius: 20px;
+         border: 1px solid rgba(255, 255, 255, 0.3);
+         position: relative;
+         overflow: hidden;
+         background: radial-gradient(
+            100% 100% at 50.14% 0%,
+            #202020 0%,
+            #0b0b0b 100%
+         );
+
+         &.premium {
+            background: url("../assets/roblox-connect-bg.jpg") center / cover no-repeat;
+
+            &::before {
+               content: "";
+               position: absolute;
+               inset: 0;
+               background: rgba(0, 0, 0, 0.5); /* tweak opacity */
+            }
+         }
+
+         fg-top {
+            z-index: 1;
+            display: flex;
+            div {
+               width: 100%;
+               display: flex;
+               align-items: top;
+               justify-content: end;
+               gap: 8px;
+
+               fg-pluginchip {
+                  display: flex;
+                  height: 30px;
+                  padding: 8px 10px;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 10px;
+                  color: #fff;
+                  text-align: center;
+                  font-family: "Atkinson Hyperlegible Next";
+                  font-size: 18px;
+                  font-style: normal;
+                  font-weight: 600;
+                  line-height: normal;
+                  border-radius: 19px;
+                  box-sizing: border-box;
+                  border-radius: 19px;
+                  border: 1px solid #434343;
+                  background: linear-gradient(
+                     180deg,
+                     #000 0%,
+                     rgba(20, 20, 20, 0.58) 100%
+                  );
+                  &.active {
+                     background: #0f5384;
+                  }
+               }
+
+               fg-premiumbadge {
+                  display: flex;
+                  align-items: center;
+                  gap: 5px;
+                  font-family: "Atkinson Hyperlegible Next";
+                  font-size: 20px;
+                  font-style: normal;
+                  font-weight: 700;
+                  line-height: normal;
+                  align-items: center;
+                  height: 28px;
+
+                  background: var(
+                     --Glass-Text,
+                     linear-gradient(
+                        180deg,
+                        #fff 0%,
+                        rgba(255, 255, 255, 0.5) 100%
+                     )
+                  );
+                  background-clip: text;
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                  img {
+                     height: 28px;
+                  }
+               }
+            }
+            img {
+               height: 48px;
+            }
+         }
+
+         fg-bottom {
+            z-index: 1;
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            align-self: stretch;
+            fg-vertical {
+               display: flex;
+               flex-direction: column;
+               width: 100%;
+               b {
+                  color: #fff;
+                  font-family: "Atkinson Hyperlegible Next";
+                  font-size: 20px;
+                  font-style: normal;
+                  font-weight: 700;
+                  line-height: normal;
+               }
+               span {
+                  color: rgba(255, 255, 255, 0.7);
+                  font-family: "Atkinson Hyperlegible Next";
+                  font-size: 20px;
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: normal;
+               }
+            }
+            button {
+               display: flex;
+               padding: 10px 13px;
+               align-items: center;
+               gap: 10px;
+               border-radius: 50px;
+               background: #07f;
+               box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.59) inset;
+               border: none;
+               color: #fff;
+               text-align: center;
+               font-family: "Atkinson Hyperlegible Next";
+               font-size: 18px;
+               font-style: normal;
+               font-weight: 500;
+               line-height: normal;
+            }
+         }
+      }
+   }
+}
+</style>
+    <link rel="stylesheet" href="../styles/base.css" />
+        <link rel="stylesheet" href="../styles/plugins.css" />
+        <script src="../scripts/site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
+
+        <style></style>
+    </head>
+
+    <body class="chat">
+        <fg-sidebar>
+    <fg-top class="sb">
+        <img src="../assets/footerLogo.svg" class="fgLogo" alt="ForgeGUI" />
+        <button type="button" data-toggle-sidebar aria-label="Toggle sidebar">
+            <img src="../icons/sidebar.svg" alt="" />
+        </button>
+    </fg-top>
+
+    <fg-specialtabs>
+        <a href="../home.html" class="sidebarElem">
+            <img src="../icons/home.svg" alt="" />
+            <span>Home</span>
+        </a>
+        <a href="../library/overview.html" class="sidebarElem">
+            <img src="../icons/file.svg" alt="" />
+            <span>Assets</span>
+        </a>
+        <a href="../community.html" class="sidebarElem">
+            <img src="../icons/people.svg" alt="" />
+            <span>Community</span>
+        </a>
+    </fg-specialtabs>
+
+    <fg-projects data-conversation-list hidden>
+        <fg-toplabel>Games</fg-toplabel>
+        <span class="conversationListStatus" data-conversation-status>Loading chats...</span>
+    </fg-projects>
+
+    <fg-contextmenu
+        id="userMenu"
+        class="hidden user"
+        style="width: 282px"
+    >
+        <a href="mailto:support@forgegui.com"><img src="../icons/Exclamation.svg" alt="" /> Help</a>
+        <a href="../settings/overview.html"><img src="../icons/Settings.svg" alt="" /> Settings</a>
+
+        <button class="destructive" data-auth-signout>
+            <img src="../icons/SignOut.svg" alt="" /> Logout
+        </button>
+    </fg-contextmenu>
+
+    <fg-bottom class="sb">
+        <a href="../plans.html" class="sidebarElem upgradeButton">
+            <img src="../icons/crown.svg" alt="" style="image-rendering: optimizeQuality" />
+            <span>Upgrade to Pro</span>
+        </a>
+
+        <fg-actions>
+            <a href="../courses.html" class="sidebarElem">
+                <img src="../icons/book.svg" alt="" />
+                <span>Courses</span>
+            </a>
+            <a href="../plugins.html" class="sidebarElem selected">
+                <img src="../icons/plugin.svg" alt="" />
+                <span>Plugins</span>
+            </a>
+            <a href="../leaderboard.html" class="sidebarElem">
+                <img src="../icons/Trophy.svg" alt="" />
+                <span>Leaderboard</span>
+            </a>
+            <a href="../notifications.html" class="sidebarElem">
+                <img src="../icons/bell.svg" alt="" />
+                <span>Notifications</span>
+            </a>
+        </fg-actions>
+
+        <fg-sidebaruserbutton data-context-target="userMenu">
+            <img src="../assets/generic.png" alt="" data-user-avatar />
+            <fg-vertical>
+                <b data-user-name>Creator</b>
+                <span data-user-email></span>
+            </fg-vertical>
+            <img src="../icons/selection.svg" alt="" />
+        </fg-sidebaruserbutton>
+    </fg-bottom>
+</fg-sidebar>
+
+<fg-mainview id="plugins">
+                <fg-banner>
+                    <h1>Plugins</h1>
+                    <span
+                        >Enhance your ForgeGUI experience with plugins that slot
+                        right in with your engine of choice.</span
+                    >
+                </fg-banner>
+                <fg-pluginheader>
+                    <fg-vertical>
+                        <b>Game Engines</b>
+                        <span
+                            >Enhance your ForgeGUI experience with plugins that
+                            slot right in with your engine of choice.</span
+                        >
+                    </fg-vertical>
+                    <fg-selectwrapper>
+                        <span>Show Only: <b id="filterLabel">All</b></span>
+                        <img src="../icons/arrow.svg" class="selectArrow" />
+                        <select
+                            onchange="
+                                document.getElementById(
+                                    'filterLabel',
+                                ).textContent =
+                                    this.options[this.selectedIndex].text
+                            "
+                        >
+                            <option value="all">All</option>
+                        </select>
+                    </fg-selectwrapper>
+                </fg-pluginheader>
+                <fg-plugingrid>
+                    <fg-pluginbox
+    data-popup-open="plugin-detail"
+    role="button"
+    tabindex="0"
+    aria-haspopup="dialog"
+ class="premium">
+    <fg-top>
+        <img src="../icons/roblox.svg" alt="" />
+        <div>
+            <fg-premiumbadge>
+                            <img src="../icons/crown.svg" alt="" />
+                            <span>Premium</span>
+                        </fg-premiumbadge>
+            <fg-pluginchip class="active">Beta</fg-pluginchip>
+            <fg-pluginchip>1.4</fg-pluginchip>
+        </div>
+    </fg-top>
+    <fg-bottom>
+        <fg-vertical>
+            <b>ForgeGUI Connect</b>
+            <span><span>for Roblox Studio</span></span>
+        </fg-vertical>
+        <button type="button">
+            Install <img src="../icons/download.svg" alt="" />
+        </button>
+    </fg-bottom>
+</fg-pluginbox>
+
+                    <fg-pluginbox
+    data-popup-open="plugin-detail"
+    role="button"
+    tabindex="0"
+    aria-haspopup="dialog"
+>
+    <fg-top>
+        <img src="../icons/unity.svg" alt="" />
+        <div>
+            
+            <fg-pluginchip class="active">Beta</fg-pluginchip>
+            <fg-pluginchip>1.4</fg-pluginchip>
+        </div>
+    </fg-top>
+    <fg-bottom>
+        <fg-vertical>
+            <b>ForgeGUI Connect</b>
+            <span><span>for Unity</span></span>
+        </fg-vertical>
+        <button type="button">
+            Install <img src="../icons/download.svg" alt="" />
+        </button>
+    </fg-bottom>
+</fg-pluginbox>
+
+                    <fg-pluginbox
+    data-popup-open="plugin-detail"
+    role="button"
+    tabindex="0"
+    aria-haspopup="dialog"
+>
+    <fg-top>
+        <img src="../icons/ue.svg" alt="" />
+        <div>
+            
+            <fg-pluginchip class="active">Beta</fg-pluginchip>
+            <fg-pluginchip>1.4</fg-pluginchip>
+        </div>
+    </fg-top>
+    <fg-bottom>
+        <fg-vertical>
+            <b>ForgeGUI Connect</b>
+            <span><span>for Unreal Engine</span></span>
+        </fg-vertical>
+        <button type="button">
+            Install <img src="../icons/download.svg" alt="" />
+        </button>
+    </fg-bottom>
+</fg-pluginbox>
+
+                    <fg-pluginbox
+    data-popup-open="plugin-detail"
+    role="button"
+    tabindex="0"
+    aria-haspopup="dialog"
+>
+    <fg-top>
+        <img src="../icons/godot.svg" alt="" />
+        <div>
+            
+            <fg-pluginchip class="active">Beta</fg-pluginchip>
+            <fg-pluginchip>1.4</fg-pluginchip>
+        </div>
+    </fg-top>
+    <fg-bottom>
+        <fg-vertical>
+            <b>ForgeGUI Connect</b>
+            <span><span>for Godot</span></span>
+        </fg-vertical>
+        <button type="button">
+            Install <img src="../icons/download.svg" alt="" />
+        </button>
+    </fg-bottom>
+</fg-pluginbox>
+
+                    <fg-pluginbox
+    data-popup-open="plugin-detail"
+    role="button"
+    tabindex="0"
+    aria-haspopup="dialog"
+>
+    <fg-top>
+        <img src="../icons/blender.svg" alt="" />
+        <div>
+            
+            <fg-pluginchip class="active">Beta</fg-pluginchip>
+            <fg-pluginchip>1.4</fg-pluginchip>
+        </div>
+    </fg-top>
+    <fg-bottom>
+        <fg-vertical>
+            <b>ForgeGUI Connect</b>
+            <span><span>for Blender</span></span>
+        </fg-vertical>
+        <button type="button">
+            Install <img src="../icons/download.svg" alt="" />
+        </button>
+    </fg-bottom>
+</fg-pluginbox>
+
+                    <fg-pluginbox
+    data-popup-open="plugin-detail"
+    role="button"
+    tabindex="0"
+    aria-haspopup="dialog"
+>
+    <fg-top>
+        <img src="../icons/ai.svg" alt="" />
+        <div>
+            
+            <fg-pluginchip class="active">Beta</fg-pluginchip>
+            <fg-pluginchip>1.4</fg-pluginchip>
+        </div>
+    </fg-top>
+    <fg-bottom>
+        <fg-vertical>
+            <b>ForgeGUI Connect</b>
+            <span><span>for MCP</span></span>
+        </fg-vertical>
+        <button type="button">
+            Install <img src="../icons/download.svg" alt="" />
+        </button>
+    </fg-bottom>
+</fg-pluginbox>
+
+                </fg-plugingrid>
+            </fg-mainview>
+
+        <fg-popupcontainer class="hidden">
+            <fg-popup id="plugin-detail" class="hidden" aria-label="Plugin details">
+                <fg-top>
+                    <button class="popupBack" type="button" data-popup-close aria-label="Close plugin details">
+                        <img src="../icons/arrow.svg" alt="" style="rotate: 90deg" />
+                    </button>
+                    <span>Plugins</span>
+                    <div style="flex: 1"></div>
+                    <img class="more" src="../icons/3dots.svg" />
+                </fg-top>
+                <fg-banner>
+                    <img src="../assets/coursePlaceholder.jpg" />
+                </fg-banner>
+                <fg-info>
+                    <fg-top>
+                        <img src="../icons/fg.svg" />
+                        <fg-vertical>
+                            <h1>ForgeGUI Connect</h1>
+                            <div>
+                                <span>For</span>
+                                <img src="../icons/roblox.svg" />
+                                <span>Roblox Studio</span>
+                            </div>
+                        </fg-vertical>
+                        <button
+                            class="installButton"
+                            data-popup-open="plugin-install"
+                        >
+                            <span>Install</span>
+                            <img src="../icons/download.svg" />
+                        </button>
+                    </fg-top>
+                    <fg-bottom>
+                        <fg-left>
+                            ForgeGUI Connect is an AI-powered Roblox Studio
+                            integration designed to streamline game development
+                            by bridging web-based asset generation directly into
+                            your workspace. Instead of manually downloading,
+                            managing, and importing generated assets or copying
+                            code snippets, the plugin links your ForgeGUI
+                            account directly to Roblox Studio for seamless
+                            workflow execution.
+                        </fg-left>
+                        <fg-right>
+                            <fg-topbox>
+                                <h1>Requirements</h1>
+                                <ul>
+                                    <li>Windows 10 or Later</li>
+                                    <li>Roblox Studio</li>
+                                    <li>ForgeGUI Pro Tier</li>
+                                </ul>
+                            </fg-topbox>
+                            <fg-bottombox>
+                                <h1>Plugin Info</h1>
+                                <ul>
+                                    <li>Version 1.4</li>
+                                    <li>Premium Plugin</li>
+                                </ul>
+                            </fg-bottombox>
+                        </fg-right>
+                    </fg-bottom>
+                </fg-info>
+            </fg-popup>
+            <fg-popup id="plugin-install" class="hidden">
+                <fg-top class="popupHeading">
+    <h1><span>Install Roblox Plugin</span></h1>
+    <span><span>Let's get you connected to ForgeGUI on Roblox</span></span>
+</fg-top>
+<div>
+                        <fg-pluginvideo>
+                            <button class="playButton" type="button">
+                                <img src="../icons/Play.svg" alt="" />
+                            </button>
+                        </fg-pluginvideo>
+                        <fg-listbox>
+    <header>Section</header>
+    <fg-group><fg-line>
+    <fg-vertical>
+        <span><span>Downloads</span></span>
+        <b><b>Download the Plugin</b></b>
+    </fg-vertical>
+    <button class="listboxAction">
+                                    Open in Roblox Studio
+                                </button>
+</fg-line>
+
+                            <fg-line>
+    <fg-vertical>
+        <span><span>Connections</span></span>
+        <b><b>Link your Roblox Account</b></b>
+    </fg-vertical>
+    <button
+                                    class="listboxAction"
+                                    data-linked-label="Already Linked"
+                                    onclick="toggleLinked(this)"
+                                >
+                                    Link Roblox Account
+                                </button>
+</fg-line></fg-group>
+</fg-listbox>
+
+                    </div>
+<fg-bottom class="popupActions">
+    <button class="popupButton" type="button" data-popup-close>
+                        Cancel
+                    </button>
+<button class="popupButton active" type="button" data-popup-close>
+                        Done
+                    </button>
+</fg-bottom>
+
+            </fg-popup>
+        </fg-popupcontainer>
+    </body>
+</html>

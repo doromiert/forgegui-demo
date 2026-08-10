@@ -1,0 +1,88 @@
+fg-plans {
+   display: flex;
+   justify-content: center;
+   align-items: flex-end;
+   gap: 15px;
+   align-self: stretch;
+   height: 100%;
+}
+
+footer {
+   display: flex;
+   padding: 18px 0;
+   gap: 7px;
+   align-self: stretch;
+   justify-content: center;
+   a {
+      color: #fff;
+      font-family: "Atkinson Hyperlegible";
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      text-decoration-line: underline;
+      text-decoration-style: solid;
+      text-decoration-skip-ink: auto;
+      text-decoration-thickness: auto;
+      text-underline-offset: auto;
+      text-underline-position: from-font;
+      width: max-content;
+   }
+}
+
+fg-mainview.plans {
+   display: flex;
+   padding: 15px 35px 0 35px;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 10px;
+   flex: 1 0 0;
+   align-self: stretch;
+   background: #0b0b0b;
+   fg-top {
+      display: flex;
+      height: 58px;
+      justify-content: space-between;
+      align-items: center;
+      align-self: stretch;
+      span {
+         color: #fff;
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 32px;
+         font-style: normal;
+         font-weight: 600;
+         line-height: normal;
+      }
+   }
+   header {
+      display: flex;
+      padding: 42px 0 23px 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      align-self: stretch;
+
+      fg-billingpicker {
+         display: flex;
+         padding: 8px;
+         align-items: flex-start;
+         border-radius: 40px;
+         background: #252525;
+
+         fg-dateoption {
+            display: flex;
+            padding: 15px 22px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border-radius: 30px;
+            height: 43px;
+            box-sizing: border-box;
+            &.selected {
+               background: #07f;
+            }
+         }
+      }
+   }
+}

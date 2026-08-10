@@ -1,0 +1,15 @@
+{
+  "name": "forgegui-interactive",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch-path=tools/site.mjs --watch-preserve-output tools/site.mjs serve",
+    "build": "node tools/site.mjs build dist",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check scripts/forge-api.js && node --check scripts/forge-cache.js && node --check scripts/auth-shell.js && node --check scripts/auth-ui.js && node --check scripts/auth-callback.js && node --check scripts/reset-password.js && node --check scripts/forge-loader.js && node --check scripts/workspace.js && node --check scripts/settings.js && node --check scripts/community.js && node --check scripts/assets.js && npm test && node tools/site.mjs build dist"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.57.4"
+  }
+}

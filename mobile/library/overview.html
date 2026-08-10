@@ -1,0 +1,1101 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta name="forge-path" content="mobile/library/overview.html">
+    <meta name="forge-route" content="library/overview.html">
+    <meta name="forge-variant" content="mobile">
+    <style>html:not(.forge-motion-ready),html:not(.forge-motion-ready) *,html:not(.forge-motion-ready) *::before,html:not(.forge-motion-ready) *::after{animation:none!important;transition:none!important}fg-client-include{display:none}</style>
+    <script src="../../scripts/vendor/supabase.js" defer></script>
+    <script src="../../scripts/forge-config.js" defer></script>
+    <script src="../../scripts/forge-api.js" defer></script>
+    <script src="../../scripts/forge-cache.js" defer></script>
+    <script src="../../scripts/auth-shell.js" defer></script>
+    <script src="../../scripts/assets.js" defer></script>
+    <script src="../../scripts/workspace.js" defer></script>
+    <script src="../../scripts/forge-loader.js"></script>
+    <script src="../../scripts/forge-runtime.js" defer></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI Assets</title>
+        <meta name="theme-color" content="#0a0a0a" />
+        <meta name="description" content="Manage projects and discover community assets" />
+        <meta name="color-scheme" content="dark" />
+        <style data-forge-critical>
+/* styles/base.css */
+html:not(.forge-motion-ready),
+html:not(.forge-motion-ready) *,
+html:not(.forge-motion-ready) *::before,
+html:not(.forge-motion-ready) *::after {
+   animation: none !important;
+   transition: none !important;
+}
+* {
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+   font-optical-sizing: auto;
+   transition-property:
+      color,
+      background-color,
+      border-color,
+      outline-color,
+      opacity,
+      transform,
+      translate,
+      scale,
+      box-shadow,
+      width,
+      height,
+      max-height,
+      padding,
+      margin,
+      gap;
+   transition-duration: 0.25s;
+   transition-timing-function: ease;
+}
+body {
+   background: #0a0a0a;
+   --Glass-Text: linear-gradient(
+      180deg,
+      #fff 0%,
+      rgba(255, 255, 255, 0.5) 100%
+   );
+
+   &.chat {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      padding: 10px 0 0 10px;
+      margin: 0;
+      box-sizing: border-box;
+      align-items: flex-start;
+      gap: 10px;
+   }
+}
+fg-sidebar {
+   user-select: none;
+   -webkit-user-drag: none;
+   overflow-y: scroll;
+   display: flex;
+   width: 305px;
+   padding: calc(10px + 62px + 15px) 10px 440px 10px;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 15px;
+   flex-shrink: 0;
+   align-self: stretch;
+   position: relative;
+
+   &.collapsed {
+      width: 60px;
+      padding-bottom: 20px;
+      fg-top.sb {
+         width: 60px;
+         .fgLogo {
+            display: none;
+         }
+      }
+      .sidebarElem {
+         color: #ffffff00;
+         width: 60px;
+         height: 60px;
+      }
+      fg-toplabel {
+         display: none;
+      }
+      fg-bottom {
+         display: none !important;
+      }
+   }
+
+   fg-top.sb {
+      display: flex;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      right: 10px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      box-sizing: border-box;
+      width: 305px;
+
+      .fgLogo {
+         height: 24px;
+      }
+      button {
+         border: none;
+         background: none;
+         width: 38px;
+         height: 38px;
+         border-radius: 1293px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            outline: solid 10px rgba(255, 255, 255, 0.05);
+         }
+         &:active {
+            transform: scale(0.9);
+         }
+      }
+   }
+
+   fg-specialtabs {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+   }
+
+   fg-projects {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1 0 0;
+      align-self: stretch;
+
+      fg-toplabel {
+         display: flex;
+         margin: 14px 15px;
+         align-items: center;
+         gap: 8px;
+         align-self: stretch;
+         color: #fff;
+         font-size: 20px;
+         font-weight: 500;
+      }
+   }
+
+   .conversationListStatus {
+      padding: 8px 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      line-height: 1.35;
+   }
+
+   .conversationEntry span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
+
+   .sidebarElem {
+      text-decoration: none;
+      display: flex;
+      padding: 8px 10px;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+      border-radius: 15px;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      width: 100%;
+      box-sizing: border-box;
+
+      &.selected {
+         border: 1px solid rgba(255, 255, 255, 0.2);
+         background: rgba(60, 60, 60, 0.2);
+      }
+      &:hover {
+         background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      img {
+         width: 28px;
+         height: 28px;
+         margin: 5px;
+      }
+   }
+
+   fg-bottom.sb {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      align-self: stretch;
+      box-sizing: border-box;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 12931823;
+      backdrop-filter: blur(20px);
+      border-radius: 15px;
+      width: 305px;
+      fg-actions {
+         width: 100%;
+      }
+      creditCounter {
+         box-sizing: border-box;
+         display: flex;
+         padding: 10px;
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         width: 100%;
+
+         fg-top {
+            display: flex;
+            padding: 5px 8px;
+            justify-content: space-between;
+            align-items: center;
+            align-self: stretch;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 18px;
+            font-weight: 400;
+            gap: 8px;
+
+            a {
+               color: #fff;
+               text-decoration: none;
+               font-size: 18px;
+               font-weight: 600;
+            }
+         }
+         fg-bottom {
+            display: flex;
+            flex-direction: row;
+            padding: 8px;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            align-self: stretch;
+         }
+         creditSlider {
+            height: 9px;
+            flex: 1 0 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            &::before {
+               content: "";
+               width: 100px;
+               display: flex;
+               height: 9px;
+               background: linear-gradient(0deg, #0084ff 0%, #0084ff 100%);
+            }
+         }
+      }
+
+      fg-sidebaruserbutton {
+         display: flex;
+         padding: 15px;
+         align-items: center;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         user-select: none;
+
+         fg-vertical {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 34px;
+            width: 100%;
+
+            b {
+               color: #fff;
+               font-size: 20px;
+               font-weight: 600;
+               line-height: 20px;
+            }
+
+            span {
+               color: rgba(255, 255, 255, 0.8);
+               font-size: 16px;
+               font-weight: 400;
+               line-height: normal;
+            }
+         }
+
+         img {
+            width: 38px;
+            height: 38px;
+            border-radius: 38px;
+         }
+
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+         }
+      }
+   }
+}
+.upgradeButton {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   padding: 12px 20px;
+   background: #0077ff;
+   border: none;
+   border-radius: 15px;
+   cursor: pointer;
+   position: relative;
+
+   &:hover {
+      background-color: #32a3ff !important;
+   }
+
+   &.selected {
+      background-color: #32a3ff !important;
+   }
+
+   &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+      pointer-events: none;
+   }
+
+   span {
+      font-weight: bold;
+      font-size: 20px;
+      white-space: nowrap;
+      background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0px 1px 1.4px rgba(0, 0, 0, 0.25));
+   }
+}
+fg-mainview {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-sizing: border-box;
+   flex: 1 0 0;
+   height: 100%;
+   overflow-y: scroll;
+   border-radius: 20px 0 0 0;
+   border-top: 1px solid #333;
+   border-left: 1px solid #333;
+   background: #161616;
+   h1 {
+      margin: 0;
+   }
+}
+/* styles/mobile-home.css */
+* {
+   box-sizing: border-box;
+}
+html,
+body.mobile-home {
+   background: #000;
+   height: 100%;
+   margin: 0;
+   overflow: hidden;
+}
+body.mobile-home {
+   color: #fff;
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+}
+.mobile-home button,
+.mobile-home textarea {
+   font: inherit;
+}
+.mobile-home button,
+.mobile-home a {
+   -webkit-tap-highlight-color: transparent;
+}
+.mobile-home-shell {
+   background: #161616;
+   height: 100dvh;
+   min-height: 0;
+   overflow: hidden;
+   position: relative;
+}
+.mobile-home-topbar {
+   align-items: center;
+   display: flex;
+   height: 83px;
+   justify-content: space-between;
+   left: 0;
+   padding: 15px 20px;
+   position: absolute;
+   right: 0;
+   top: 0;
+   transition:
+      background-color 160ms,
+      border-color 160ms;
+   z-index: 10;
+}
+.mobile-home-topbar.is-scrolled {
+   background: #0f0f0f;
+   border-bottom: 1px solid #303030;
+}
+.mobile-home-brand {
+   align-items: center;
+   display: flex;
+   gap: 16px;
+}
+.mobile-home-brand > img,
+.mobile-home-drawer > header > img {
+   height: 42px;
+   width: 42px;
+}
+.mobile-hamburger,
+.mobile-drawer-close {
+   background: transparent;
+   border: 0;
+   cursor: pointer;
+   height: 28px;
+   padding: 3px;
+   position: relative;
+   width: 28px;
+}
+.mobile-hamburger span {
+   background: #fff;
+   border-radius: 2px;
+   display: block;
+   height: 2px;
+   margin: 4px 0;
+   width: 22px;
+}
+.mobile-home-scroll {
+   height: calc(100% - 92px);
+   overflow-x: hidden;
+   overflow-y: auto;
+   scrollbar-width: none;
+}
+.mobile-home-scroll::-webkit-scrollbar,
+.mobile-tool-track::-webkit-scrollbar {
+   display: none;
+}
+.mobile-create-hero {
+   background:
+      linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+      url("../../assets/d2.png") center / cover;
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+   justify-content: flex-end;
+   min-height: 700px;
+   padding: 83px 20px 25px;
+}
+.mobile-create-content {
+   display: flex;
+   flex-direction: column;
+   gap: 34px;
+   margin-top: auto;
+}
+.mobile-create-content h1 {
+   font-size: 36px;
+   font-weight: 500;
+   line-height: 1.28;
+   margin: 0;
+   text-align: center;
+}
+.mobile-create-box {
+   background: #101010;
+   border: 1px solid #383838;
+   border-radius: 25px;
+   box-shadow: 0 4px 50px rgba(0, 0, 0, 0.25);
+   overflow: hidden;
+}
+.mobile-create-box textarea {
+   background: transparent;
+   border: 0;
+   color: #fff;
+   height: 96px;
+   outline: 0;
+   padding: 15px 20px;
+   resize: none;
+   width: 100%;
+}
+.mobile-create-box textarea,
+.mobile-create-box textarea::placeholder {
+   font-size: 20px;
+   font-weight: 500;
+}
+.mobile-create-box textarea::placeholder {
+   color: rgba(255, 255, 255, 0.5);
+}
+.mobile-create-actions {
+   align-items: center;
+   background: #000;
+   border-top: 1px solid #1f1f1f;
+   display: flex;
+   justify-content: space-between;
+   flex-shrink: 0;
+   padding: 12px;
+}
+.mobile-create-actions > div {
+   align-items: center;
+   color: rgba(255, 255, 255, 0.72);
+   display: flex;
+   gap: 10px;
+}
+.mobile-create-actions > div img {
+   width: 24px;
+   height: 24px;
+}
+.mobile-create-actions button {
+   align-items: center;
+   background: #212121;
+   border: 0;
+   border-radius: 15px;
+   cursor: pointer;
+   display: flex;
+   height: 48px;
+   justify-content: center;
+   width: 48px;
+}
+.mobile-create-actions button img {
+   height: 24px;
+   width: 24px;
+}
+.mobile-create-actions .mobile-send {
+   background: #07f;
+   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.59);
+   width: 56px;
+}
+.mobile-scroll-cue {
+   align-items: center;
+   align-self: center;
+   background: transparent;
+   border: 0;
+   color: #fff;
+   cursor: pointer;
+   display: flex;
+   font-size: 20px;
+   gap: 10px;
+   margin-top: 154px;
+   padding: 0;
+}
+.mobile-scroll-cue img {
+   height: 24px;
+   width: 24px;
+}
+.mobile-forge {
+   background: #0f0f0f;
+   border-top: 1px solid #303030;
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   min-height: 100%;
+   padding: 30px 0 40px;
+   scroll-margin-top: 83px;
+}
+.mobile-forge > h2 {
+   font-size: 33px;
+   font-style: italic;
+   font-weight: 800;
+   margin: 0 0 8px;
+   text-align: center;
+   text-shadow: 0 4px 20px rgba(255, 255, 255, 0.25);
+}
+.mobile-forge > h2 span {
+   font-size: 24px;
+   font-weight: 500;
+}
+.mobile-tool-section {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+.mobile-tool-section > header {
+   align-items: center;
+   display: flex;
+   justify-content: space-between;
+   padding: 0 30px;
+}
+.mobile-tool-section > header > div:first-child,
+.mobile-tool-arrows {
+   align-items: center;
+   display: flex;
+}
+.mobile-tool-section > header > div:first-child {
+   gap: 10px;
+}
+.mobile-tool-section h3 {
+   font-size: 20px;
+   font-weight: 500;
+   margin: 0;
+}
+.mobile-tool-section > header > div:first-child img {
+   height: 24px;
+   width: 24px;
+}
+.mobile-tool-arrows {
+   gap: 20px;
+}
+.mobile-tool-arrows button {
+   background: transparent;
+   border: 0;
+   cursor: pointer;
+   height: 24px;
+   padding: 0;
+   width: 24px;
+}
+.mobile-tool-arrows button:first-child img {
+   transform: rotate(90deg);
+}
+.mobile-tool-arrows button:last-child img {
+   transform: rotate(270deg);
+}
+.mobile-tool-arrows img {
+   height: 24px;
+   width: 24px;
+}
+.mobile-tool-track {
+   --mobile-track-gutter: 30px;
+   display: flex;
+   gap: 15px;
+   overflow-x: auto;
+   padding: 0;
+   box-sizing: border-box;
+   scroll-padding-inline: var(--mobile-track-gutter);
+   scroll-snap-type: x mandatory;
+   scrollbar-width: none;
+}
+.mobile-tool-track > :first-child {
+   margin-left: var(--mobile-track-gutter);
+}
+.mobile-tool-track > :last-child {
+   margin-right: var(--mobile-track-gutter);
+}
+.mobile-tool-card {
+   display: flex;
+   flex: 0 0 301px;
+   flex-direction: column;
+   scroll-snap-align: start;
+}
+.mobile-tool-card > img {
+   border-radius: 12px;
+   height: 168px;
+   object-fit: cover;
+   width: 301px;
+}
+.mobile-tool-card strong,
+.mobile-featured-tool strong {
+   font-size: 20px;
+   font-weight: 600;
+   margin: 10px 8px 0;
+}
+.mobile-tool-card span,
+.mobile-featured-tool span {
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 18px;
+   margin: 4px 8px 0;
+}
+.mobile-featured-tool {
+   display: flex;
+   flex-direction: column;
+   padding: 0 30px;
+}
+.mobile-featured-tool > img {
+   border-radius: 12px;
+   height: 219px;
+   object-fit: cover;
+   width: 100%;
+}
+.mobile-featured-tool button {
+   background: #07f;
+   border: 0;
+   border-radius: 15px;
+   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.59);
+   color: #fff;
+   font-size: 20px;
+   height: 50px;
+   margin-top: 12px;
+}
+.mobile-drawer-scrim {
+   background: transparent;
+   border: 0;
+   bottom: 92px;
+   display: none;
+   left: 0;
+   position: absolute;
+   right: 0;
+   top: 0;
+   z-index: 20;
+}
+.mobile-home-drawer {
+   background: #101010;
+   border-right: 1px solid #303030;
+   bottom: 92px;
+   box-shadow: 4px 4px 60px #000;
+   display: flex;
+   flex-direction: column;
+   left: 0;
+   position: absolute;
+   top: 0;
+   transform: translateX(-102%);
+   transition: transform 220ms ease-out;
+   width: min(325px, calc(100% - 54px));
+   z-index: 30;
+}
+.mobile-home-shell.is-drawer-open .mobile-drawer-scrim {
+   display: block;
+}
+.mobile-home-shell.is-drawer-open .mobile-home-drawer {
+   transform: translateX(0);
+}
+.mobile-home-drawer > header {
+   align-items: center;
+   display: flex;
+   gap: 16px;
+   padding: 20px;
+}
+.mobile-drawer-close span {
+   background: #fff;
+   height: 2px;
+   left: 3px;
+   position: absolute;
+   top: 13px;
+   width: 24px;
+}
+.mobile-drawer-close span:first-child {
+   transform: rotate(45deg);
+}
+.mobile-drawer-close span:last-child {
+   transform: rotate(-45deg);
+}
+.mobile-projects {
+   display: flex;
+   flex: 1;
+   flex-direction: column;
+   min-height: 0;
+   padding: 5px 10px;
+}
+.mobile-projects h2 {
+   color: rgba(255, 255, 255, 0.75);
+   font-size: 20px;
+   font-weight: 500;
+   margin: 0;
+   padding: 14px 15px;
+}
+.mobile-projects a,
+.mobile-drawer-links a {
+   align-items: center;
+   color: #fff;
+   display: flex;
+   font-size: 20px;
+   gap: 8px;
+   min-height: 54px;
+   padding: 8px 10px;
+   text-decoration: none;
+}
+.mobile-projects a > img:first-child {
+   height: 24px;
+   width: 24px;
+}
+/* styles/mobile-assets.css */
+.mobile-assets .mobile-home-shell {
+   background: rgba(0, 0, 0, 0.8);
+}
+.mobile-assets-topbar {
+   background: #050505;
+}
+.mobile-new-project {
+   align-items: center;
+   background: #07f;
+   border-radius: 15px;
+   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.59);
+   color: #fff;
+   display: flex;
+   font-size: 20px;
+   font-weight: 700;
+   gap: 10px;
+   height: 48px;
+   padding: 0 24px;
+   text-decoration: none;
+}
+.mobile-new-project img {
+   height: 24px;
+   width: 24px;
+}
+.mobile-project-library {
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+   padding: 83px 17px 25px;
+}
+.mobile-assets-search {
+   align-items: center;
+   background: #121212;
+   border: 1px solid #373636;
+   border-radius: 47px;
+   display: flex;
+   flex: 0 0 48px;
+   gap: 10px;
+   padding: 10px 18px;
+   width: 100%;
+}
+.mobile-assets-search img {
+   height: 24px;
+   opacity: 0.8;
+   width: 24px;
+}
+.mobile-assets-search input {
+   background: transparent;
+   border: 0;
+   color: #fff;
+   flex: 1;
+   font-size: 20px;
+   font-weight: 500;
+   min-width: 0;
+   outline: 0;
+}
+.mobile-assets-search input::placeholder {
+   color: rgba(255, 255, 255, 0.5);
+}
+.mobile-project-list {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+.mobile-project-card {
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+}
+.mobile-project-preview {
+   background: #161616;
+   border: 1px solid #333;
+   border-radius: 20px;
+   display: grid;
+   gap: 10px;
+   grid-template-columns: repeat(2, minmax(0, 1fr));
+   height: 245px;
+   overflow: hidden;
+   padding: 10px;
+}
+.mobile-project-preview img {
+   border-radius: 10px;
+   height: 107px;
+   object-fit: cover;
+   width: 100%;
+}
+.mobile-project-info {
+   align-items: center;
+   display: flex;
+   justify-content: space-between;
+   padding: 0 12px;
+}
+.mobile-project-info > a {
+   display: flex;
+   flex-direction: column;
+   gap: 4px;
+   text-decoration: none;
+}
+.mobile-project-info strong,
+.mobile-project-info span {
+   font-size: 18px;
+}
+.mobile-project-info strong {
+   color: #fff;
+   font-weight: 500;
+}
+.mobile-project-info span {
+   color: rgba(255, 255, 255, 0.48);
+}
+</style>
+    <link rel="stylesheet" href="../../styles/base.css" />
+        <link rel="stylesheet" href="../../styles/mobile-home.css" />
+        <link rel="stylesheet" href="../../styles/mobile-assets.css" />
+        <link rel="stylesheet" href="../../styles/community-asset-popup.css" />
+        <script src="../../scripts/site.js" defer></script>
+        <script src="../../scripts/mobile-home.js" defer></script>
+        <script src="../../scripts/mobile-assets.js" defer></script>
+    </head>
+    <body class="mobile-home mobile-assets">
+        <main class="mobile-home-shell">
+            <header class="mobile-home-topbar mobile-assets-topbar">
+                <div class="mobile-home-brand">
+                    <button
+                        class="mobile-hamburger"
+                        type="button"
+                        aria-label="Open game projects"
+                        aria-controls="mobile-home-drawer"
+                        aria-expanded="false"
+                        data-open-drawer
+                    >
+                        <span></span><span></span><span></span>
+                    </button>
+                    <img src="../../icons/fg.svg" alt="ForgeGUI" />
+                </div>
+                <a class="mobile-new-project" href="../../library/project.html">
+                    <img src="../../icons/add.svg" alt="" />
+                    <span>New Project</span>
+                </a>
+            </header>
+
+            <div class="mobile-home-scroll mobile-assets-scroll" data-home-scroll>
+                <section class="mobile-project-library">
+                    <label class="mobile-assets-search">
+                        <img src="../../icons/search.svg" alt="" />
+                        <input type="search" placeholder="Search" aria-label="Search projects" data-project-search />
+                    </label>
+
+                    <div class="mobile-project-list">
+                        <article class="mobile-project-card" data-search-item="project name">
+                            <a class="mobile-project-preview" href="../../library/project.html" aria-label="Open Project Name">
+                                <img src="../../assets/landing/blog-article.jpg" alt="" />
+                                <img src="../../assets/landing/blog-article.jpg" alt="" />
+                                <img src="../../assets/landing/blog-article.jpg" alt="" />
+                                <img src="../../assets/landing/blog-article.jpg" alt="" />
+                            </a>
+                            <div class="mobile-project-info">
+                                <a href="../../library/project.html"><strong>Project Name</strong><span>Last Edited: Yesterday</span></a>
+                                <button type="button" aria-label="Project options"><img src="../../icons/3dots.svg" alt="" /></button>
+                            </div>
+                        </article>
+                        <article class="mobile-project-card" data-search-item="project name">
+                            <a class="mobile-project-preview" href="../../library/project.html" aria-label="Open Project Name">
+                                <img src="../../assets/landing/blog-article.jpg" alt="" />
+                                <img src="../../assets/landing/blog-article.jpg" alt="" />
+                                <img src="../../assets/landing/blog-article.jpg" alt="" />
+                                <img src="../../assets/landing/blog-article.jpg" alt="" />
+                            </a>
+                            <div class="mobile-project-info">
+                                <a href="../../library/project.html"><strong>Project Name</strong><span>Last Edited: Yesterday</span></a>
+                                <button type="button" aria-label="Project options"><img src="../../icons/3dots.svg" alt="" /></button>
+                            </div>
+                        </article>
+                        <article class="mobile-project-card" data-search-item="project name">
+                            <a class="mobile-project-preview" href="../../library/project.html" aria-label="Open Project Name">
+                                <img src="../../assets/landing/blog-article.jpg" alt="" />
+                                <img src="../../assets/landing/blog-article.jpg" alt="" />
+                                <img src="../../assets/landing/blog-article.jpg" alt="" />
+                                <img src="../../assets/landing/blog-article.jpg" alt="" />
+                            </a>
+                            <div class="mobile-project-info">
+                                <a href="../../library/project.html"><strong>Project Name</strong><span>Last Edited: Yesterday</span></a>
+                                <button type="button" aria-label="Project options"><img src="../../icons/3dots.svg" alt="" /></button>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="mobile-community-assets" id="mobile-community-assets">
+                    <h1>Discover Community Assets</h1>
+                    <label class="mobile-assets-search">
+                        <img src="../../icons/search.svg" alt="" />
+                        <input type="search" placeholder="Search" aria-label="Search community assets" data-community-search data-catalog-search />
+                    </label>
+                    <div class="mobile-community-grid" data-catalog-grid>
+                        <article class="mobile-community-card is-wide" data-search-item="alex chen mountain retreat nature travel">
+                            <img src="../../assets/roblox-connect-bg.jpg" alt="" />
+                            <div><p><img src="../../assets/generic.png" alt="" /><strong>Alex Chen</strong></p><h2>Mountain Retreat</h2><span>A secluded getaway nestled between alpine peaks...</span><footer><b>Nature</b><b>Travel</b></footer></div>
+                        </article>
+                        <article class="mobile-community-card is-wide" data-search-item="alex chen mountain retreat nature travel">
+                            <img src="../../assets/landing/blog-card.jpg" alt="" />
+                            <div><p><img src="../../assets/generic.png" alt="" /><strong>Alex Chen</strong></p><h2>Mountain Retreat</h2><span>A secluded getaway nestled between alpine peaks...</span><footer><b>Nature</b><b>Travel</b></footer></div>
+                        </article>
+                        <article class="mobile-community-card" data-search-item="mountain retreat nature"><img src="../../assets/roblox-connect-bg.jpg" alt="" /></article>
+                        <article class="mobile-community-card" data-search-item="night skyline city"><img src="../../assets/landing/blog-card.jpg" alt="" /></article>
+                        <article class="mobile-community-card" data-search-item="clouds sky nature"><img src="../../assets/landing/blog-article.jpg" alt="" /></article>
+                        <article class="mobile-community-card" data-search-item="castle game environment"><img src="../../assets/landing/hero-art-a.png" alt="" /></article>
+                        <article class="mobile-community-card is-wide" data-search-item="forest waterfall nature"><img src="../../assets/coursePlaceholder.jpg" alt="" /></article>
+                    </div>
+                </section>
+            </div>
+
+            <button class="mobile-drawer-scrim" type="button" aria-label="Close menu" data-close-drawer></button>
+<aside class="mobile-home-drawer" id="mobile-home-drawer" aria-hidden="true">
+    <header>
+        <button class="mobile-drawer-close" type="button" aria-label="Close game projects" data-close-drawer>
+            <span></span><span></span>
+        </button>
+        <img src="../../icons/fg.svg" alt="ForgeGUI" />
+    </header>
+    <nav class="mobile-projects" aria-label="Games" data-conversation-list hidden>
+        <h2>Games</h2>
+        <span class="conversationListStatus" data-conversation-status>Loading chats...</span>
+    </nav>
+    <nav class="mobile-drawer-links" aria-label="Additional navigation">
+        <a class="mobile-upgrade" href="../../plans.html"><img src="../../icons/crown.svg" alt="" /><span>Upgrade to Pro</span></a>
+        <a href="../../courses.html"><img src="../../icons/book.svg" alt="" /><span>Courses</span></a>
+        <a href="../../leaderboard.html"><img src="../../icons/Trophy.svg" alt="" /><span>Leaderboard</span></a>
+        <a href="../../notifications.html"><img src="../../icons/bell.svg" alt="" /><span>Notifications</span></a>
+    </nav>
+</aside>
+
+            <nav class="mobile-bottom-nav" aria-label="Primary navigation">
+    <a class="mobile-nav-home" href="../../home.html"><img src="../../icons/home.svg" alt="" /><span>Home</span></a>
+    <a class="mobile-nav-assets" href="../../library/overview.html"><img src="../../icons/file.svg" alt="" /><span>Assets</span></a>
+    <a class="mobile-nav-community" href="../../community.html"><img src="../../icons/people.svg" alt="" /><span>Community</span></a>
+    <a class="mobile-nav-more" href="../../settings/overview.html">
+        <img class="mobile-nav-profile" src="../../assets/generic.png" alt="" data-user-avatar />
+        <span>More...</span>
+    </a>
+</nav>
+
+        </main>
+        <fg-popupcontainer class="hidden">
+    <fg-popup id="community-asset-preview" class="communityAssetPopup hidden" aria-label="Community asset view">
+        <section class="communityAssetViewport">
+            <header class="communityAssetToolbar">
+                <button type="button" data-popup-close aria-label="Close community asset view">
+                    <img src="../../icons/arrow.svg" alt="" />
+                </button>
+                <span>Asset View</span>
+                <button type="button" class="communityAssetMore" aria-label="More options" disabled>
+                    <img src="../../icons/3dots.svg" alt="" />
+                </button>
+            </header>
+            <div class="communityAssetPreview">
+                <img src="../../assets/generic.png" alt="" data-community-preview-image />
+                <div class="communityAssetPreviewFallback" data-community-preview-fallback hidden>
+                    <img src="../../icons/file.svg" alt="" data-community-preview-icon />
+                    <span data-community-preview-message>Preview unavailable</span>
+                </div>
+            </div>
+        </section>
+        <aside class="communityAssetDetails">
+            <header class="communityAssetAuthor">
+                <img class="communityAssetAvatar" src="../../assets/community-avatar.png" alt="" data-community-avatar />
+                <span class="communityAssetAuthorCopy">
+                    <strong data-community-creator>ForgeGUI Creator</strong>
+                    <span data-community-handle>@forgegui</span>
+                </span>
+                <button type="button" class="communityAssetFollow" disabled title="Following is not available in this preview">
+                    <span>Follow</span>
+                    <img src="../../icons/follow-person.svg" alt="" />
+                </button>
+            </header>
+            <div class="communityAssetMetadata">
+                <span class="communityAssetType">
+                    <img src="../../icons/3d.svg" alt="" data-community-type-icon />
+                    <span data-community-type>3D Object</span>
+                </span>
+                <span class="communityAssetLikes" data-community-likes hidden>
+                    <img src="../../icons/heart.svg" alt="" />
+                    <span data-community-like-count></span>
+                </span>
+                <h1 data-community-title>Community asset</h1>
+                <p data-community-description></p>
+                <button type="button" class="communityAssetDescriptionToggle" data-community-description-toggle aria-expanded="false">
+                    View Full Description
+                </button>
+            </div>
+            <footer class="communityAssetActions">
+                <button type="button" class="communityAssetDownload" data-community-download>
+                    <img src="../../icons/download.svg" alt="" />
+                    <span>Download <strong>Free</strong></span>
+                </button>
+                <button type="button" class="communityAssetAction" data-community-share aria-label="Share asset">
+                    <img src="../../icons/share.svg" alt="" />
+                </button>
+                <button type="button" class="communityAssetAction" aria-label="Favorite unavailable" disabled title="Favorites are not available in this preview">
+                    <img src="../../icons/heart.svg" alt="" />
+                </button>
+            </footer>
+        </aside>
+    </fg-popup>
+</fg-popupcontainer>
+
+    </body>
+</html>

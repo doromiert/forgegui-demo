@@ -1,0 +1,985 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta name="forge-path" content="desktop/community.html">
+    <meta name="forge-route" content="community.html">
+    <meta name="forge-variant" content="desktop">
+    <style>html:not(.forge-motion-ready),html:not(.forge-motion-ready) *,html:not(.forge-motion-ready) *::before,html:not(.forge-motion-ready) *::after{animation:none!important;transition:none!important}fg-client-include{display:none}</style>
+    <script src="../scripts/vendor/supabase.js" defer></script>
+    <script src="../scripts/forge-config.js" defer></script>
+    <script src="../scripts/forge-api.js" defer></script>
+    <script src="../scripts/forge-cache.js" defer></script>
+    <script src="../scripts/auth-shell.js" defer></script>
+    <script src="../scripts/community.js" defer></script>
+    <script src="../scripts/workspace.js" defer></script>
+    <script src="../scripts/forge-loader.js"></script>
+    <script src="../scripts/forge-runtime.js" defer></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="../fg.svg" />-->
+        <style data-forge-critical>
+/* styles/base.css */
+html:not(.forge-motion-ready),
+html:not(.forge-motion-ready) *,
+html:not(.forge-motion-ready) *::before,
+html:not(.forge-motion-ready) *::after {
+   animation: none !important;
+   transition: none !important;
+}
+* {
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+   font-optical-sizing: auto;
+   transition-property:
+      color,
+      background-color,
+      border-color,
+      outline-color,
+      opacity,
+      transform,
+      translate,
+      scale,
+      box-shadow,
+      width,
+      height,
+      max-height,
+      padding,
+      margin,
+      gap;
+   transition-duration: 0.25s;
+   transition-timing-function: ease;
+}
+body {
+   background: #0a0a0a;
+   --Glass-Text: linear-gradient(
+      180deg,
+      #fff 0%,
+      rgba(255, 255, 255, 0.5) 100%
+   );
+
+   &.chat {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      padding: 10px 0 0 10px;
+      margin: 0;
+      box-sizing: border-box;
+      align-items: flex-start;
+      gap: 10px;
+   }
+}
+fg-sidebar {
+   user-select: none;
+   -webkit-user-drag: none;
+   overflow-y: scroll;
+   display: flex;
+   width: 305px;
+   padding: calc(10px + 62px + 15px) 10px 440px 10px;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 15px;
+   flex-shrink: 0;
+   align-self: stretch;
+   position: relative;
+
+   &.collapsed {
+      width: 60px;
+      padding-bottom: 20px;
+      fg-top.sb {
+         width: 60px;
+         .fgLogo {
+            display: none;
+         }
+      }
+      .sidebarElem {
+         color: #ffffff00;
+         width: 60px;
+         height: 60px;
+      }
+      fg-toplabel {
+         display: none;
+      }
+      fg-bottom {
+         display: none !important;
+      }
+   }
+
+   fg-top.sb {
+      display: flex;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      right: 10px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      box-sizing: border-box;
+      width: 305px;
+
+      .fgLogo {
+         height: 24px;
+      }
+      button {
+         border: none;
+         background: none;
+         width: 38px;
+         height: 38px;
+         border-radius: 1293px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            outline: solid 10px rgba(255, 255, 255, 0.05);
+         }
+         &:active {
+            transform: scale(0.9);
+         }
+      }
+   }
+
+   fg-specialtabs {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+   }
+
+   fg-projects {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1 0 0;
+      align-self: stretch;
+
+      fg-toplabel {
+         display: flex;
+         margin: 14px 15px;
+         align-items: center;
+         gap: 8px;
+         align-self: stretch;
+         color: #fff;
+         font-size: 20px;
+         font-weight: 500;
+      }
+   }
+
+   .conversationListStatus {
+      padding: 8px 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      line-height: 1.35;
+   }
+
+   .conversationEntry span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
+
+   .sidebarElem {
+      text-decoration: none;
+      display: flex;
+      padding: 8px 10px;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+      border-radius: 15px;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      width: 100%;
+      box-sizing: border-box;
+
+      &.selected {
+         border: 1px solid rgba(255, 255, 255, 0.2);
+         background: rgba(60, 60, 60, 0.2);
+      }
+      &:hover {
+         background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      img {
+         width: 28px;
+         height: 28px;
+         margin: 5px;
+      }
+   }
+
+   fg-bottom.sb {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      align-self: stretch;
+      box-sizing: border-box;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 12931823;
+      backdrop-filter: blur(20px);
+      border-radius: 15px;
+      width: 305px;
+      fg-actions {
+         width: 100%;
+      }
+      creditCounter {
+         box-sizing: border-box;
+         display: flex;
+         padding: 10px;
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         width: 100%;
+
+         fg-top {
+            display: flex;
+            padding: 5px 8px;
+            justify-content: space-between;
+            align-items: center;
+            align-self: stretch;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 18px;
+            font-weight: 400;
+            gap: 8px;
+
+            a {
+               color: #fff;
+               text-decoration: none;
+               font-size: 18px;
+               font-weight: 600;
+            }
+         }
+         fg-bottom {
+            display: flex;
+            flex-direction: row;
+            padding: 8px;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            align-self: stretch;
+         }
+         creditSlider {
+            height: 9px;
+            flex: 1 0 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            &::before {
+               content: "";
+               width: 100px;
+               display: flex;
+               height: 9px;
+               background: linear-gradient(0deg, #0084ff 0%, #0084ff 100%);
+            }
+         }
+      }
+
+      fg-sidebaruserbutton {
+         display: flex;
+         padding: 15px;
+         align-items: center;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         user-select: none;
+
+         fg-vertical {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 34px;
+            width: 100%;
+
+            b {
+               color: #fff;
+               font-size: 20px;
+               font-weight: 600;
+               line-height: 20px;
+            }
+
+            span {
+               color: rgba(255, 255, 255, 0.8);
+               font-size: 16px;
+               font-weight: 400;
+               line-height: normal;
+            }
+         }
+
+         img {
+            width: 38px;
+            height: 38px;
+            border-radius: 38px;
+         }
+
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+         }
+      }
+   }
+}
+.upgradeButton {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   padding: 12px 20px;
+   background: #0077ff;
+   border: none;
+   border-radius: 15px;
+   cursor: pointer;
+   position: relative;
+
+   &:hover {
+      background-color: #32a3ff !important;
+   }
+
+   &.selected {
+      background-color: #32a3ff !important;
+   }
+
+   &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+      pointer-events: none;
+   }
+
+   span {
+      font-weight: bold;
+      font-size: 20px;
+      white-space: nowrap;
+      background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0px 1px 1.4px rgba(0, 0, 0, 0.25));
+   }
+}
+fg-mainview {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-sizing: border-box;
+   flex: 1 0 0;
+   height: 100%;
+   overflow-y: scroll;
+   border-radius: 20px 0 0 0;
+   border-top: 1px solid #333;
+   border-left: 1px solid #333;
+   background: #161616;
+   h1 {
+      margin: 0;
+   }
+}
+/* styles/community.css */
+/* Page-specific styles extracted from base.css. */
+
+fg-mainview#community {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+   padding: 16px 25px;
+}
+.postButton {
+   display: flex;
+   width: 195px;
+   padding: 12px 0;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+   border-radius: 8px;
+   background: #07f;
+   box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.59) inset;
+   border: none;
+   span {
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      background: var(
+         --Glass-Text,
+         linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%)
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+   }
+}
+fg-timeline {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   border-radius: 20px;
+   border: 1px solid #454545;
+   box-sizing: border-box;
+   width: 770px;
+   max-width: 100%;
+   height: max-content;
+   fg-post {
+      cursor: pointer;
+   }
+   fg-post:last-child {
+      border: none;
+   }
+}
+.communityStatus {
+   width: 100%;
+   margin: 0;
+   padding: 36px 24px;
+   box-sizing: border-box;
+   color: rgba(255, 255, 255, 0.6);
+   text-align: center;
+}
+.communityStatus.is-error {
+   color: #ff9b9b;
+}
+fg-engagement[data-community-like],
+[data-community-share],
+[data-community-comments] {
+   cursor: pointer;
+}
+fg-engagement[data-community-like].is-liked img,
+fg-popup#post-detail [data-community-like].is-liked img {
+   filter: sepia(1) saturate(8) hue-rotate(305deg);
+}
+[data-community-follow].is-following {
+   background: #292929 !important;
+   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.2) !important;
+}
+fg-mediaplaceholder[data-community-media-preview] {
+   display: flex;
+   overflow-x: auto;
+   gap: 6px;
+}
+fg-mediaplaceholder[data-community-media-preview] img {
+   width: 100%;
+   min-width: 100%;
+   height: 100%;
+   object-fit: cover;
+   border-radius: 10px;
+}
+.communityCommentEmpty {
+   margin: 0;
+   padding: 24px;
+   color: rgba(255, 255, 255, 0.6);
+   text-align: center;
+}
+fg-sticky {
+   position: sticky;
+   display: flex;
+   flex-direction: column;
+   left: 0;
+   top: 0;
+   width: 100%;
+   align-items: center;
+
+   fg-communitytags {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      height: 48px;
+      justify-content: center;
+      fg-communitytag {
+         display: flex;
+         padding: 12px 16px;
+         align-items: center;
+         gap: 10px;
+         border-radius: 15px;
+         background: #212121;
+         &.active {
+            background: #545454;
+         }
+      }
+   }
+
+   & > fg-top {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      color: #fff;
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      img {
+         height: 32px;
+      }
+   }
+   gap: 16px;
+}
+fg-userctx {
+   position: fixed;
+   z-index: 9999999999999999999999999999999999999999999999999;
+   display: flex;
+   width: 280px;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   border-radius: 20px;
+   border: 1px solid rgba(255, 255, 255, 0.08);
+   background: #0a0a0a;
+   box-shadow: 0 4px 29px 0 rgba(0, 0, 0, 0.25);
+   overflow: hidden;
+   flex-shrink: 0;
+   /* hidden by default — no display:none so transitions work */
+   opacity: 0;
+   pointer-events: none;
+   transform: translateY(-12px);
+   transition:
+      opacity 0.18s ease-out,
+      transform 0.18s ease-out;
+   &.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+   }
+   fg-buttons {
+      display: flex;
+      padding: 12px 15px 15px 15px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      align-self: stretch;
+      box-sizing: border-box;
+      button {
+         display: flex;
+         padding: 12px 0;
+         justify-content: center;
+         align-items: center;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 8px;
+         border: none;
+         background: #1d1d1d;
+         box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.21) inset;
+         height: 36px;
+         &.active {
+            background: #07f;
+            box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.59) inset;
+         }
+         b {
+            color: #fff;
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+         }
+         span {
+            color: #fff;
+            font-family: "Atkinson Hyperlegible Next";
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+         }
+      }
+   }
+   fg-doxx {
+      align-items: flex-start;
+      width: 100%;
+      padding: 0 20px;
+      box-sizing: border-box;
+      margin-top: 30px;
+      gap: 0;
+      b {
+         color: #fff;
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 20px;
+         font-style: normal;
+         font-weight: 600;
+         line-height: normal;
+      }
+      span {
+         color: rgba(255, 255, 255, 0.7);
+         font-family: "Atkinson Hyperlegible Next";
+         font-size: 18px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: normal;
+      }
+   }
+   fg-banner {
+      display: flex;
+      height: 116px;
+      padding: 10px;
+      justify-content: flex-end;
+      align-items: flex-end;
+      gap: 5px;
+      align-self: stretch;
+      background-image: url("../assets/coursePlaceholder.jpg");
+      position: relative;
+      flex-shrink: 0;
+
+      img {
+         position: absolute;
+         left: 21px;
+         bottom: -20px;
+         width: 85px;
+         height: 85px;
+         border-radius: 85px;
+         border: 5px solid #0a0a0a;
+      }
+   }
+}
+</style>
+    <link rel="stylesheet" href="../styles/base.css" />
+        <link rel="stylesheet" href="../styles/community.css" />
+        <script src="../scripts/site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
+
+        <style></style>
+    </head>
+
+    <body class="chat">
+        <fg-sidebar>
+    <fg-top class="sb">
+        <img src="../assets/footerLogo.svg" class="fgLogo" alt="ForgeGUI" />
+        <button type="button" data-toggle-sidebar aria-label="Toggle sidebar">
+            <img src="../icons/sidebar.svg" alt="" />
+        </button>
+    </fg-top>
+
+    <fg-specialtabs>
+        <a href="../home.html" class="sidebarElem">
+            <img src="../icons/home.svg" alt="" />
+            <span>Home</span>
+        </a>
+        <a href="../library/overview.html" class="sidebarElem">
+            <img src="../icons/file.svg" alt="" />
+            <span>Assets</span>
+        </a>
+        <a href="../community.html" class="sidebarElem selected">
+            <img src="../icons/people.svg" alt="" />
+            <span>Community</span>
+        </a>
+    </fg-specialtabs>
+
+    <fg-projects data-conversation-list hidden>
+        <fg-toplabel>Games</fg-toplabel>
+        <span class="conversationListStatus" data-conversation-status>Loading chats...</span>
+    </fg-projects>
+
+    <fg-contextmenu
+        id="userMenu"
+        class="hidden user"
+        style="width: 282px"
+    >
+        <a href="mailto:support@forgegui.com"><img src="../icons/Exclamation.svg" alt="" /> Help</a>
+        <a href="../settings/overview.html"><img src="../icons/Settings.svg" alt="" /> Settings</a>
+
+        <button class="destructive" data-auth-signout>
+            <img src="../icons/SignOut.svg" alt="" /> Logout
+        </button>
+    </fg-contextmenu>
+
+    <fg-bottom class="sb">
+        <a href="../plans.html" class="sidebarElem upgradeButton">
+            <img src="../icons/crown.svg" alt="" style="image-rendering: optimizeQuality" />
+            <span>Upgrade to Pro</span>
+        </a>
+
+        <fg-actions>
+            <a href="../courses.html" class="sidebarElem">
+                <img src="../icons/book.svg" alt="" />
+                <span>Courses</span>
+            </a>
+            <a href="../plugins.html" class="sidebarElem">
+                <img src="../icons/plugin.svg" alt="" />
+                <span>Plugins</span>
+            </a>
+            <a href="../leaderboard.html" class="sidebarElem">
+                <img src="../icons/Trophy.svg" alt="" />
+                <span>Leaderboard</span>
+            </a>
+            <a href="../notifications.html" class="sidebarElem">
+                <img src="../icons/bell.svg" alt="" />
+                <span>Notifications</span>
+            </a>
+        </fg-actions>
+
+        <fg-sidebaruserbutton data-context-target="userMenu">
+            <img src="../assets/generic.png" alt="" data-user-avatar />
+            <fg-vertical>
+                <b data-user-name>Creator</b>
+                <span data-user-email></span>
+            </fg-vertical>
+            <img src="../icons/selection.svg" alt="" />
+        </fg-sidebaruserbutton>
+    </fg-bottom>
+</fg-sidebar>
+
+<fg-mainview id="community">
+                <fg-sticky>
+                    <fg-top>
+                        <img src="../icons/people.svg" />
+                        <span>Community</span>
+                    </fg-top>
+                    <fg-communitytags>
+                        <fg-communitytag class="active" role="button" tabindex="0" data-community-category="">
+                            🔥 Trending
+                        </fg-communitytag>
+                        <fg-communitytag role="button" tabindex="0" data-community-category="Music"> 🎸 Music </fg-communitytag>
+                        <fg-communitytag role="button" tabindex="0" data-community-category="Announcements"> 📣 Announcements </fg-communitytag>
+                        <fg-communitytag role="button" tabindex="0" data-community-category="Development"> 👾 Development </fg-communitytag>
+                        <fg-communitytag role="button" tabindex="0" data-community-category="Gaming"> 🕹️ Gaming </fg-communitytag>
+                        <fg-communitytag role="button" tabindex="0" data-community-category="Drawing"> ✏️ Drawing </fg-communitytag>
+                        <fg-communitytag role="button" tabindex="0" data-community-category="Writing"> 📝 Writing </fg-communitytag>
+                        <fg-searchwrapper>
+                            <img src="../icons/search.svg" />
+                            <input type="search" placeholder="Search" aria-label="Search Community" data-community-search />
+                        </fg-searchwrapper>
+                    </fg-communitytags>
+                    <button class="postButton" data-popup-open="new-post">
+                        <img src="../icons/s-add.svg" /><span>Post</span>
+                    </button>
+                </fg-sticky>
+                <fg-timeline data-community-feed aria-live="polite">
+                    <p class="communityStatus" data-community-status>Loading Community...</p>
+                </fg-timeline>
+                <fg-userctx data-community-user-context>
+                    <fg-banner>
+                        <img src="../assets/generic.png" data-community-context-avatar />
+                    </fg-banner>
+                    <fg-doxx>
+                        <b data-community-context-name>User</b>
+                        <span data-community-context-handle>@user</span>
+                    </fg-doxx>
+                    <fg-buttons>
+                        <button class="profileButton active" type="button" data-community-follow>
+                            <b>Follow</b><span data-community-context-followers>0</span>
+                        </button>
+                        <button class="profileButton" data-popup-open="user-profile">
+                            <b>View Profile</b>
+                        </button>
+                    </fg-buttons>
+                </fg-userctx>
+
+                <fg-popupcontainer class="hidden">
+                    <fg-popup id="user-profile" class="hidden" aria-label="User profile">
+                        <fg-leftside>
+                            <fg-banner>
+                                <button
+                                    class="closeButton"
+                                    data-popup-close
+                                >
+                                    <img src="../icons/x.svg" />
+                                </button>
+                                <img src="../assets/generic.png" data-community-profile-avatar />
+                            </fg-banner>
+                            <header>
+                                <fg-doxx>
+                                    <b data-community-profile-name>User</b>
+                                    <span data-community-profile-handle>@user</span>
+                                </fg-doxx>
+                                <fg-bignumber>
+                                    <b data-community-profile-followers>0</b>
+                                    <span>Followers</span>
+                                </fg-bignumber>
+                                <fg-bignumber>
+                                    <b data-community-profile-likes>0</b>
+                                    <span>Likes</span>
+                                </fg-bignumber>
+                                <button class="postButton follow" type="button" data-community-follow>
+                                    <b>Follow</b>
+                                </button>
+                            </header>
+                            <fg-bio>
+                                <header>About Me</header>
+                                <fg-content data-community-profile-bio>No biography yet.</fg-content>
+                            </fg-bio>
+                            <fg-games hidden>
+                                <header>Games</header>
+                                <fg-gamesgrid>
+                                    <fg-game>
+    <b>Game Title</b>
+    <span>By ForgeGUI</span>
+</fg-game>
+
+                                    <fg-game>
+    <b>Game Title</b>
+    <span>By ForgeGUI</span>
+</fg-game>
+
+                                    <fg-game>
+    <b>Game Title</b>
+    <span>By ForgeGUI</span>
+</fg-game>
+
+                                    <fg-game>
+    <b>Game Title</b>
+    <span>By ForgeGUI</span>
+</fg-game>
+
+                                    <fg-game>
+    <b>Game Title</b>
+    <span>By ForgeGUI</span>
+</fg-game>
+
+                                    <fg-game>
+    <b>Game Title</b>
+    <span>By ForgeGUI</span>
+</fg-game>
+
+                                    <fg-game>
+    <b>Game Title</b>
+    <span>By ForgeGUI</span>
+</fg-game>
+
+                                    <fg-game>
+    <b>Game Title</b>
+    <span>By ForgeGUI</span>
+</fg-game>
+
+                                    <fg-game>
+    <b>Game Title</b>
+    <span>By ForgeGUI</span>
+</fg-game>
+
+                                </fg-gamesgrid>
+                            </fg-games>
+                        </fg-leftside>
+                        <fg-rightside data-community-profile-posts>
+                        </fg-rightside>
+                    </fg-popup>
+                    <fg-popup id="new-post" class="hidden" aria-label="Create post">
+                        <fg-top>
+                            <img src="../assets/generic.png" data-user-avatar />
+                            <fg-vertical>
+                                <b data-user-name>Creator</b>
+                                <span data-user-handle>@creator</span>
+                            </fg-vertical>
+                            <button
+                                class="closeButton"
+                                data-popup-close
+                            >
+                                <img src="../icons/x.svg" />
+                            </button>
+                        </fg-top>
+                        <form id="community-create-form" data-community-create-form>
+                            <div class="postField">
+                                <input
+                                    name="title"
+                                    type="text"
+                                    placeholder="Title"
+                                    maxlength="50"
+                                />
+                                <span class="charCounter">0/50</span>
+                            </div>
+                            <div class="postField">
+                                <textarea
+                                    name="description"
+                                    placeholder="Text"
+                                    maxlength="1000"
+                                ></textarea>
+                                <span class="charCounter">0/1000</span>
+                            </div>
+                        </form>
+                        <fg-mediaslots>
+                            <header>
+                                <img src="../icons/picture.svg" />
+                                <span>Media</span>
+                                <span>Up to 4 images</span>
+                            </header>
+                            <fg-mediacarousel>
+                                <button class="addMediaButton" type="button" data-community-add-media>
+                                    <img src="../icons/add.svg" />
+                                </button>
+                                <fg-mediaplaceholder data-community-media-preview></fg-mediaplaceholder>
+                                <input type="file" accept="image/*" multiple hidden data-community-media-input />
+                            </fg-mediacarousel>
+                        </fg-mediaslots>
+                        <button class="postButton" type="submit" form="community-create-form" data-community-create-submit>
+                            Upload Post
+                            <img src="../icons/send.svg" />
+                        </button>
+                    </fg-popup>
+                    <fg-popup id="post-detail" class="hidden" aria-label="Community post">
+                        <fg-top>
+                            <button class="backButton" data-popup-close>
+                                <img
+                                    src="../icons/arrow.svg"
+                                    style="rotate: 90deg"
+                                />
+                            </button>
+                            <span> Community Post </span>
+                            <div style="flex: 1"></div>
+                            <img src="../icons/3dots.svg" />
+                        </fg-top>
+                        <header>
+                             <img src="../assets/generic.png" data-community-detail-avatar />
+                            <fg-doxx>
+                                 <b data-community-detail-name>User</b>
+                                 <span data-community-detail-handle>@user</span>
+                            </fg-doxx>
+                             <button class="followButton" type="button" data-community-follow>
+                                Follow
+                                <img src="../icons/follow.svg" />
+                            </button>
+                        </header>
+                        <fg-posttitle>
+                             <b data-community-detail-title>Community post</b>
+                             <span data-community-detail-description></span>
+                             <fg-tags data-community-detail-tags>
+                            </fg-tags>
+                        </fg-posttitle>
+                         <fg-content class="img" data-community-detail-media>
+                             <img src="../assets/generic.png" alt="" />
+                        </fg-content>
+                        <fg-bottom>
+                             <img src="../icons/share.svg" role="button" tabindex="0" data-community-share />
+                            <div style="flex: 1"></div>
+                             <fg-engagement role="button" tabindex="0" data-community-like>
+                                <img src="../icons/heart.svg" />
+                                 <span data-community-detail-likes>0</span>
+                            </fg-engagement>
+                            <fg-engagement>
+                                <img src="../icons/message.svg" />
+                                 <span data-community-detail-comments>0</span>
+                            </fg-engagement>
+                        </fg-bottom>
+                        <fg-commentsbox>
+                            <header>
+                                <b>Comments</b>
+                                 <span><b data-community-comment-count>0</b> Comments</span>
+                            </header>
+                             <form data-community-comment-form>
+                             <fg-commentfield>
+                                <input
+                                    type="text"
+                                    placeholder="Type Comment..."
+                                />
+                                 <button type="submit" aria-label="Send comment"><img src="../icons/send.svg" /></button>
+                             </fg-commentfield>
+                             </form>
+                             <div data-community-comments-list></div>
+                        </fg-commentsbox>
+                    </fg-popup>
+                </fg-popupcontainer>
+            </fg-mainview>
+
+    </body>
+</html>

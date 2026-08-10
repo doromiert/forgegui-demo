@@ -1,0 +1,897 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="forge-path" content="mobile/oldChat.html">
+    <meta name="forge-route" content="oldChat.html">
+    <meta name="forge-variant" content="mobile">
+    <style>html:not(.forge-motion-ready),html:not(.forge-motion-ready) *,html:not(.forge-motion-ready) *::before,html:not(.forge-motion-ready) *::after{animation:none!important;transition:none!important}fg-client-include{display:none}</style>
+    <script src="../scripts/vendor/supabase.js" defer></script>
+    <script src="../scripts/forge-config.js" defer></script>
+    <script src="../scripts/forge-api.js" defer></script>
+    <script src="../scripts/forge-cache.js" defer></script>
+    <script src="../scripts/auth-shell.js" defer></script>
+    <script src="../scripts/genbox.js" defer></script>
+    <script src="../scripts/workspace.js" defer></script>
+    <script src="../scripts/forge-loader.js"></script>
+    <script src="../scripts/forge-runtime.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat - ForgeGUI</title>
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
+    <style data-forge-critical>
+/* styles/base.css */
+html:not(.forge-motion-ready),
+html:not(.forge-motion-ready) *,
+html:not(.forge-motion-ready) *::before,
+html:not(.forge-motion-ready) *::after {
+   animation: none !important;
+   transition: none !important;
+}
+* {
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+   font-optical-sizing: auto;
+   transition-property:
+      color,
+      background-color,
+      border-color,
+      outline-color,
+      opacity,
+      transform,
+      translate,
+      scale,
+      box-shadow,
+      width,
+      height,
+      max-height,
+      padding,
+      margin,
+      gap;
+   transition-duration: 0.25s;
+   transition-timing-function: ease;
+}
+body {
+   background: #0a0a0a;
+   --Glass-Text: linear-gradient(
+      180deg,
+      #fff 0%,
+      rgba(255, 255, 255, 0.5) 100%
+   );
+
+   &.chat {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      padding: 10px 0 0 10px;
+      margin: 0;
+      box-sizing: border-box;
+      align-items: flex-start;
+      gap: 10px;
+   }
+}
+fg-sidebar {
+   user-select: none;
+   -webkit-user-drag: none;
+   overflow-y: scroll;
+   display: flex;
+   width: 305px;
+   padding: calc(10px + 62px + 15px) 10px 440px 10px;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 15px;
+   flex-shrink: 0;
+   align-self: stretch;
+   position: relative;
+
+   &.collapsed {
+      width: 60px;
+      padding-bottom: 20px;
+      fg-top.sb {
+         width: 60px;
+         .fgLogo {
+            display: none;
+         }
+      }
+      .sidebarElem {
+         color: #ffffff00;
+         width: 60px;
+         height: 60px;
+      }
+      fg-toplabel {
+         display: none;
+      }
+      fg-bottom {
+         display: none !important;
+      }
+   }
+
+   fg-top.sb {
+      display: flex;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      right: 10px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      box-sizing: border-box;
+      width: 305px;
+
+      .fgLogo {
+         height: 24px;
+      }
+      button {
+         border: none;
+         background: none;
+         width: 38px;
+         height: 38px;
+         border-radius: 1293px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            outline: solid 10px rgba(255, 255, 255, 0.05);
+         }
+         &:active {
+            transform: scale(0.9);
+         }
+      }
+   }
+
+   fg-specialtabs {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+   }
+
+   fg-projects {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1 0 0;
+      align-self: stretch;
+
+      fg-toplabel {
+         display: flex;
+         margin: 14px 15px;
+         align-items: center;
+         gap: 8px;
+         align-self: stretch;
+         color: #fff;
+         font-size: 20px;
+         font-weight: 500;
+      }
+   }
+
+   .conversationListStatus {
+      padding: 8px 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      line-height: 1.35;
+   }
+
+   .conversationEntry span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
+
+   .sidebarElem {
+      text-decoration: none;
+      display: flex;
+      padding: 8px 10px;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+      border-radius: 15px;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      width: 100%;
+      box-sizing: border-box;
+
+      &.selected {
+         border: 1px solid rgba(255, 255, 255, 0.2);
+         background: rgba(60, 60, 60, 0.2);
+      }
+      &:hover {
+         background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      img {
+         width: 28px;
+         height: 28px;
+         margin: 5px;
+      }
+   }
+
+   fg-bottom.sb {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      align-self: stretch;
+      box-sizing: border-box;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 12931823;
+      backdrop-filter: blur(20px);
+      border-radius: 15px;
+      width: 305px;
+      fg-actions {
+         width: 100%;
+      }
+      creditCounter {
+         box-sizing: border-box;
+         display: flex;
+         padding: 10px;
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         width: 100%;
+
+         fg-top {
+            display: flex;
+            padding: 5px 8px;
+            justify-content: space-between;
+            align-items: center;
+            align-self: stretch;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 18px;
+            font-weight: 400;
+            gap: 8px;
+
+            a {
+               color: #fff;
+               text-decoration: none;
+               font-size: 18px;
+               font-weight: 600;
+            }
+         }
+         fg-bottom {
+            display: flex;
+            flex-direction: row;
+            padding: 8px;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            align-self: stretch;
+         }
+         creditSlider {
+            height: 9px;
+            flex: 1 0 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            &::before {
+               content: "";
+               width: 100px;
+               display: flex;
+               height: 9px;
+               background: linear-gradient(0deg, #0084ff 0%, #0084ff 100%);
+            }
+         }
+      }
+
+      fg-sidebaruserbutton {
+         display: flex;
+         padding: 15px;
+         align-items: center;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         user-select: none;
+
+         fg-vertical {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 34px;
+            width: 100%;
+
+            b {
+               color: #fff;
+               font-size: 20px;
+               font-weight: 600;
+               line-height: 20px;
+            }
+
+            span {
+               color: rgba(255, 255, 255, 0.8);
+               font-size: 16px;
+               font-weight: 400;
+               line-height: normal;
+            }
+         }
+
+         img {
+            width: 38px;
+            height: 38px;
+            border-radius: 38px;
+         }
+
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+         }
+      }
+   }
+}
+.upgradeButton {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   padding: 12px 20px;
+   background: #0077ff;
+   border: none;
+   border-radius: 15px;
+   cursor: pointer;
+   position: relative;
+
+   &:hover {
+      background-color: #32a3ff !important;
+   }
+
+   &.selected {
+      background-color: #32a3ff !important;
+   }
+
+   &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+      pointer-events: none;
+   }
+
+   span {
+      font-weight: bold;
+      font-size: 20px;
+      white-space: nowrap;
+      background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0px 1px 1.4px rgba(0, 0, 0, 0.25));
+   }
+}
+fg-mainview {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-sizing: border-box;
+   flex: 1 0 0;
+   height: 100%;
+   overflow-y: scroll;
+   border-radius: 20px 0 0 0;
+   border-top: 1px solid #333;
+   border-left: 1px solid #333;
+   background: #161616;
+   h1 {
+      margin: 0;
+   }
+}
+/* styles/old-chat.css */
+/* Conversation layout preserved from the August 9 interface. */
+
+fg-mainview.currentConvo {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   flex: 1 0 0;
+   align-self: stretch;
+}
+fg-mainview.currentConvo > header {
+   display: flex;
+   padding: 20px 25px 0 25px;
+   align-items: center;
+   gap: 10px;
+   align-self: stretch;
+}
+fg-mainview.currentConvo > fg-mainviewtop {
+   display: flex;
+   height: 734px;
+   padding: 15px;
+   justify-content: flex-end;
+   align-items: flex-start;
+   gap: 15px;
+   flex: 1 0 0;
+   align-self: stretch;
+   color: #fff;
+   text-align: center;
+   font-family: "Atkinson Hyperlegible Next";
+   font-size: 22px;
+   font-weight: 500;
+}
+fg-mainview.currentConvo fg-chatcontainer {
+   display: flex;
+   padding: 0 10px;
+   flex: 1 0 0;
+   flex-direction: column;
+   align-items: flex-start;
+   align-self: stretch;
+   overflow: hidden;
+   border: 1px solid #464646;
+   border-radius: 25px;
+   background: #0c0c0c;
+}
+fg-mainview.currentConvo fg-chatcontainer > fg-top {
+   display: flex;
+   width: 100%;
+   height: 24px !important;
+   padding: 15px 0;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+   color: #fff;
+   text-align: center;
+   font-family: "Atkinson Hyperlegible Next";
+   font-size: 22px;
+   font-weight: 500;
+}
+fg-mainview.currentConvo fg-chatcontainer.convo {
+   display: flex;
+   width: 441px !important;
+   padding: 0 10px 10px;
+   flex: none;
+   flex-direction: column;
+   align-items: flex-start;
+   align-self: stretch;
+}
+.assetGrid {
+   display: grid;
+   height: 100%;
+   padding: 2px;
+   overflow-y: auto;
+   flex: 1 0 0;
+   align-self: stretch;
+   grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+   align-content: flex-start;
+   gap: 10px;
+}
+.assetGrid a,
+.assetGrid img {
+   display: block;
+   width: 100%;
+   border-radius: 14px;
+}
+.assetGrid img {
+   aspect-ratio: 1;
+   object-fit: cover;
+   animation: assetFadeIn 550ms ease-out both;
+}
+fg-bottom.convo.workspaceMessages {
+   display: flex;
+   padding: 10px;
+   overflow-y: auto;
+   flex: 1 0 0;
+   align-items: flex-end;
+   align-self: stretch;
+   flex-direction: column;
+   gap: 10px;
+   border-radius: 16px;
+   background: #161616;
+}
+.workspaceMessage {
+   display: flex;
+   width: 400px;
+   max-width: 100%;
+   padding: 12px;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 10px;
+   border-radius: 9px;
+   text-align: left;
+}
+.workspaceMessage.you {
+   background: #2a2a2a;
+}
+.workspaceMessage > strong {
+   color: rgba(255, 255, 255, 0.55);
+   font-size: 18px;
+   font-weight: 400;
+}
+.workspaceMessage.forge > strong {
+   color: #72baff;
+}
+.workspaceMessage > p {
+   margin: 0;
+   line-height: 1.4;
+   white-space: pre-wrap;
+}
+.workspaceTask {
+   display: flex;
+   width: 100%;
+   padding: 10px;
+   flex-direction: column;
+   gap: 8px;
+   border: 1px solid rgba(255, 255, 255, 0.1);
+   border-radius: 10px;
+   background: #111;
+}
+.workspaceTask header {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 10px;
+}
+.workspaceTask header span {
+   color: rgba(255, 255, 255, 0.55);
+   font-size: 12px;
+   text-transform: capitalize;
+}
+.workspaceTask img {
+   width: 100%;
+   border-radius: 8px;
+}
+.workspaceTask a {
+   color: #72baff;
+}
+.workspaceTaskError {
+   color: #ff9b9b;
+}
+.workspaceGenbox {
+   --gb-ratio: 1 / 1;
+   align-self: flex-start;
+   max-width: 280px;
+   width: min(100%, 280px);
+}
+.workspaceClarification {
+   display: flex;
+   width: 100%;
+   padding: 12px;
+   flex-direction: column;
+   gap: 8px;
+   border: 1px solid rgba(114, 186, 255, 0.3);
+   border-radius: 10px;
+   background: rgba(0, 119, 255, 0.08);
+}
+.workspaceClarification button {
+   padding: 10px;
+   border: 1px solid rgba(255, 255, 255, 0.12);
+   border-radius: 8px;
+   background: #202020;
+   color: #fff;
+   cursor: pointer;
+   text-align: left;
+}
+.workspaceEmpty {
+   margin: auto;
+   color: rgba(255, 255, 255, 0.5);
+   text-align: center;
+}
+.assetGrid > .workspaceEmpty {
+   grid-column: 1 / -1;
+   align-self: center;
+   justify-self: center;
+}
+.workspaceMessages > .workspaceEmpty {
+   align-self: center;
+}
+.mobileConversationPage {
+   min-height: 100vh;
+   margin: 0;
+   background: #0a0a0a;
+   color: #fff;
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+}
+.mobileConversationShell {
+   display: grid;
+   min-height: 100vh;
+   grid-template-rows: auto minmax(0, 1fr) auto;
+}
+.mobileConversationHeader {
+   display: grid;
+   min-height: 64px;
+   padding: 10px 14px;
+   align-items: center;
+   grid-template-columns: 48px minmax(0, 1fr) 48px;
+   border-bottom: 1px solid #262626;
+   text-align: center;
+}
+.mobileConversationHeader a {
+   color: #72baff;
+   text-decoration: none;
+}
+.mobileConversationHeader img {
+   width: 24px;
+   rotate: 90deg;
+}
+.mobileConversationShell > .workspaceMessages {
+   display: flex;
+   min-height: 0;
+   padding: 14px;
+   overflow-y: auto;
+   flex-direction: column;
+   gap: 10px;
+}
+.mobileConversationComposer {
+   padding: 10px;
+   border-top: 1px solid #262626;
+   background: #080808;
+}
+.mobileConversationComposer fg-chatbox {
+   width: 100%;
+}
+.mobileConversationComposer fg-chatbox fg-bottom > .chatboxButton:not(.mobileChatboxControl):not(.send),
+.mobileConversationComposer fg-chatbox fg-contextmenu {
+   display: none;
+}
+.mobileConversationComposer fg-chatbox .mobileChatboxControl {
+   display: flex;
+   width: 44px;
+   height: 44px;
+   padding: 10px;
+   justify-content: center;
+}
+.mobileConversationComposer fg-chatbox .mobileChatboxControl img {
+   width: 24px;
+   height: 24px;
+}
+.mobileConversationComposer fg-chatbox [data-chat-attachment] {
+   position: relative;
+}
+.mobileConversationComposer fg-chatbox [data-chat-attachment].hasAttachments::after {
+   content: attr(data-attachment-count);
+   position: absolute;
+   top: -4px;
+   right: -4px;
+   display: grid;
+   width: 18px;
+   height: 18px;
+   place-items: center;
+   border-radius: 50%;
+   background: #07f;
+   color: #fff;
+   font-size: 11px;
+   font-weight: 700;
+}
+@keyframes assetFadeIn {
+   from { opacity: 0; transform: perspective(400px) rotateX(-14deg) rotateY(14deg) scale(0.82); }
+   65% { opacity: 1; transform: perspective(400px) rotateX(-2deg) rotateY(2deg) scale(1.08); }
+   to { opacity: 1; transform: perspective(400px) rotateX(0) rotateY(0) scale(1); }
+}
+@keyframes workspacePulse {
+   50% { border-color: rgba(114, 186, 255, 0.5); }
+}
+.conversationEntering fg-mainview.currentConvo > fg-mainviewtop,
+.conversationEntering .mobileConversationShell > .workspaceMessages {
+   animation: conversationPanelsIn 480ms ease-out both;
+}
+.conversationEntering fg-mainview.currentConvo > fg-bottom,
+.conversationEntering .mobileConversationComposer {
+   animation: conversationComposerDown 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes conversationPanelsIn {
+   from { opacity: 0; transform: translateY(18px); }
+   to { opacity: 1; transform: translateY(0); }
+}
+@keyframes conversationComposerDown {
+   from { opacity: 0.72; transform: translateY(-32vh) scale(1.015); }
+   to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+   .conversationEntering fg-mainview.currentConvo > fg-mainviewtop,
+   .conversationEntering .mobileConversationShell > .workspaceMessages,
+   .conversationEntering fg-mainview.currentConvo > fg-bottom,
+   .conversationEntering .mobileConversationComposer {
+      animation: none;
+   }
+}
+/* styles/genbox.css */
+/* genbox — image generation placeholder
+   everything is scoped under .genbox. recolour via the custom properties below. */
+
+.genbox {
+   /* ---- palette ---- */
+   --gb-1: #4f6bff; /* blue    */
+   --gb-2: #8b5cf6; /* violet  */
+   --gb-3: #22d3ee; /* cyan    */
+   --gb-4: #c026d3; /* magenta */
+   --gb-plate: #0e0c16; /* box fill */
+   --gb-radius: 20px;
+   --gb-ratio: 4/5;
+   --gb-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+
+   position: relative;
+   width: 100%;
+   aspect-ratio: var(--gb-ratio);
+   border-radius: var(--gb-radius);
+   overflow: hidden;
+   isolation: isolate;
+   background: var(--gb-plate);
+   border: 1px solid #ffffff12;
+   box-shadow: 0 20px 50px -24px #4f6bff55;
+}
+/* ---- 1. drifting glow ---- */
+.genbox-glow {
+   position: absolute;
+   inset: -30%;
+   filter: blur(46px);
+   pointer-events: none;
+}
+.genbox-blob {
+   position: absolute;
+   border-radius: 50%;
+   mix-blend-mode: screen;
+   will-change: transform;
+}
+.genbox-b1 {
+   width: 95%;
+   height: 60%;
+   left: -18%;
+   bottom: -10%;
+   background: radial-gradient(circle, var(--gb-1) 0%, #4f6bff00 68%);
+   animation: gb-d1 17s ease-in-out infinite;
+}
+.genbox-b2 {
+   width: 85%;
+   height: 55%;
+   right: -16%;
+   bottom: -6%;
+   background: radial-gradient(circle, var(--gb-3) 0%, #22d3ee00 66%);
+   animation: gb-d2 21s ease-in-out infinite;
+}
+.genbox-b3 {
+   width: 70%;
+   height: 44%;
+   left: 12%;
+   bottom: 4%;
+   background: radial-gradient(circle, var(--gb-2) 0%, #8b5cf600 64%);
+   animation: gb-d3 13s ease-in-out infinite;
+}
+.genbox-b4 {
+   width: 130%;
+   height: 30%;
+   left: -14%;
+   top: -14%;
+   background: radial-gradient(
+      ellipse at 50% 100%,
+      var(--gb-2) 0%,
+      #8b5cf600 70%
+   );
+   animation: gb-d4 19s ease-in-out infinite;
+}
+.genbox-b5 {
+   width: 45%;
+   height: 38%;
+   left: -12%;
+   bottom: 22%;
+   background: radial-gradient(circle, var(--gb-4) 0%, #c026d300 65%);
+   animation: gb-d2 25s ease-in-out infinite reverse;
+}
+@keyframes gb-d1 {
+   0%,
+   100% {
+      transform: translate3d(0, 0, 0) scale(1);
+   }
+   33% {
+      transform: translate3d(9%, -6%, 0) scale(1.15);
+   }
+   66% {
+      transform: translate3d(-6%, 4%, 0) scale(0.92);
+   }
+}
+@keyframes gb-d2 {
+   0%,
+   100% {
+      transform: translate3d(0, 0, 0) scale(1.05);
+   }
+   40% {
+      transform: translate3d(-11%, -8%, 0) scale(0.9);
+   }
+   70% {
+      transform: translate3d(5%, 3%, 0) scale(1.2);
+   }
+}
+@keyframes gb-d3 {
+   0%,
+   100% {
+      transform: translate3d(0, 0, 0) scale(0.95);
+   }
+   50% {
+      transform: translate3d(14%, -10%, 0) scale(1.25);
+   }
+}
+@keyframes gb-d4 {
+   0%,
+   100% {
+      transform: translate3d(-4%, 0, 0) scale(1);
+   }
+   50% {
+      transform: translate3d(6%, 2%, 0) scale(1.1);
+   }
+}
+</style>
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="../styles/old-chat.css" />
+    <link rel="stylesheet" href="../styles/genbox.css" />
+  </head>
+  <body class="mobileConversationPage">
+    <main class="mobileConversationShell">
+      <header class="mobileConversationHeader">
+        <a href="../home.html" aria-label="Back to home"><img src="../icons/arrow.svg" alt="" /></a>
+        <strong data-chat-title>Conversation</strong>
+        <a href="../home.html">New</a>
+      </header>
+      <section class="workspaceMessages" data-chat-messages aria-live="polite">
+        <p class="workspaceEmpty">Loading conversation...</p>
+      </section>
+      <section class="mobileConversationComposer">
+        <fg-chatbox data-chat-form>
+  <fg-assetbar data-chat-attachment-preview role="group" aria-label="Reference images">
+    <button class="chatboxAttachmentButton" type="button" aria-label="Add reference images" data-chat-attachment>
+      <img src="../icons/add.svg" alt="" />
+    </button>
+    <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple hidden data-chat-attachment-input />
+  </fg-assetbar>
+  <textarea
+    data-chat-input
+    maxlength="4000"
+    aria-label="Describe what you want ForgeGUI to create"
+    placeholder="Describe what you want to create..."
+  ></textarea>
+  <fg-bottom>
+    <button class="chatboxButton mobileChatboxControl" type="button" aria-label="More options">
+      <img src="../icons/3dots.svg" alt="" />
+    </button>
+    <button class="chatboxButton" type="button" data-context-target="chatboxGamePicker">
+      <img src="../icons/roblox.svg" alt="" />
+      <span>Roblox</span>
+      <img src="../icons/arrow.svg" alt="" />
+    </button>
+    <fg-contextmenu id="chatboxGamePicker" class="hidden">
+      <button type="button"><img src="../icons/roblox.svg" alt="" />Roblox</button>
+      <button type="button"><img src="../icons/ue.svg" alt="" />Unreal Engine</button>
+      <button type="button"><img src="../icons/unity.svg" alt="" />Unity</button>
+    </fg-contextmenu>
+
+    <button class="chatboxButton" type="button" data-context-target="chatboxStyle">
+      <img src="../icons/pencil.svg" alt="" />
+      <span>Auto-Detect</span>
+      <img src="../icons/arrow.svg" alt="" />
+    </button>
+    <fg-contextmenu id="chatboxStyle" class="hidden" style="left: 120px">
+      <button type="button">Auto-Detect</button>
+      <button type="button">Realistic</button>
+      <button type="button">Cartoon</button>
+      <button type="button">Pixel Art</button>
+    </fg-contextmenu>
+
+    <button class="chatboxButton" type="button" data-context-target="chatboxModel">
+      <img src="../icons/ai.svg" alt="" />
+      <span>Yunes Pro</span>
+      <img src="../icons/arrow.svg" alt="" />
+    </button>
+    <fg-contextmenu id="chatboxModel" class="hidden" style="left: 328px">
+      <button type="button">Yunes Pro</button>
+      <button type="button">GoyAI</button>
+      <button type="button">SahurML</button>
+    </fg-contextmenu>
+
+    <span style="flex: 1"></span>
+    <button class="chatboxButton send" type="button" data-chat-submit>
+      <span>Create</span>
+      <img src="../icons/send.svg" alt="" />
+    </button>
+  </fg-bottom>
+  <p class="chatboxStatus" data-chat-status role="status" hidden></p>
+</fg-chatbox>
+
+      </section>
+    </main>
+  </body>
+</html>

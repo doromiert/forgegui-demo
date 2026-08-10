@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta name="forge-path" content="mobile/onboarding.html">
+    <meta name="forge-route" content="onboarding.html">
+    <meta name="forge-variant" content="mobile">
+    <style>html:not(.forge-motion-ready),html:not(.forge-motion-ready) *,html:not(.forge-motion-ready) *::before,html:not(.forge-motion-ready) *::after{animation:none!important;transition:none!important}fg-client-include{display:none}</style>
+    <script src="../scripts/vendor/supabase.js" defer></script>
+    <script src="../scripts/forge-config.js" defer></script>
+    <script src="../scripts/forge-api.js" defer></script>
+    <script src="../scripts/forge-cache.js" defer></script>
+    <script src="../scripts/auth-shell.js" defer></script>
+    <script src="../scripts/workspace.js" defer></script>
+    <script src="../scripts/forge-loader.js"></script>
+    <script src="../scripts/forge-runtime.js" defer></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI Onboarding</title>
+        <meta name="theme-color" content="#0a0a0a" />
+        <meta name="description" content="Set up your ForgeGUI account" />
+        <meta name="color-scheme" content="dark" />
+        <style data-forge-critical>
+/* styles/base.css */
+html:not(.forge-motion-ready),
+html:not(.forge-motion-ready) *,
+html:not(.forge-motion-ready) *::before,
+html:not(.forge-motion-ready) *::after {
+   animation: none !important;
+   transition: none !important;
+}
+* {
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+   font-optical-sizing: auto;
+   transition-property:
+      color,
+      background-color,
+      border-color,
+      outline-color,
+      opacity,
+      transform,
+      translate,
+      scale,
+      box-shadow,
+      width,
+      height,
+      max-height,
+      padding,
+      margin,
+      gap;
+   transition-duration: 0.25s;
+   transition-timing-function: ease;
+}
+body {
+   background: #0a0a0a;
+   --Glass-Text: linear-gradient(
+      180deg,
+      #fff 0%,
+      rgba(255, 255, 255, 0.5) 100%
+   );
+
+   &.chat {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      padding: 10px 0 0 10px;
+      margin: 0;
+      box-sizing: border-box;
+      align-items: flex-start;
+      gap: 10px;
+   }
+}
+fg-sidebar {
+   user-select: none;
+   -webkit-user-drag: none;
+   overflow-y: scroll;
+   display: flex;
+   width: 305px;
+   padding: calc(10px + 62px + 15px) 10px 440px 10px;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 15px;
+   flex-shrink: 0;
+   align-self: stretch;
+   position: relative;
+
+   &.collapsed {
+      width: 60px;
+      padding-bottom: 20px;
+      fg-top.sb {
+         width: 60px;
+         .fgLogo {
+            display: none;
+         }
+      }
+      .sidebarElem {
+         color: #ffffff00;
+         width: 60px;
+         height: 60px;
+      }
+      fg-toplabel {
+         display: none;
+      }
+      fg-bottom {
+         display: none !important;
+      }
+   }
+
+   fg-top.sb {
+      display: flex;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      right: 10px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      box-sizing: border-box;
+      width: 305px;
+
+      .fgLogo {
+         height: 24px;
+      }
+      button {
+         border: none;
+         background: none;
+         width: 38px;
+         height: 38px;
+         border-radius: 1293px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            outline: solid 10px rgba(255, 255, 255, 0.05);
+         }
+         &:active {
+            transform: scale(0.9);
+         }
+      }
+   }
+
+   fg-specialtabs {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+   }
+
+   fg-projects {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1 0 0;
+      align-self: stretch;
+
+      fg-toplabel {
+         display: flex;
+         margin: 14px 15px;
+         align-items: center;
+         gap: 8px;
+         align-self: stretch;
+         color: #fff;
+         font-size: 20px;
+         font-weight: 500;
+      }
+   }
+
+   .conversationListStatus {
+      padding: 8px 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      line-height: 1.35;
+   }
+
+   .conversationEntry span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
+
+   .sidebarElem {
+      text-decoration: none;
+      display: flex;
+      padding: 8px 10px;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+      border-radius: 15px;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      width: 100%;
+      box-sizing: border-box;
+
+      &.selected {
+         border: 1px solid rgba(255, 255, 255, 0.2);
+         background: rgba(60, 60, 60, 0.2);
+      }
+      &:hover {
+         background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      img {
+         width: 28px;
+         height: 28px;
+         margin: 5px;
+      }
+   }
+
+   fg-bottom.sb {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      align-self: stretch;
+      box-sizing: border-box;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 12931823;
+      backdrop-filter: blur(20px);
+      border-radius: 15px;
+      width: 305px;
+      fg-actions {
+         width: 100%;
+      }
+      creditCounter {
+         box-sizing: border-box;
+         display: flex;
+         padding: 10px;
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         width: 100%;
+
+         fg-top {
+            display: flex;
+            padding: 5px 8px;
+            justify-content: space-between;
+            align-items: center;
+            align-self: stretch;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 18px;
+            font-weight: 400;
+            gap: 8px;
+
+            a {
+               color: #fff;
+               text-decoration: none;
+               font-size: 18px;
+               font-weight: 600;
+            }
+         }
+         fg-bottom {
+            display: flex;
+            flex-direction: row;
+            padding: 8px;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            align-self: stretch;
+         }
+         creditSlider {
+            height: 9px;
+            flex: 1 0 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            &::before {
+               content: "";
+               width: 100px;
+               display: flex;
+               height: 9px;
+               background: linear-gradient(0deg, #0084ff 0%, #0084ff 100%);
+            }
+         }
+      }
+
+      fg-sidebaruserbutton {
+         display: flex;
+         padding: 15px;
+         align-items: center;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         user-select: none;
+
+         fg-vertical {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 34px;
+            width: 100%;
+
+            b {
+               color: #fff;
+               font-size: 20px;
+               font-weight: 600;
+               line-height: 20px;
+            }
+
+            span {
+               color: rgba(255, 255, 255, 0.8);
+               font-size: 16px;
+               font-weight: 400;
+               line-height: normal;
+            }
+         }
+
+         img {
+            width: 38px;
+            height: 38px;
+            border-radius: 38px;
+         }
+
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+         }
+      }
+   }
+}
+.upgradeButton {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   padding: 12px 20px;
+   background: #0077ff;
+   border: none;
+   border-radius: 15px;
+   cursor: pointer;
+   position: relative;
+
+   &:hover {
+      background-color: #32a3ff !important;
+   }
+
+   &.selected {
+      background-color: #32a3ff !important;
+   }
+
+   &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+      pointer-events: none;
+   }
+
+   span {
+      font-weight: bold;
+      font-size: 20px;
+      white-space: nowrap;
+      background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0px 1px 1.4px rgba(0, 0, 0, 0.25));
+   }
+}
+fg-mainview {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-sizing: border-box;
+   flex: 1 0 0;
+   height: 100%;
+   overflow-y: scroll;
+   border-radius: 20px 0 0 0;
+   border-top: 1px solid #333;
+   border-left: 1px solid #333;
+   background: #161616;
+   h1 {
+      margin: 0;
+   }
+}
+/* styles/mobile-onboarding.css */
+* {
+   box-sizing: border-box;
+}
+html,
+body.mobile-onboarding {
+   background: #000;
+   height: 100%;
+   margin: 0;
+   overflow: hidden;
+}
+body.mobile-onboarding {
+   color: #fff;
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+}
+.mobile-onboarding button,
+.mobile-onboarding input {
+   font: inherit;
+}
+.mobile-onboarding button,
+.mobile-onboarding a {
+   -webkit-tap-highlight-color: transparent;
+}
+.mobile-onboarding-shell {
+   background: #161616;
+   display: flex;
+   flex-direction: column;
+   height: 100dvh;
+   min-height: 0;
+   overflow: hidden;
+}
+.mobile-onboarding-topbar {
+   align-items: center;
+   display: flex;
+   flex: 0 0 72px;
+   gap: 12px;
+   padding: 15px 25px;
+}
+.mobile-onboarding-logo {
+   height: auto;
+   width: 120px;
+}
+.mobile-onboarding-skip {
+   color: #fff;
+   font-size: 20px;
+   font-weight: 500;
+   padding: 8px 6px;
+   text-decoration: none;
+   white-space: nowrap;
+}
+.mobile-onboarding-spacer {
+   flex: 1;
+}
+.mobile-onboarding-profile {
+   border-radius: 50%;
+   flex: 0 0 42px;
+   height: 42px;
+   object-fit: cover;
+   width: 42px;
+}
+.mobile-onboarding-stage {
+   flex: 1;
+   min-height: 0;
+   position: relative;
+}
+.mobile-onboarding-step {
+   height: 100%;
+   overflow-x: hidden;
+   overflow-y: auto;
+   padding: 10px 10px 20px;
+   scrollbar-color: #3b3b3b transparent;
+   scrollbar-width: thin;
+}
+.mobile-onboarding-step[hidden] {
+   display: none;
+}
+.mobile-onboarding-heading {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+   padding: 20px;
+}
+.mobile-onboarding-heading h1,
+.mobile-onboarding-heading p {
+   margin: 0;
+}
+.mobile-onboarding-heading h1 {
+   font-size: 28px;
+   font-weight: 600;
+   line-height: 1.25;
+}
+.mobile-onboarding-heading p {
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 20px;
+   font-weight: 500;
+   line-height: 1.3;
+}
+.mobile-option-grid {
+   display: grid;
+   gap: 15px;
+   grid-template-columns: repeat(2, minmax(0, 1fr));
+   padding: 0 15px;
+}
+.mobile-option-card {
+   align-items: center;
+   background: #131313;
+   border: 1px solid #313131;
+   border-radius: 15px;
+   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+   color: #fff;
+   cursor: pointer;
+   display: flex;
+   flex-direction: column;
+   font-size: 20px;
+   font-weight: 500;
+   gap: 20px;
+   height: 139px;
+   justify-content: center;
+   min-width: 0;
+   padding: 14px;
+}
+.mobile-option-card img {
+   height: 48px;
+   object-fit: contain;
+   width: 48px;
+}
+.mobile-option-card span {
+   white-space: nowrap;
+}
+.mobile-option-card.is-selected {
+   background: #003166;
+   border: 8px solid #0086b7;
+   padding: 7px;
+}
+.mobile-follow-list {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   padding: 0 15px;
+}
+.mobile-follow-account {
+   align-items: center;
+   background: #1d1d1d;
+   border: 1px solid #303030;
+   border-radius: 20px;
+   display: flex;
+   gap: 14px;
+   min-width: 0;
+   padding: 14px;
+}
+.mobile-follow-account > img {
+   border-radius: 50%;
+   flex: 0 0 40px;
+   height: 40px;
+   object-fit: cover;
+   width: 40px;
+}
+.mobile-follow-account > div {
+   display: flex;
+   flex: 1;
+   flex-direction: column;
+   line-height: 1.05;
+   min-width: 0;
+}
+.mobile-follow-account strong,
+.mobile-follow-account span,
+.mobile-follow-account button {
+   font-size: 18px;
+}
+.mobile-follow-account strong {
+   font-weight: 600;
+}
+.mobile-follow-account span {
+   color: rgba(255, 255, 255, 0.79);
+}
+.mobile-follow-account button {
+   background: #2b2b2b;
+   border: 0;
+   border-radius: 10px;
+   color: #fff;
+   cursor: pointer;
+   flex: 0 0 auto;
+   font-weight: 600;
+   padding: 13px 14px;
+   white-space: nowrap;
+}
+.mobile-follow-account button.is-following {
+   background: #003166;
+   color: #fff;
+}
+.mobile-primary {
+   align-items: center;
+   background: #07f;
+   border: 0;
+   border-radius: 15px;
+   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.59);
+   color: #fff;
+   cursor: pointer;
+   display: flex;
+   font-size: 20px;
+   font-weight: 700;
+   justify-content: center;
+   text-decoration: none;
+}
+.mobile-follow-all {
+   gap: 10px;
+   height: 48px;
+   margin: 25px auto 0;
+   padding: 0 30px;
+}
+.mobile-follow-all img {
+   height: 28px;
+   width: 28px;
+}
+.mobile-project-fields {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   padding: 0 15px;
+}
+.mobile-name-input {
+   align-items: center;
+   background: #1d1d1d;
+   border: 1px solid #303030;
+   border-radius: 10px;
+   color: rgba(255, 255, 255, 0.7);
+   display: flex;
+   font-size: 20px;
+   padding: 14px 20px;
+}
+.mobile-name-input input {
+   background: transparent;
+   border: 0;
+   color: #fff;
+   flex: 1;
+   min-width: 0;
+   outline: 0;
+}
+.mobile-name-input input::placeholder {
+   color: rgba(255, 255, 255, 0.7);
+}
+.mobile-project-fields > p,
+.mobile-prompt-list > p {
+   font-size: 18px;
+   font-weight: 500;
+   margin: 0 10px;
+}
+.mobile-suggestion,
+.mobile-prompt-card {
+   align-items: center;
+   background: #1d1d1d;
+   border: 1px solid #303030;
+   border-radius: 15px;
+   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.15);
+   color: #fff;
+   cursor: pointer;
+   display: flex;
+   font-size: 20px;
+   font-weight: 500;
+   gap: 10px;
+   text-align: left;
+}
+.mobile-suggestion {
+   min-height: 56px;
+   padding: 12px;
+}
+.mobile-suggestion img {
+   height: 32px;
+   width: 32px;
+}
+.mobile-prompt-step {
+   display: flex;
+   flex-direction: column;
+}
+.mobile-prompt-step[hidden] {
+   display: none;
+}
+.mobile-prompt-list {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   padding: 0 15px;
+}
+.mobile-prompt-card {
+   align-items: flex-start;
+   flex-direction: column;
+   justify-content: center;
+   min-height: 84px;
+   padding: 15px;
+}
+.mobile-prompt-card img {
+   height: 28px;
+   width: 28px;
+}
+.mobile-prompt-card.is-selected {
+   border-color: #0086b7;
+   background: #003166;
+}
+.mobile-custom-prompt {
+   align-items: center;
+   background: #101010;
+   border: 1px solid #383838;
+   border-radius: 60px;
+   display: flex;
+   margin-top: auto;
+   padding: 8px 8px 8px 20px;
+}
+.mobile-custom-prompt input {
+   background: transparent;
+   border: 0;
+   color: #fff;
+   flex: 1;
+   font-size: 20px;
+   min-width: 0;
+   outline: 0;
+}
+.mobile-custom-prompt input::placeholder {
+   color: rgba(255, 255, 255, 0.5);
+}
+.mobile-custom-prompt button {
+   align-items: center;
+   background: #07f;
+   border: 0;
+   border-radius: 50%;
+   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.59);
+   display: flex;
+   flex: 0 0 44px;
+   height: 44px;
+   justify-content: center;
+   padding: 10px;
+}
+.mobile-custom-prompt button img {
+   height: 24px;
+   width: 24px;
+}
+.mobile-offer-step {
+   padding-bottom: 24px;
+}
+.mobile-offer-content {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   padding: 0 15px;
+}
+.mobile-promo {
+   background:
+      radial-gradient(
+         ellipse at 50% 0,
+         rgba(0, 106, 255, 0.2),
+         transparent 80%
+      ),
+      linear-gradient(#1d252f, #0d1118);
+   border: 1px solid #606060;
+   border-radius: 20px;
+   overflow: hidden;
+}
+.mobile-promo-code {
+   background: rgba(255, 255, 255, 0.1);
+   font-size: 18px;
+   font-weight: 500;
+   padding: 10px 15px;
+   text-align: center;
+}
+.mobile-promo-code span,
+.mobile-promo-body > div:first-child strong {
+   color: #00c3ff;
+}
+.mobile-promo-body {
+   align-items: center;
+   display: flex;
+   padding: 24px 0;
+}
+.mobile-promo-body > div {
+   align-items: center;
+   display: flex;
+   flex: 1;
+   flex-direction: column;
+}
+.mobile-promo-body strong {
+   font-size: 38px;
+   font-weight: 600;
+   line-height: 1;
+   white-space: nowrap;
+}
+.mobile-promo-body strong span {
+   font-weight: 300;
+}
+.mobile-promo-body small {
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 18px;
+   font-weight: 500;
+   margin-top: 5px;
+}
+.mobile-promo-divider {
+   border-left: 1px dotted rgba(255, 255, 255, 0.65);
+   height: 59px;
+}
+.mobile-promo-time {
+   font-family: "Atkinson Hyperlegible Mono", monospace;
+}
+</style>
+    <link rel="stylesheet" href="../styles/base.css" />
+        <link rel="stylesheet" href="../styles/mobile-onboarding.css" />
+        <script src="../scripts/mobile-onboarding.js" defer></script>
+    </head>
+    <body class="mobile-onboarding">
+        <main class="mobile-onboarding-shell">
+            <header class="mobile-onboarding-topbar">
+                <img
+                    class="mobile-onboarding-logo"
+                    src="../assets/footerLogo.svg"
+                    alt="ForgeGUI"
+                />
+                <a class="mobile-onboarding-skip" href="../home.html">Skip...</a>
+                <span class="mobile-onboarding-spacer"></span>
+                <img
+                    class="mobile-onboarding-profile"
+                    src="../assets/generic.png"
+                    alt="Your profile"
+                />
+            </header>
+
+            <div class="mobile-onboarding-stage" aria-live="polite">
+                <section class="mobile-onboarding-step" data-onboarding-step="source">
+                    <div class="mobile-onboarding-heading">
+                        <h1>Howdy! Where did you come from?</h1>
+                        <p>Select between one of the options below.</p>
+                    </div>
+                    <div class="mobile-option-grid" data-choice-group>
+                        <button class="mobile-option-card is-selected" type="button" aria-pressed="true">
+                            <img src="../icons/yt.svg" alt="" />
+                            <span>YouTube</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="../icons/twitter.svg" alt="" />
+                            <span>X/Twitter</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="../icons/tiktok.svg" alt="" />
+                            <span>TikTok</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="../icons/google.svg" alt="" />
+                            <span>Search Engine</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="../icons/3dots.svg" alt="" />
+                            <span>Friend/Other</span>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="mobile-onboarding-step" data-onboarding-step="platform" hidden>
+                    <div class="mobile-onboarding-heading">
+                        <h1>What do you use?</h1>
+                        <p>Select between one of the options below.</p>
+                    </div>
+                    <div class="mobile-option-grid" data-choice-group>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="../icons/roblox.svg" alt="" />
+                            <span>Roblox</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="../icons/ue.svg" alt="" />
+                            <span>UEFN</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="../icons/unity.svg" alt="" />
+                            <span>Unity</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="../icons/3dots.svg" alt="" />
+                            <span>Other/None</span>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="mobile-onboarding-step" data-onboarding-step="experience" hidden>
+                    <div class="mobile-onboarding-heading">
+                        <h1>Are you a new game developer?</h1>
+                        <p>Select between one of the options below.</p>
+                    </div>
+                    <div class="mobile-option-grid" data-choice-group>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="../icons/heart.svg" alt="" />
+                            <span>Yes, I&rsquo;m new.</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="../icons/Programming.svg" alt="" />
+                            <span>I&rsquo;m not new.</span>
+                        </button>
+                        <button class="mobile-option-card" type="button" aria-pressed="false">
+                            <img src="../icons/x.svg" alt="" />
+                            <span>I&rsquo;m not a dev.</span>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="mobile-onboarding-step" data-onboarding-step="follow" hidden>
+                    <div class="mobile-onboarding-heading">
+                        <h1>Let&rsquo;s get you connected!</h1>
+                        <p>Before you can continue, follow 3 accounts.</p>
+                    </div>
+                    <div class="mobile-follow-list">
+                        <article class="mobile-follow-account">
+                            <img src="../assets/generic.png" alt="" />
+                            <div>
+                                <strong>Account Name</strong>
+                                <span>@username</span>
+                            </div>
+                            <button type="button" data-follow>Not Followed</button>
+                        </article>
+                        <article class="mobile-follow-account">
+                            <img src="../assets/generic.png" alt="" />
+                            <div>
+                                <strong>Account Name</strong>
+                                <span>@username</span>
+                            </div>
+                            <button type="button" data-follow>Not Followed</button>
+                        </article>
+                        <article class="mobile-follow-account">
+                            <img src="../assets/generic.png" alt="" />
+                            <div>
+                                <strong>Account Name</strong>
+                                <span>@username</span>
+                            </div>
+                            <button type="button" data-follow>Not Followed</button>
+                        </article>
+                    </div>
+                    <button class="mobile-primary mobile-follow-all" type="button" data-follow-all>
+                        <span>Follow All 3</span>
+                        <img src="../icons/People.svg" alt="" />
+                    </button>
+                </section>
+
+                <section class="mobile-onboarding-step" data-onboarding-step="project" hidden>
+                    <div class="mobile-onboarding-heading">
+                        <h1>Let&rsquo;s create your first game.</h1>
+                        <p>First, give us a name for your project.</p>
+                    </div>
+                    <div class="mobile-project-fields">
+                        <label class="mobile-name-input">
+                            <span class="sr-only">Project name</span>
+                            <input type="text" maxlength="50" placeholder="Name" data-project-name />
+                            <span data-character-count>0/50</span>
+                        </label>
+                        <p>Or, Use Suggested.</p>
+                        <button class="mobile-suggestion" type="button" data-name-suggestion>
+                            <img src="../icons/ai.svg" alt="" />
+                            <span>Epic Gun Game</span>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="mobile-onboarding-step mobile-prompt-step" data-onboarding-step="prompt" hidden>
+                    <div class="mobile-onboarding-heading">
+                        <h1>Select a prompt to start generating.</h1>
+                        <p>Generate the first asset for your game.</p>
+                    </div>
+                    <div class="mobile-prompt-list" data-choice-group>
+                        <button class="mobile-prompt-card" type="button" aria-pressed="false">
+                            <img src="../icons/ai.svg" alt="" />
+                            <span>Generate an AK47 3D Model.</span>
+                        </button>
+                        <button class="mobile-prompt-card" type="button" aria-pressed="false">
+                            <img src="../icons/ai.svg" alt="" />
+                            <span>Generate a FPS thumbnail for my game.</span>
+                        </button>
+                        <button class="mobile-prompt-card" type="button" aria-pressed="false">
+                            <img src="../icons/ai.svg" alt="" />
+                            <span>Generate a gunshot sound effect.</span>
+                        </button>
+                        <p>Or type your own...</p>
+                    </div>
+                    <label class="mobile-custom-prompt">
+                        <span class="sr-only">Custom prompt</span>
+                        <input type="text" placeholder="Enter Custom Prompt" />
+                        <button type="button" aria-label="Use custom prompt" data-custom-prompt>
+                            <img src="../icons/send.svg" alt="" />
+                        </button>
+                    </label>
+                </section>
+
+                <section class="mobile-onboarding-step mobile-offer-step" data-onboarding-step="offer" hidden>
+                    <div class="mobile-onboarding-heading">
+                        <h1>You&rsquo;re in luck!</h1>
+                        <p>You&rsquo;ve received an exclusive discount.</p>
+                    </div>
+                    <div class="mobile-offer-content">
+                        <article class="mobile-promo">
+                            <div class="mobile-promo-code">Promo Code: <span>Code Name</span></div>
+                            <div class="mobile-promo-body">
+                                <div>
+                                    <strong>75% <span>OFF</span></strong>
+                                    <small>PROMO</small>
+                                </div>
+                                <span class="mobile-promo-divider"></span>
+                                <div>
+                                    <strong class="mobile-promo-time">10:00</strong>
+                                    <small>TIME LEFT</small>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="mobile-plan-card">
+                            <header>
+                                <h2>Pro</h2>
+                                <span>55% OFF</span>
+                            </header>
+                            <div class="mobile-plan-price">
+                                <p><strong>14.99</strong> <del>$59.99</del> <span>/month</span></p>
+                                <ul>
+                                    <li><em>UNLIMITED GENERATIONS.</em></li>
+                                    <li>Subject to abuse protections.</li>
+                                </ul>
+                            </div>
+                            <section class="mobile-plan-features">
+                                <h3><img src="../icons/ai.svg" alt="" /> AI models configured for game devs</h3>
+                                <ul>
+                                    <li>Access to Google Nano Banana</li>
+                                    <li>Access to Meshy</li>
+                                    <li>Fable 5</li>
+                                    <li>Access to Tripo</li>
+                                    <li>Access to GPT Image V2</li>
+                                    <li>10s of more models.</li>
+                                </ul>
+                            </section>
+                            <section class="mobile-plan-features">
+                                <h3><img src="../icons/crown.svg" alt="" /> Included Features</h3>
+                                <ul>
+                                    <li>Pro AI models for any task.</li>
+                                    <li>Custom Pro Role</li>
+                                    <li>Faster Generations</li>
+                                    <li>Skip the Waitlist</li>
+                                    <li>Everything in the Starter Tier</li>
+                                </ul>
+                            </section>
+                            <a class="mobile-primary mobile-claim-offer" href="../plans.html">Claim Discount!</a>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="mobile-onboarding-step mobile-free-step" data-onboarding-step="free" hidden>
+                    <div class="mobile-onboarding-heading">
+                        <h1>You&rsquo;re using the free plan.</h1>
+                        <p>You have unlimited daily generations, subject to rate limits.</p>
+                    </div>
+                    <a class="mobile-understood" href="../home.html">Understood</a>
+                </section>
+            </div>
+
+            <footer class="mobile-onboarding-footer">
+                <fg-carouselsteps
+                    class="mobile-progress"
+                    role="status"
+                    aria-label="Step 1 of 8"
+                ></fg-carouselsteps>
+                <button class="mobile-primary mobile-next" type="button" data-next-step>Next</button>
+            </footer>
+        </main>
+    </body>
+</html>

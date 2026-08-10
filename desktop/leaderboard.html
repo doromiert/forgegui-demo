@@ -1,0 +1,960 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta name="forge-path" content="desktop/leaderboard.html">
+    <meta name="forge-route" content="leaderboard.html">
+    <meta name="forge-variant" content="desktop">
+    <style>html:not(.forge-motion-ready),html:not(.forge-motion-ready) *,html:not(.forge-motion-ready) *::before,html:not(.forge-motion-ready) *::after{animation:none!important;transition:none!important}fg-client-include{display:none}</style>
+    <script src="../scripts/vendor/supabase.js" defer></script>
+    <script src="../scripts/forge-config.js" defer></script>
+    <script src="../scripts/forge-api.js" defer></script>
+    <script src="../scripts/forge-cache.js" defer></script>
+    <script src="../scripts/auth-shell.js" defer></script>
+    <script src="../scripts/workspace.js" defer></script>
+    <script src="../scripts/forge-loader.js"></script>
+    <script src="../scripts/forge-runtime.js" defer></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="../fg.svg" />-->
+        <style data-forge-critical>
+/* styles/base.css */
+html:not(.forge-motion-ready),
+html:not(.forge-motion-ready) *,
+html:not(.forge-motion-ready) *::before,
+html:not(.forge-motion-ready) *::after {
+   animation: none !important;
+   transition: none !important;
+}
+* {
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+   font-optical-sizing: auto;
+   transition-property:
+      color,
+      background-color,
+      border-color,
+      outline-color,
+      opacity,
+      transform,
+      translate,
+      scale,
+      box-shadow,
+      width,
+      height,
+      max-height,
+      padding,
+      margin,
+      gap;
+   transition-duration: 0.25s;
+   transition-timing-function: ease;
+}
+body {
+   background: #0a0a0a;
+   --Glass-Text: linear-gradient(
+      180deg,
+      #fff 0%,
+      rgba(255, 255, 255, 0.5) 100%
+   );
+
+   &.chat {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      padding: 10px 0 0 10px;
+      margin: 0;
+      box-sizing: border-box;
+      align-items: flex-start;
+      gap: 10px;
+   }
+}
+fg-sidebar {
+   user-select: none;
+   -webkit-user-drag: none;
+   overflow-y: scroll;
+   display: flex;
+   width: 305px;
+   padding: calc(10px + 62px + 15px) 10px 440px 10px;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 15px;
+   flex-shrink: 0;
+   align-self: stretch;
+   position: relative;
+
+   &.collapsed {
+      width: 60px;
+      padding-bottom: 20px;
+      fg-top.sb {
+         width: 60px;
+         .fgLogo {
+            display: none;
+         }
+      }
+      .sidebarElem {
+         color: #ffffff00;
+         width: 60px;
+         height: 60px;
+      }
+      fg-toplabel {
+         display: none;
+      }
+      fg-bottom {
+         display: none !important;
+      }
+   }
+
+   fg-top.sb {
+      display: flex;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      right: 10px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      box-sizing: border-box;
+      width: 305px;
+
+      .fgLogo {
+         height: 24px;
+      }
+      button {
+         border: none;
+         background: none;
+         width: 38px;
+         height: 38px;
+         border-radius: 1293px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            outline: solid 10px rgba(255, 255, 255, 0.05);
+         }
+         &:active {
+            transform: scale(0.9);
+         }
+      }
+   }
+
+   fg-specialtabs {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+   }
+
+   fg-projects {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1 0 0;
+      align-self: stretch;
+
+      fg-toplabel {
+         display: flex;
+         margin: 14px 15px;
+         align-items: center;
+         gap: 8px;
+         align-self: stretch;
+         color: #fff;
+         font-size: 20px;
+         font-weight: 500;
+      }
+   }
+
+   .conversationListStatus {
+      padding: 8px 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      line-height: 1.35;
+   }
+
+   .conversationEntry span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
+
+   .sidebarElem {
+      text-decoration: none;
+      display: flex;
+      padding: 8px 10px;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+      border-radius: 15px;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      width: 100%;
+      box-sizing: border-box;
+
+      &.selected {
+         border: 1px solid rgba(255, 255, 255, 0.2);
+         background: rgba(60, 60, 60, 0.2);
+      }
+      &:hover {
+         background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      img {
+         width: 28px;
+         height: 28px;
+         margin: 5px;
+      }
+   }
+
+   fg-bottom.sb {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      align-self: stretch;
+      box-sizing: border-box;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 12931823;
+      backdrop-filter: blur(20px);
+      border-radius: 15px;
+      width: 305px;
+      fg-actions {
+         width: 100%;
+      }
+      creditCounter {
+         box-sizing: border-box;
+         display: flex;
+         padding: 10px;
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         width: 100%;
+
+         fg-top {
+            display: flex;
+            padding: 5px 8px;
+            justify-content: space-between;
+            align-items: center;
+            align-self: stretch;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 18px;
+            font-weight: 400;
+            gap: 8px;
+
+            a {
+               color: #fff;
+               text-decoration: none;
+               font-size: 18px;
+               font-weight: 600;
+            }
+         }
+         fg-bottom {
+            display: flex;
+            flex-direction: row;
+            padding: 8px;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            align-self: stretch;
+         }
+         creditSlider {
+            height: 9px;
+            flex: 1 0 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            &::before {
+               content: "";
+               width: 100px;
+               display: flex;
+               height: 9px;
+               background: linear-gradient(0deg, #0084ff 0%, #0084ff 100%);
+            }
+         }
+      }
+
+      fg-sidebaruserbutton {
+         display: flex;
+         padding: 15px;
+         align-items: center;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         user-select: none;
+
+         fg-vertical {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 34px;
+            width: 100%;
+
+            b {
+               color: #fff;
+               font-size: 20px;
+               font-weight: 600;
+               line-height: 20px;
+            }
+
+            span {
+               color: rgba(255, 255, 255, 0.8);
+               font-size: 16px;
+               font-weight: 400;
+               line-height: normal;
+            }
+         }
+
+         img {
+            width: 38px;
+            height: 38px;
+            border-radius: 38px;
+         }
+
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+         }
+      }
+   }
+}
+.upgradeButton {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   padding: 12px 20px;
+   background: #0077ff;
+   border: none;
+   border-radius: 15px;
+   cursor: pointer;
+   position: relative;
+
+   &:hover {
+      background-color: #32a3ff !important;
+   }
+
+   &.selected {
+      background-color: #32a3ff !important;
+   }
+
+   &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+      pointer-events: none;
+   }
+
+   span {
+      font-weight: bold;
+      font-size: 20px;
+      white-space: nowrap;
+      background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0px 1px 1.4px rgba(0, 0, 0, 0.25));
+   }
+}
+fg-mainview {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-sizing: border-box;
+   flex: 1 0 0;
+   height: 100%;
+   overflow-y: scroll;
+   border-radius: 20px 0 0 0;
+   border-top: 1px solid #333;
+   border-left: 1px solid #333;
+   background: #161616;
+   h1 {
+      margin: 0;
+   }
+}
+/* styles/leaderboard.css */
+/* Page-specific styles extracted from base.css. */
+
+fg-mainview.leaderboard {
+   position: relative;
+   display: flex;
+   padding: 90px 0;
+   flex-direction: column;
+   align-items: center;
+   gap: 42px;
+   flex: 1 0 0;
+   align-self: stretch;
+   overflow-y: auto;
+
+   /* explicit order for all direct children so we can reorder in expanded */
+   > fg-fomo {
+      order: 10;
+   }
+   > h1 {
+      order: 20;
+   }
+   > fg-leaderboard {
+      order: 30;
+   }
+   > .showMoreButton {
+      order: 40;
+   }
+   > .leaderboardBottom {
+      order: 50;
+   }
+   > fg-physicalbox {
+      order: 60;
+   }
+   background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.46) 0%, #000 100%),
+      url("../assets/d2.png") lightgray 50% / cover no-repeat;
+}
+fg-fomo {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 6px;
+   background: #0077ff;
+   border-radius: 15px;
+   padding: 20px 25px;
+   box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+   box-sizing: border-box;
+   height: 67px;
+
+   b {
+      font-size: 40px;
+      font-weight: 800;
+      color: #fff;
+      background: var(
+         --Glass-Text,
+         linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%)
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+   }
+
+   span {
+      font-size: 40px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.8);
+      background: var(
+         --Glass-Text,
+         linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%)
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background: var(
+         --Glass-Text,
+         linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%)
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+   }
+}
+fg-mainview.leaderboard > h1 {
+   font-size: 40px;
+   font-weight: 600;
+   color: #fff;
+   text-align: center;
+   width: 232px;
+   padding-bottom: 22px;
+   border-bottom: 1px solid #6d6d6d;
+}
+fg-leaderboard {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 8px;
+}
+fg-leaderboardheader {
+   display: block;
+   font-size: 22px;
+   font-weight: 600;
+   color: #fff;
+   text-align: center;
+   box-sizing: border-box;
+   width: 100%;
+   padding: 8px 17px 15px;
+
+   &:not(:first-child) {
+      margin-top: 7px;
+   }
+}
+fg-leaderboardposition {
+   display: flex;
+   align-items: center;
+   gap: 15px;
+   width: 625px;
+   padding: 12px 20px 12px 15px;
+   border-radius: 35px;
+   box-sizing: border-box;
+   overflow: hidden;
+   flex-shrink: 0;
+   border-radius: 35px;
+   background: radial-gradient(
+      100% 49.91% at 50.09% 0%,
+      rgba(37, 37, 37, 0.75) 0%,
+      rgba(18, 18, 18, 0.75) 100%
+   );
+
+   img:first-of-type {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+   }
+
+   img:last-of-type {
+      width: 29px;
+      height: 29px;
+      flex-shrink: 0;
+   }
+
+   fg-username {
+      flex: 1;
+      font-size: 20px;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+      min-width: 0;
+   }
+
+   fg-likescount {
+      font-size: 20px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+      white-space: nowrap;
+   }
+
+   fg-playscount {
+      font-size: 20px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+      white-space: nowrap;
+      display: flex;
+      gap: 10px;
+
+      b {
+         color: #00ff80;
+         font-weight: 700;
+      }
+   }
+}
+fg-badge {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 60px;
+   height: 32px;
+   padding: 10px;
+   border-radius: 19px;
+   box-sizing: border-box;
+   background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.46) 0%,
+      rgba(44, 44, 44, 0.46) 100%
+   );
+   font-size: 18px;
+   font-weight: 600;
+   color: #fff;
+   text-align: center;
+   flex-shrink: 0;
+}
+#n1 {
+   border-color: transparent;
+   background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.53) 0%, rgba(0, 0, 0, 0.53) 100%),
+      linear-gradient(
+         90deg,
+         rgb(47, 154, 255) 0%,
+         rgb(163, 105, 255) 30%,
+         rgb(255, 75, 162) 66%,
+         rgb(255, 126, 66) 100%
+      );
+
+   fg-badge {
+      background:
+         linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.7) 0%,
+            rgba(44, 44, 44, 0.41) 100%
+         ),
+         linear-gradient(
+            90deg,
+            rgb(47, 154, 255) 0%,
+            rgb(163, 105, 255) 30%,
+            rgb(255, 75, 162) 66%,
+            rgb(255, 75, 162) 100%
+         );
+   }
+}
+#n2 {
+   border-radius: 35px;
+   background: radial-gradient(
+      100% 49.91% at 50.09% 0%,
+      #00204b 0%,
+      #075c73 100%
+   );
+}
+#n3 {
+   background: radial-gradient(ellipse at center, #7e4a00 0%, #976700 100%);
+   border-radius: 35px;
+   background:
+      radial-gradient(100% 49.91% at 50.09% 0%, #7e4a00 0%, #976700 100%),
+      radial-gradient(
+         100% 49.91% at 50.09% 0%,
+         rgba(37, 37, 37, 0.75) 0%,
+         rgba(18, 18, 18, 0.75) 100%
+      );
+}
+#n4,
+#n5 {
+   border-radius: 35px;
+   background: radial-gradient(
+      100% 49.91% at 50.09% 0%,
+      #00623b 0%,
+      #00402e 100%
+   );
+}
+#you {
+   border-radius: 35px;
+   background:
+      linear-gradient(
+         0deg,
+         rgba(0, 47, 102, 0.2) 0%,
+         rgba(0, 47, 102, 0.2) 100%
+      ),
+      radial-gradient(100% 49.91% at 50.09% 0%, #4c4c4c 0%, #262626 100%);
+   img:last-of-type {
+      display: none;
+   }
+}
+.showMoreButton {
+   background: #0077ff;
+   border: none;
+   border-radius: 15px;
+   padding: 9px 16px;
+   color: #fff;
+   font-size: 20px;
+   font-weight: 500;
+   cursor: pointer;
+   box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+}
+/* Extra rows (5–10) hidden by default */
+.extra-row {
+   display: none !important;
+}
+/* Bottom section: you row + button + plays text */
+.leaderboardBottom {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 15px;
+   position: relative;
+   width: 100%;
+}
+.leaderboardBottom > span {
+   font-size: 20px;
+   font-weight: 500;
+   color: rgba(255, 255, 255, 0.8);
+   text-align: center;
+}
+/* ── Expanded state ─────────────────────────────────────────────── */
+fg-mainview.leaderboard.is-expanded {
+   padding: 40px 0 0;
+   gap: 20px;
+   overflow: hidden;
+
+   /* button moves to just after the title, before the rows */
+   > .showMoreButton {
+      order: 25;
+   }
+
+   fg-leaderboard {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      /* ensure last row can scroll fully above the floating bottom */
+      padding-bottom: 220px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+   }
+
+   .more-header {
+      display: none;
+   }
+
+   .extra-row {
+      display: flex !important;
+   }
+
+   /* floating bottom: overlays the scroll area, gradient fades up into the rows */
+   .leaderboardBottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 90px 0 35px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      background: linear-gradient(to bottom, transparent 0%, #000 40%);
+      /* gradient area is click-through; children stay interactive */
+      pointer-events: none;
+
+      > * {
+         pointer-events: auto;
+      }
+   }
+}
+</style>
+    <link rel="stylesheet" href="../styles/base.css" />
+        <link rel="stylesheet" href="../styles/leaderboard.css" />
+        <script src="../scripts/site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
+
+        <style></style>
+    </head>
+
+    <body class="chat">
+        <fg-sidebar>
+    <fg-top class="sb">
+        <img src="../assets/footerLogo.svg" class="fgLogo" alt="ForgeGUI" />
+        <button type="button" data-toggle-sidebar aria-label="Toggle sidebar">
+            <img src="../icons/sidebar.svg" alt="" />
+        </button>
+    </fg-top>
+
+    <fg-specialtabs>
+        <a href="../home.html" class="sidebarElem">
+            <img src="../icons/home.svg" alt="" />
+            <span>Home</span>
+        </a>
+        <a href="../library/overview.html" class="sidebarElem">
+            <img src="../icons/file.svg" alt="" />
+            <span>Assets</span>
+        </a>
+        <a href="../community.html" class="sidebarElem">
+            <img src="../icons/people.svg" alt="" />
+            <span>Community</span>
+        </a>
+    </fg-specialtabs>
+
+    <fg-projects data-conversation-list hidden>
+        <fg-toplabel>Games</fg-toplabel>
+        <span class="conversationListStatus" data-conversation-status>Loading chats...</span>
+    </fg-projects>
+
+    <fg-contextmenu
+        id="userMenu"
+        class="hidden user"
+        style="width: 282px"
+    >
+        <a href="mailto:support@forgegui.com"><img src="../icons/Exclamation.svg" alt="" /> Help</a>
+        <a href="../settings/overview.html"><img src="../icons/Settings.svg" alt="" /> Settings</a>
+
+        <button class="destructive" data-auth-signout>
+            <img src="../icons/SignOut.svg" alt="" /> Logout
+        </button>
+    </fg-contextmenu>
+
+    <fg-bottom class="sb">
+        <a href="../plans.html" class="sidebarElem upgradeButton">
+            <img src="../icons/crown.svg" alt="" style="image-rendering: optimizeQuality" />
+            <span>Upgrade to Pro</span>
+        </a>
+
+        <fg-actions>
+            <a href="../courses.html" class="sidebarElem">
+                <img src="../icons/book.svg" alt="" />
+                <span>Courses</span>
+            </a>
+            <a href="../plugins.html" class="sidebarElem">
+                <img src="../icons/plugin.svg" alt="" />
+                <span>Plugins</span>
+            </a>
+            <a href="../leaderboard.html" class="sidebarElem selected">
+                <img src="../icons/Trophy.svg" alt="" />
+                <span>Leaderboard</span>
+            </a>
+            <a href="../notifications.html" class="sidebarElem">
+                <img src="../icons/bell.svg" alt="" />
+                <span>Notifications</span>
+            </a>
+        </fg-actions>
+
+        <fg-sidebaruserbutton data-context-target="userMenu">
+            <img src="../assets/generic.png" alt="" data-user-avatar />
+            <fg-vertical>
+                <b data-user-name>Creator</b>
+                <span data-user-email></span>
+            </fg-vertical>
+            <img src="../icons/selection.svg" alt="" />
+        </fg-sidebaruserbutton>
+    </fg-bottom>
+</fg-sidebar>
+
+<fg-mainview class="leaderboard">
+                <fg-fomo> <b>57</b><span>Days Left</span> </fg-fomo>
+                <h1>Leaderboard</h1>
+                <fg-leaderboard>
+                    <fg-leaderboardheader>Top 4</fg-leaderboardheader>
+                    <fg-leaderboardposition id="n1">
+                        <fg-badge class="n1">1st</fg-badge>
+                        <img src="../assets/generic.png" />
+                        <fg-username>Generic</fg-username>
+                        <img src="../assets/trophy.svg" />
+                        <fg-likescount>49K Likes</fg-likescount>
+                        <fg-playscount><b>100B+</b> Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n2">
+                        <fg-badge>2nd</fg-badge>
+                        <img src="../assets/generic.png" />
+                        <fg-username>Generic</fg-username>
+                        <img src="../assets/trophy.svg" />
+                        <fg-likescount>49K Likes</fg-likescount>
+                        <fg-playscount><b>100B+</b> Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n3">
+                        <fg-badge>3rd</fg-badge>
+                        <img src="../assets/generic.png" />
+                        <fg-username>Generic</fg-username>
+                        <img src="../assets/trophy.svg" />
+                        <fg-likescount>49K Likes</fg-likescount>
+                        <fg-playscount><b>100B+</b> Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n4">
+                        <fg-badge>4th</fg-badge>
+                        <img src="../assets/generic.png" />
+                        <fg-username>Generic</fg-username>
+                        <img src="../assets/trophy.svg" />
+                        <fg-likescount>49K Likes</fg-likescount>
+                        <fg-playscount><b>100B+</b> Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardheader class="more-header">More...</fg-leaderboardheader>
+                    <fg-leaderboardposition id="n5" class="extra-row">
+                        <fg-badge>5th</fg-badge>
+                        <img src="../assets/generic.png" />
+                        <fg-username>Username</fg-username>
+                        <img src="../assets/trophy.svg" />
+                        <fg-likescount>50K Likes</fg-likescount>
+                        <fg-playscount><b>105B+</b> Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n6" class="extra-row">
+                        <fg-badge>6th</fg-badge>
+                        <img src="../assets/generic.png" />
+                        <fg-username>Username</fg-username>
+                        <img src="../assets/trophy.svg" />
+                        <fg-likescount>52K Likes</fg-likescount>
+                        <fg-playscount>110B+ Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n7" class="extra-row">
+                        <fg-badge>7th</fg-badge>
+                        <img src="../assets/generic.png" />
+                        <fg-username>Username</fg-username>
+                        <img src="../assets/trophy.svg" />
+                        <fg-likescount>48K Likes</fg-likescount>
+                        <fg-playscount>95B+ Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n8" class="extra-row">
+                        <fg-badge>8th</fg-badge>
+                        <img src="../assets/generic.png" />
+                        <fg-username>Username</fg-username>
+                        <img src="../assets/trophy.svg" />
+                        <fg-likescount>51K Likes</fg-likescount>
+                        <fg-playscount>102B+ Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n9" class="extra-row">
+                        <fg-badge>9th</fg-badge>
+                        <img src="../assets/generic.png" />
+                        <fg-username>Username</fg-username>
+                        <fg-likescount>53K Likes</fg-likescount>
+                        <fg-playscount>108B+ Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <fg-leaderboardposition id="n10" class="extra-row">
+                        <fg-badge>10th</fg-badge>
+                        <img src="../assets/generic.png" />
+                        <fg-username>Username</fg-username>
+                        <fg-likescount>54K Likes</fg-likescount>
+                        <fg-playscount>115B+ Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                </fg-leaderboard>
+                <button class="showMoreButton" onclick="toggleLeaderboard(this)">Show More...</button>
+                <div class="leaderboardBottom">
+                    <fg-leaderboardposition id="you">
+                        <fg-badge>67th</fg-badge>
+                        <img src="../assets/generic.png" />
+                        <fg-username>YOU</fg-username>
+                        <fg-likescount>49K Likes</fg-likescount>
+                        <fg-playscount><b>100B+</b> Plays</fg-playscount>
+                    </fg-leaderboardposition>
+                    <span>50M Plays to 1st place!</span>
+                </div>
+                <fg-physicalbox>
+                    <img src="../assets/trophy.svg" />
+                    <h1>Physical Trophy Winners</h1>
+                    <p>
+                        Every month, 10 users are selected for a ForgeGUI
+                        trophy. You can earn one by continuing to contribute to
+                        the community and getting plays.
+                    </p>
+                    <fg-winners>
+                        <fg-winner>
+                            <img src="../assets/generic.png" />
+                            <span>Username</span>
+                            <fg-trophytype>GOLD</fg-trophytype>
+                        </fg-winner>
+                        <fg-winner>
+                            <img src="../assets/generic.png" />
+                            <span>Username</span>
+                            <fg-trophytype>SILVER</fg-trophytype>
+                        </fg-winner>
+                        <fg-winner>
+                            <img src="../assets/generic.png" />
+                            <span>Username</span>
+                            <fg-trophytype>BRONZE</fg-trophytype>
+                        </fg-winner>
+                    </fg-winners>
+                </fg-physicalbox>
+            </fg-mainview>
+
+        <script>
+            function toggleLeaderboard(btn) {
+                var mv = document.querySelector("fg-mainview.leaderboard");
+                mv.classList.toggle("is-expanded");
+                var expanded = mv.classList.contains("is-expanded");
+                btn.textContent = expanded ? "Show Less" : "Show More...";
+                if (expanded) mv.querySelector("fg-leaderboard").scrollTop = 0;
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="forge-path" content="desktop/auth/callback.html">
+    <meta name="forge-route" content="auth/callback.html">
+    <meta name="forge-variant" content="desktop">
+    <style>html:not(.forge-motion-ready),html:not(.forge-motion-ready) *,html:not(.forge-motion-ready) *::before,html:not(.forge-motion-ready) *::after{animation:none!important;transition:none!important}fg-client-include{display:none}</style>
+    <script src="../../scripts/vendor/supabase.js" defer></script>
+    <script src="../../scripts/forge-config.js" defer></script>
+    <script src="../../scripts/forge-api.js" defer></script>
+    <script src="../../scripts/forge-cache.js" defer></script>
+    <script src="../../scripts/auth-shell.js" defer></script>
+    <script src="../../scripts/workspace.js" defer></script>
+    <script src="../../scripts/forge-loader.js"></script>
+    <script src="../../scripts/forge-runtime.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signing in - ForgeGUI</title>
+    <meta name="color-scheme" content="dark" />
+    <style data-forge-critical>
+/* styles/auth-pages.css */
+body.auth-page {
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: radial-gradient(circle at 50% 20%, rgba(0, 119, 255, 0.2), transparent 38%), #080808;
+  color: #fff;
+  font-family: Inter, system-ui, sans-serif;
+}
+.auth-page-panel {
+  width: min(430px, 100%);
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  background: rgba(13, 13, 13, 0.96);
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+.auth-page-panel img {
+  width: 150px;
+  max-height: 42px;
+  object-fit: contain;
+}
+.auth-page-panel h1 {
+  margin: 24px 0 8px;
+}
+.auth-page-panel p {
+  color: rgba(255, 255, 255, 0.72);
+}
+.auth-page-form {
+  display: grid;
+  margin-top: 24px;
+  gap: 12px;
+}
+.auth-page-form input,
+.auth-page-form button {
+  min-height: 48px;
+  padding: 0 16px;
+  border-radius: 12px;
+  color: #fff;
+  font: inherit;
+}
+.auth-page-form input {
+  border: 1px solid #303030;
+  background: #1d1d1d;
+}
+.auth-page-form button {
+  border: 0;
+  background: #0077ff;
+  cursor: pointer;
+  font-weight: 700;
+}
+.auth-page-status {
+  min-height: 24px;
+  color: #ff8f8f !important;
+}
+.auth-page-status.success {
+  color: #86efac !important;
+}
+</style>
+    <link rel="stylesheet" href="../../styles/auth-pages.css" />
+    <script src="../../scripts/auth-callback.js" defer></script>
+  </head>
+  <body class="auth-page">
+    <main class="auth-page-panel">
+      <img src="../../assets/footerLogo.svg" alt="ForgeGUI" />
+      <h1>Completing sign-in</h1>
+      <p class="auth-page-status" data-auth-callback-status role="status">Securely exchanging your sign-in code...</p>
+      <p><a href="../../index.html">Return to ForgeGUI</a></p>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,1214 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta name="forge-path" content="desktop/onboarding.html">
+    <meta name="forge-route" content="onboarding.html">
+    <meta name="forge-variant" content="desktop">
+    <style>html:not(.forge-motion-ready),html:not(.forge-motion-ready) *,html:not(.forge-motion-ready) *::before,html:not(.forge-motion-ready) *::after{animation:none!important;transition:none!important}fg-client-include{display:none}</style>
+    <script src="../scripts/vendor/supabase.js" defer></script>
+    <script src="../scripts/forge-config.js" defer></script>
+    <script src="../scripts/forge-api.js" defer></script>
+    <script src="../scripts/forge-cache.js" defer></script>
+    <script src="../scripts/auth-shell.js" defer></script>
+    <script src="../scripts/workspace.js" defer></script>
+    <script src="../scripts/forge-loader.js"></script>
+    <script src="../scripts/forge-runtime.js" defer></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ForgeGUI</title>
+        <!--<link rel="icon" type="image/svg+xml" href="../fg.svg" />-->
+        <style data-forge-critical>
+/* styles/base.css */
+html:not(.forge-motion-ready),
+html:not(.forge-motion-ready) *,
+html:not(.forge-motion-ready) *::before,
+html:not(.forge-motion-ready) *::after {
+   animation: none !important;
+   transition: none !important;
+}
+* {
+   font-family: "Atkinson Hyperlegible Next", sans-serif;
+   font-optical-sizing: auto;
+   transition-property:
+      color,
+      background-color,
+      border-color,
+      outline-color,
+      opacity,
+      transform,
+      translate,
+      scale,
+      box-shadow,
+      width,
+      height,
+      max-height,
+      padding,
+      margin,
+      gap;
+   transition-duration: 0.25s;
+   transition-timing-function: ease;
+}
+body {
+   background: #0a0a0a;
+   --Glass-Text: linear-gradient(
+      180deg,
+      #fff 0%,
+      rgba(255, 255, 255, 0.5) 100%
+   );
+
+   &.chat {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      padding: 10px 0 0 10px;
+      margin: 0;
+      box-sizing: border-box;
+      align-items: flex-start;
+      gap: 10px;
+   }
+}
+fg-sidebar {
+   user-select: none;
+   -webkit-user-drag: none;
+   overflow-y: scroll;
+   display: flex;
+   width: 305px;
+   padding: calc(10px + 62px + 15px) 10px 440px 10px;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 15px;
+   flex-shrink: 0;
+   align-self: stretch;
+   position: relative;
+
+   &.collapsed {
+      width: 60px;
+      padding-bottom: 20px;
+      fg-top.sb {
+         width: 60px;
+         .fgLogo {
+            display: none;
+         }
+      }
+      .sidebarElem {
+         color: #ffffff00;
+         width: 60px;
+         height: 60px;
+      }
+      fg-toplabel {
+         display: none;
+      }
+      fg-bottom {
+         display: none !important;
+      }
+   }
+
+   fg-top.sb {
+      display: flex;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      right: 10px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      box-sizing: border-box;
+      width: 305px;
+
+      .fgLogo {
+         height: 24px;
+      }
+      button {
+         border: none;
+         background: none;
+         width: 38px;
+         height: 38px;
+         border-radius: 1293px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            outline: solid 10px rgba(255, 255, 255, 0.05);
+         }
+         &:active {
+            transform: scale(0.9);
+         }
+      }
+   }
+
+   fg-specialtabs {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+   }
+
+   fg-projects {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1 0 0;
+      align-self: stretch;
+
+      fg-toplabel {
+         display: flex;
+         margin: 14px 15px;
+         align-items: center;
+         gap: 8px;
+         align-self: stretch;
+         color: #fff;
+         font-size: 20px;
+         font-weight: 500;
+      }
+   }
+
+   .conversationListStatus {
+      padding: 8px 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      line-height: 1.35;
+   }
+
+   .conversationEntry span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
+
+   .sidebarElem {
+      text-decoration: none;
+      display: flex;
+      padding: 8px 10px;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+      border-radius: 15px;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      width: 100%;
+      box-sizing: border-box;
+
+      &.selected {
+         border: 1px solid rgba(255, 255, 255, 0.2);
+         background: rgba(60, 60, 60, 0.2);
+      }
+      &:hover {
+         background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      img {
+         width: 28px;
+         height: 28px;
+         margin: 5px;
+      }
+   }
+
+   fg-bottom.sb {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      align-self: stretch;
+      box-sizing: border-box;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 12931823;
+      backdrop-filter: blur(20px);
+      border-radius: 15px;
+      width: 305px;
+      fg-actions {
+         width: 100%;
+      }
+      creditCounter {
+         box-sizing: border-box;
+         display: flex;
+         padding: 10px;
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         width: 100%;
+
+         fg-top {
+            display: flex;
+            padding: 5px 8px;
+            justify-content: space-between;
+            align-items: center;
+            align-self: stretch;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 18px;
+            font-weight: 400;
+            gap: 8px;
+
+            a {
+               color: #fff;
+               text-decoration: none;
+               font-size: 18px;
+               font-weight: 600;
+            }
+         }
+         fg-bottom {
+            display: flex;
+            flex-direction: row;
+            padding: 8px;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            align-self: stretch;
+         }
+         creditSlider {
+            height: 9px;
+            flex: 1 0 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            &::before {
+               content: "";
+               width: 100px;
+               display: flex;
+               height: 9px;
+               background: linear-gradient(0deg, #0084ff 0%, #0084ff 100%);
+            }
+         }
+      }
+
+      fg-sidebaruserbutton {
+         display: flex;
+         padding: 15px;
+         align-items: center;
+         gap: 10px;
+         align-self: stretch;
+         border-radius: 15px;
+         border: 1px solid rgba(255, 255, 255, 0.12);
+         user-select: none;
+
+         fg-vertical {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 34px;
+            width: 100%;
+
+            b {
+               color: #fff;
+               font-size: 20px;
+               font-weight: 600;
+               line-height: 20px;
+            }
+
+            span {
+               color: rgba(255, 255, 255, 0.8);
+               font-size: 16px;
+               font-weight: 400;
+               line-height: normal;
+            }
+         }
+
+         img {
+            width: 38px;
+            height: 38px;
+            border-radius: 38px;
+         }
+
+         &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+         }
+      }
+   }
+}
+.upgradeButton {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   padding: 12px 20px;
+   background: #0077ff;
+   border: none;
+   border-radius: 15px;
+   cursor: pointer;
+   position: relative;
+
+   &:hover {
+      background-color: #32a3ff !important;
+   }
+
+   &.selected {
+      background-color: #32a3ff !important;
+   }
+
+   &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+      pointer-events: none;
+   }
+
+   span {
+      font-weight: bold;
+      font-size: 20px;
+      white-space: nowrap;
+      background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0px 1px 1.4px rgba(0, 0, 0, 0.25));
+   }
+}
+fg-mainview {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-sizing: border-box;
+   flex: 1 0 0;
+   height: 100%;
+   overflow-y: scroll;
+   border-radius: 20px 0 0 0;
+   border-top: 1px solid #333;
+   border-left: 1px solid #333;
+   background: #161616;
+   h1 {
+      margin: 0;
+   }
+}
+/* styles/onboarding.css */
+/* Page-specific styles extracted from base.css. */
+
+fg-topbar {
+   display: flex;
+   align-items: center;
+   gap: 16px;
+   padding: 14px 24px;
+   flex-shrink: 0;
+   color: #fff;
+
+   .skipOnboardingButton {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 18px;
+      font-weight: 500;
+      text-decoration: none;
+      &:hover {
+         color: #fff;
+      }
+   }
+}
+fg-mainview.carousel {
+   position: relative;
+   overflow: hidden;
+   flex: 1;
+   min-height: 0;
+   /* reset base mainView defaults */
+   display: block;
+   border-radius: 0;
+   border: none;
+   background: none;
+   padding: 0;
+}
+fg-carouselsteps {
+   display: flex;
+   gap: 8px;
+   align-items: center;
+   justify-content: center;
+}
+fg-carouselstep {
+   width: 8px;
+   height: 8px;
+   border-radius: 50%;
+   background: rgba(255, 255, 255, 0.25);
+
+   &.active {
+      background: #fff;
+      transform: scale(1.3);
+   }
+}
+.postButton {
+   display: flex;
+   width: 195px;
+   padding: 12px 0;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+   border: none;
+   border-radius: 8px;
+   background: #07f;
+   box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.59) inset;
+   cursor: pointer;
+
+   span {
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 20px;
+      font-weight: 700;
+      background: linear-gradient(
+         180deg,
+         #fff 0%,
+         rgba(255, 255, 255, 0.5) 100%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+   }
+}
+.onboardingInput {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 16px;
+   padding: 20px;
+   background: #1d1d1d;
+   border: 1px solid #303030;
+   border-radius: 10px;
+   overflow: hidden;
+
+   input {
+      flex: 1;
+      min-width: 0;
+      background: none;
+      border: none;
+      outline: none;
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 23px;
+      font-weight: 400;
+
+      &::placeholder {
+         color: rgba(255, 255, 255, 0.7);
+      }
+   }
+
+   .charCounter {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 20px;
+      font-weight: 400;
+      white-space: nowrap;
+      flex-shrink: 0;
+   }
+}
+.promptInput {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 15px 15px 15px 25px;
+   background: #111;
+   border-radius: 15px;
+   overflow: hidden;
+   width: 100%;
+   box-sizing: border-box;
+
+   input {
+      flex: 1;
+      min-width: 0;
+      background: none;
+      border: none;
+      outline: none;
+      font-family: "Atkinson Hyperlegible Next";
+      font-size: 20px;
+      font-weight: 500;
+
+      &::placeholder {
+         color: rgba(255, 255, 255, 0.5);
+      }
+   }
+
+   .createBtn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: #0077ff;
+      border: none;
+      border-radius: 15px;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+      white-space: nowrap;
+      flex-shrink: 0;
+   }
+}
+/* ── Page 4: follow accounts ────────────────────────────────────── */
+#page4 {
+   align-items: center;
+   justify-content: center;
+   gap: 50px;
+}
+fg-followlist {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+fg-followitem {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 14px;
+   width: 670px;
+   padding: 16px;
+   background: #1d1d1d;
+   border: 1px solid #303030;
+   border-radius: 20px;
+   box-sizing: border-box;
+
+   .followAvatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+
+      img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
+   }
+
+   .followInfo {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      strong {
+         font-size: 20px;
+         font-weight: 600;
+         color: #fff;
+      }
+
+      span {
+         font-size: 20px;
+         font-weight: 400;
+         color: rgba(255, 255, 255, 0.79);
+      }
+   }
+
+   .followBtn {
+      background: #2b2b2b;
+      border: none;
+      border-radius: 10px;
+      padding: 17px 24px;
+      height: 48px;
+      align-items: center;
+      display: flex;
+      color: #fff;
+      font-size: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+
+      &.is-followed {
+         background: #0d3d1a;
+         color: #4cff7a;
+      }
+   }
+}
+/* ── Page 7: offer / free-plan view toggle ──────────────────────── */
+#page7 {
+   padding: 40px 20px 30px;
+   align-items: center;
+   gap: 24px;
+}
+.offerView {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 20px;
+   width: 100%;
+   height: 100%;
+}
+.freePlanView {
+   display: none;
+   position: absolute;
+   inset: 0;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 50px;
+   padding: 40px 20px 30px;
+   box-sizing: border-box;
+   background-color: #161616;
+}
+#page7.skipped .offerView {
+   display: none;
+}
+#page7.skipped .freePlanView {
+   display: flex;
+}
+.promoCodeBanner {
+   width: 100%;
+   max-width: 494px;
+   border-radius: 20px;
+   overflow: hidden;
+   border: 1px solid #606060;
+   flex-shrink: 0;
+   background:
+      radial-gradient(
+         ellipse 100% 60% at 50% 0%,
+         rgba(0, 106, 255, 0.15) 0%,
+         transparent 100%
+      ),
+      linear-gradient(180deg, #1c1c1c 0%, #0d0d0d 100%);
+
+   .promoCodeTop {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.09);
+      font-size: 18px;
+      font-weight: 500;
+      color: white;
+
+      span {
+         color: #00c3ff;
+      }
+   }
+
+   .promoCodeBody {
+      display: flex;
+      align-items: center;
+      padding: 25px 0;
+
+      .promoStat {
+         flex: 1;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 10px;
+
+         strong {
+            font-size: 40px;
+            font-weight: 600;
+            color: #00c3ff;
+
+            em {
+               font-style: normal;
+               font-weight: 300;
+            }
+         }
+
+         small {
+            font-size: 18px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 0.05em;
+         }
+      }
+
+      .promoDivider {
+         width: 1px;
+         height: 59px;
+         background: rgba(255, 255, 255, 0.25);
+         flex-shrink: 0;
+      }
+   }
+}
+.plan-card--offer {
+   width: 100% !important;
+   max-width: 494px;
+   height: auto !important;
+   flex-shrink: 0;
+
+   strong {
+      color: #0bf !important;
+   }
+}
+.skipOfferBtn {
+   background: #1d1d1d;
+   border: 1px solid #262626;
+   border-radius: 15px;
+   color: white;
+   font-size: 20px;
+   font-weight: 500;
+   padding: 25px;
+   cursor: pointer;
+   box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.21);
+   width: 100%;
+   max-width: 494px;
+   flex-shrink: 0;
+}
+.freePlanActions {
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+   align-items: center;
+   width: 100%;
+
+   a {
+      border-radius: 15px;
+      font-size: 20px;
+      font-weight: 500;
+      cursor: pointer;
+      width: 100%;
+      max-width: 462px;
+      text-align: center;
+      text-decoration: none;
+      padding: 17px 24px;
+   }
+
+   .understoodBtn {
+      background: #1d1d1d;
+      border: 1px solid #262626;
+      color: white;
+      box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.21);
+   }
+
+   .upgradeBtn {
+      background: #0077ff;
+      border: none;
+      color: white;
+      font-size: 22px;
+      font-weight: 600;
+      box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+   }
+}
+fg-carouselpage {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   color: #fff;
+   overflow-y: scroll;
+   transform: translateX(100vw);
+   will-change: transform;
+   backface-visibility: hidden;
+   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+</style>
+    <link rel="stylesheet" href="../styles/base.css" />
+        <link rel="stylesheet" href="../styles/onboarding.css" />
+        <script src="../scripts/site.js" defer></script>
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta name="description" content="ForgeGUI - Create anything with AI" />
+        <meta property="og:title" content="ForgeGUI" />
+        <meta
+            property="og:description"
+            content="Powerful AI tool for creators"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="dark" />
+
+        <style></style>
+    </head>
+
+    <body class="onboarding">
+        <fg-topbar>
+            <img src="../assets/footerLogo.svg" />
+            <a href="../home.html" class="skipOnboardingButton"
+                >Skip On-Boarding</a
+            >
+            <div style="flex: 1"></div>
+            <img src="../assets/generic.png" style="height: 42px" />
+        </fg-topbar>
+        <fg-mainview class="onboarding carousel">
+            <fg-carouselpage id="page1">
+                <fg-onboardingheader>
+                    <h1>Howdy! Where did you come from?</h1>
+                    <span>Select between one of the options below.</span>
+                </fg-onboardingheader>
+                <fg-onboardingoptionsgrid>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="../icons/yt.svg" />
+                        Youtube
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="../icons/twitter.svg" />
+                        X/Twitter
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="../icons/tiktok.svg" />
+                        TikTok
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="../icons/google.svg" />
+                        Search Engine
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="../icons/3dots.svg" />
+                        Friend/Other
+                    </button>
+                </fg-onboardingoptionsgrid>
+            </fg-carouselpage>
+            <fg-carouselpage id="page2">
+                <fg-onboardingheader>
+                    <h1>What platform will you use ForgeGUI for?</h1>
+                    <span>Select between one of the options below.</span>
+                </fg-onboardingheader>
+                <fg-onboardingoptionsgrid>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="../icons/roblox.svg" />
+                        Roblox
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="../icons/ue.svg" />
+                        UEFN
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="../icons/unity.svg" />
+                        Unity
+                    </button>
+                </fg-onboardingoptionsgrid>
+            </fg-carouselpage>
+            <fg-carouselpage id="page3">
+                <fg-onboardingheader>
+                    <h1>What's your role?</h1>
+                    <span>Select between one of the options below.</span>
+                </fg-onboardingheader>
+                <fg-onboardingoptionsgrid>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="../icons/heart.svg" />
+                        Yes, I'm new
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="../icons/Programming.svg" />
+                        No, I'm not new
+                    </button>
+                    <button
+                        class="onboardingButton"
+                        onclick="
+                            this.classList.toggle('is-active');
+                            carousel.next();
+                        "
+                    >
+                        <img src="../icons/x.svg" />
+                        I'm not a dev
+                    </button>
+                </fg-onboardingoptionsgrid>
+            </fg-carouselpage>
+            <fg-carouselpage id="page4">
+                <fg-onboardingheader>
+                    <h1>Let's get you connected!</h1>
+                    <span>Before you can continue, follow <strong>3</strong> accounts.</span>
+                </fg-onboardingheader>
+                <fg-followlist>
+                    <fg-followitem>
+                        <div class="followAvatar">
+                            <img src="../assets/generic.png" />
+                        </div>
+                        <div class="followInfo">
+                            <strong>Account Name</strong>
+                            <span>@username</span>
+                        </div>
+                        <button class="followBtn" onclick="toggleFollow(this)">Not Followed</button>
+                    </fg-followitem>
+                    <fg-followitem>
+                        <div class="followAvatar">
+                            <img src="../assets/generic.png" />
+                        </div>
+                        <div class="followInfo">
+                            <strong>Account Name</strong>
+                            <span>@username</span>
+                        </div>
+                        <button class="followBtn" onclick="toggleFollow(this)">Not Followed</button>
+                    </fg-followitem>
+                    <fg-followitem>
+                        <div class="followAvatar">
+                            <img src="../assets/generic.png" />
+                        </div>
+                        <div class="followInfo">
+                            <strong>Account Name</strong>
+                            <span>@username</span>
+                        </div>
+                        <button class="followBtn" onclick="toggleFollow(this)">Not Followed</button>
+                    </fg-followitem>
+
+                </fg-followlist>
+                <button type="button" class="postButton" onclick="followAll()">
+                    <img src="../icons/People.svg">
+                    <span>
+                        Follow All 3
+                    </span>
+                </button>
+            </fg-carouselpage>
+            <fg-carouselpage id="page5">
+                <fg-onboardingheader>
+                    <h1>Let's create your first game!</h1>
+                    <span>First, give us a name for your project.</span>
+                </fg-onboardingheader>
+                <form>
+                    <div class="onboardingInput">
+                        <input type="text" placeholder="Name" maxlength="50" />
+                        <span class="charCounter">0/50</span>
+                    </div>
+                    <span> Or, Use suggested </span>
+                    <button
+                        type="button"
+                        class="suggestionButton"
+                        onclick="carousel.next()"
+                    >
+                        <img src="../icons/ai.svg" />
+                        Epic Gun Game
+                    </button>
+                    <button
+                        type="button"
+                        class="postButton"
+                        style="width: 300px; align-self: center"
+                        onclick="carousel.next()"
+                    >
+                        <span>Create Project</span><img src="../icons/add.svg" />
+                    </button>
+                </form>
+            </fg-carouselpage>
+            <fg-carouselpage id="page6">
+                <fg-onboardingheader>
+                    <h1>Select a prompt to start generating.</h1>
+                    <span>Generate the first asset for your game.</span>
+                </fg-onboardingheader>
+                <fg-stockprompts>
+                    <button class="suggestionButton">
+                        <img src="../icons/ai.svg" onclick="carousel.next()" />
+                        Generate an AK47 3D model
+                    </button>
+                    <button class="suggestionButton">
+                        <img src="../icons/ai.svg" onclick="carousel.next()" />
+                        Generate an fps thumbnail for my game
+                    </button>
+                    <button class="suggestionButton">
+                        <img src="../icons/ai.svg" onclick="carousel.next()" />
+                        Generate a gun shot sound effect
+                    </button>
+                </fg-stockprompts>
+                <hr class="onboardingHR" />
+                <fg-ownprompt>
+                    <span>Or type your own prompt...</span>
+                    <div class="promptInput">
+                        <input type="text" placeholder="Enter Text" />
+                        <button class="createBtn" onclick="carousel.next()">
+                            Create
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M14.5 1.5L1.5 6.5L6.5 8.5M14.5 1.5L9.5 14.5L6.5 8.5M14.5 1.5L6.5 8.5"
+                                    stroke="white"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </fg-ownprompt>
+            </fg-carouselpage>
+            <fg-carouselpage id="page7">
+                <div class="offerView">
+                    <fg-onboardingheader>
+                        <h1>You're in luck!</h1>
+                        <span
+                            >You've earned a 55% discount on the Pro tier!</span
+                        >
+                    </fg-onboardingheader>
+                    <div class="promoCodeBanner">
+                        <div class="promoCodeTop">
+                            Promo Code: <span>Code Name</span>
+                        </div>
+                        <div class="promoCodeBody">
+                            <div class="promoStat">
+                                <strong>75% <em>OFF</em></strong>
+                                <small>PROMO</small>
+                            </div>
+                            <div class="promoDivider"></div>
+                            <div class="promoStat">
+                                <strong>10:00</strong>
+                                <small>TIME LEFT</small>
+                            </div>
+                        </div>
+                    </div>
+                    <fg-plancard class="plan-card plan-card--pro plan-card--offer">
+                        <fg-plantitle>
+    <h2><span>Pro</span></h2>
+    <fg-planbadge><span>55% OFF</span></fg-planbadge>
+</fg-plantitle>
+
+<fg-planprice>
+    <fg-priceline>
+        <strong><span>$14.99</span></strong>
+        <del><span>$59.99</span></del>
+        <span>/month</span>
+    </fg-priceline>
+    <fg-pricebenefits>
+        <div>
+                                <p><em>TRULY UNLIMITED GENERATIONS.</em></p>
+                                <p>Subject to abuse protections.</p>
+                            </div>
+    </fg-pricebenefits>
+</fg-planprice>
+
+<button class="planButton"><span>Claim Discount!</span></button>
+
+<fg-planfeatures>
+    <fg-featuregroup>
+        <h3><img src="../icons/ai.svg" alt="" /> AI models</h3>
+        <ul>
+                                <li>Access to Google Nano Banana</li>
+                                <li>Access to Meshy</li>
+                                <li>Fable 5</li>
+                                <li>Access to Tripo</li>
+                                <li>Access to GPT Image V2</li>
+                                <li>10s of more models.</li>
+                            </ul>
+    </fg-featuregroup>
+    <fg-featuregroup>
+        <h3><img src="../icons/crown.svg" alt="" /> Included Features</h3>
+        <ul>
+                                <li>Pro AI models for any task.</li>
+                                <li>Custom Pro Role</li>
+                                <li>Faster Generations</li>
+                                <li>Skip the Waitlist</li>
+                                <li>Everything in the Starter Tier</li>
+                            </ul>
+    </fg-featuregroup>
+</fg-planfeatures>
+
+                    </fg-plancard>
+                    <button
+                        type="button"
+                        class="skipOfferBtn"
+                        onclick="
+                            var p = document.getElementById('page7');
+                            p.classList.add('skipped');
+                            p.style.overflowY = 'hidden';
+                            p.scrollTop = 0;
+                        "
+                    >
+                        Skip Offer
+                    </button>
+                </div>
+                <div class="freePlanView">
+                    <fg-onboardingheader>
+                        <h1>You're using the free plan.</h1>
+                        <span
+                            >You have unlimited free daily generations, subject
+                            to daily rate limits.</span
+                        >
+                    </fg-onboardingheader>
+                    <div class="freePlanActions">
+                        <a href="../home.html" type="button" class="understoodBtn">
+                            Understood
+                        </a>
+                        <a href="../home.html" type="button" class="upgradeBtn">
+                            Upgrade
+                        </a>
+                    </div>
+                </div>
+            </fg-carouselpage>
+            <fg-carouselsteps></fg-carouselsteps>
+        </fg-mainview>
+        <script>
+            document.querySelectorAll(".onboardingButton").forEach((btn) => {
+                btn.addEventListener("mousemove", (e) => {
+                    if (btn.matches(":active")) return;
+                    const r = btn.getBoundingClientRect();
+                    const x = (e.clientX - r.left) / r.width - 0.5;
+                    const y = (e.clientY - r.top) / r.height - 0.5;
+                    btn.style.transform = `perspective(600px) rotateX(${-y * 14}deg) rotateY(${x * 14}deg)`;
+                });
+                btn.addEventListener("mousedown", () => {
+                    btn.style.transform = "";
+                });
+                btn.addEventListener("mouseleave", () => {
+                    btn.style.transform = "";
+                });
+            });
+
+            function toggleFollow(btn) {
+                btn.classList.toggle("is-followed");
+                btn.textContent = btn.classList.contains("is-followed") ? "Following" : "Not Followed";
+                var allFollowed = Array.from(
+                    document.getElementById("page4").querySelectorAll(".followBtn")
+                ).every((b) => b.classList.contains("is-followed"));
+                if (allFollowed) carousel.next();
+            }
+
+            function followAll() {
+                var followButtons = document
+                    .getElementById("page4")
+                    .querySelectorAll(".followBtn");
+                followButtons.forEach((btn) => {
+                    btn.classList.add("is-followed");
+                    btn.textContent = "Following";
+                });
+                window.carousel.next();
+            }
+        </script>
+    </body>
+</html>

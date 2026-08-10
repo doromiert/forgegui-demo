@@ -1,0 +1,28 @@
+<fg-plantitle>
+    <h2><fg-slot data-name="title">Plan</fg-slot></h2>
+    <fg-planbadge><fg-slot data-name="badge"></fg-slot></fg-planbadge>
+</fg-plantitle>
+
+<fg-planprice>
+    <fg-priceline>
+        <strong><fg-slot data-name="price">$0.00</fg-slot></strong>
+        <del><fg-slot data-name="original-price"></fg-slot></del>
+        <span>/month</span>
+    </fg-priceline>
+    <fg-pricebenefits>
+        <fg-slot data-name="price-benefits"></fg-slot>
+    </fg-pricebenefits>
+</fg-planprice>
+
+<button class="planButton"><fg-slot data-name="button">Choose Plan</fg-slot></button>
+
+<fg-planfeatures>
+    <fg-featuregroup>
+        <h3><img src="icons/ai.svg" alt="" /> AI models</h3>
+        <fg-slot data-name="ai-features"></fg-slot>
+    </fg-featuregroup>
+    <fg-featuregroup>
+        <h3><img src="icons/crown.svg" alt="" /> Included Features</h3>
+        <fg-slot data-name="included-features"></fg-slot>
+    </fg-featuregroup>
+</fg-planfeatures>

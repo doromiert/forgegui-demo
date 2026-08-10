@@ -1,0 +1,156 @@
+/* Page-specific styles extracted from base.css. */
+
+/* ── Course player page ─────────────────────────────────────────── */
+fg-mainview.courses:has(fg-courseplayer) {
+   align-items: stretch;
+   overflow: hidden;
+   padding: 0;
+
+   fg-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 40px;
+      padding: 30px 35px 0;
+      flex-shrink: 0;
+   }
+
+   fg-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      span {
+         font-size: 32px;
+         font-weight: 500;
+         color: rgba(255, 255, 255, 0.8);
+      }
+
+      b {
+         font-size: 32px;
+         font-weight: 600;
+         color: #fff;
+      }
+
+      img {
+         width: 24px;
+         height: 24px;
+      }
+   }
+
+   fg-courseplayer {
+      flex: 1;
+      min-height: 0;
+      margin: 20px 35px 0;
+      border: 1px solid #363636;
+      border-radius: 10px;
+      overflow: hidden;
+      background: url("../assets/coursePlaceholder.jpg") center / cover no-repeat;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      &::before {
+         content: "";
+         position: absolute;
+         inset: 0;
+         background: rgba(0, 0, 0, 0.6);
+         pointer-events: none;
+      }
+
+      h1 {
+         font-size: 32px;
+         font-weight: 600;
+         color: #fff;
+         margin: 0;
+         position: relative;
+         z-index: 1;
+      }
+
+      h2 {
+         font-size: 24px;
+         font-weight: 500;
+         color: rgba(255, 255, 255, 0.7);
+         margin: 0;
+         position: relative;
+         z-index: 1;
+      }
+
+      > span {
+         font-size: 18px;
+         font-weight: 500;
+         color: rgba(255, 255, 255, 0.7);
+         position: relative;
+         z-index: 1;
+      }
+
+      .coursePlayerInfo {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 4px;
+         position: relative;
+         z-index: 1;
+      }
+   }
+
+   .playButton {
+      width: 81px;
+      height: 81px;
+      border-radius: 50px;
+      backdrop-filter: blur(25px);
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+
+      img {
+         width: 61px;
+         height: 61px;
+      }
+   }
+
+   fg-bottom {
+      height: 109px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-shrink: 0;
+
+      fg-completionbar {
+         width: 529px;
+      }
+   }
+}
+
+.courseSwitchButton {
+   width: 58px;
+   height: 58px;
+   border-radius: 36px;
+   backdrop-filter: blur(17.9px);
+   background: rgba(255, 255, 255, 0.16);
+   border: 0.716px solid rgba(255, 255, 255, 0.2);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   flex-shrink: 0;
+
+   img {
+      width: 32px;
+      height: 32px;
+   }
+
+   &.active {
+      background: #0077ff;
+      box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.59);
+   }
+}

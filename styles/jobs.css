@@ -1,0 +1,419 @@
+.jobsListing {
+   display: flex;
+   width: 100%;
+   padding: 30px 35px;
+   flex-direction: column;
+   gap: 20px;
+}
+
+.jobsToolbar {
+   display: flex;
+   width: 100%;
+   min-height: 48px;
+   padding: 0 15px;
+   align-items: center;
+   justify-content: space-between;
+   gap: 28px;
+}
+
+.jobFilters {
+   display: flex;
+   min-width: 0;
+   align-items: center;
+   justify-content: flex-end;
+   gap: 12px;
+}
+
+.jobFilters > label:not(.publicSearch) {
+   display: flex;
+   align-items: center;
+   gap: 7px;
+   font-size: 20px;
+   font-weight: 500;
+   white-space: nowrap;
+}
+
+.jobFilters select {
+   padding: 8px 30px 8px 2px;
+   border: 0;
+   outline: 0;
+   appearance: none;
+   background: url("../icons/arrow.svg") right 2px center / 24px 24px no-repeat;
+   color: #fff;
+   font-size: 20px;
+   font-weight: 600;
+   cursor: pointer;
+}
+
+.jobFilters option {
+   background: #161616;
+}
+
+.jobSearch {
+   margin-left: 4px;
+}
+
+.jobsGrid {
+   display: grid;
+   width: 100%;
+   grid-template-columns: repeat(5, minmax(0, 1fr));
+   gap: 20px 18px;
+}
+
+.jobCard {
+   display: flex;
+   min-width: 0;
+   height: 383px;
+   padding: 10px;
+   flex-direction: column;
+   gap: 10px;
+   overflow: hidden;
+   border: 1px solid rgba(255, 255, 255, 0.25);
+   border-radius: 20px;
+   background: #0a0a0a;
+   color: #fff;
+   text-align: left;
+   cursor: pointer;
+}
+
+.jobCardPreview {
+   min-height: 0;
+   flex: 1;
+   border-radius: 10px;
+   background: #e4e4e4;
+}
+
+.jobCardCopy {
+   display: flex;
+   padding: 15px 10px 10px;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 14px;
+}
+
+.jobCardCopy strong {
+   font-size: 24px;
+   font-weight: 600;
+}
+
+.jobCardCopy > span:not(.jobCardPay) {
+   min-height: 69px;
+   font-size: 20px;
+   line-height: 1.15;
+}
+
+.jobCardPay {
+   padding: 8px 11px;
+   border-radius: 40px;
+   background: #323232;
+   font-size: 20px;
+   font-weight: 500;
+}
+
+.jobCard:hover,
+.jobCard:focus-visible {
+   border-color: #888;
+   transform: translateY(-2px);
+}
+
+.jobsEmpty {
+   display: flex;
+   min-height: calc(100dvh - var(--header-height) - 345px);
+   padding: 30px 35px;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   gap: 36px;
+   text-align: center;
+}
+
+.jobsEmpty h2 {
+   font-size: 48px;
+   font-weight: 600;
+}
+
+.jobsEmpty p {
+   font-size: 32px;
+}
+
+.jobDetailPopup {
+   width: 800px;
+}
+
+.jobDetailInner {
+   display: flex;
+   width: 100%;
+   padding: 15px 20px 20px;
+   flex-direction: column;
+   gap: 15px;
+}
+
+.jobDetailTitlebar {
+   display: flex;
+   width: 100%;
+   height: 38px;
+   padding: 0 12px;
+   align-items: center;
+   gap: 15px;
+}
+
+.jobDetailTitlebar > span {
+   flex: 1;
+   font-size: 24px;
+   font-weight: 500;
+}
+
+.jobDetailBack {
+   display: grid;
+   width: 24px;
+   height: 24px;
+   padding: 0;
+   border: 0;
+   background: none;
+   cursor: pointer;
+   place-items: center;
+}
+
+.jobDetailBack img {
+   width: 24px;
+   height: 24px;
+   rotate: 90deg;
+}
+
+.jobDetailMore {
+   width: 24px;
+   height: 24px;
+}
+
+.jobDetailBanner {
+   position: relative;
+   width: 100%;
+   height: 260px;
+   overflow: hidden;
+   border-radius: 10px;
+}
+
+.jobDetailBanner img {
+   position: absolute;
+   inset: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+.jobDetailHeader {
+   display: flex;
+   width: 100%;
+   padding: 15px;
+   align-items: center;
+   gap: 15px;
+}
+
+.jobDetailIcon {
+   position: relative;
+   width: 48px;
+   height: 48px;
+   flex: 0 0 48px;
+}
+
+.jobDetailIcon img {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+.jobIconLeft,
+.jobIconRight {
+   width: 17.6px;
+   height: 22px;
+}
+
+.jobIconLeft {
+   margin-left: -13px;
+}
+
+.jobIconRight {
+   margin-left: 13px;
+}
+
+.jobIconCenter {
+   width: 26.4px;
+   height: 33px;
+}
+
+.jobDetailHeading {
+   display: flex;
+   min-width: 0;
+   flex: 1;
+   flex-direction: column;
+   gap: 9px;
+}
+
+.jobDetailHeading strong {
+   font-size: 32px;
+   font-weight: 600;
+}
+
+.jobDetailHeading span {
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 20px;
+}
+
+.jobApplyButton {
+   display: flex;
+   padding: 10px 15px 10px 20px;
+   align-items: center;
+   gap: 10px;
+   border-radius: 50px;
+   background: #07f;
+   box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.59);
+   font-size: 18px;
+   font-weight: 500;
+}
+
+.jobMailIcon {
+   position: relative;
+   width: 24px;
+   height: 24px;
+   flex: 0 0 24px;
+}
+
+.jobMailIcon img {
+   position: absolute;
+   inset: 0;
+   width: 24px;
+   height: 24px;
+}
+
+.jobDetailBody {
+   display: grid;
+   width: 100%;
+   height: 234px;
+   grid-template-columns: minmax(0, 1fr) 322px;
+   gap: 10px;
+}
+
+.jobDescription,
+.jobRequirements {
+   padding: 15px;
+   border-radius: 10px;
+   background: #1b1b1b;
+}
+
+.jobDescription h2 {
+   font-size: 16px;
+   font-weight: 400;
+}
+
+.jobRequirements {
+   display: flex;
+   flex-direction: column;
+   gap: 18px;
+}
+
+.jobRequirements h2 {
+   margin: 0;
+   font-size: 20px;
+   font-weight: 600;
+}
+
+.jobRequirements ul {
+   margin: 0;
+   padding-left: 27px;
+   font-size: 18px;
+}
+
+@media (max-width: 1500px) {
+   .jobsToolbar {
+      align-items: flex-start;
+      flex-direction: column;
+   }
+
+   .jobFilters {
+      width: 100%;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+   }
+
+   .jobSearch {
+      margin-left: auto;
+   }
+}
+
+@media (max-width: 1200px) {
+   .jobsGrid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+   }
+}
+
+@media (max-width: 760px) {
+   .jobsListing {
+      padding: 24px 16px;
+   }
+
+   .jobsToolbar {
+      padding: 0;
+   }
+
+   .jobFilters {
+      align-items: stretch;
+      flex-direction: column;
+   }
+
+   .jobFilters > label:not(.publicSearch) {
+      justify-content: space-between;
+   }
+
+   .jobSearch {
+      width: 100%;
+      margin-left: 0;
+   }
+
+   .jobsGrid {
+      grid-template-columns: 1fr;
+   }
+
+   .jobDetailPopup {
+      width: 100%;
+      max-height: none;
+      border-radius: 20px;
+   }
+
+   .jobDetailInner {
+      padding: 12px;
+   }
+
+   .jobDetailBanner {
+      height: auto;
+      aspect-ratio: 16 / 7;
+   }
+
+   .jobDetailHeader {
+      align-items: flex-start;
+      flex-wrap: wrap;
+   }
+
+   .jobApplyButton {
+      width: 100%;
+      justify-content: center;
+   }
+
+   .jobDetailBody {
+      height: auto;
+      grid-template-columns: 1fr;
+   }
+
+   .jobDescription,
+   .jobRequirements {
+      min-height: 180px;
+   }
+
+   .jobsEmpty h2 {
+      font-size: 36px;
+   }
+
+   .jobsEmpty p {
+      font-size: 24px;
+   }
+}
