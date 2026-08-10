@@ -43,4 +43,3 @@ jobs:
           publish_branch: public
           publish_dir: ./dist
           force_orphan: true
-          cname: forgegui.com
