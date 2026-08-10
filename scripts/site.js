@@ -57,6 +57,57 @@
     menuButton.setAttribute("aria-expanded", String(open));
   });
 
+  function closeNavMenus(exceptMenu) {
+    document.querySelectorAll("[data-nav-menu]").forEach(function (menu) {
+      if (menu === exceptMenu) return;
+      menu.classList.remove("is-open");
+      menu.querySelector(".nav-trigger").setAttribute("aria-expanded", "false");
+      menu.querySelector(".nav-dropdown").hidden = true;
+    });
+  }
+
+  function openNavMenu(menu) {
+    closeNavMenus(menu);
+    menu.classList.add("is-open");
+    menu.querySelector(".nav-trigger").setAttribute("aria-expanded", "true");
+    menu.querySelector(".nav-dropdown").hidden = false;
+  }
+
+  document.addEventListener("click", function (event) {
+    var trigger = event.target.closest(".nav-trigger");
+    if (trigger) {
+      var menu = trigger.closest("[data-nav-menu]");
+      var opening = !menu.classList.contains("is-open");
+      closeNavMenus();
+      if (opening) openNavMenu(menu);
+      return;
+    }
+
+    if (event.target.closest(".nav-dropdown-item") || !event.target.closest("[data-nav-menu]")) {
+      closeNavMenus();
+    }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    var trigger = event.target.closest && event.target.closest(".nav-trigger");
+    if (trigger && event.key === "ArrowDown") {
+      event.preventDefault();
+      var menu = trigger.closest("[data-nav-menu]");
+      openNavMenu(menu);
+      var firstLink = menu.querySelector('.nav-dropdown [role="menuitem"]:not([aria-disabled="true"])');
+      if (firstLink) firstLink.focus();
+      return;
+    }
+
+    if (event.key !== "Escape") return;
+    var openMenu = document.querySelector("[data-nav-menu].is-open");
+    if (!openMenu) return;
+    event.preventDefault();
+    var openTrigger = openMenu.querySelector(".nav-trigger");
+    closeNavMenus();
+    openTrigger.focus();
+  });
+
   // Carousel API — call carousel.next(), carousel.prev(), or carousel.goTo(n)
   window.carousel = (function () {
     var index = 0;

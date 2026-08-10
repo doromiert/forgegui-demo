@@ -93,27 +93,112 @@ a {
    align-items: center;
 }
 
-.main-nav a {
+.nav-menu {
+   position: relative;
+   display: flex;
+   align-self: stretch;
+   align-items: center;
+}
+
+.nav-trigger {
    display: flex;
    height: 54px;
+   padding: 15px 10px 15px 20px;
    align-items: center;
    gap: 12px;
-   padding: 15px 10px 15px 20px;
+   border: 0;
    border-radius: 30px;
+   background: transparent;
    color: var(--cool-white);
    font-family: "Inter Tight", sans-serif;
    font-size: 22px;
    font-weight: 500;
    white-space: nowrap;
+   cursor: pointer;
 }
 
-.main-nav a:hover {
+.nav-trigger:hover,
+.nav-trigger:focus-visible,
+.nav-menu.is-open .nav-trigger {
    background: rgba(255, 255, 255, 0.06);
+   outline: 0;
 }
 
-.main-nav img {
+.nav-trigger img {
    width: 24px;
    height: 24px;
+   flex: 0 0 24px;
+}
+
+.nav-dropdown {
+   position: absolute;
+   z-index: 30;
+   top: calc(100% + 13px);
+   left: 0;
+   display: flex;
+   width: 326px;
+   padding: 10px;
+   flex-direction: column;
+   overflow: hidden;
+   border: 1px solid rgba(255, 255, 255, 0.12);
+   border-radius: 23px;
+   background: rgba(18, 18, 18, 0.8);
+   box-shadow: 0 4px 50px #000;
+   backdrop-filter: blur(25px);
+}
+
+.nav-dropdown[hidden] {
+   display: none;
+}
+
+.nav-dropdown-company {
+   right: 0;
+   left: auto;
+}
+
+.nav-dropdown-item {
+   display: flex;
+   min-height: 65px;
+   padding: 15px;
+   align-items: center;
+   gap: 10px;
+   overflow: hidden;
+   border-radius: 15px;
+   color: #fff;
+}
+
+a.nav-dropdown-item:hover,
+a.nav-dropdown-item:focus-visible {
+   background: rgba(255, 255, 255, 0.1);
+   outline: 0;
+}
+
+.nav-dropdown-copy {
+   display: flex;
+   min-width: 0;
+   flex: 1;
+   flex-direction: column;
+   gap: 0px;
+   line-height: normal;
+   text-box-trim: trim-both;
+   text-box-edge: cap alphabetic;
+}
+
+.nav-dropdown-copy strong {
+   font-size: 20px;
+   font-weight: 500;
+}
+
+.nav-dropdown-copy > span {
+   font-size: 18px;
+   font-weight: 400;
+}
+
+.nav-dropdown-item > img {
+   width: 24px;
+   height: 24px;
+   flex: 0 0 24px;
+   rotate: -90deg;
 }
 
 .auth-actions {
@@ -140,7 +225,7 @@ a {
 }
 
 .hero {
-   z-index: 10000;
+   z-index: 10;
    --hero-scroll: 0;
    --hero-portal-y: calc(50% - 380px);
    --hero-portal-scale: 0.82;
@@ -1700,7 +1785,7 @@ body.modal-open .feature-stack .platform-question {
 }
 
 @media (max-width: 1500px) {
-   .main-nav a {
+   .nav-trigger {
       gap: 6px;
       padding-left: 12px;
       font-size: 18px;
@@ -1784,8 +1869,24 @@ body.modal-open .feature-stack .platform-question {
    .main-nav.is-open {
       display: flex;
    }
-   .main-nav a {
+
+   .nav-menu {
+      width: 100%;
+      align-self: auto;
+      flex-direction: column;
+      align-items: stretch;
+   }
+
+   .nav-trigger {
+      width: 100%;
       justify-content: space-between;
+   }
+
+   .nav-dropdown,
+   .nav-dropdown-company {
+      position: static;
+      width: 100%;
+      margin: 4px 0 10px;
    }
    .auth-actions {
       margin-left: auto;
