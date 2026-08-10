@@ -76,15 +76,14 @@ a {
    width: 100%;
    height: var(--header-height);
    min-height: var(--header-height);
-   padding: 10px 15px 10px 20px;
+   padding: 15px 15px 15px 20px;
    margin: 0;
-   background: transparent;
    z-index: 1000000000000000000;
 }
 
 .brand img {
-   width: 128px;
-   height: 28px;
+   width: 120px;
+   height: 26px;
    object-fit: contain;
    object-position: left center;
 }
@@ -96,6 +95,7 @@ a {
 
 .main-nav a {
    display: flex;
+   height: 54px;
    align-items: center;
    gap: 12px;
    padding: 15px 10px 15px 20px;
@@ -2242,11 +2242,11 @@ body.modal-open .feature-stack .platform-question {
    .hero-scene,
    .hero-platform-orbit,
    .hero-platform,
-    .hero-prompt,
-    .hero-cta,
-    .scroll-cue,
-    .feature-stack .orbit-stage,
-    .feature.is-active .model-logo,
+   .hero-prompt,
+   .hero-cta,
+   .scroll-cue,
+   .feature-stack .orbit-stage,
+   .feature.is-active .model-logo,
    .feature.is-active .collage,
    .feature.is-active .platform-logo,
    .feature.is-active .platform-stroke,
@@ -2614,7 +2614,9 @@ body.modal-open {
    background: rgba(255, 255, 255, 0.05);
    color: #fff;
    cursor: pointer;
-   font: 600 13px/1 "Inter Tight", sans-serif;
+   font:
+      600 13px/1 "Inter Tight",
+      sans-serif;
    text-transform: capitalize;
 }
 
