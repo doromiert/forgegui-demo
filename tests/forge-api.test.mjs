@@ -47,7 +47,7 @@ test("classifies protected and public routes", () => {
   assert.equal(api.auth.isProtectedRoute("community.html"), true);
   assert.equal(api.auth.isProtectedRoute("plans.html"), true);
   assert.equal(api.auth.isProtectedRoute("docs/index.html"), true);
-  assert.equal(api.auth.isProtectedRoute("onboarding.html"), true);
+  assert.equal(api.auth.isProtectedRoute("onboarding.html"), false);
   assert.equal(api.auth.isProtectedRoute("auth/callback.html"), false);
   assert.equal(api.auth.isProtectedRoute("index.html"), false);
   assert.equal(api.auth.isProtectedRoute("blog.html"), false);

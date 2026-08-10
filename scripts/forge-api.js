@@ -10,6 +10,7 @@
     "blog/article.html",
     "jobs.html",
     "jobs-empty.html",
+    "onboarding.html",
     "auth/callback.html",
     "auth/reset-password.html",
   ]);
@@ -152,13 +153,7 @@
   async function requireSession(route, root) {
     if (!isProtectedRoute(route)) return true;
     try {
-      if (await currentSession()) {
-        if (normalizeRoute(route, "").split(/[?#]/)[0] === "onboarding.html") {
-          location.replace(new URL("home.html", root).href);
-          return false;
-        }
-        return true;
-      }
+      if (await currentSession()) return true;
       rememberReturnPath(route);
       location.replace(new URL("index.html?auth=signin", root).href);
       return false;
