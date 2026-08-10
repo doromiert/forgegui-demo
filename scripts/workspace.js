@@ -434,21 +434,22 @@
     setChatBusy(true);
     try {
       var references = await uploadAttachments(attachmentFiles || []);
-      var turn = await api.function("chat-router", {
-        body: {
-          conversation_id: activeConversationId,
-          message: prompt,
-          available_references: references,
-          plan_mode: false,
-          routing_mode: "contextual",
-          prompt_selector: {
-            source: "interactive_frontend",
-            category: "auto",
-            action: "generate",
-          },
-          lime_session_active: false,
-          clarification_answer: clarificationAnswer,
+      var requestBody = {
+        conversation_id: activeConversationId,
+        message: prompt,
+        available_references: references,
+        plan_mode: false,
+        routing_mode: "contextual",
+        prompt_selector: {
+          source: "interactive_frontend",
+          category: "auto",
+          action: "generate",
         },
+        lime_session_active: false,
+      };
+      if (clarificationAnswer) requestBody.clarification_answer = clarificationAnswer;
+      var turn = await api.function("chat-router", {
+        body: requestBody,
       });
       activeConversationId = turn.conversation_id;
       history.replaceState({}, "", conversationUrl(activeConversationId).href);
