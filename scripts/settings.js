@@ -322,6 +322,7 @@
     setBusy(button, true, "Deleting...");
     try {
       await window.ForgeAPI.function("delete-account");
+      if (state.session && window.ForgeCache) window.ForgeCache.clearUser(state.session.user.id);
       try { await window.ForgeAPI.auth.signOut(); } catch (_) {}
       location.assign(window.ForgeAPI.routeUrl("index.html").href);
     } catch (error) {

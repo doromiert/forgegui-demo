@@ -134,6 +134,7 @@
       '<div class="genbox-vign"></div>' +
       '<div class="genbox-ring"></div>' +
       '<img class="genbox-shot" alt="">' +
+      '<div class="genbox-track"><i></i></div>' +
       '<div class="genbox-label">' +
         '<span class="genbox-txt">Generating your image...</span><span class="genbox-pct"></span>' +
       '</div>';

@@ -177,9 +177,11 @@ fg-bottom.convo.workspaceMessages {
    color: #ff9b9b;
 }
 
-.workspaceTask-running,
-.workspaceTask-queued {
-   animation: workspacePulse 1.8s ease-in-out infinite;
+.workspaceGenbox {
+   --gb-ratio: 1 / 1;
+   align-self: flex-start;
+   max-width: 280px;
+   width: min(100%, 280px);
 }
 
 .workspaceClarification {

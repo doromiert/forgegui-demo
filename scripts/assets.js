@@ -7,6 +7,9 @@
   if (!route.startsWith("library/")) return;
 
   var api = window.ForgeAPI;
+  var cache = window.ForgeCache;
+  var CATALOG_MAX_AGE = 24 * 60 * 60 * 1000;
+  var PERSONAL_ASSETS_MAX_AGE = 24 * 60 * 60 * 1000;
   var client;
   var session;
   var personalAssets = new Map();
@@ -418,13 +421,22 @@
   });
 
   async function loadCatalog() {
+    var cached = cache ? cache.read("public", "assets:catalog", CATALOG_MAX_AGE) : null;
+    if (Array.isArray(cached) && cached.length) renderCatalog(cached);
     var result = await client.rpc("get_public_asset_catalog_entries", { p_slug: null });
-    if (!result.error && Array.isArray(result.data) && result.data.length) renderCatalog(result.data);
+    if (!result.error && Array.isArray(result.data) && result.data.length) {
+      if (cache) cache.write("public", "assets:catalog", result.data);
+      renderCatalog(result.data);
+    }
   }
 
   async function loadPersonalAssets() {
     var grid = document.querySelector("[data-personal-assets]");
-    if (grid) {
+    var cached = cache
+      ? cache.read(session.user.id, "assets:personal", PERSONAL_ASSETS_MAX_AGE)
+      : null;
+    if (Array.isArray(cached)) renderPersonalAssets(cached);
+    else if (grid) {
       grid.innerHTML = '<p class="assetBackendStatus">Loading your generated assets...</p>';
     }
     var result = await client
@@ -435,7 +447,9 @@
       .order("created_at", { ascending: false })
       .limit(30);
     if (result.error) throw result.error;
-    renderPersonalAssets(flattenTasks(result.data || []));
+    var assets = flattenTasks(result.data || []);
+    if (cache) cache.write(session.user.id, "assets:personal", assets);
+    renderPersonalAssets(assets);
   }
 
   async function initialize() {

@@ -6,9 +6,12 @@
   if (!routeMeta || routeMeta.content !== "community.html") return;
 
   var api = window.ForgeAPI;
+  var cache = window.ForgeCache;
+  var FEED_MAX_AGE = 6 * 60 * 60 * 1000;
   var client;
   var session;
   var posts = new Map();
+  var currentFeedPosts = [];
   var activePost = null;
   var selectedAuthorId = null;
   var selectedCategory = "";
@@ -266,6 +269,20 @@
     applySearch();
   }
 
+  function feedCacheName() {
+    return "community:feed:trending:" + (selectedCategory || "all");
+  }
+
+  function applyFeedPosts(feedPosts) {
+    currentFeedPosts = feedPosts;
+    posts = new Map(feedPosts.map(function (post) { return [post.id, post]; }));
+    renderFeed(feedPosts);
+  }
+
+  function cacheFeed() {
+    if (cache && session) cache.write(session.user.id, feedCacheName(), currentFeedPosts);
+  }
+
   async function enrichPosts(feedPosts) {
     if (!feedPosts.length) return [];
     var userIds = Array.from(new Set(feedPosts.map(function (post) { return post.user_id; })));
@@ -289,22 +306,38 @@
   }
 
   async function loadFeed() {
-    showFeedStatus("Loading Community...");
-    var result = await client.rpc("get_community_feed", {
-      p_limit: 30,
-      p_offset: 0,
-      p_sort: "trending",
-      p_platform_tags: null,
-      p_dev_type_tags: selectedCategory ? [selectedCategory] : null,
-    });
-    if (result.error) throw result.error;
-    var enriched = await enrichPosts(result.data || []);
-    posts = new Map(enriched.map(function (post) { return [post.id, post]; }));
-    renderFeed(enriched);
+    var cached = cache && session
+      ? cache.read(session.user.id, feedCacheName(), FEED_MAX_AGE)
+      : null;
     var requested = new URLSearchParams(location.search).get("post");
-    if (requested) {
-      var post = posts.get(requested) || await loadSinglePost(requested);
-      if (post) openDetail(post, false);
+    if (Array.isArray(cached)) {
+      applyFeedPosts(cached);
+      var cachedPost = requested && posts.get(requested);
+      if (cachedPost) openDetail(cachedPost, false).catch(function (error) { toast(error.message, true); });
+    } else showFeedStatus("Loading Community...");
+    try {
+      var result = await client.rpc("get_community_feed", {
+        p_limit: 30,
+        p_offset: 0,
+        p_sort: "trending",
+        p_platform_tags: null,
+        p_dev_type_tags: selectedCategory ? [selectedCategory] : null,
+      });
+      if (result.error) throw result.error;
+      var enriched = await enrichPosts(result.data || []);
+      applyFeedPosts(enriched);
+      cacheFeed();
+      if (requested) {
+        var post = posts.get(requested) || await loadSinglePost(requested);
+        if (post && (!activePost || activePost.id !== post.id)) await openDetail(post, false);
+        else if (post) {
+          activePost = post;
+          renderDetail(post);
+        }
+      }
+    } catch (error) {
+      if (!Array.isArray(cached)) throw error;
+      toast("Showing saved Community posts while the server reconnects.", true);
     }
   }
 
@@ -468,6 +501,11 @@
 
   function updateFeedPost(post) {
     posts.set(post.id, post);
+    var cachedIndex = currentFeedPosts.findIndex(function (item) { return item.id === post.id; });
+    if (cachedIndex !== -1) {
+      currentFeedPosts[cachedIndex] = post;
+      cacheFeed();
+    }
     all('[data-post-id="' + post.id + '"]').forEach(function (element) {
       if (element.matches("[data-community-like]")) {
         element.classList.toggle("is-liked", !!post.has_liked);

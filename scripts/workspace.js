@@ -4,10 +4,16 @@
   if (!window.ForgeAPI) return;
 
   var api = window.ForgeAPI;
+  var cache = window.ForgeCache;
   var PENDING_TURN_KEY = "forgegui.workspace.pending_turn";
+  var CONVERSATION_LIST_MAX_AGE = 7 * 24 * 60 * 60 * 1000;
+  var CONVERSATION_MAX_AGE = 24 * 60 * 60 * 1000;
   var client;
+  var session;
   var activeConversationId = null;
   var pollTimer = null;
+  var conversationListRequest = null;
+  var renderedConversationCount = 0;
   var pendingClarification = null;
   var selectedAttachments = new WeakMap();
   var taskColumns = [
@@ -69,11 +75,10 @@
     }
   }
 
-  async function listConversations() {
+  async function fetchConversations() {
     var result = await client.rpc("list_active_conversations", { p_limit: 100 });
     if (!result.error) return result.data || [];
 
-    var session = await api.auth.session();
     if (!session) throw new Error("Your session has expired.");
     result = await client
       .from("conversations")
@@ -85,7 +90,25 @@
     return result.data || [];
   }
 
+  function listConversations() {
+    if (conversationListRequest) return conversationListRequest;
+    conversationListRequest = fetchConversations().finally(function () {
+      conversationListRequest = null;
+    });
+    return conversationListRequest;
+  }
+
+  function conversationCache(name, maxAge) {
+    if (!cache || !session) return null;
+    return cache.read(session.user.id, name, maxAge);
+  }
+
+  function writeConversationCache(name, data) {
+    if (cache && session) cache.write(session.user.id, name, data);
+  }
+
   function renderConversationLists(conversations) {
+    renderedConversationCount = conversations.length;
     document.querySelectorAll("[data-conversation-list]").forEach(function (list) {
       list.querySelectorAll("[data-conversation-entry]").forEach(function (entry) {
         entry.remove();
@@ -116,11 +139,17 @@
 
   async function refreshConversationLists() {
     try {
-      renderConversationLists(await listConversations());
+      var conversations = await listConversations();
+      writeConversationCache("conversations:list", conversations);
+      renderConversationLists(conversations);
+      return conversations;
     } catch (error) {
-      document.querySelectorAll("[data-conversation-list]").forEach(function (list) {
-        list.hidden = true;
-      });
+      if (!renderedConversationCount) {
+        document.querySelectorAll("[data-conversation-list]").forEach(function (list) {
+          list.hidden = true;
+        });
+      }
+      return conversationCache("conversations:list", CONVERSATION_LIST_MAX_AGE) || [];
     }
   }
 
@@ -177,7 +206,30 @@
     return Array.from(new Set(assets));
   }
 
+  function createGeneratingTask(task) {
+    var box = document.createElement("div");
+    box.className = "genbox workspaceGenbox workspaceGenbox-" + task.status;
+    box.dataset.taskId = task.id;
+    box.setAttribute("role", "status");
+    box.setAttribute("aria-label", task.status === "queued" ? "Generation queued" : "Generation in progress");
+    if (typeof window.GenBox === "function") {
+      new window.GenBox(box);
+      var label = box.querySelector(".genbox-txt");
+      if (label) {
+        label.textContent = task.status === "queued"
+          ? "Preparing " + taskLabel(task.kind) + "..."
+          : "Generating " + taskLabel(task.kind) + "...";
+      }
+    } else {
+      box.textContent = task.status === "queued" ? "Preparing generation..." : "Generating...";
+    }
+    return box;
+  }
+
   function createTaskCard(task) {
+    if (task.status === "queued" || task.status === "running") {
+      return createGeneratingTask(task);
+    }
     var card = document.createElement("section");
     card.className = "workspaceTask workspaceTask-" + task.status;
     card.dataset.taskId = task.id;
@@ -253,6 +305,9 @@
   function renderConversation(history) {
     var stream = document.querySelector("[data-chat-messages]");
     if (!stream) return;
+    stream.querySelectorAll(".genbox").forEach(function (box) {
+      if (box.genbox) box.genbox.destroy();
+    });
     stream.innerHTML = "";
     pendingClarification = null;
     if (!history.messages.length) {
@@ -328,11 +383,23 @@
     }
   }
 
-  async function hydrateActiveConversation() {
-    if (!activeConversationId) return;
-    var history = await loadConversation(activeConversationId);
+  function renderConversationHistory(history) {
     renderConversation(history);
     renderAssets(history.tasks);
+  }
+
+  async function hydrateActiveConversation(useCached) {
+    if (!activeConversationId) return;
+    var cacheName = "conversation:" + activeConversationId;
+    if (useCached) {
+      var cached = conversationCache(cacheName, CONVERSATION_MAX_AGE);
+      if (cached && Array.isArray(cached.messages) && Array.isArray(cached.tasks)) {
+        renderConversationHistory(cached);
+      }
+    }
+    var history = await loadConversation(activeConversationId);
+    writeConversationCache(cacheName, history);
+    renderConversationHistory(history);
     history.tasks.forEach(function (task) {
       if (task.status !== "queued") return;
       var message = history.messages.find(function (item) { return item.id === task.message_id; });
@@ -537,7 +604,7 @@
   }
 
   async function initialize() {
-    var session = await api.auth.session();
+    session = await api.auth.session();
     if (!session) return;
     client = api.client();
     var route = document.querySelector('meta[name="forge-route"]')?.content || "";
@@ -547,7 +614,19 @@
       activeConversationId = validUuid(candidate) ? candidate : null;
     }
     wireChatForms();
-    refreshConversationLists();
+    var cachedConversations = conversationCache("conversations:list", CONVERSATION_LIST_MAX_AGE);
+    if (Array.isArray(cachedConversations)) {
+      renderConversationLists(cachedConversations);
+      var cachedActive = cachedConversations.find(function (conversation) {
+        return conversation.id === activeConversationId;
+      });
+      if (cachedActive) {
+        document.querySelectorAll("[data-chat-title]").forEach(function (title) {
+          title.textContent = cachedActive.title || "Untitled chat";
+        });
+      }
+    }
+    var conversationRefresh = refreshConversationLists();
     if (route === "home.html") {
       var prompt = new URLSearchParams(location.search).get("prompt");
       if (prompt) {
@@ -584,7 +663,7 @@
       return;
     }
     if (!activeConversationId) {
-      var conversations = await listConversations();
+      var conversations = await conversationRefresh;
       if (conversations.length) {
         location.replace(conversationUrl(conversations[0].id).href);
         return;
@@ -594,6 +673,7 @@
       renderAssets([]);
       return;
     }
+    var historyRefresh = hydrateActiveConversation(true);
     var titleResult = await client
       .from("conversations")
       .select("title")
@@ -605,7 +685,7 @@
     document.querySelectorAll("[data-chat-title]").forEach(function (title) {
       title.textContent = titleResult.data.title || "Untitled chat";
     });
-    await hydrateActiveConversation();
+    await historyRefresh;
   }
 
   initialize().catch(showWorkspaceError);

@@ -63,7 +63,9 @@
     event.preventDefault();
     button.disabled = true;
     try {
+      var current = await window.ForgeAPI.auth.session();
       await window.ForgeAPI.auth.signOut();
+      if (current && window.ForgeCache) window.ForgeCache.clearUser(current.user.id);
       location.assign(new URL("index.html", window.ForgeAPI.root()).href);
     } catch (error) {
       button.disabled = false;

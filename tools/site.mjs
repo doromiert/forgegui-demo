@@ -822,6 +822,7 @@ function injectForgeMetadata(html, forgePath, route, variant) {
     '<script src="scripts/vendor/supabase.js" defer></script>',
     '<script src="scripts/forge-config.js" defer></script>',
     '<script src="scripts/forge-api.js" defer></script>',
+    '<script src="scripts/forge-cache.js" defer></script>',
     '<script src="scripts/auth-shell.js" defer></script>',
     ...(route.startsWith("settings/")
       ? ['<script src="scripts/settings.js" defer></script>']
@@ -831,6 +832,9 @@ function injectForgeMetadata(html, forgePath, route, variant) {
       : []),
     ...(route.startsWith("library/")
       ? ['<script src="scripts/assets.js" defer></script>']
+      : []),
+    ...(route === "oldChat.html"
+      ? ['<script src="scripts/genbox.js" defer></script>']
       : []),
     '<script src="scripts/workspace.js" defer></script>',
     '<script src="scripts/forge-loader.js"></script>',
